@@ -1,0 +1,18 @@
+name: Lint and testing booking-clone app
+on: [push]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get repository code
+        uses: actions/checkout@v4
+      - name: node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.11.0"
+      - name: Install dependencies
+        working-directory: ./booking-clone
+        run: npm ci
+      - name: Lint application
+        working-directory: ./booking-clone
+        run: npm run lint
