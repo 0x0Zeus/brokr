@@ -1,0 +1,39 @@
+<div
+  class="car p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative"
+>
+  <img
+    [src]="isFavorite ? 'assets/fav-fill.svg' : 'assets/fav.svg'"
+    alt="Favorite"
+    class="favorite absolute top-[1.7rem] right-[1.5rem] w-[2.6rem] h-[2.6rem]"
+  />
+  <img
+    src="assets/stub/boat.png"
+    alt="Car"
+    class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem]"
+  />
+  <div class="mb-[1.6rem] flex justify-between items-center">
+    <p class="location mr-auto">{{ 'CHICAGO, IL' | uppercase }}</p>
+    <div class="stars flex justify-center items-center mr-[rem]">
+      @for (item of ratingItems; track item) {
+        <img
+          src="assets/star.svg"
+          alt="Star"
+          class="star w-[1.3reb] h-[1.3rem] mr-[0.4rem]"
+        />
+      }
+    </div>
+    <div class="rating">4.0</div>
+  </div>
+  <p class="title font-medium text-xl mb-[1rem]">
+    Luxury 40' 2010 Multi Level Yacht. Hourly rate includes Captain fee!!!
+  </p>
+  <div class="info flex justify-start items-center mb-[1rem]">
+    <div class="term mr-[1.6rem]">4 - 6 hours</div>
+    <div class="capitan">Captained</div>
+  </div>
+  <div class="mb-[1.1rem]">
+    <span class="price-value text-2xl font-medium mr-[0.6rem]">$260 +</span
+    ><span class="price-desc text-base_secondary"> /hour</span>
+  </div>
+  <div class="capacity mb-[0.2rem]">Up to 12 passengers</div>
+</div>

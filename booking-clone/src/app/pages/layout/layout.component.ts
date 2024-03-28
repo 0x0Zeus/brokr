@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { FiltersComponent } from '@components/core/filters/filters.component';
 import { HeaderComponent } from '@components/core/header';
 import { NavigationComponent } from '@components/core/navigation';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -12,9 +14,22 @@ import { NavigationComponent } from '@components/core/navigation';
     HeaderComponent,
     NavigationComponent,
     FiltersComponent,
+    AsyncPipe,
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutComponent {}
+export class LayoutComponent implements OnInit {
+  currentPath = new BehaviorSubject<string>('');
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentPath.next(event.url);
+        console.log(event.url);
+      }
+    });
+  }
+}

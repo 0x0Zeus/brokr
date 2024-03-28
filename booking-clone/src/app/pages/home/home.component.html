@@ -1,0 +1,71 @@
+<div class="container">
+  <section class="cars">
+    <div
+      class="cars-summary h-[59.2rem] w-full bg-cover bg-center flex flex-col items-center text-base_fifth"
+    >
+      <p class="cars-title mt-[13rem] mb-[2rem] font-bold text-[5rem]">
+        Where do you want to go?
+      </p>
+      <p class="cars-description text-xl">
+        When you're traveling to a new place, sometimes the best way to truly
+        experience it is by renting a car.
+      </p>
+    </div>
+  </section>
+  <section class="why-we">
+    <div
+      class="w-full bg-cover bg-center flex flex-col items-center mb-[3rem] mt-[8rem]"
+    >
+      <p class="why-we-title font-bold text-[3rem]">Why Choose Us</p>
+      <p class="why-we-description text-xl">
+        Experience the moment like never before by choosing to rent a car from
+        us
+      </p>
+    </div>
+    <div
+      class="kinds flex items-center justify-center text-base_fifth mb-[9rem]"
+    >
+      <div
+        class="kind-item relative mr-[3rem] cursor-pointer"
+        [routerLink]="['/cars']"
+      >
+        <img
+          src="assets/home/car.png"
+          alt="Car"
+          class="kind-item-img w-[27.4rem] h-[33-3rem] rounded-lg"
+        />
+        <div
+          class="absolute kind-item-title font-bold text-[2rem] left-[2rem] bottom-[2.8rem]"
+        >
+          Car
+        </div>
+      </div>
+      <div class="kind-item relative mr-[3rem] cursor-pointer">
+        <img
+          src="assets/home/stay.png"
+          alt="Car"
+          class="kind-item-img w-[27.4rem] h-[33-3rem] rounded-lg"
+          [routerLink]="['/stays']"
+        />
+        <div
+          class="absolute kind-item-title font-bold text-[2rem] left-[2rem] bottom-[2.8rem]"
+        >
+          Stays
+        </div>
+      </div>
+      <div class="kind-item relative cursor-pointer">
+        <img
+          src="assets/home/boat.png"
+          alt="Car"
+          class="kind-item-img w-[27.4rem] h-[33-3rem] rounded-lg"
+          [routerLink]="['/boats']"
+        />
+        <div
+          class="absolute kind-item-title font-bold text-[2rem] left-[2rem] bottom-[2.8rem]"
+        >
+          Boat
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -23,6 +23,7 @@ module.exports = {
         base_primary: '#000000',
         base_secondary: '#7E7E7E',
         base_third: '#675DFE',
+        base_fifth: '#ffffff',
         base_border: '#E5E7EB',
       },
       borderRadius: {
