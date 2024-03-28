@@ -1,0 +1,41 @@
+<nav
+  class="type-nav flex items-center justify-start border-b-1 border-base_border mb-[2.1rem]"
+>
+  <div
+    class="nav-item flex items-center justify-start mr-[4rem] pb-[1rem] border-b-4 border-transparent hover:border-base_third hover:text-base_third cursor-pointer"
+    [routerLink]="['/']"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <img
+      src="assets/car.svg"
+      alt="Car"
+      class="nav-item__icon mr-[1.2rem] w-[3.3rem] h-[1.5rem]"
+    />
+    <div class="nav-item__title">Car</div>
+  </div>
+  <div
+    class="nav-item flex items-center justify-start mr-[4rem] pb-[1rem] border-b-4 border-transparent hover:border-base_third hover:text-base_third cursor-pointer"
+    [routerLink]="['/stays']"
+    routerLinkActive="active"
+  >
+    <img
+      src="assets/home.svg"
+      alt="Home"
+      class="nav-item__icon mr-[1.2rem] w-[2.4rem] h-[1.9rem]"
+    />
+    <div class="nav-item__title">Stays</div>
+  </div>
+  <div
+    class="nav-item flex items-center justify-start mr-[4rem] pb-[1rem] border-b-4 border-transparent hover:border-base_third hover:text-base_third cursor-pointer"
+    [routerLink]="['/boats']"
+    routerLinkActive="active"
+  >
+    <img
+      src="assets/boat.svg"
+      alt="Boat"
+      class="nav-item__icon mr-[1.2rem] w-[3.4rem] h-[2rem]"
+    />
+    <div class="nav-item__title">Boats</div>
+  </div>
+</nav>
