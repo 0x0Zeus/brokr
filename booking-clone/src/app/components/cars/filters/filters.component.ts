@@ -102,7 +102,6 @@ export class FiltersComponent implements OnInit {
   elasticSearch(destination: ICarsDestination): void {
     this.locationValue.setValue(destination.location);
     this.chosenLocation = destination;
-    // this.onSearch();
   }
 
   get fromDate() {

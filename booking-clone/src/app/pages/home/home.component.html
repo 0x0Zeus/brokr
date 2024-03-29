@@ -26,8 +26,8 @@
       class="kinds flex items-center justify-center text-base_fifth mb-[9rem]"
     >
       <div
-        class="kind-item relative mr-[3rem] cursor-pointer"
-        [routerLink]="['/cars']"
+        class="kind-item relative mr-[3rem] cursor-pointer hover:opacity-80"
+        [routerLink]="['/booking/cars']"
       >
         <img
           src="assets/home/car.png"
@@ -40,12 +40,12 @@
           Car
         </div>
       </div>
-      <div class="kind-item relative mr-[3rem] cursor-pointer">
+      <div class="kind-item relative mr-[3rem] cursor-pointer hover:opacity-80">
         <img
           src="assets/home/stay.png"
           alt="Car"
           class="kind-item-img w-[27.4rem] h-[33-3rem] rounded-lg"
-          [routerLink]="['/stays']"
+          [routerLink]="['/booking/stays']"
         />
         <div
           class="absolute kind-item-title font-bold text-[2rem] left-[2rem] bottom-[2.8rem]"
@@ -53,12 +53,12 @@
           Stays
         </div>
       </div>
-      <div class="kind-item relative cursor-pointer">
+      <div class="kind-item relative cursor-pointer hover:opacity-80">
         <img
           src="assets/home/boat.png"
           alt="Car"
           class="kind-item-img w-[27.4rem] h-[33-3rem] rounded-lg"
-          [routerLink]="['/boats']"
+          [routerLink]="['/booking/boats']"
         />
         <div
           class="absolute kind-item-title font-bold text-[2rem] left-[2rem] bottom-[2.8rem]"

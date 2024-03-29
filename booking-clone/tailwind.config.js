@@ -25,6 +25,9 @@ module.exports = {
         base_third: '#675DFE',
         base_fifth: '#ffffff',
         base_border: '#E5E7EB',
+        bg_primary: '#ffffff',
+        bg_secondary: '#675DFE',
+        bg_third: '#7E7E7E',
       },
       borderRadius: {
         sm: '0.6rem',

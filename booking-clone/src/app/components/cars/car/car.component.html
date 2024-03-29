@@ -1,5 +1,5 @@
 <div
-  class="car p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full"
+  class="car p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full hover:opacity-80"
 >
   <img
     [src]="isFavorite ? 'assets/fav-fill.svg' : 'assets/fav.svg'"
@@ -11,9 +11,9 @@
     alt="Car"
     class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem]"
   />
-  <p class="description text-base_secondary mb-[0.2rem]">All-Star Host</p>
+  <p class="description text-base_secondary mb-[0.2rem]">{{ car.supplier }}</p>
   <p class="title text-xl font-medium mb-[1rem]">{{ car.model }}</p>
-  <div class="splitter h-[1px] w-[4.5rem] bg-base_third mb-[1rem]"></div>
+  <div class="splitter h-[1px] w-[4.5rem] bg-bg_secondary mb-[1rem]"></div>
   <div class="location mb-[1rem] flex justify-start items-start">
     <img
       src="assets/car-location.svg"
@@ -34,6 +34,6 @@
         >${{ car.price }}</span
       ><span class="price-desc text-base_secondary">/day</span>
     </div>
-    <div class="reviews">DEAL</div>
+    <div class="reviews">{{ car.seats }} seats</div>
   </div>
 </div>

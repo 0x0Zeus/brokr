@@ -71,6 +71,8 @@ export class CarsService {
               model: car.vehicle_info.v_name,
               rating: Number((car.rating_info.average / 2).toFixed(1)),
               price: car.pricing_info.price,
+              supplier: car.supplier_info.name,
+              seats: car.vehicle_info.seats,
             };
             return carData;
           });
