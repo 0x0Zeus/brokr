@@ -70,7 +70,7 @@ export class CarsService {
               location: car.supplier_info.address,
               model: car.vehicle_info.v_name,
               rating: car.rating_info.average,
-              price: car.pricing_info.price,
+              price: Math.ceil(car.pricing_info.price / 2),
             };
             return carData;
           });
