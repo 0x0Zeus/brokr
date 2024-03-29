@@ -39,4 +39,28 @@ export class CarsService {
         })
       );
   }
+
+  getCars({ query }: { query: string }): Observable<ICarsDestination[]> {
+    const options = {
+      params: new HttpParams().set('query', query),
+    };
+    return this.http
+      .get<ICarsDestinationResponse>(this.destinationURL, options)
+      .pipe(
+        map((resp) => {
+          if (resp.data) {
+            const transData = resp.data.map((item) => {
+              const coordinatesData = {
+                ...item.coordinates,
+                location: item.name,
+              };
+              return coordinatesData;
+            });
+            return transData;
+          } else {
+            return [];
+          }
+        })
+      );
+  }
 }
