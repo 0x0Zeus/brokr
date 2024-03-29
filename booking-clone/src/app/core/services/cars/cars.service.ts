@@ -69,8 +69,8 @@ export class CarsService {
               photo: car.vehicle_info.image_thumbnail_url,
               location: car.supplier_info.address,
               model: car.vehicle_info.v_name,
-              rating: car.rating_info.average,
-              price: Math.ceil(car.pricing_info.price / 2),
+              rating: Math.ceil(car.rating_info.average / 2),
+              price: car.pricing_info.price,
             };
             return carData;
           });
