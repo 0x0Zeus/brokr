@@ -2,7 +2,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
-import { authInterceptor } from '@core/interceptor/auth.interceptor';
+import { authInterceptor } from '@core/interceptor';
 import { StateModule } from '@store/state.module';
 
 import { routes } from './app.routes';

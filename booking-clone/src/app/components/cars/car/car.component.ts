@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RatingComponent } from '@components/shared/rating';
+import { ICar } from '@shared/cars/models/car';
 
 @Component({
   selector: 'app-car',
@@ -10,5 +11,6 @@ import { RatingComponent } from '@components/shared/rating';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarComponent {
+  @Input({ required: true }) car!: ICar;
   isFavorite = false;
 }

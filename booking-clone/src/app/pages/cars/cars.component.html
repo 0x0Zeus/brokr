@@ -1,3 +1,13 @@
-<div class="cars">
-  <app-car />
+<div class="cars base-grid">
+  @if (isLoadingCars$ | async) {
+    <div class="mt-[20rem] h-full flex justify-center items-center w-full">
+      <app-loader />
+    </div>
+  } @else {
+    @for (car of cars$ | async; track car) {
+      <app-car [car]="car" />
+    } @empty {
+      Cars not found.
+    }
+  }
 </div>

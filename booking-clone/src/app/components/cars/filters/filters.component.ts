@@ -11,10 +11,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { DestroyDirective } from '@core/deirectives/destroy.directive';
-import { CarsService } from '@core/services/cars.service';
+import { DestroyDirective } from '@core/deirectives';
+import { CarsService } from '@core/services/cars';
 import { ICarsFilterForm } from '@shared/cars/models/carsFilter';
 import { ICarsDestination } from '@shared/cars/models/destination';
+import { CarsFacade } from '@store/cars';
 import {
   BehaviorSubject,
   debounceTime,
@@ -34,6 +35,7 @@ import {
 export class FiltersComponent implements OnInit {
   isLocationFocus = false;
   elasticLocationValues = new BehaviorSubject<ICarsDestination[]>([]);
+  chosenLocation: null | ICarsDestination = null;
   private destroy$ = inject(DestroyDirective).destroy$;
 
   carsFilterForm = new FormGroup<ICarsFilterForm>({
@@ -59,7 +61,10 @@ export class FiltersComponent implements OnInit {
     nonNullable: true,
   });
 
-  constructor(private carsService: CarsService) {}
+  constructor(
+    private carsService: CarsService,
+    private carsFacade: CarsFacade
+  ) {}
 
   ngOnInit(): void {
     this.locationValue.valueChanges
@@ -84,20 +89,20 @@ export class FiltersComponent implements OnInit {
   }
 
   onSearch(): void {
-    // this.booksFacade.fetchBooks({
-    //   searchValue: this.searchValue.value,
-    //   filterType: this.filterType.getValue(),
-    //   categoryFilterType: this.filterCategory,
-    //   page: 0,
-    // });
-    // if (this.router.url !== '/search') {
-    //   this.router.navigateByUrl('search');
-    // }
+    if (this.carsFilterForm.valid && this.chosenLocation) {
+      const carsFormData = this.carsFilterForm.getRawValue();
+      this.carsFacade.fetchCars({
+        ...carsFormData,
+        latitude: this.chosenLocation!.latitude,
+        longitude: this.chosenLocation!.longitude,
+      });
+    }
   }
 
   elasticSearch(destination: ICarsDestination): void {
     this.locationValue.setValue(destination.location);
-    this.onSearch();
+    this.chosenLocation = destination;
+    // this.onSearch();
   }
 
   get fromDate() {
@@ -109,10 +114,10 @@ export class FiltersComponent implements OnInit {
   }
 
   get untilDate() {
-    return this.carsFilterForm.controls.fromDate;
+    return this.carsFilterForm.controls.untilDate;
   }
 
   get untilTime() {
-    return this.carsFilterForm.controls.fromTime;
+    return this.carsFilterForm.controls.untilTime;
   }
 }

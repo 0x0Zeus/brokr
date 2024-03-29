@@ -1,27 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { ICarsSearchParams } from '@shared/cars/interfaces/params';
 
-import * as RECOMMENDED_BOOKS_ACTIONS from './cars.action';
+import * as CARS_ACTIONS from './cars.action';
 import {
-  selectRecommendedBooks,
-  selectRecommendedBooksError,
-  selectRecommendedBooksIsLoading,
+  selectCars,
+  selectCarsError,
+  selectCarsIsLoading,
 } from './cars.selector';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RecommendedBooksFacade {
-  recommendedBooks$ = this.store.select(selectRecommendedBooks);
-  recBooksIsLoading$ = this.store.select(selectRecommendedBooksIsLoading);
-  recBooksError$ = this.store.select(selectRecommendedBooksError);
+export class CarsFacade {
+  cars$ = this.store.select(selectCars);
+  carsIsLoading$ = this.store.select(selectCarsIsLoading);
+  carsError$ = this.store.select(selectCarsError);
 
   constructor(private store: Store) {}
 
-  fetchRecommendedBooks(searchValue: string) {
+  fetchCars(searchParams: ICarsSearchParams) {
     this.store.dispatch(
-      RECOMMENDED_BOOKS_ACTIONS.FetchRecommendedBooks({
-        searchValue,
+      CARS_ACTIONS.FetchCars({
+        searchParams,
       })
     );
   }
