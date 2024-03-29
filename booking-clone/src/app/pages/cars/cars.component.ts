@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CarComponent } from '@components/cars/car';
 
 @Component({
@@ -7,5 +7,6 @@ import { CarComponent } from '@components/cars/car';
   imports: [CarComponent],
   templateUrl: './cars.component.html',
   styleUrl: './cars.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarsComponent {}

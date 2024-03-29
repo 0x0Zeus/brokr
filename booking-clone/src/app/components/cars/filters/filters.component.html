@@ -1,5 +1,8 @@
-<div class="filters flex justify-start items-end mb-[3.2rem]">
-  <div class="input-item max-w-[32rem] mr-[1.1rem]">
+<form
+  [formGroup]="carsFilterForm"
+  class="filters flex justify-start items-end mb-[3.2rem]"
+>
+  <div class="relative input-item max-w-[32rem] mr-[1.1rem]">
     <div class="input-title font-medium text-sm mb-[0.6rem]">Where</div>
     <label>
       <div
@@ -11,10 +14,30 @@
           class="w-[1.1rem] h-[1.4rem] mr-[1.4rem]"
         />
         <input
+          [formControl]="locationValue"
           type="text"
+          (focus)="onFocus()"
+          (blur)="onBlur()"
           class="input_place h-full w-full outline-none"
           placeholder="City, postcode, address, airport or hotel"
         />
+        @if (isLocationFocus && (elasticLocationValues | async)!.length >= 1) {
+          <div
+            class="elastic-search absolute w-full left-0 bottom-0 translate-y-[105%] rounded-sm py-[0.8rem] z-10 border-1 border-base_border bg-base_fifth"
+          >
+            @for (
+              elasticItem of elasticLocationValues | async;
+              track elasticItem.location
+            ) {
+              <button
+                class="elastic-item py-[0.4rem] px-[0.5rem] overflow-hidden text-ellipsis whitespace-nowrap text-left w-full hover:bg-base_secondary"
+                (mousedown)="elasticSearch(elasticItem)"
+              >
+                {{ elasticItem.location }}
+              </button>
+            }
+          </div>
+        }
       </div>
     </label>
   </div>
@@ -22,6 +45,7 @@
   <div class="input-item max-w-[32rem] mr-[1.1rem]">
     <div class="input-title font-medium text-sm mb-[0.6rem]">From</div>
     <input
+      [formControl]="fromDate"
       type="date"
       class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
     />
@@ -48,4 +72,4 @@
       class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
     />
   </div>
-</div>
+</form>

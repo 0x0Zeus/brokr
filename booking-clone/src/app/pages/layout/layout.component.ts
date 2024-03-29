@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { FiltersComponent } from '@components/core/filters/filters.component';
+import { FiltersComponent } from '@components/cars/filters/filters.component';
 import { HeaderComponent } from '@components/core/header';
 import { NavigationComponent } from '@components/core/navigation';
 import { BehaviorSubject } from 'rxjs';

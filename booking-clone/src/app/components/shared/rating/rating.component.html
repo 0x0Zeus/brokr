@@ -1,0 +1,10 @@
+<div class="stars flex justify-center items-center">
+  @for (item of ratingItems; track item) {
+    <img
+      src="assets/star.svg"
+      [src]="rating < item + 1 ? 'assets/star.svg' : 'assets/star-fill.svg'"
+      alt="Star"
+      class="star w-[1.3reb] h-[1.3rem] mr-[0.4rem]"
+    />
+  }
+</div>
