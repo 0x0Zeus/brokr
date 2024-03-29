@@ -69,7 +69,7 @@ export class CarsService {
               photo: car.vehicle_info.image_thumbnail_url,
               location: car.supplier_info.address,
               model: car.vehicle_info.v_name,
-              rating: Math.ceil(car.rating_info.average / 2),
+              rating: Number((car.rating_info.average / 2).toFixed(1)),
               price: car.pricing_info.price,
             };
             return carData;
