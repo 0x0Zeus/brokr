@@ -1,20 +1,20 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
-
-import { IBook } from '../../shared/models/book';
+import { ICarsSearchParams } from '@shared/cars/interfaces/params';
+import { ICar } from '@shared/cars/models/car';
 
 const actionSource = '[Cars]';
 
 export const FetchCars = createAction(
   `${actionSource} Fetch`,
   props<{
-    searchValue: string;
+    searchParams: ICarsSearchParams;
   }>()
 );
 
 export const FetchCarsSuccess = createAction(
   `${actionSource} Fetch Success`,
-  props<{ books: IBook[] }>()
+  props<{ cars: ICar[] }>()
 );
 
 export const FetchCarsFailed = createAction(

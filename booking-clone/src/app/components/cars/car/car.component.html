@@ -7,32 +7,31 @@
     class="favorite absolute top-[1.7rem] right-[1.5rem] w-[2.6rem] h-[2.6rem]"
   />
   <img
-    src="assets/stub/car.png"
+    [src]="car.photo"
     alt="Car"
     class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem]"
   />
   <p class="description text-base_secondary mb-[0.2rem]">All-Star Host</p>
-  <p class="title text-xl font-medium mb-[1rem]">BMW Z4 2016</p>
+  <p class="title text-xl font-medium mb-[1rem]">{{ car.model }}</p>
   <div class="splitter h-[1px] w-[4.5rem] bg-base_third mb-[1rem]"></div>
-  <div class="mb-[2.6rem] flex justify-between items-center">
-    <div class="location flex justify-center items-center">
-      <img
-        src="assets/car-location.svg"
-        alt="Location"
-        class="location-img mr-[0.6rem]"
-      />
-      <p class="location text-base_secondary">Full Location</p>
+  <div class="location mb-[1rem] flex justify-start items-start">
+    <img
+      src="assets/car-location.svg"
+      alt="Location"
+      class="location-img mr-[0.6rem] mt-[0.3rem]"
+    />
+    <p class="location text-base_secondary">{{ car.location }}</p>
+  </div>
+  <div class="rating-container flex justify-start items-center mb-[qrem]">
+    <div class="mr-[0.7rem]">
+      <app-rating [rating]="car.rating" />
     </div>
-    <div class="rating-container flex justify-center items-center w-fit">
-      <div class="mr-[0.7rem]">
-        <app-rating [rating]="4.5" />
-      </div>
-      <div class="rating">4.5</div>
-    </div>
+    <div class="rating">{{ car.rating }}</div>
   </div>
   <div class="flex justify-between items-center mb-[0.2rem]">
     <div class="price">
-      <span class="price-value text-2xl font-medium mr-[0.6rem]">$260</span
+      <span class="price-value text-2xl font-medium mr-[0.6rem]"
+        >${{ car.price }}</span
       ><span class="price-desc text-base_secondary">/day</span>
     </div>
     <div class="reviews">DEAL</div>

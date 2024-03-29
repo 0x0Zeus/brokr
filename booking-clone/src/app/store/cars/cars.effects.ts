@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CarsService } from '@core/services/cars.service';
-import { ToasterService } from '@core/services/toaster';
+import { CarsService } from '@core/services/cars';
+// import { ToasterService } from '@core/services/toaster';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
@@ -15,11 +15,11 @@ export class CarsEffects {
     // private toasterService: ToasterService
   ) {}
 
-  fetchRecommendedBooks$ = createEffect(() => {
+  fetchCars$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CARS_ACTIONS.FetchCars),
-      switchMap(({ searchValue }) =>
-        this.searchService.getRecBooks(searchValue).pipe(
+      switchMap(({ searchParams }) =>
+        this.carsService.getCars(searchParams).pipe(
           map((cars) => CARS_ACTIONS.FetchCarsSuccess({ cars })),
           catchError((error: HttpErrorResponse) => {
             // this.toasterService.showHttpsError(error);

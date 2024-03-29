@@ -41,6 +41,8 @@ body {
   font-size: 1.4rem;
 }
 
+//scrollbar
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -65,4 +67,15 @@ body {
 
 ::-webkit-scrollbar-corner {
   background: rgba(0, 0, 0, 0);
+}
+
+//base grid
+
+.base-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(33.7rem, 1fr));
+  justify-items: center;
+  column-gap: 2.4rem;
+  margin-bottom: 1rem;
+  row-gap: 1.1rem;
 }

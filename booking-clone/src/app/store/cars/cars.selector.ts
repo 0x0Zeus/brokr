@@ -1,21 +1,20 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { RecommendedBooksState } from './cars.reducer';
+import { CarsState } from './cars.reducer';
 
-export const selectRecommendedBooksStore =
-  createFeatureSelector<RecommendedBooksState>('recommendedBooks');
+export const selectCarsStore = createFeatureSelector<CarsState>('cars');
 
-export const selectRecommendedBooks = createSelector(
-  selectRecommendedBooksStore,
-  (state: RecommendedBooksState) => state.books
+export const selectCars = createSelector(
+  selectCarsStore,
+  (state: CarsState) => state.cars
 );
 
-export const selectRecommendedBooksError = createSelector(
-  selectRecommendedBooksStore,
-  (state: RecommendedBooksState) => state.error
+export const selectCarsError = createSelector(
+  selectCarsStore,
+  (state: CarsState) => state.error
 );
 
-export const selectRecommendedBooksIsLoading = createSelector(
-  selectRecommendedBooksStore,
-  (state: RecommendedBooksState) => state.isLoading
+export const selectCarsIsLoading = createSelector(
+  selectCarsStore,
+  (state: CarsState) => state.isLoading
 );

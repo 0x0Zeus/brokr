@@ -53,6 +53,7 @@
 
   <div class="input-item max-w-[32rem] mr-[1.1rem]">
     <input
+      [formControl]="fromTime"
       type="time"
       class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
     />
@@ -61,6 +62,7 @@
   <div class="input-item max-w-[32rem] mr-[1.1rem]">
     <div class="input-title font-medium text-sm mb-[0.6rem]">Until</div>
     <input
+      [formControl]="untilDate"
       type="date"
       class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
     />
@@ -68,8 +70,10 @@
 
   <div class="input-item max-w-[32rem] mr-[1.1rem]">
     <input
+      [formControl]="untilTime"
       type="time"
       class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
     />
   </div>
+  <button (click)="onSearch()">Button</button>
 </form>
