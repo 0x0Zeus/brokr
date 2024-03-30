@@ -28,6 +28,7 @@ module.exports = {
         bg_primary: '#ffffff',
         bg_secondary: '#675DFE',
         bg_third: '#7E7E7E',
+        bg_fifth: 'rgba(217, 217, 217, 0.22)',
       },
       borderRadius: {
         sm: '0.6rem',
@@ -35,6 +36,7 @@ module.exports = {
         lg: '1.1rem',
         xl: '1.4rem',
         '2xl': '1.8rem',
+        '5xl': '3rem',
       },
       borderWidth: {
         1: '1px',

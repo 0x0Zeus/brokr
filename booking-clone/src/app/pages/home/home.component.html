@@ -1,69 +1,232 @@
 <div class="container">
-  <section class="cars">
+  <section class="intro">
     <div
-      class="cars-summary h-[59.2rem] w-full bg-cover bg-center flex flex-col items-center text-base_fifth"
+      class="intro-summary h-[59.2rem] w-full flex flex-col items-center text-base_fifth"
     >
-      <p class="cars-title mt-[13rem] mb-[2rem] font-bold text-[5rem]">
+      <h1 class="intro-title mt-[13rem] mb-[2rem] font-bold text-[5rem]">
         Where do you want to go?
-      </p>
-      <p class="cars-description text-xl">
+      </h1>
+      <h3 class="intro-description text-xl">
         When you're traveling to a new place, sometimes the best way to truly
         experience it is by renting a car.
-      </p>
+      </h3>
     </div>
   </section>
-  <section class="why-we">
+  <section class="why-we bg-bg_fifth pt-[8rem]">
+    <div class="wrapper">
+      <div class="why-we-summary w-full flex flex-col items-center mb-[3rem]">
+        <h2 class="why-we-title text-title">Why Choose Us</h2>
+        <h3 class="why-we-description text-descr">
+          Experience the moment like never before by choosing to rent a car from
+          us
+        </h3>
+      </div>
+      <div
+        class="kinds flex items-center justify-center text-base_fifth pb-[9rem] gap-[3rem] flex-wrap"
+      >
+        @for (kind of kinds; track kind.title) {
+          <div
+            class="kind-item relative cursor-pointer hover:opacity-80 w-[27.4rem] h-[33.3rem]"
+          >
+            <img
+              [src]="kind.url"
+              [alt]="kind.title"
+              class="kind-item-img w-full h-full rounded-lg"
+              [routerLink]="[kind.link]"
+            />
+            <p
+              class="absolute kind-item-title font-bold text-[2rem] left-[2rem] bottom-[2.8rem]"
+            >
+              {{ kind.title }}
+            </p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+  <section class="cars wrapper mt-[6.7rem] mb-[4.1rem]">
     <div
-      class="w-full bg-cover bg-center flex flex-col items-center mb-[3rem] mt-[8rem]"
+      class="garage h-[52.2rem] pl-[8rem] pt-[18.2rem] text-base_fifth mb-[5.5rem] rounded-lg"
     >
-      <p class="why-we-title font-bold text-[3rem]">Why Choose Us</p>
-      <p class="why-we-description text-xl">
-        Experience the moment like never before by choosing to rent a car from
-        us
-      </p>
+      <div class="garage__content max-w-[51.3rem]">
+        <h2 class="garage__title mb-[1.5rem] text-title">
+          Find the perfect car to conquer the great outdoors
+        </h2>
+        <h3 class="garage__decscription text-xl mb-[2rem] leading-[1.8rem]">
+          Go prepared in a rugged 4x4 to take on winter roads with ease, or a
+          camper van to take you to the trees.
+        </h3>
+        <button
+          class="garage__btn btn-base w-[16.7rem] h-[4.7rem]"
+          [routerLink]="['/booking/cars']"
+        >
+          Browse Cars
+        </button>
+      </div>
+    </div>
+    <div class="cars-summary mb-[4.1rem]">
+      <h2 class="cars-summary__title text-title mb-[1rem]">Find your drive</h2>
+      <h3 class="cars-summary__description text-descr">
+        There's nothing quite like the feeling of getting behind the wheel and
+        hitting the open road. Whether you're embarking on a cross-country
+        adventure, taking a scenic drive through the countryside, or simply
+        cruising around town, driving gives you a sense of freedom and
+        empowerment like no other
+      </h3>
     </div>
     <div
-      class="kinds flex items-center justify-center text-base_fifth mb-[9rem]"
+      class="cars-models flex justify-center items-center gap-[1.8rem] flex-wrap"
     >
+      @for (car of cars; track car.title) {
+        <div class="cars-models-item relative w-[29.6rem] h-[26.6rem]">
+          <img
+            [src]="car.url"
+            [alt]="car.title"
+            class="cars-models-item__img w-full h-full rounded-lg"
+          />
+          <p
+            class="absolute kind-item-title font-bold text-[2rem] left-[2.2rem] bottom-[2.4rem] text-base_fifth"
+          >
+            {{ car.title }}
+          </p>
+        </div>
+      }
+    </div>
+  </section>
+  <section class="homes bg-bg_fifth pt-[8.5rem] pb-[11.5rem] mb-[7.2rem]">
+    <div class="wrapper">
+      <div class="homes-summary">
+        <h2 class="homes-title text-title mb-[1rem]">
+          Find inspiration for a family trip
+        </h2>
+        <h3 class="homes-description text-descr mb-[2rem]">
+          Book homes that offer space, convenience, and amenities.
+        </h3>
+      </div>
       <div
-        class="kind-item relative mr-[3rem] cursor-pointer hover:opacity-80"
-        [routerLink]="['/booking/cars']"
+        class="homes-kinds flex justify-center items-center gap-[1.4rem] mb-[8.2rem]"
       >
-        <img
-          src="assets/home/car.png"
-          alt="Car"
-          class="kind-item-img w-[27.4rem] h-[33-3rem] rounded-lg"
-        />
         <div
-          class="absolute kind-item-title font-bold text-[2rem] left-[2rem] bottom-[2.8rem]"
+          class="homes-kinds-set homes-find basis-1/2 w-[65.5rem] h-[51.9rem] rounded-lg flex flex-col justify-end items-start p-[4rem] text-base_fifth"
         >
-          Car
+          <h2 class="homes-find__title text-title mb-[1rem]">
+            Find inspiration for your family trip
+          </h2>
+          <h3 class="homes-find__description text-xl mb-[1rem]">
+            Discover a plethora of exciting ideas and suggestions to help you
+            find inspiration and plan an unforgettable family trip that is sure
+            to create cherished memories for years to come.
+          </h3>
+          <button
+            class="homes-find__btn btn-base w-[16.7rem] h-[4.7rem]"
+            [routerLink]="['/booking/stays']"
+          >
+            Browse Stays
+          </button>
+        </div>
+        <div
+          class="homes-kinds-set basis-1/2 flex justify-center items-center gap-[1.5rem] flex-wrap"
+        >
+          @for (home of homes; track home.title) {
+            <div class="homes-item relative w-[28.1rem] h-[25.3rem]">
+              <img
+                [src]="home.url"
+                [alt]="home.title"
+                class="cars-models-item__img w-full h-full rounded-lg"
+              />
+              <p
+                class="absolute homes-item-title font-bold text-[2rem] left-[2.5rem] bottom-[1.9rem] text-base_fifth"
+              >
+                {{ home.title }}
+              </p>
+            </div>
+          }
         </div>
       </div>
-      <div class="kind-item relative mr-[3rem] cursor-pointer hover:opacity-80">
-        <img
-          src="assets/home/stay.png"
-          alt="Car"
-          class="kind-item-img w-[27.4rem] h-[33-3rem] rounded-lg"
-          [routerLink]="['/booking/stays']"
-        />
-        <div
-          class="absolute kind-item-title font-bold text-[2rem] left-[2rem] bottom-[2.8rem]"
-        >
-          Stays
-        </div>
+      <div
+        class="homes-options flex justify-between items-start flex-wrap gap-[1rem]"
+      >
+        @for (option of homeOptions; track option.title) {
+          <div class="homes-options-item text-xl w-[22.7rem]">
+            <img
+              [src]="option.url"
+              [alt]="option.title"
+              class="homes-options-item__icon mb-[1.3rem]"
+            />
+            <h4 class="homes-options-item__title mb-[1rem]">
+              {{ option.title }}
+            </h4>
+            <p class="homes-options-item__title text-base_secondary">
+              {{ option.description }}
+            </p>
+          </div>
+        }
       </div>
-      <div class="kind-item relative cursor-pointer hover:opacity-80">
-        <img
-          src="assets/home/boat.png"
-          alt="Car"
-          class="kind-item-img w-[27.4rem] h-[33-3rem] rounded-lg"
-          [routerLink]="['/booking/boats']"
-        />
+    </div>
+  </section>
+  <section class="boats wrapper pb-[14rem]">
+    <h2 class="boats__title text-title mb-[3.3rem]">
+      The Bahamas is a country located in the Caribbean, known for its beautiful
+      beaches, crystal-clear waters, and vibrant culture.
+    </h2>
+    <div
+      class="boats-browse w-full rounded-lg h-[52.2rem] flex flex-col justify-end items-start px-[3.8rem] py-[6.7rem] text-base_fifth mb-[2rem]"
+    >
+      <p class="boats-browse__title font-bold text-2xl mb-[1rem]">
+        Put your boat to work
+      </p>
+      <p class="boats-browse__description text-xl mb-[1.7rem]">
+        Offset the cost of boat ownership by listing it on Boatsetter.
+      </p>
+      <button
+        class="boats-browse__btn btn-base w-[16.7rem] h-[4.7rem]"
+        [routerLink]="['/booking/boats']"
+      >
+        Browse Boats
+      </button>
+    </div>
+    <div class="boats-options flex justify-center items-center gap-[2.2rem]">
+      @for (boat of boatsInfo; track boat.title) {
         <div
-          class="absolute kind-item-title font-bold text-[2rem] left-[2rem] bottom-[2.8rem]"
+          class="boats-browse h-[35rem] rounded-lg w-[61rem] flex flex-col justify-end items-start px-[2.4rem] py-[4rem] text-base_fifth"
+          [style.background-image]="boat.url"
         >
-          Boat
+          <p class="boats-browse__title font-bold text-2xl mb-[0.9rem]">
+            {{ boat.title }}
+          </p>
+          <p class="boats-browse__description text-xl">
+            {{ boat.description }}
+          </p>
+        </div>
+      }
+    </div>
+  </section>
+  <section
+    class="statistic pt-[8.8rem] text-2xl pb-[14rem] text-base_fifth bg-bg_secondary"
+  >
+    <div class="max-w-[61rem] m-auto text-center">
+      <p class="statistic__title text-[4.8rem] font-bold mb-[4rem]">
+        This trip will be the best
+      </p>
+      <p
+        class="statistic__description text-center leading-[3.1rem] mb-[4.2rem]"
+      >
+        Travel should be an integral part of every person’s life. In each trip,
+        you can make new acquaintances, new friends, business partners. Thanks
+        to travel, you grow up, go to a new level of your personal development.
+      </p>
+      <div class="statistic-info flex justify-between items-center">
+        <div class="statistic-info-item">
+          <p class="statistic-info-item__title text-[7.2rem] leading-[8.3rem]">
+            942
+          </p>
+          <p class="statistic-info-item__Description">Host</p>
+        </div>
+        <div class="statistic-info-item">
+          <p class="statistic-info-item__title text-[7.2rem] leading-[8.3rem]">
+            1476
+          </p>
+          <p class="statistic-info-item__Description">Broker</p>
         </div>
       </div>
     </div>

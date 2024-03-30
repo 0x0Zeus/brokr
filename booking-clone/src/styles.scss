@@ -79,3 +79,19 @@ body {
   margin-bottom: 1rem;
   row-gap: 1.1rem;
 }
+
+//buttons
+
+.btn-base {
+  border-radius: 0.8rem;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #675dfe;
+  transition: all 0.1s linear;
+
+  &:hover {
+    transform: scale(102%);
+  }
+}
