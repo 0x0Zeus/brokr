@@ -29,6 +29,7 @@ module.exports = {
         bg_secondary: '#675DFE',
         bg_third: '#7E7E7E',
         bg_fifth: 'rgba(217, 217, 217, 0.22)',
+        bg_sixth: '#010013',
       },
       borderRadius: {
         sm: '0.6rem',

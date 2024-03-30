@@ -41,6 +41,14 @@ body {
   font-size: 1.4rem;
 }
 
+//wrappers
+
+.wrapper {
+  max-width: 124.2rem;
+  width: 100%;
+  margin: auto;
+}
+
 //scrollbar
 
 ::-webkit-scrollbar {
@@ -93,5 +101,14 @@ body {
 
   &:hover {
     transform: scale(102%);
+  }
+}
+
+//links
+
+a {
+  &:hover {
+    text-decoration: underline;
+    color: #675dfe;
   }
 }
