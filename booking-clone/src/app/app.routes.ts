@@ -12,20 +12,29 @@ export const routes: Routes = [
           import('./pages/home').then((m) => m.HomeComponent),
       },
       {
-        path: 'cars',
+        path: 'booking',
         loadComponent: () =>
-          import('./pages/cars').then((m) => m.CarsComponent),
-      },
-      {
-        path: 'stays',
-        loadComponent: () =>
-          import('./pages/stays').then((m) => m.StaysComponent),
-      },
+          import('./pages/booking-layout').then(
+            (m) => m.BookingLayoutComponent
+          ),
+        children: [
+          {
+            path: 'cars',
+            loadComponent: () =>
+              import('./pages/cars').then((m) => m.CarsComponent),
+          },
+          {
+            path: 'stays',
+            loadComponent: () =>
+              import('./pages/stays').then((m) => m.StaysComponent),
+          },
 
-      {
-        path: 'boats',
-        loadComponent: () =>
-          import('./pages/boats').then((m) => m.BoatsComponent),
+          {
+            path: 'boats',
+            loadComponent: () =>
+              import('./pages/boats').then((m) => m.BoatsComponent),
+          },
+        ],
       },
     ],
   },

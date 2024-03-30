@@ -1,3 +1,35 @@
-.cars-summary {
-  background-image: url('../../../assets/home/cars/helm.png');
+.intro-summary,
+.garage,
+.homes-find,
+.aircraft-browse {
+  background-position: center;
+  background-size: cover;
+}
+
+.intro-summary {
+  background-image: url('../../../assets/home/cars/helm.jpg');
+}
+
+.garage {
+  background-image: url('../../../assets/home/cars/garage.jpg');
+}
+
+.text-title {
+  font-family: 'Roboto Bold';
+  font-size: 3rem;
+  line-height: 3.4rem;
+}
+
+.text-descr {
+  font-size: 1.6rem;
+  color: #7e7e7e;
+  line-height: 1.8rem;
+}
+
+.homes-find {
+  background-image: url('../../../assets/home/homes/beach.jpg');
+}
+
+.boats-browse {
+  background-image: url('../../../assets/home/boats/view.jpg');
 }

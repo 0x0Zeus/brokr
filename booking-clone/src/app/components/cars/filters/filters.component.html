@@ -6,7 +6,7 @@
     <div class="input-title font-medium text-sm mb-[0.6rem]">Where</div>
     <label>
       <div
-        class="input-container h-[3.3rem] px-[1.4rem] flex justify-start items-center border-2 border-base_border rounded-sm text-base"
+        class="input-container h-[3.3rem] w-[32rem] px-[1.4rem] flex justify-start items-center border-2 border-base_border rounded-sm text-base"
       >
         <img
           src="assets/map.svg"
@@ -23,14 +23,14 @@
         />
         @if (isLocationFocus && (elasticLocationValues | async)!.length >= 1) {
           <div
-            class="elastic-search absolute w-full left-0 bottom-0 translate-y-[105%] rounded-sm py-[0.8rem] z-10 border-1 border-base_border bg-base_fifth"
+            class="elastic-search absolute w-full left-0 bottom-0 translate-y-[105%] rounded-sm py-[0.8rem] z-10 border-1 border-base_border bg-bg_primary"
           >
             @for (
               elasticItem of elasticLocationValues | async;
               track elasticItem.location
             ) {
               <button
-                class="elastic-item py-[0.4rem] px-[0.5rem] overflow-hidden text-ellipsis whitespace-nowrap text-left w-full hover:bg-base_secondary"
+                class="elastic-item py-[0.4rem] px-[0.5rem] overflow-hidden text-ellipsis whitespace-nowrap text-left w-full hover:bg-bg_third"
                 (mousedown)="elasticSearch(elasticItem)"
               >
                 {{ elasticItem.location }}
@@ -75,5 +75,7 @@
       class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
     />
   </div>
-  <button (click)="onSearch()">Button</button>
+  <button (click)="onSearch()" class="btn-base text-base_fifth p-[0.5rem]">
+    <img src="assets/search.svg" alt="Search" class="w-[2rem] h-[2rem]" />
+  </button>
 </form>
