@@ -1,5 +1,6 @@
 <div
-  class="car flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full"
+  class="car flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
+  [routerLink]="['/preview/stay/', stay.id]"
 >
   <img
     [src]="isFavorite ? 'assets/fav-fill.svg' : 'assets/fav.svg'"
