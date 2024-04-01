@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { IToaster } from '@shared/models/toaster';
+import { IToaster } from '@shared/models/toaster/toaster';
 
 @Component({
   selector: 'app-toaster',

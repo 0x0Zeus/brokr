@@ -15,8 +15,8 @@ import {
 import { DestroyDirective } from '@core/directives';
 import { CarsService } from '@core/services/cars';
 import { ToasterService } from '@core/services/toaster';
-import { ICarsFilterForm } from '@shared/cars/models/carsFilter';
-import { ICarsDestination } from '@shared/cars/models/destination';
+import { ICarsFilterForm } from '@shared/models/cars/carsFilter';
+import { ICarsDestination } from '@shared/models/cars/destination';
 import { CarsFacade } from '@store/cars';
 import {
   BehaviorSubject,

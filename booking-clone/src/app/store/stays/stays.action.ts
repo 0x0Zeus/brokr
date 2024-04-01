@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
-import { IStaysSearchParams } from '@shared/stays/models/params';
-import { IStay } from '@shared/stays/models/stay';
+import { IStaysSearchParams } from '@shared/interfaces/stays/params';
+import { IStay } from '@shared/models/stays/stay';
 
 const actionSource = '[Stays]';
 

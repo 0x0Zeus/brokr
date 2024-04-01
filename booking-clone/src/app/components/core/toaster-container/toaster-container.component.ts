@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { DestroyDirective } from '@core/directives';
 import { ToasterService } from '@core/services/toaster';
-import { IToaster } from '@shared/models/toaster';
+import { IToaster } from '@shared/models/toaster/toaster';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 
 import { ToasterComponent } from '../toaster';

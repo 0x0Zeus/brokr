@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ISearchCarsResponse } from '@shared/cars/interfaces/carsResponse';
-import { ICarsDestinationResponse } from '@shared/cars/interfaces/destinationsResponse';
-import { ICarsSearchParams } from '@shared/cars/interfaces/params';
-import { ICar } from '@shared/cars/models/car';
-import { ICarsDestination } from '@shared/cars/models/destination';
+import { ISearchCarsResponse } from '@shared/interfaces/cars/carsResponse';
+import { ICarsDestinationResponse } from '@shared/interfaces/cars/destinationsResponse';
+import { ICarsSearchParams } from '@shared/interfaces/cars/params';
+import { ICar } from '@shared/models/cars/car';
+import { ICarsDestination } from '@shared/models/cars/destination';
 import { map, Observable } from 'rxjs';
 
 @Injectable({

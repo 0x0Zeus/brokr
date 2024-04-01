@@ -1,6 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
-const XRapidAPIKey = 'cf901d06ecmshfe4be5632be82p18d952jsn369fe36364b6';
+const XRapidAPIKey = 'cf901d06ecmsh65fe4be5632be82p18d952jsn369fe36364b6';
 const XRapidAPIHost = 'booking-com15.p.rapidapi.com';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {

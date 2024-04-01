@@ -15,8 +15,8 @@ import {
 import { DestroyDirective } from '@core/directives';
 import { StaysService } from '@core/services/stays';
 import { ToasterService } from '@core/services/toaster';
-import { IStaysDestination } from '@shared/stays/models/destination';
-import { IStaysFilterForm } from '@shared/stays/models/staysFilter';
+import { IStaysDestination } from '@shared/models/stays/destination';
+import { IStaysFilterForm } from '@shared/models/stays/staysFilter';
 import { StaysFacade } from '@store/stays';
 import {
   BehaviorSubject,
@@ -41,6 +41,8 @@ export class StaysFilterComponent implements OnInit {
   isLocationFocus = false;
   elasticLocationValues = new BehaviorSubject<IStaysDestination[]>([]);
   chosenLocation: null | IStaysDestination = null;
+  page$ = this.staysFacade.staysPage$;
+  page = 1;
   private destroy$ = inject(DestroyDirective).destroy$;
 
   staysFilterForm = new FormGroup<IStaysFilterForm>({
@@ -86,6 +88,10 @@ export class StaysFilterComponent implements OnInit {
       .subscribe((locationsValues) => {
         this.elasticLocationValues.next(locationsValues);
       });
+
+    this.page$.pipe(takeUntil(this.destroy$)).subscribe((page) => {
+      this.page = page;
+    });
   }
 
   onFocus(): void {
@@ -103,6 +109,7 @@ export class StaysFilterComponent implements OnInit {
         ...staysFormData,
         destId: this.chosenLocation.destId,
         searchType: this.chosenLocation.searchType,
+        page: this.page,
       });
     }
   }

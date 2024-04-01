@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IToaster } from '@shared/models/toaster';
+import { IToaster } from '@shared/models/toaster/toaster';
 import { Subject } from 'rxjs';
 
 @Injectable({

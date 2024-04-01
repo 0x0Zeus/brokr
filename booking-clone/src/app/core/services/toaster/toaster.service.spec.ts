@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { IToaster } from '@shared/models/toaster';
+import { IToaster } from '@shared/models/toaster/toaster';
 
 import { ToasterService } from '.';
 

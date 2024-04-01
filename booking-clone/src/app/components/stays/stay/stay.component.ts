@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RatingComponent } from '@components/shared/rating';
-import { IStay } from '@shared/stays/models/stay';
+import { IStay } from '@shared/models/stays/stay';
 
 @Component({
   selector: 'app-stay',

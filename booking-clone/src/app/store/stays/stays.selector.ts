@@ -18,3 +18,19 @@ export const selectStaysIsLoading = createSelector(
   selectStaysStore,
   (state: StaysState) => state.isLoading
 );
+
+export const selectStaysPage = createSelector(
+  selectStaysStore,
+  (state: StaysState) => {
+    if (state.searchParams) {
+      return state.searchParams.page;
+    } else {
+      return 1;
+    }
+  }
+);
+
+export const selectStaysSearchParams = createSelector(
+  selectStaysStore,
+  (state: StaysState) => state.searchParams
+);
