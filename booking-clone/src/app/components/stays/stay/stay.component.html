@@ -1,5 +1,5 @@
 <div
-  class="car p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full"
+  class="car flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full"
 >
   <img
     [src]="isFavorite ? 'assets/fav-fill.svg' : 'assets/fav.svg'"
@@ -19,7 +19,7 @@
     {{ stay.label }}
   </div>
   <div
-    class="rating-container flex justify-center items-center w-fit mb-[1.5rem]"
+    class="rating-container mt-auto flex justify-center items-center w-fit mb-[1.5rem]"
   >
     <div class="mr-[0.7rem]">
       <app-rating [rating]="stay.rating" />

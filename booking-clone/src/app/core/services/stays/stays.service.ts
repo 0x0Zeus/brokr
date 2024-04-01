@@ -35,7 +35,7 @@ export class StaysService {
               const locationData = {
                 destId: item.dest_id,
                 searchType: item.dest_type,
-                location: item.city_name,
+                location: item.label,
               };
               return locationData;
             });

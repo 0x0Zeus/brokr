@@ -32,9 +32,19 @@ export class CarsService {
         map((resp) => {
           if (resp.data) {
             const transData = resp.data.map((item) => {
+              let location = '';
+              if (item.name) {
+                location += `${item.name}, `;
+              }
+              if (item.city) {
+                location += `${item.city}, `;
+              }
+              if (item.country) {
+                location += `${item.country}, `;
+              }
               const coordinatesData = {
                 ...item.coordinates,
-                location: item.name,
+                location: location.slice(0, -2),
               };
               return coordinatesData;
             });

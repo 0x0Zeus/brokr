@@ -1,0 +1,54 @@
+.toast {
+  max-width: 30rem;
+  width: 100%;
+  min-height: 8rem;
+  padding: 2.3rem 1.2rem;
+  margin-top: 1.6rem;
+  border-radius: 0.5rem;
+  animation: move 1s both;
+  overflow-y: hidden;
+}
+
+.success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.close {
+  position: absolute;
+  top: 0.7rem;
+  right: 1rem;
+  font-size: 2.4rem;
+  cursor: pointer;
+}
+
+.toast__title {
+  font-family: 'Roboto Bold';
+  margin-bottom: 1rem;
+}
+
+.toast__message {
+  overflow-wrap: break-word;
+}
+
+@keyframes move {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

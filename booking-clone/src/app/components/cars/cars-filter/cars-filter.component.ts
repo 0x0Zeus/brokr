@@ -1,4 +1,5 @@
 import { AsyncPipe, NgClass } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,13 +14,17 @@ import {
 } from '@angular/forms';
 import { DestroyDirective } from '@core/directives';
 import { CarsService } from '@core/services/cars';
+import { ToasterService } from '@core/services/toaster';
 import { ICarsFilterForm } from '@shared/cars/models/carsFilter';
 import { ICarsDestination } from '@shared/cars/models/destination';
 import { CarsFacade } from '@store/cars';
 import {
   BehaviorSubject,
+  catchError,
   debounceTime,
   distinctUntilChanged,
+  of,
+  switchMap,
   takeUntil,
 } from 'rxjs';
 
@@ -64,19 +69,31 @@ export class CarsFilterComponent implements OnInit {
 
   constructor(
     private carsService: CarsService,
-    private carsFacade: CarsFacade
+    private carsFacade: CarsFacade,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
     this.locationValue.valueChanges
-      .pipe(takeUntil(this.destroy$), debounceTime(500), distinctUntilChanged())
-      .subscribe(() => {
-        this.carsService
-          .getDestinations({ query: this.locationValue.value })
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((locationsValues) => {
-            this.elasticLocationValues.next(locationsValues);
-          });
+      .pipe(
+        takeUntil(this.destroy$),
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap(() => {
+          return this.carsService
+            .getDestinations({
+              query: this.locationValue.value,
+            })
+            .pipe(
+              catchError((error: HttpErrorResponse) => {
+                this.toasterService.showHttpsError(error);
+                return of();
+              })
+            );
+        })
+      )
+      .subscribe((locationsValues) => {
+        this.elasticLocationValues.next(locationsValues);
       });
   }
 

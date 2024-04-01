@@ -1,4 +1,5 @@
 import { AsyncPipe, NgClass } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,13 +14,17 @@ import {
 } from '@angular/forms';
 import { DestroyDirective } from '@core/directives';
 import { StaysService } from '@core/services/stays';
+import { ToasterService } from '@core/services/toaster';
 import { IStaysDestination } from '@shared/stays/models/destination';
 import { IStaysFilterForm } from '@shared/stays/models/staysFilter';
 import { StaysFacade } from '@store/stays';
 import {
   BehaviorSubject,
+  catchError,
   debounceTime,
   distinctUntilChanged,
+  of,
+  switchMap,
   takeUntil,
 } from 'rxjs';
 
@@ -57,19 +62,29 @@ export class StaysFilterComponent implements OnInit {
 
   constructor(
     private staysService: StaysService,
-    private staysFacade: StaysFacade
+    private staysFacade: StaysFacade,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
     this.locationValue.valueChanges
-      .pipe(takeUntil(this.destroy$), debounceTime(500), distinctUntilChanged())
-      .subscribe(() => {
-        this.staysService
-          .getDestinations({ query: this.locationValue.value })
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((locationsValues) => {
-            this.elasticLocationValues.next(locationsValues);
-          });
+      .pipe(
+        takeUntil(this.destroy$),
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap(() =>
+          this.staysService
+            .getDestinations({ query: this.locationValue.value })
+            .pipe(
+              catchError((error: HttpErrorResponse) => {
+                this.toasterService.showHttpsError(error);
+                return of();
+              })
+            )
+        )
+      )
+      .subscribe((locationsValues) => {
+        this.elasticLocationValues.next(locationsValues);
       });
   }
 
