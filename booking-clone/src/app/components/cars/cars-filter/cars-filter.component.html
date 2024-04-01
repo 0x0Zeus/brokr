@@ -39,43 +39,63 @@
           </div>
         }
       </div>
+      @if (
+        (locationValue.hasError('required') && locationValue.touched) ||
+        (chosenLocation === null && locationValue.touched)
+      ) {
+        <div class="invalid__message">
+          please select a location from the list below
+        </div>
+      }
     </label>
   </div>
-
-  <div class="input-item max-w-[32rem] mr-[1.1rem]">
+  <div class="input-item max-w-[32rem] mr-[1.1rem] relative">
     <div class="input-title font-medium text-sm mb-[0.6rem]">From</div>
     <input
       [formControl]="fromDate"
       type="date"
       class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
     />
+    @if (fromDate.hasError('required') && fromDate.touched) {
+      <div class="invalid__message">please enter a date</div>
+    }
   </div>
-
-  <div class="input-item max-w-[32rem] mr-[1.1rem]">
+  <div class="input-item max-w-[32rem] mr-[1.1rem] relative">
     <input
       [formControl]="fromTime"
       type="time"
       class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
     />
+    @if (fromTime.hasError('required') && fromTime.touched) {
+      <div class="invalid__message">please enter a time</div>
+    }
   </div>
-
-  <div class="input-item max-w-[32rem] mr-[1.1rem]">
+  <div class="input-item max-w-[32rem] mr-[1.1rem] relative">
     <div class="input-title font-medium text-sm mb-[0.6rem]">Until</div>
     <input
       [formControl]="untilDate"
       type="date"
       class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
     />
+    @if (untilDate.hasError('required') && untilDate.touched) {
+      <div class="invalid__message">please enter a date</div>
+    }
   </div>
-
-  <div class="input-item max-w-[32rem] mr-[1.1rem]">
+  <div class="input-item max-w-[32rem] mr-[1.1rem] relative">
     <input
       [formControl]="untilTime"
       type="time"
       class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
     />
+    @if (untilTime.hasError('required') && untilTime.touched) {
+      <div class="invalid__message">please enter a time</div>
+    }
   </div>
-  <button (click)="onSearch()" class="btn-base text-base_fifth p-[0.5rem]">
-    <img src="assets/search.svg" alt="Search" class="w-[2rem] h-[2rem]" />
+  <button
+    (click)="onSearch()"
+    [ngClass]="carsFilterForm.valid ? '' : 'invalid-but'"
+    class="btn-base text-base_fifth p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
+  >
+    <img src="assets/search.svg" alt="Search" class="w-full h-full" />
   </button>
 </form>

@@ -111,3 +111,18 @@ a {
     color: #675dfe;
   }
 }
+
+//form validation
+
+.invalid__message {
+  position: absolute;
+  color: rgb(239 68 68);
+  left: 0;
+  bottom: 0;
+  transform: translateY(105%);
+}
+
+.invalid-but {
+  opacity: 0.7;
+  cursor: default;
+}
