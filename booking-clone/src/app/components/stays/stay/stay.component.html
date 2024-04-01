@@ -6,11 +6,10 @@
     alt="Favorite"
     class="favorite absolute top-[1.7rem] right-[1.5rem] w-[2.6rem] h-[2.6rem]"
   />
-  <img
-    [src]="stay.photo"
-    alt="Car"
-    class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem]"
-  />
+  <div
+    class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem] bg-center bg-cover"
+    [style.background-image]="'url(' + stay.photo + ')'"
+  ></div>
   <p class="description text-base_secondary mb-[0.2rem]">
     {{ stay.location }}
   </p>

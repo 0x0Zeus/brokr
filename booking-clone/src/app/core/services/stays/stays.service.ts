@@ -61,9 +61,11 @@ export class StaysService {
         if (resp.data) {
           const transData = resp.data.hotels.map(
             ({ property, accessibilityLabel }) => {
+              const imgUrlArr = property.photoUrls[0].split('/');
+              const transImgResolution = `${imgUrlArr.slice(0, 6).join('/')}/square330/${imgUrlArr.slice(7).join('/')}`;
               const stayData = {
                 id: property.id,
-                photo: property.photoUrls[0],
+                photo: transImgResolution,
                 location: property.wishlistName,
                 label: accessibilityLabel,
                 name: property.name,
