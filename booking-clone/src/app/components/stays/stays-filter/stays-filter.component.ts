@@ -12,6 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
 import { StaysService } from '@core/services/stays';
 import { ToasterService } from '@core/services/toaster';
@@ -31,7 +32,7 @@ import {
 @Component({
   selector: 'app-stays-filter',
   standalone: true,
-  imports: [ReactiveFormsModule, AsyncPipe, NgClass],
+  imports: [ReactiveFormsModule, AsyncPipe, NgClass, MiniLoaderComponent],
   templateUrl: './stays-filter.component.html',
   styleUrl: './stays-filter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,7 +40,8 @@ import {
 })
 export class StaysFilterComponent implements OnInit {
   isLocationFocus = false;
-  elasticLocationValues = new BehaviorSubject<IStaysDestination[]>([]);
+  destinationIsLoading$ = new BehaviorSubject<boolean>(false);
+  elasticLocationValues$ = new BehaviorSubject<IStaysDestination[]>([]);
   chosenLocation: null | IStaysDestination = null;
   page$ = this.staysFacade.staysPage$;
   page = 1;
@@ -74,19 +76,22 @@ export class StaysFilterComponent implements OnInit {
         takeUntil(this.destroy$),
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap(() =>
-          this.staysService
+        switchMap(() => {
+          this.destinationIsLoading$.next(true);
+          return this.staysService
             .getDestinations({ query: this.locationValue.value })
             .pipe(
               catchError((error: HttpErrorResponse) => {
+                this.destinationIsLoading$.next(false);
                 this.toasterService.showHttpsError(error);
                 return of();
               })
-            )
-        )
+            );
+        })
       )
       .subscribe((locationsValues) => {
-        this.elasticLocationValues.next(locationsValues);
+        this.destinationIsLoading$.next(false);
+        this.elasticLocationValues$.next(locationsValues);
       });
 
     this.page$.pipe(takeUntil(this.destroy$)).subscribe((page) => {

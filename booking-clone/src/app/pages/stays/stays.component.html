@@ -14,7 +14,7 @@
   </div>
 } @else if ((stays$ | async)?.length) {
   <button
-    class="relative btn-base w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
+    class="btn-base w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
     (click)="setNextPage()"
   >
     @if (isLoadingStays$ | async) {

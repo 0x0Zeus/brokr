@@ -8,11 +8,17 @@
       <div
         class="input-container h-[3.3rem] w-[32rem] px-[1.4rem] flex justify-start items-center border-2 border-base_border rounded-sm text-base"
       >
-        <img
-          src="assets/map.svg"
-          alt="Map"
-          class="w-[1.1rem] h-[1.4rem] mr-[1.4rem]"
-        />
+        @if (destinationIsLoading$ | async) {
+          <div class="w-[1.1rem] mr-[1.4rem]">
+            <app-mini-loader color="bg-bg_secondary" />
+          </div>
+        } @else {
+          <img
+            src="assets/map.svg"
+            alt="Map"
+            class="w-[1.1rem] h-[1.4rem] mr-[1.4rem]"
+          />
+        }
         <input
           [formControl]="locationValue"
           type="text"
