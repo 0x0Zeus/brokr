@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import { StayComponent } from './stay.component';
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+describe('StayComponent', () => {
+  let component: StayComponent;
+  let fixture: ComponentFixture<StayComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(HomeComponent);
+      imports: [StayComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(StayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

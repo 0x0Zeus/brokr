@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +11,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { DestroyDirective } from '@core/deirectives';
+import { DestroyDirective } from '@core/directives';
 import { CarsService } from '@core/services/cars';
 import { ICarsFilterForm } from '@shared/cars/models/carsFilter';
 import { ICarsDestination } from '@shared/cars/models/destination';
@@ -24,15 +24,15 @@ import {
 } from 'rxjs';
 
 @Component({
-  selector: 'app-filters',
+  selector: 'app-cars-filter',
   standalone: true,
-  imports: [ReactiveFormsModule, AsyncPipe],
-  templateUrl: './filters.component.html',
-  styleUrl: './filters.component.scss',
+  imports: [ReactiveFormsModule, AsyncPipe, NgClass],
+  templateUrl: './cars-filter.component.html',
+  styleUrl: './cars-filter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [DestroyDirective],
 })
-export class FiltersComponent implements OnInit {
+export class CarsFilterComponent implements OnInit {
   isLocationFocus = false;
   elasticLocationValues = new BehaviorSubject<ICarsDestination[]>([]);
   chosenLocation: null | ICarsDestination = null;
@@ -59,6 +59,7 @@ export class FiltersComponent implements OnInit {
 
   locationValue = new FormControl<string>('', {
     nonNullable: true,
+    validators: [Validators.required],
   });
 
   constructor(
@@ -74,7 +75,6 @@ export class FiltersComponent implements OnInit {
           .getDestinations({ query: this.locationValue.value })
           .pipe(takeUntil(this.destroy$))
           .subscribe((locationsValues) => {
-            console.log(locationsValues);
             this.elasticLocationValues.next(locationsValues);
           });
       });

@@ -4,7 +4,7 @@
       <app-loader />
     </div>
   } @else {
-    @for (car of cars$ | async; track car) {
+    @for (car of cars$ | async; track car.id) {
       <app-car [car]="car" />
     } @empty {
       Cars not found.
