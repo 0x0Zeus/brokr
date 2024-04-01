@@ -36,6 +36,11 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'preview/stay/:stayId',
+        loadComponent: () =>
+          import('./pages/preview-stay').then((m) => m.PreviewStayComponent),
+      },
     ],
   },
 ];

@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IStaysDestinationResponse } from '@shared/stays/interfaces/destinationsResponse';
-import { IStaysResponse } from '@shared/stays/interfaces/staysResponse';
-import { IStaysDestination } from '@shared/stays/models/destination';
-import { IStaysSearchParams } from '@shared/stays/models/params';
-import { IStay } from '@shared/stays/models/stay';
+import { IStaysDestinationResponse } from '@shared/interfaces/stays/destinationsResponse';
+import { IStaysSearchParams } from '@shared/interfaces/stays/params';
+import { IStaysResponse } from '@shared/interfaces/stays/staysResponse';
+import { IStaysDestination } from '@shared/models/stays/destination';
+import { IStay } from '@shared/models/stays/stay';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -35,7 +35,7 @@ export class StaysService {
               const locationData = {
                 destId: item.dest_id,
                 searchType: item.dest_type,
-                location: item.city_name,
+                location: item.label,
               };
               return locationData;
             });
@@ -48,13 +48,14 @@ export class StaysService {
   }
 
   getStays(query: IStaysSearchParams): Observable<IStay[]> {
-    const { destId, searchType, arrivalDate, departureDate } = query;
+    const { destId, searchType, arrivalDate, departureDate, page } = query;
     const options = {
       params: new HttpParams()
         .set('dest_id', destId)
         .append('search_type', searchType)
         .append('arrival_date', arrivalDate)
-        .append('departure_date', departureDate),
+        .append('departure_date', departureDate)
+        .append('page_number', page),
     };
     return this.http.get<IStaysResponse>(this.searchStaysURL, options).pipe(
       map((resp) => {

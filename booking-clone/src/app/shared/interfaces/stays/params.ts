@@ -3,4 +3,5 @@ export interface IStaysSearchParams {
   departureDate: string;
   destId: string;
   searchType: string;
+  page: number;
 }

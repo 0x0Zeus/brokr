@@ -1,13 +1,26 @@
 <div class="cars base-grid">
-  @if (isLoadingStays$ | async) {
-    <div class="mt-[16rem] h-full flex justify-center items-center w-full">
-      <app-loader />
-    </div>
-  } @else {
-    @for (stay of stays$ | async; track stay.id) {
-      <app-stay [stay]="stay" />
-    } @empty {
+  @for (stay of stays$ | async; track stay.id) {
+    <app-stay [stay]="stay" />
+  } @empty {
+    @if ((isLoadingStays$ | async) === false) {
       Stays not found.
     }
   }
 </div>
+
+@if (!(stays$ | async)?.length && (isLoadingStays$ | async)) {
+  <div class="mt-[16rem] h-full flex justify-center items-center w-full">
+    <app-loader />
+  </div>
+} @else if ((stays$ | async)?.length) {
+  <button
+    class="btn-base w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
+    (click)="setNextPage()"
+  >
+    @if (isLoadingStays$ | async) {
+      <app-mini-loader color="#ffffff" />
+    } @else {
+      Show More
+    }
+  </button>
+}

@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
-import { ICarsSearchParams } from '@shared/cars/interfaces/params';
-import { ICar } from '@shared/cars/models/car';
+import { ICarsSearchParams } from '@shared/interfaces/cars/params';
+import { ICar } from '@shared/models/cars/car';
 
 const actionSource = '[Cars]';
 
