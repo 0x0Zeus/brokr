@@ -6,11 +6,10 @@
     alt="Favorite"
     class="favorite absolute top-[1.7rem] right-[1.5rem] w-[2.6rem] h-[2.6rem]"
   />
-  <img
-    src="assets/stub/boat.png"
-    alt="Car"
-    class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem]"
-  />
+  <div
+    class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem] bg-center bg-cover"
+    [style.background-image]="'url(assets/home/boat.jpg)'"
+  ></div>
   <div class="mb-[1.6rem] flex justify-between items-center">
     <p class="location mr-auto">{{ 'CHICAGO, IL' | uppercase }}</p>
     <div class="mr-[0.7rem]">
