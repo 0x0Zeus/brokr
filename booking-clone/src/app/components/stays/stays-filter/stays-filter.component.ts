@@ -43,8 +43,6 @@ export class StaysFilterComponent implements OnInit {
   destinationIsLoading$ = new BehaviorSubject<boolean>(false);
   elasticLocationValues$ = new BehaviorSubject<IStaysDestination[]>([]);
   chosenLocation: null | IStaysDestination = null;
-  page$ = this.staysFacade.staysPage$;
-  page = 1;
   private destroy$ = inject(DestroyDirective).destroy$;
 
   staysFilterForm = new FormGroup<IStaysFilterForm>({
@@ -93,10 +91,6 @@ export class StaysFilterComponent implements OnInit {
         this.destinationIsLoading$.next(false);
         this.elasticLocationValues$.next(locationsValues);
       });
-
-    this.page$.pipe(takeUntil(this.destroy$)).subscribe((page) => {
-      this.page = page;
-    });
   }
 
   onFocus(): void {
@@ -114,7 +108,7 @@ export class StaysFilterComponent implements OnInit {
         ...staysFormData,
         destId: this.chosenLocation.destId,
         searchType: this.chosenLocation.searchType,
-        page: this.page,
+        page: 1,
       });
     }
   }

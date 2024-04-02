@@ -18,9 +18,18 @@
     (click)="setNextPage()"
   >
     @if (isLoadingStays$ | async) {
-      <app-mini-loader color="#ffffff" />
+      <button
+        class="btn-base btn-disabled w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
+      >
+        <app-mini-loader color="#ffffff" />
+      </button>
     } @else {
-      Show More
+      <button
+        class="btn-base w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
+        (click)="setNextPage()"
+      >
+        Show More
+      </button>
     }
   </button>
 }

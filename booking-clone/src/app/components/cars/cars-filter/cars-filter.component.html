@@ -100,7 +100,7 @@
   </div>
   <button
     (click)="onSearch()"
-    [ngClass]="carsFilterForm.valid ? '' : 'invalid-but'"
+    [ngClass]="carsFilterForm.valid ? '' : 'btn-disabled'"
     class="btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
   >
     <img src="assets/search.svg" alt="Search" class="w-full h-full" />
