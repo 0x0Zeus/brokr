@@ -51,8 +51,8 @@ export class StaysFilterComponent implements OnInit {
   destinationIsLoading$ = new BehaviorSubject<boolean>(false);
   elasticLocationValues$ = new BehaviorSubject<IStaysDestination[]>([]);
   chosenLocation: null | IStaysDestination = null;
-  private destroy$ = inject(DestroyDirective).destroy$;
   nowDate = new Date(Date.now());
+  private destroy$ = inject(DestroyDirective).destroy$;
 
   staysFilterForm = new FormGroup<IStaysFilterForm>({
     arrivalDate: new FormControl<Date>(this.nowDate, {

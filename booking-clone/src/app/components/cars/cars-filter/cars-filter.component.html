@@ -56,43 +56,47 @@
       }
     </label>
   </div>
-  <div class="input-item max-w-[32rem] mr-[1.1rem] relative">
+  <div class="input-item max-w-[17rem] mr-[1.1rem] relative">
     <div class="input-title font-medium text-sm mb-[0.6rem]">From</div>
-    <input
+    <p-calendar
       [formControl]="fromDate"
-      type="date"
-      class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
-    />
+      [iconDisplay]="'input'"
+      [showIcon]="true"
+      [minDate]="nowDate"
+      class="h-[3.3rem] w-full block border-2 border-base_border rounded-sm text-base outline-none"
+    ></p-calendar>
     @if (fromDate.hasError('required') && fromDate.touched) {
       <div class="invalid__message">please enter a date</div>
     }
   </div>
-  <div class="input-item max-w-[32rem] mr-[1.1rem] relative">
+  <div class="input-item max-w-[17rem] mr-[1.1rem] relative">
     <input
       [formControl]="fromTime"
       type="time"
-      class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
+      class="h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
     />
     @if (fromTime.hasError('required') && fromTime.touched) {
       <div class="invalid__message">please enter a time</div>
     }
   </div>
-  <div class="input-item max-w-[32rem] mr-[1.1rem] relative">
+  <div class="input-item max-w-[17rem] mr-[1.1rem] relative">
     <div class="input-title font-medium text-sm mb-[0.6rem]">Until</div>
-    <input
+    <p-calendar
       [formControl]="untilDate"
-      type="date"
-      class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
-    />
+      [iconDisplay]="'input'"
+      [showIcon]="true"
+      [minDate]="nowDate"
+      class="h-[3.3rem] w-full block border-2 border-base_border rounded-sm text-base outline-none"
+    ></p-calendar>
     @if (untilDate.hasError('required') && untilDate.touched) {
       <div class="invalid__message">please enter a date</div>
     }
   </div>
-  <div class="input-item max-w-[32rem] mr-[1.1rem] relative">
+  <div class="input-item max-w-[17rem] mr-[1.1rem] relative">
     <input
       [formControl]="untilTime"
       type="time"
-      class="input_place h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
+      class="h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
     />
     @if (untilTime.hasError('required') && untilTime.touched) {
       <div class="invalid__message">please enter a time</div>
