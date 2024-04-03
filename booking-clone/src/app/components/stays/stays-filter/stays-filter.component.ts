@@ -18,7 +18,9 @@ import { StaysService } from '@core/services/stays';
 import { ToasterService } from '@core/services/toaster';
 import { IStaysDestination } from '@shared/models/stays/destination';
 import { IStaysFilterForm } from '@shared/models/stays/staysFilter';
+import { parseDate } from '@shared/utils';
 import { StaysFacade } from '@store/stays';
+import { CalendarModule } from 'primeng/calendar';
 import {
   BehaviorSubject,
   catchError,
@@ -32,7 +34,13 @@ import {
 @Component({
   selector: 'app-stays-filter',
   standalone: true,
-  imports: [ReactiveFormsModule, AsyncPipe, NgClass, MiniLoaderComponent],
+  imports: [
+    ReactiveFormsModule,
+    AsyncPipe,
+    NgClass,
+    MiniLoaderComponent,
+    CalendarModule,
+  ],
   templateUrl: './stays-filter.component.html',
   styleUrl: './stays-filter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,14 +52,15 @@ export class StaysFilterComponent implements OnInit {
   elasticLocationValues$ = new BehaviorSubject<IStaysDestination[]>([]);
   chosenLocation: null | IStaysDestination = null;
   private destroy$ = inject(DestroyDirective).destroy$;
+  nowDate = new Date(Date.now());
 
   staysFilterForm = new FormGroup<IStaysFilterForm>({
-    arrivalDate: new FormControl<string>('', {
+    arrivalDate: new FormControl<Date>(this.nowDate, {
       nonNullable: true,
       validators: [Validators.required],
     }),
 
-    departureDate: new FormControl<string>('', {
+    departureDate: new FormControl<Date>(this.nowDate, {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -104,8 +113,10 @@ export class StaysFilterComponent implements OnInit {
   onSearch(): void {
     if (this.staysFilterForm.valid && this.chosenLocation) {
       const staysFormData = this.staysFilterForm.getRawValue();
+
       this.staysFacade.fetchStays({
-        ...staysFormData,
+        arrivalDate: parseDate(staysFormData.arrivalDate),
+        departureDate: parseDate(staysFormData.departureDate),
         destId: this.chosenLocation.destId,
         searchType: this.chosenLocation.searchType,
         page: 1,
