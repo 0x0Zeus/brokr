@@ -7,7 +7,6 @@ import {
   selectStays,
   selectStaysError,
   selectStaysIsLoading,
-  selectStaysPage,
   selectStaysSearchParams,
 } from './stays.selector';
 
@@ -17,7 +16,6 @@ import {
 export class StaysFacade {
   stays$ = this.store.select(selectStays);
   staysIsLoading$ = this.store.select(selectStaysIsLoading);
-  staysPage$ = this.store.select(selectStaysPage);
   staysSearchParams$ = this.store.select(selectStaysSearchParams);
   staysError$ = this.store.select(selectStaysError);
 

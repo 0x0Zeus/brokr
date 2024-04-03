@@ -18,7 +18,9 @@ import { CarsService } from '@core/services/cars';
 import { ToasterService } from '@core/services/toaster';
 import { ICarsFilterForm } from '@shared/models/cars/carsFilter';
 import { ICarsDestination } from '@shared/models/cars/destination';
+import { parseDate } from '@shared/utils';
 import { CarsFacade } from '@store/cars';
+import { CalendarModule } from 'primeng/calendar';
 import {
   BehaviorSubject,
   catchError,
@@ -32,7 +34,13 @@ import {
 @Component({
   selector: 'app-cars-filter',
   standalone: true,
-  imports: [ReactiveFormsModule, AsyncPipe, NgClass, MiniLoaderComponent],
+  imports: [
+    ReactiveFormsModule,
+    AsyncPipe,
+    NgClass,
+    MiniLoaderComponent,
+    CalendarModule,
+  ],
   templateUrl: './cars-filter.component.html',
   styleUrl: './cars-filter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,10 +51,11 @@ export class CarsFilterComponent implements OnInit {
   elasticLocationValues = new BehaviorSubject<ICarsDestination[]>([]);
   destinationIsLoading$ = new BehaviorSubject<boolean>(false);
   chosenLocation: null | ICarsDestination = null;
+  nowDate = new Date(Date.now());
   private destroy$ = inject(DestroyDirective).destroy$;
 
   carsFilterForm = new FormGroup<ICarsFilterForm>({
-    fromDate: new FormControl<string>('', {
+    fromDate: new FormControl<Date>(this.nowDate, {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -54,7 +63,7 @@ export class CarsFilterComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    untilDate: new FormControl<string>('', {
+    untilDate: new FormControl<Date>(this.nowDate, {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -115,6 +124,8 @@ export class CarsFilterComponent implements OnInit {
       const carsFormData = this.carsFilterForm.getRawValue();
       this.carsFacade.fetchCars({
         ...carsFormData,
+        fromDate: parseDate(carsFormData.fromDate),
+        untilDate: parseDate(carsFormData.untilDate),
         latitude: this.chosenLocation!.latitude,
         longitude: this.chosenLocation!.longitude,
       });

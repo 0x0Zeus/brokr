@@ -2,6 +2,9 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import 'primeng/resources/themes/lara-light-blue/theme.css';
+@import 'primeng/resources/primeng.css';
+
 @font-face {
   font-family: 'Roboto Bold';
   src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
@@ -30,9 +33,12 @@
   font-style: normal;
 }
 
+:root {
+  font-family: 'Roboto Regular', sans-serif;
+}
+
 html {
   font-size: 10px;
-  font-family: 'Roboto Regular', sans-serif;
   color: #000000;
   background-color: #ffffff;
 }
@@ -123,7 +129,48 @@ a {
   transform: translateY(105%);
 }
 
-.invalid-but {
+.btn-disabled {
   opacity: 0.7;
   cursor: default;
+}
+
+//prime-ng datepicker
+
+.p-datepicker table td.p-datepicker-today > span {
+  background: #675dfe;
+  color: #d1d5db;
+  border-color: transparent;
+}
+
+.p-calendar {
+  height: 100%;
+}
+
+.p-calendar .p-inputtext {
+  padding: 0 1.4rem;
+}
+
+.p-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.p-input-icon-left > i,
+.p-input-icon-left > .p-icon-wrapper,
+.p-input-icon-right > i,
+.p-input-icon-right > .p-icon-wrapper {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.8rem;
+}
+
+.p-datepicker table td > span {
+  border-radius: 0.3rem;
+}
+
+.p-calendar:not(.p-calendar-disabled).p-focus > .p-inputtext {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #bfdbfe;
+  border-color: #3b82f6;
 }
