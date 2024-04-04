@@ -33,6 +33,8 @@ export const getTransformedCarData = (car: ISearchCarsResponseItem): ICar => {
     price: car.pricing_info.price,
     supplier: car.supplier_info.name,
     seats: car.vehicle_info.seats,
+    latitude: Number(car.supplier_info.latitude),
+    longitude: Number(car.supplier_info.longitude),
   };
   return carData;
 };

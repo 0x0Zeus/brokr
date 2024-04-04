@@ -1,4 +1,3 @@
-<div id="map" class="map w-full h-[80rem] mb-[2.1rem]"></div>
 <div class="cars base-grid">
   @for (stay of stays$ | async; track stay.id) {
     <app-stay [stay]="stay" />

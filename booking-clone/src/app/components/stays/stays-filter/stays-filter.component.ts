@@ -22,7 +22,6 @@ import { IStaysFilterForm } from '@shared/models/stays/staysFilter';
 import { parseDate } from '@shared/utils';
 import { StaysFacade } from '@store/stays';
 import { CalendarModule } from 'primeng/calendar';
-import { InputSwitchModule } from 'primeng/inputswitch';
 import {
   BehaviorSubject,
   catchError,
@@ -42,7 +41,6 @@ import {
     NgClass,
     MiniLoaderComponent,
     CalendarModule,
-    InputSwitchModule,
     FormsModule,
   ],
   templateUrl: './stays-filter.component.html',
@@ -56,7 +54,6 @@ export class StaysFilterComponent implements OnInit {
   elasticLocationValues$ = new BehaviorSubject<IStaysDestinations[]>([]);
   chosenLocation: null | IStaysDestinations = null;
   nowDate = new Date(Date.now());
-  checkedMap = false;
   private destroy$ = inject(DestroyDirective).destroy$;
 
   staysFilterForm = new FormGroup<IStaysFilterForm>({
@@ -133,8 +130,6 @@ export class StaysFilterComponent implements OnInit {
     this.locationValue.setValue(destination.location);
     this.chosenLocation = destination;
   }
-
-  toggleMap(): void {}
 
   get arrivalDate(): FormControl<Date> {
     return this.staysFilterForm.controls.arrivalDate;

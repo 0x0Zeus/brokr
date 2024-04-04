@@ -7,4 +7,6 @@ export interface ICar {
   price: number;
   supplier: string;
   seats: string;
+  latitude: number;
+  longitude: number;
 }

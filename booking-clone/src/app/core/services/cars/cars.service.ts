@@ -63,7 +63,7 @@ export class CarsService {
     };
     return this.http.get<ISearchCarsResponse>(this.searchCarsURL, options).pipe(
       map((resp) => {
-        if (resp.data) {
+        if (resp.data.search_results) {
           const transData = resp.data.search_results.map((car) => {
             const carData = getTransformedCarData(car);
             return carData;

@@ -5,5 +5,8 @@
     <app-stays-filter />
   }
   <app-navigation />
+  @if (isMap$ | async) {
+    <app-map />
+  }
   <router-outlet></router-outlet>
 </div>
