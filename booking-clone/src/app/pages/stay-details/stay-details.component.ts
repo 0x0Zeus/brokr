@@ -6,6 +6,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from '@components/shared/loader';
 import { RatingComponent } from '@components/shared/rating';
 import { ReviewComponent } from '@components/shared/review';
@@ -14,6 +15,7 @@ import { ToasterService } from '@core/services/toaster';
 import { IStayReview } from '@shared/models/stays/review';
 import { IStayDetails } from '@shared/models/stays/stayDetails';
 import { StaysFacade } from '@store/stays';
+import { CalendarModule } from 'primeng/calendar';
 import {
   BehaviorSubject,
   catchError,
@@ -28,7 +30,14 @@ import { StaysService } from '../../core/services/stays/stays.service';
 @Component({
   selector: 'app-stay-details',
   standalone: true,
-  imports: [RatingComponent, AsyncPipe, LoaderComponent, ReviewComponent],
+  imports: [
+    RatingComponent,
+    AsyncPipe,
+    LoaderComponent,
+    ReviewComponent,
+    CalendarModule,
+    FormsModule,
+  ],
   templateUrl: './stay-details.component.html',
   styleUrl: './stay-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,6 +48,7 @@ export class StayDetailsComponent implements OnInit {
   stayInfo$ = new BehaviorSubject<IStayDetails | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
   reviews$ = new BehaviorSubject<IStayReview[]>([]);
+  dateRange: [Date, Date] = [new Date(Date.now()), new Date(Date.now())];
 
   constructor(
     private staysFacade: StaysFacade,
@@ -54,6 +64,7 @@ export class StayDetailsComponent implements OnInit {
         filter((stayId) => stayId !== undefined),
         switchMap((stayId) => {
           const stayIdInfo = stayId.split('_');
+          this.dateRange = [new Date(stayIdInfo[1]), new Date(stayIdInfo[2])];
           return this.staysService
             .getStayDetails({
               hotelId: stayIdInfo[0],

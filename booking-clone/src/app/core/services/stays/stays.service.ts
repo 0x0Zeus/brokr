@@ -5,7 +5,7 @@ import {
   IStayDetailsSearchParams,
   IStaysSearchParams,
 } from '@shared/interfaces/stays/params';
-import { IReviewsResponse } from '@shared/interfaces/stays/reviewsResponse';
+import { IStayReviewsResponse } from '@shared/interfaces/stays/reviewsResponse';
 import { IStayDetailsResponse } from '@shared/interfaces/stays/stayDetailsResponse';
 import { IStaysResponse } from '@shared/interfaces/stays/staysResponse';
 import { IStaysDestinations } from '@shared/models/stays/destination';
@@ -15,6 +15,7 @@ import { IStayDetails } from '@shared/models/stays/stayDetails';
 import {
   getTransformedStayData,
   getTransformedStayDetails,
+  getTransformedStayReview,
   getTransformedStaysDestination,
 } from '@shared/utils';
 import { map, Observable } from 'rxjs';
@@ -116,18 +117,12 @@ export class StaysService {
     };
 
     return this.http
-      .get<IReviewsResponse>(this.searchStayReviewsURL, options)
+      .get<IStayReviewsResponse>(this.searchStayReviewsURL, options)
       .pipe(
         map((resp) => {
           if (resp.data) {
             const stayReviewsData = resp.data.result.map((review) => {
-              const transformedReview = {
-                photo: '#',
-                rating: review.average_score,
-                review: review.pros,
-                reviewer: review.author.name,
-                date: '2022-04-05',
-              };
+              const transformedReview = getTransformedStayReview(review);
 
               return transformedReview;
             });

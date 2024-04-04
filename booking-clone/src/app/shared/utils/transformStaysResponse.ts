@@ -1,9 +1,13 @@
 import { IStayDestinationsResponse } from '@shared/interfaces/stays/destinationsResponse';
+import { IStayReviewResponse } from '@shared/interfaces/stays/reviewsResponse';
 import { IStayDetailsDataResponse } from '@shared/interfaces/stays/stayDetailsResponse';
 import { IStayResponse } from '@shared/interfaces/stays/staysResponse';
 import { IStaysDestinations } from '@shared/models/stays/destination';
+import { IStayReview } from '@shared/models/stays/review';
 import { IStay } from '@shared/models/stays/stay';
 import { IStayDetails } from '@shared/models/stays/stayDetails';
+
+import { getShortDateFormat } from './dateParser';
 
 export const getTransformedStayData = ({
   property,
@@ -49,8 +53,8 @@ export const getTransformedStayDetails = (
     location: stay.address,
     review: stay.review_nr,
     description: stay.rooms[stay.block[0].room_id].description,
-    arrival_date: stay.arrival_date,
-    departure_date: stay.departure_date,
+    arrival_date: getShortDateFormat(stay.arrival_date),
+    departure_date: getShortDateFormat(stay.departure_date),
     city: stay.city,
     facilities: stay.facilities_block.facilities.map((fac) => fac.name),
     nights: Math.floor(
@@ -65,7 +69,7 @@ export const getTransformedStayDetails = (
       type: stay.block[0].paymentterms.cancellation.type_translation,
       before: stay.block[0].paymentterms.cancellation.info.date_before,
     },
-    rating: Number((stay.wifi_review_score.rating / 2).toFixed(1)),
+    rating: Number((10 / 2).toFixed(1)),
     specifications: {
       square: stay.block[0].room_surface_in_m2,
       bedrooms: stay.block[0].number_of_bedrooms,
@@ -73,4 +77,18 @@ export const getTransformedStayDetails = (
     },
   };
   return stayDetailsData;
+};
+
+export const getTransformedStayReview = (
+  review: IStayReviewResponse
+): IStayReview => {
+  const transformedReview = {
+    photo: review.author.avatar ?? null,
+    rating: Number((review.average_score / 2).toFixed(1)),
+    review: review.pros,
+    reviewer: review.author.name,
+    date: getShortDateFormat(review.date),
+  };
+
+  return transformedReview;
 };

@@ -1,4 +1,4 @@
-<div class="details-container max-w-[135rem] mx-[2rem] m-auto mt-[5.7rem]">
+<div class="details-container max-w-[135rem] px-[2rem] m-auto mt-[5.7rem]">
   @if (stayInfo$ | async; as stayInfo) {
     <div class="main flex justify-between gap-[6.6rem] mb-[6.7rem]">
       <div
@@ -54,6 +54,17 @@
           <p class="reservation__period text-base_secondary font-light text-md">
             {{ stayInfo.arrival_date + ' - ' + stayInfo.departure_date }}
           </p>
+        </div>
+        <div
+          class="calendar h-[30rem] w-full border-b-1 border-base_border mb-[2.5rem]"
+        >
+          <p-calendar
+            [showIcon]="true"
+            selectionMode="range"
+            [inline]="true"
+            [(ngModel)]="dateRange"
+            class="rounded-sm border-2 w-fit border-base_border text-base outline-none"
+          ></p-calendar>
         </div>
         <div class="specification">
           <h4 class="specification__title font-bold text-3xl mb-[1.4rem]">
@@ -125,7 +136,9 @@
               {{ 'Full refund before ' + stayInfo.cancellation.before }}
             </p>
           } @else {
-            <p class="cancellation__term text-xl">Not refund</p>
+            <p class="cancellation__term text-xl">
+              {{ stayInfo.cancellation.type }}
+            </p>
           }
         </div>
       </div>
@@ -157,7 +170,7 @@
       </p>
     </div>
     <div
-      class="reviews flex justify-between items-center flex-wrap gap-[2.8rem]"
+      class="reviews flex justify-between items-start flex-wrap gap-[2.8rem]"
     >
       @if (reviews$ | async; as reviews) {
         @for (review of reviews; track review.reviewer) {
@@ -166,10 +179,10 @@
       }
     </div>
   } @else if (isLoading$ | async) {
-    <div class="mt-[20rem]">
+    <div class="mt-[35rem]">
       <app-loader />
     </div>
   } @else {
-    <p class="mt-[20rem]">Something went wrong</p>
+    <p class="error-message mt-[35rem]">Something went wrong</p>
   }
 </div>

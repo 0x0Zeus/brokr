@@ -134,6 +134,16 @@ a {
   cursor: default;
 }
 
+//error message
+
+.error-message {
+  font-size: 1.8rem;
+  font-family: 'Roboto Regular';
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 //prime-ng datepicker
 
 .p-datepicker table td.p-datepicker-today > span {

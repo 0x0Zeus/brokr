@@ -1,4 +1,4 @@
-export interface IReviewsResponse {
+export interface IStayReviewsResponse {
   status: boolean;
   message: string;
   timestamp: number;
@@ -7,11 +7,11 @@ export interface IReviewsResponse {
 
 interface Data {
   count: number;
-  result: IReviewResponse[];
+  result: IStayReviewResponse[];
   sort_options: SortOption[];
 }
 
-export interface IReviewResponse {
+export interface IStayReviewResponse {
   reviewng: number;
   cons: string;
   title_translated: string;

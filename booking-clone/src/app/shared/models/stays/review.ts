@@ -1,5 +1,5 @@
 export interface IStayReview {
-  photo: string;
+  photo: string | null;
   rating: number;
   review: string;
   reviewer: string;
