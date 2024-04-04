@@ -1,0 +1,164 @@
+<div class="details-container max-w-[135rem] mx-[2rem] m-auto mt-[5.7rem]">
+  @if (stayInfo$ | async; as stayInfo) {
+    <div class="main flex justify-between gap-[6.6rem] mb-[6.7rem]">
+      <div
+        class="hotel-photo rounded-lg w-[53.2rem] h-[63.2rem] bg-center bg-cover"
+        [style.background-image]="'url(' + stayInfo.photo + ')'"
+      ></div>
+      <div class="main-info basis-1/2 w-full">
+        <div class="host flex items-center justify-start mb-[1.6rem]">
+          <img
+            src="assets/stayDetails/reward.svg"
+            alt="Host"
+            class="host__img w-[1rem] h-[1.6rem] mr-[1rem]"
+          />
+          <h4 class="host__title text-base_third">Host Name</h4>
+        </div>
+        <p class="hotel-title font-bold text-4xl mb-[1.5rem]">
+          {{ stayInfo.name }}
+        </p>
+        <div class="location flex items-center justify-start mb-[1rem]">
+          <img
+            src="assets/stayDetails/map.svg"
+            alt="Location"
+            class="location__img w-[0.9rem] h-[1rem] mr-[1rem]"
+          />
+          <p class="location__title text-base_secondary font-light">
+            {{ stayInfo.city }}
+          </p>
+        </div>
+        <div
+          class="statistic-info flex items-center justify-between pb-[2.7rem] border-b-1 border-base_border mb-[2.7rem]"
+        >
+          <app-rating [rating]="stayInfo.rating" class="mr-[1.2rem]" />
+          <div class="reviews">{{ '(' + stayInfo.review + ' reviews)' }}</div>
+        </div>
+        <div class="where mb-[2.5rem]">
+          <h4 class="where__title font-bold text-3xl mb-[1.8rem]">Where</h4>
+          <div class="location flex items-center justify-start mb-[1rem]">
+            <img
+              src="assets/stayDetails/map.svg"
+              alt="Location"
+              class="location__img w-[1.7rem] h-[1.7rem] mr-[1.7rem]"
+            />
+            <p class="location__title text-lg">
+              {{ stayInfo.location }}
+            </p>
+          </div>
+        </div>
+        <div class="reservation mb-[2.5rem]">
+          <p class="reservation__nights font-bold text-3xl mb-[0.7rem]">
+            {{ stayInfo.nights }}
+            <span> nights</span>
+          </p>
+          <p class="reservation__period text-base_secondary font-light text-md">
+            {{ stayInfo.arrival_date + ' - ' + stayInfo.departure_date }}
+          </p>
+        </div>
+        <div class="specification">
+          <h4 class="specification__title font-bold text-3xl mb-[1.4rem]">
+            Specifications
+          </h4>
+          <div
+            class="specification-items flex items-center justify-start gap-[2rem] flex-wrap"
+          >
+            <div
+              class="specification-item w-[20rem] h-[11rem] px-[1.6rem] pt-[2.1rem] border-1 border-base_border rounded-lg"
+            >
+              <img
+                src="assets/stayDetails/square.svg"
+                alt="Specification"
+                class="specification-item__icon w-[2rem] h-[1.8rem] mb-[2.8rem]"
+              />
+              <p class="specification-item__description font-medium text-xl">
+                {{ stayInfo.specifications.square }}<span> Sqmr</span>
+              </p>
+            </div>
+            <div
+              class="specification-item w-[20rem] h-[11rem] px-[1.6rem] pt-[2.1rem] border-1 border-base_border rounded-lg"
+            >
+              <img
+                src="assets/stayDetails/bedroom.svg"
+                alt="Specification"
+                class="specification-item__icon w-[2rem] h-[1.8rem] mb-[2.8rem]"
+              />
+              <p class="specification-item__description font-medium text-xl">
+                {{ stayInfo.specifications.bedrooms }}<span> Bedrooms</span>
+              </p>
+            </div>
+            <div
+              class="specification-item w-[20rem] h-[11rem] px-[1.6rem] pt-[2.1rem] border-1 border-base_border rounded-lg"
+            >
+              <img
+                src="assets/stayDetails/bathroom.svg"
+                alt="Specification"
+                class="specification-item__icon w-[2rem] h-[1.8rem] mb-[2.8rem]"
+              />
+              <p class="specification-item__descr font-medium text-xl">
+                {{ stayInfo.specifications.bathrooms }}<span> Bathrooms</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cancellation mb-[5.1rem]">
+      <h4 class="cancellation__title font-bold text-3xl mb-[1.8rem]">
+        Cancellation policy
+      </h4>
+      <div class="cancellation__descr flex items-start justify-start">
+        <div
+          class="cancellation__img rounded-md bg-bg_secondary w-[4rem] h-[4rem] flex items-center justify-center mr-[2.1rem]"
+        >
+          <img
+            src="assets/stayDetails/cancellation-smile.svg"
+            alt="Cancellation"
+            class="w-[2rem] h-[2rem]"
+          />
+        </div>
+        <div class="cancellation__info">
+          <p class="cancellation__friendly font-medium text-2xl leading-[2rem]">
+            {{ stayInfo.cancellation.type }}
+          </p>
+          @if (stayInfo.cancellation.before) {
+            <p class="cancellation__term text-xl">
+              {{ 'Full refund before ' + stayInfo.cancellation.before }}
+            </p>
+          } @else {
+            <p class="cancellation__term text-xl">Not refund</p>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="amenities mb-[5.2rem]">
+      <h4 class="amenities__title font-bold text-3xl mb-[3rem]">
+        Specifications
+      </h4>
+      <div
+        class="amenities-items flex items-center justify-start gap-[2rem] flex-wrap"
+      >
+        @for (facility of stayInfo.facilities; track facility) {
+          <p
+            class="amenities-item w-[14.7rem] min-h-[11.8rem] h-full px-[1.6rem] pt-[2.5rem] border-1 border-base_border rounded-lg font-medium text-xl"
+          >
+            {{ facility }}
+          </p>
+        }
+      </div>
+    </div>
+    <div class="description mb-[5.2rem]">
+      <h4 class="description__title font-bold text-3xl mb-[2.5rem]">
+        Description
+      </h4>
+      <p class="description__content text-xl text-base_secondary">
+        {{ stayInfo.description }}
+      </p>
+    </div>
+  } @else if (isLoading$ | async) {
+    <div class="mt-[20rem]">
+      <app-loader />
+    </div>
+  } @else {
+    <p class="mt-[20rem]">Something went wrong</p>
+  }
+</div>

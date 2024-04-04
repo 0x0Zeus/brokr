@@ -37,9 +37,9 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'preview/stay/:stayId',
+        path: 'details/stay/:stayId',
         loadComponent: () =>
-          import('./pages/preview-stay').then((m) => m.PreviewStayComponent),
+          import('./pages/stay-details').then((m) => m.StayDetailsComponent),
       },
     ],
   },

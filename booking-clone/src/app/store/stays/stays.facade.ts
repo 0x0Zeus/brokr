@@ -4,6 +4,7 @@ import { IStaysSearchParams } from '@shared/interfaces/stays/params';
 
 import * as STAYS_ACTIONS from './stays.action';
 import {
+  selectPreviewStayId,
   selectStays,
   selectStaysError,
   selectStaysIsLoading,
@@ -18,6 +19,7 @@ export class StaysFacade {
   staysIsLoading$ = this.store.select(selectStaysIsLoading);
   staysSearchParams$ = this.store.select(selectStaysSearchParams);
   staysError$ = this.store.select(selectStaysError);
+  stayPreviewId$ = this.store.select(selectPreviewStayId);
 
   constructor(private store: Store) {}
 

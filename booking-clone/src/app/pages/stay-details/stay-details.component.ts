@@ -1,0 +1,74 @@
+import { AsyncPipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
+import { LoaderComponent } from '@components/shared/loader';
+import { RatingComponent } from '@components/shared/rating';
+import { DestroyDirective } from '@core/directives';
+import { ToasterService } from '@core/services/toaster';
+import { IStayDetails } from '@shared/models/stays/stayDetails';
+import { StaysFacade } from '@store/stays';
+import {
+  BehaviorSubject,
+  catchError,
+  filter,
+  of,
+  switchMap,
+  takeUntil,
+} from 'rxjs';
+
+import { StaysService } from '../../core/services/stays/stays.service';
+
+@Component({
+  selector: 'app-stay-details',
+  standalone: true,
+  imports: [RatingComponent, AsyncPipe, LoaderComponent],
+  templateUrl: './stay-details.component.html',
+  styleUrl: './stay-details.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [DestroyDirective],
+})
+export class StayDetailsComponent implements OnInit {
+  private destroy$ = inject(DestroyDirective).destroy$;
+  stayInfo$ = new BehaviorSubject<IStayDetails | null>(null);
+  isLoading$ = new BehaviorSubject<boolean>(false);
+
+  constructor(
+    private staysFacade: StaysFacade,
+    private staysService: StaysService,
+    private toasterService: ToasterService
+  ) {}
+
+  ngOnInit(): void {
+    this.isLoading$.next(true);
+    this.staysFacade.stayPreviewId$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((stayId) => stayId !== undefined),
+        switchMap((stayId) => {
+          const stayIdInfo = stayId.split('_');
+          return this.staysService
+            .getStayDetails({
+              hotelId: stayIdInfo[0],
+              arrivalDate: stayIdInfo[1],
+              departureDate: stayIdInfo[2],
+            })
+            .pipe(
+              catchError((error: HttpErrorResponse) => {
+                this.isLoading$.next(false);
+                this.toasterService.showHttpsError(error);
+                return of();
+              })
+            );
+        })
+      )
+      .subscribe((stayInfo) => {
+        this.stayInfo$.next(stayInfo);
+        this.isLoading$.next(false);
+      });
+  }
+}

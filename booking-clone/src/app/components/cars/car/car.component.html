@@ -21,14 +21,7 @@
     />
     <p class="location text-base_secondary">{{ car.location }}</p>
   </div>
-  <div
-    class="rating-container mt-auto flex justify-start items-center mb-[1rem]"
-  >
-    <div class="mr-[0.7rem]">
-      <app-rating [rating]="car.rating" />
-    </div>
-    <div class="rating">{{ car.rating }}</div>
-  </div>
+  <app-rating [rating]="car.rating" class="mb-[1rem]" />
   <div class="flex justify-between items-center mb-[0.2rem]">
     <div class="price">
       <span class="price-value text-2xl font-medium mr-[0.6rem]"

@@ -37,6 +37,8 @@ module.exports = {
         lg: '1.1rem',
         xl: '1.4rem',
         '2xl': '1.8rem',
+        '3xl': '2rem',
+        '4xl': '2.2rem',
         '5xl': '3rem',
       },
       borderWidth: {
