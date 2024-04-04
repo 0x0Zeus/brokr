@@ -8,8 +8,10 @@ import {
 } from '@angular/core';
 import { LoaderComponent } from '@components/shared/loader';
 import { RatingComponent } from '@components/shared/rating';
+import { ReviewComponent } from '@components/shared/review';
 import { DestroyDirective } from '@core/directives';
 import { ToasterService } from '@core/services/toaster';
+import { IStayReview } from '@shared/models/stays/review';
 import { IStayDetails } from '@shared/models/stays/stayDetails';
 import { StaysFacade } from '@store/stays';
 import {
@@ -26,7 +28,7 @@ import { StaysService } from '../../core/services/stays/stays.service';
 @Component({
   selector: 'app-stay-details',
   standalone: true,
-  imports: [RatingComponent, AsyncPipe, LoaderComponent],
+  imports: [RatingComponent, AsyncPipe, LoaderComponent, ReviewComponent],
   templateUrl: './stay-details.component.html',
   styleUrl: './stay-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,6 +38,7 @@ export class StayDetailsComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
   stayInfo$ = new BehaviorSubject<IStayDetails | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
+  reviews$ = new BehaviorSubject<IStayReview[]>([]);
 
   constructor(
     private staysFacade: StaysFacade,
@@ -69,6 +72,30 @@ export class StayDetailsComponent implements OnInit {
       .subscribe((stayInfo) => {
         this.stayInfo$.next(stayInfo);
         this.isLoading$.next(false);
+      });
+
+    //temporary
+
+    this.staysFacade.stayPreviewId$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((stayId) => stayId !== undefined),
+        switchMap((stayId) => {
+          const stayIdInfo = stayId.split('_');
+          return this.staysService
+            .getStayReviews({
+              hotelId: stayIdInfo[0],
+            })
+            .pipe(
+              catchError((error: HttpErrorResponse) => {
+                this.toasterService.showHttpsError(error);
+                return of();
+              })
+            );
+        })
+      )
+      .subscribe((reviewsInfo) => {
+        this.reviews$.next(reviewsInfo);
       });
   }
 }

@@ -5,6 +5,10 @@ import { ICarsDestinationResponse } from '@shared/interfaces/cars/destinationsRe
 import { ICarsSearchParams } from '@shared/interfaces/cars/params';
 import { ICar } from '@shared/models/cars/car';
 import { ICarsDestination } from '@shared/models/cars/destination';
+import {
+  getTransformedCarData,
+  getTransformedCarDestinations,
+} from '@shared/utils/transformCarsResponse';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -31,21 +35,8 @@ export class CarsService {
       .pipe(
         map((resp) => {
           if (resp.data) {
-            const transData = resp.data.map((item) => {
-              let location = '';
-              if (item.name) {
-                location += `${item.name}, `;
-              }
-              if (item.city) {
-                location += `${item.city}, `;
-              }
-              if (item.country) {
-                location += `${item.country}, `;
-              }
-              const coordinatesData = {
-                ...item.coordinates,
-                location: location.slice(0, -2),
-              };
+            const transData = resp.data.map((location) => {
+              const coordinatesData = getTransformedCarDestinations(location);
               return coordinatesData;
             });
             return transData;
@@ -74,16 +65,7 @@ export class CarsService {
       map((resp) => {
         if (resp.data) {
           const transData = resp.data.search_results.map((car) => {
-            const carData = {
-              id: car.vehicle_id,
-              photo: car.vehicle_info.image_thumbnail_url,
-              location: car.supplier_info.address,
-              model: car.vehicle_info.v_name,
-              rating: Number((car.rating_info.average / 2).toFixed(1)),
-              price: car.pricing_info.price,
-              supplier: car.supplier_info.name,
-              seats: car.vehicle_info.seats,
-            };
+            const carData = getTransformedCarData(car);
             return carData;
           });
           return transData;

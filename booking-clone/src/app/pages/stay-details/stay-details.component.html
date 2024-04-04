@@ -146,13 +146,24 @@
         }
       </div>
     </div>
-    <div class="description mb-[5.2rem]">
+    <div
+      class="description pb-[5.5rem] border-b-1 border-base_border mb-[3.5rem]"
+    >
       <h4 class="description__title font-bold text-3xl mb-[2.5rem]">
         Description
       </h4>
       <p class="description__content text-xl text-base_secondary">
         {{ stayInfo.description }}
       </p>
+    </div>
+    <div
+      class="reviews flex justify-between items-center flex-wrap gap-[2.8rem]"
+    >
+      @if (reviews$ | async; as reviews) {
+        @for (review of reviews; track review.reviewer) {
+          <app-review [review]="review" />
+        }
+      }
     </div>
   } @else if (isLoading$ | async) {
     <div class="mt-[20rem]">

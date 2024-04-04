@@ -1,11 +1,11 @@
-export interface IStaysDestinationResponse {
+export interface IStaysDestinationsResponse {
   status: boolean;
   message: string;
   timestamp: number;
-  data: IStaysDestination[];
+  data: IStayDestinationsResponse[];
 }
 
-interface IStaysDestination {
+export interface IStayDestinationsResponse {
   dest_type: string;
   cc1: string;
   city_name: string;

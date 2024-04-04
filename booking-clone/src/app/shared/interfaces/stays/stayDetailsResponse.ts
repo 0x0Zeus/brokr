@@ -2,10 +2,10 @@ export interface IStayDetailsResponse {
   status: boolean;
   message: string;
   timestamp: number;
-  data: Data;
+  data: IStayDetailsDataResponse;
 }
 
-interface Data {
+export interface IStayDetailsDataResponse {
   ufi: number;
   hotel_id: number;
   hotel_name: string;
