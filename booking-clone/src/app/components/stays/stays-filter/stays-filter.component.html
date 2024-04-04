@@ -89,4 +89,17 @@
   >
     <img src="assets/search.svg" alt="Search" class="w-full h-full" />
   </button>
+  <div
+    class="input-item max-w-[17rem] ml-auto relative flex items-center justify-start pl-[2rem]"
+  >
+    <div class="input-title font-medium text-sm mb-[0.6rem] mr-[1.1rem]">
+      Map
+    </div>
+    <p-inputSwitch
+      [(ngModel)]="checkedMap"
+      [ngModelOptions]="{ standalone: true }"
+      class="block"
+      (ngModelChange)="toggleMap()"
+    ></p-inputSwitch>
+  </div>
 </form>

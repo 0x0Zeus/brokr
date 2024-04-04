@@ -58,13 +58,15 @@
         <div
           class="calendar h-[30rem] w-full border-b-1 border-base_border mb-[2.5rem]"
         >
-          <p-calendar
-            [showIcon]="true"
-            selectionMode="range"
-            [inline]="true"
-            [(ngModel)]="dateRange"
-            class="rounded-sm border-2 w-fit border-base_border text-base outline-none"
-          ></p-calendar>
+          <div [formGroup]="dateRange">
+            <p-calendar
+              [showIcon]="true"
+              selectionMode="range"
+              [inline]="true"
+              formControlName="date"
+              class="rounded-sm border-2 w-fit border-base_border text-base outline-none"
+            ></p-calendar>
+          </div>
         </div>
         <div class="specification">
           <h4 class="specification__title font-bold text-3xl mb-[1.4rem]">

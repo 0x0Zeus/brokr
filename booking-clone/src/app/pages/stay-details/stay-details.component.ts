@@ -6,7 +6,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoaderComponent } from '@components/shared/loader';
 import { RatingComponent } from '@components/shared/rating';
 import { ReviewComponent } from '@components/shared/review';
@@ -36,7 +36,7 @@ import { StaysService } from '../../core/services/stays/stays.service';
     LoaderComponent,
     ReviewComponent,
     CalendarModule,
-    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './stay-details.component.html',
   styleUrl: './stay-details.component.scss',
@@ -48,7 +48,12 @@ export class StayDetailsComponent implements OnInit {
   stayInfo$ = new BehaviorSubject<IStayDetails | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
   reviews$ = new BehaviorSubject<IStayReview[]>([]);
-  dateRange: [Date, Date] = [new Date(Date.now()), new Date(Date.now())];
+  dateRange = new FormGroup({
+    date: new FormControl<[Date, Date]>([
+      new Date(Date.now()),
+      new Date(Date.now()),
+    ]),
+  });
 
   constructor(
     private staysFacade: StaysFacade,
@@ -64,7 +69,9 @@ export class StayDetailsComponent implements OnInit {
         filter((stayId) => stayId !== undefined),
         switchMap((stayId) => {
           const stayIdInfo = stayId.split('_');
-          this.dateRange = [new Date(stayIdInfo[1]), new Date(stayIdInfo[2])];
+          this.dateRange.setValue({
+            date: [new Date(stayIdInfo[1]), new Date(stayIdInfo[2])],
+          });
           return this.staysService
             .getStayDetails({
               hotelId: stayIdInfo[0],
@@ -85,7 +92,7 @@ export class StayDetailsComponent implements OnInit {
         this.isLoading$.next(false);
       });
 
-    //temporary
+    //will optimize
 
     this.staysFacade.stayPreviewId$
       .pipe(
