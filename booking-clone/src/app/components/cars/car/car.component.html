@@ -1,5 +1,6 @@
 <div
-  class="car flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full hover:opacity-80 hover:cursor-pointer"
+  class="car flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
+  [routerLink]="['/details/car/', car.id]"
 >
   <img
     [src]="isFavorite ? 'assets/fav-fill.svg' : 'assets/fav.svg'"
@@ -21,14 +22,7 @@
     />
     <p class="location text-base_secondary">{{ car.location }}</p>
   </div>
-  <div
-    class="rating-container mt-auto flex justify-start items-center mb-[1rem]"
-  >
-    <div class="mr-[0.7rem]">
-      <app-rating [rating]="car.rating" />
-    </div>
-    <div class="rating">{{ car.rating }}</div>
-  </div>
+  <app-rating [rating]="car.rating" class="mb-[1rem]" />
   <div class="flex justify-between items-center mb-[0.2rem]">
     <div class="price">
       <span class="price-value text-2xl font-medium mr-[0.6rem]"

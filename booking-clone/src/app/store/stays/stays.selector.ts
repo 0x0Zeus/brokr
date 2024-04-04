@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { selectRouteParams } from '@store/router/router.selectors';
 
 import { StaysState } from './stays.reducer';
 
@@ -22,4 +23,11 @@ export const selectStaysIsLoading = createSelector(
 export const selectStaysSearchParams = createSelector(
   selectStaysStore,
   (state: StaysState) => state.searchParams
+);
+
+export const selectPreviewStayId = createSelector(
+  selectRouteParams,
+  ({ stayId }) => {
+    return stayId as string;
+  }
 );

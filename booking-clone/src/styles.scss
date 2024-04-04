@@ -134,6 +134,27 @@ a {
   cursor: default;
 }
 
+//error message
+
+.error-message {
+  font-size: 1.8rem;
+  font-family: 'Roboto Regular';
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+//google maps
+
+.mapboxgl-popup-close-button {
+  right: 6px !important;
+}
+
+.mapboxgl-popup-content {
+  font-size: 14px;
+  padding: 13px 10px 15px !important;
+}
+
 //prime-ng datepicker
 
 .p-datepicker table td.p-datepicker-today > span {

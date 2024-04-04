@@ -16,7 +16,7 @@ export interface ISearchCarsResponse {
   };
 }
 
-interface ISearchCarsResponseItem {
+export interface ISearchCarsResponseItem {
   vehicle_id: string;
   accessibility: {
     pick_up_location: string;

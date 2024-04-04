@@ -10,6 +10,7 @@ import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { StayComponent } from '@components/stays/stay';
 import { DestroyDirective } from '@core/directives';
 import { IStaysSearchParams } from '@shared/interfaces/stays/params';
+import { MapFacade } from '@store/map';
 import { StaysFacade } from '@store/stays';
 import { takeUntil } from 'rxjs';
 
@@ -29,7 +30,10 @@ export class StaysComponent implements OnInit {
   staysSearchParams: null | IStaysSearchParams = null;
   private destroy$ = inject(DestroyDirective).destroy$;
 
-  constructor(private staysFacade: StaysFacade) {}
+  constructor(
+    private staysFacade: StaysFacade,
+    private mapFacade: MapFacade
+  ) {}
 
   ngOnInit(): void {
     this.staysSearchParams$
@@ -37,6 +41,15 @@ export class StaysComponent implements OnInit {
       .subscribe((searchParams) => {
         this.staysSearchParams = searchParams;
       });
+
+    this.stays$.pipe(takeUntil(this.destroy$)).subscribe((stays) => {
+      const mapData = stays.map((stay) => ({
+        latitude: stay.latitude,
+        longitude: stay.longitude,
+        label: `${stay.location}, ${stay.price}$`,
+      }));
+      this.mapFacade.addMapData(mapData);
+    });
   }
 
   setNextPage(): void {

@@ -8,8 +8,10 @@ import {
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { CarsFilterComponent } from '@components/cars/cars-filter';
 import { NavigationComponent } from '@components/core/navigation';
+import { MapComponent } from '@components/shared/map';
 import { StaysFilterComponent } from '@components/stays/stays-filter';
 import { DestroyDirective } from '@core/directives';
+import { MapFacade } from '@store/map';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 
 @Component({
@@ -21,6 +23,7 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
     CarsFilterComponent,
     StaysFilterComponent,
     AsyncPipe,
+    MapComponent,
   ],
   templateUrl: './booking-layout.component.html',
   styleUrl: './booking-layout.component.scss',
@@ -30,7 +33,11 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
 export class BookingLayoutComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
   currentRoute = new BehaviorSubject<string>(this.router.url);
-  constructor(private router: Router) {}
+  isMap$ = this.mapFacade.isMap$;
+  constructor(
+    private router: Router,
+    private mapFacade: MapFacade
+  ) {}
 
   ngOnInit(): void {
     this.router.events.pipe(takeUntil(this.destroy$)).subscribe((event) => {

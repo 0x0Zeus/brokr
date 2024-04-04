@@ -1,40 +1,53 @@
-<nav
-  class="type-nav flex items-center justify-start border-b-1 border-base_border mb-[2.1rem]"
+<div
+  class="type-nav border-b-1 border-base_border mb-[2.1rem] flex items-start justify-between"
 >
+  <nav class="nav flex items-center justify-start">
+    <div
+      class="nav-item -mb-[0.2rem] flex items-center justify-start mr-[4rem] pb-[1rem] border-b-4 border-transparent hover:border-base_third hover:text-base_third cursor-pointer"
+      [routerLink]="['/booking/cars']"
+      routerLinkActive="active"
+    >
+      <img
+        src="assets/car.svg"
+        alt="Car"
+        class="nav-item__icon mr-[1.2rem] w-[3.3rem] h-[1.5rem]"
+      />
+      <div class="nav-item__title">Car</div>
+    </div>
+    <div
+      class="nav-item -mb-[0.2rem] flex items-center justify-start mr-[4rem] pb-[1rem] border-b-4 border-transparent hover:border-base_third hover:text-base_third cursor-pointer"
+      [routerLink]="['/booking/stays']"
+      routerLinkActive="active"
+    >
+      <img
+        src="assets/home.svg"
+        alt="Home"
+        class="nav-item__icon mr-[1.2rem] w-[2.4rem] h-[1.9rem]"
+      />
+      <div class="nav-item__title">Stays</div>
+    </div>
+    <div
+      class="nav-item -mb-[0.2rem] flex items-center justify-start mr-[4rem] pb-[1rem] border-b-4 border-transparent hover:border-base_third hover:text-base_third cursor-pointer"
+      [routerLink]="['/booking/boats']"
+      routerLinkActive="active"
+    >
+      <img
+        src="assets/boat.svg"
+        alt="Boat"
+        class="nav-item__icon mr-[1.2rem] w-[3.4rem] h-[2rem]"
+      />
+      <div class="nav-item__title">Boats</div>
+    </div>
+  </nav>
   <div
-    class="nav-item -mb-[0.2rem] flex items-center justify-start mr-[4rem] pb-[1rem] border-b-4 border-transparent hover:border-base_third hover:text-base_third cursor-pointer"
-    [routerLink]="['/booking/cars']"
-    routerLinkActive="active"
+    class="input-item max-w-[17rem] flex items-center justify-start pl-[2rem]"
   >
-    <img
-      src="assets/car.svg"
-      alt="Car"
-      class="nav-item__icon mr-[1.2rem] w-[3.3rem] h-[1.5rem]"
-    />
-    <div class="nav-item__title">Car</div>
+    <div class="input-title font-medium text-sm mr-[1.1rem]">Map</div>
+    <p-inputSwitch
+      [(ngModel)]="checkedMap"
+      [ngModelOptions]="{ standalone: true }"
+      class="block"
+      (ngModelChange)="toggleMap()"
+    ></p-inputSwitch>
   </div>
-  <div
-    class="nav-item -mb-[0.2rem] flex items-center justify-start mr-[4rem] pb-[1rem] border-b-4 border-transparent hover:border-base_third hover:text-base_third cursor-pointer"
-    [routerLink]="['/booking/stays']"
-    routerLinkActive="active"
-  >
-    <img
-      src="assets/home.svg"
-      alt="Home"
-      class="nav-item__icon mr-[1.2rem] w-[2.4rem] h-[1.9rem]"
-    />
-    <div class="nav-item__title">Stays</div>
-  </div>
-  <div
-    class="nav-item -mb-[0.2rem] flex items-center justify-start mr-[4rem] pb-[1rem] border-b-4 border-transparent hover:border-base_third hover:text-base_third cursor-pointer"
-    [routerLink]="['/booking/boats']"
-    routerLinkActive="active"
-  >
-    <img
-      src="assets/boat.svg"
-      alt="Boat"
-      class="nav-item__icon mr-[1.2rem] w-[3.4rem] h-[2rem]"
-    />
-    <div class="nav-item__title">Boats</div>
-  </div>
-</nav>
+</div>

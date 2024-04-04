@@ -1,10 +1,23 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IStaysDestinationResponse } from '@shared/interfaces/stays/destinationsResponse';
-import { IStaysSearchParams } from '@shared/interfaces/stays/params';
+import { IStaysDestinationsResponse } from '@shared/interfaces/stays/destinationsResponse';
+import {
+  IStayDetailsSearchParams,
+  IStaysSearchParams,
+} from '@shared/interfaces/stays/params';
+import { IStayReviewsResponse } from '@shared/interfaces/stays/reviewsResponse';
+import { IStayDetailsResponse } from '@shared/interfaces/stays/stayDetailsResponse';
 import { IStaysResponse } from '@shared/interfaces/stays/staysResponse';
-import { IStaysDestination } from '@shared/models/stays/destination';
+import { IStaysDestinations } from '@shared/models/stays/destination';
+import { IStayReview } from '@shared/models/stays/review';
 import { IStay } from '@shared/models/stays/stay';
+import { IStayDetails } from '@shared/models/stays/stayDetails';
+import {
+  getTransformedStayData,
+  getTransformedStayDetails,
+  getTransformedStayReview,
+  getTransformedStaysDestination,
+} from '@shared/utils';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -15,6 +28,10 @@ export class StaysService {
     'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination';
   private searchStaysURL =
     'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels';
+  private searchStayDetailsURL =
+    'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails';
+  private searchStayReviewsURL =
+    'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelReviews';
 
   constructor(private http: HttpClient) {}
 
@@ -22,21 +39,17 @@ export class StaysService {
     query,
   }: {
     query: string;
-  }): Observable<IStaysDestination[]> {
+  }): Observable<IStaysDestinations[]> {
     const options = {
       params: new HttpParams().set('query', query),
     };
     return this.http
-      .get<IStaysDestinationResponse>(this.destinationURL, options)
+      .get<IStaysDestinationsResponse>(this.destinationURL, options)
       .pipe(
         map((resp) => {
           if (resp.data) {
-            const transData = resp.data.map((item) => {
-              const locationData = {
-                destId: item.dest_id,
-                searchType: item.dest_type,
-                location: item.label,
-              };
+            const transData = resp.data.map((location) => {
+              const locationData = getTransformedStaysDestination(location);
               return locationData;
             });
             return transData;
@@ -60,30 +73,64 @@ export class StaysService {
     return this.http.get<IStaysResponse>(this.searchStaysURL, options).pipe(
       map((resp) => {
         if (resp.data) {
-          const transData = resp.data.hotels.map(
-            ({ property, accessibilityLabel }) => {
-              const imgUrlArr = property.photoUrls[0].split('/');
-              const transImgResolution = `${imgUrlArr.slice(0, 6).join('/')}/square330/${imgUrlArr.slice(7).join('/')}`;
-              const stayData = {
-                id: property.id,
-                photo: transImgResolution,
-                location: property.wishlistName,
-                label: accessibilityLabel,
-                name: property.name,
-                rating: Number((property.reviewScore / 2).toFixed(1)),
-                price: Number(
-                  property.priceBreakdown.grossPrice.value.toFixed(2)
-                ),
-                reviewCount: property.reviewCount,
-              };
-              return stayData;
-            }
-          );
+          const transData = resp.data.hotels.map((stay) => {
+            const stayData = getTransformedStayData(stay);
+            return stayData;
+          });
           return transData;
         } else {
           return [];
         }
       })
     );
+  }
+
+  getStayDetails({
+    arrivalDate,
+    departureDate,
+    hotelId,
+  }: IStayDetailsSearchParams): Observable<IStayDetails | null> {
+    const options = {
+      params: new HttpParams()
+        .set('hotel_id', hotelId)
+        .append('arrival_date', arrivalDate)
+        .append('departure_date', departureDate),
+    };
+
+    return this.http
+      .get<IStayDetailsResponse>(this.searchStayDetailsURL, options)
+      .pipe(
+        map((resp) => {
+          if (resp.data) {
+            const stayDetailsData = getTransformedStayDetails(resp.data);
+            return stayDetailsData;
+          } else {
+            return null;
+          }
+        })
+      );
+  }
+
+  getStayReviews({ hotelId }: { hotelId: string }): Observable<IStayReview[]> {
+    const options = {
+      params: new HttpParams().set('hotel_id', hotelId),
+    };
+
+    return this.http
+      .get<IStayReviewsResponse>(this.searchStayReviewsURL, options)
+      .pipe(
+        map((resp) => {
+          if (resp.data) {
+            const stayReviewsData = resp.data.result.map((review) => {
+              const transformedReview = getTransformedStayReview(review);
+
+              return transformedReview;
+            });
+            return stayReviewsData;
+          } else {
+            return [];
+          }
+        })
+      );
   }
 }

@@ -7,7 +7,7 @@ export interface IStaysResponse {
   };
 }
 
-interface IStayResponse {
+export interface IStayResponse {
   accessibilityLabel: string;
   property: {
     reviewScoreWord: string;

@@ -2,10 +2,10 @@ export interface ICarsDestinationResponse {
   status: boolean;
   message: string;
   timestamp: number;
-  data: ICarsDestination[];
+  data: ICarsDestinationResponse[];
 }
 
-interface ICarsDestination {
+export interface ICarsDestinationResponse {
   iata_code: string;
   location_id: null | string;
   city_id: null | string;

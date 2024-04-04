@@ -4,6 +4,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 
 import { CarsStoreModule } from './cars';
+import { MapStoreModule } from './map';
 import { RouterStoreModule } from './router';
 import { StaysStoreModule } from './stays';
 
@@ -12,6 +13,7 @@ import { StaysStoreModule } from './stays';
     CarsStoreModule,
     StaysStoreModule,
     RouterStoreModule,
+    MapStoreModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot({}),
     StoreRouterConnectingModule.forRoot(),
