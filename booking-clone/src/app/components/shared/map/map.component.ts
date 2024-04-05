@@ -21,13 +21,25 @@ export class MapComponent implements AfterViewInit {
   mapData$ = this.mapFacade.mapData$;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   map: any;
+  markers: tt.Marker[] = [];
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(private mapFacade: MapFacade) {}
 
   ngAfterViewInit(): void {
     this.loadMap();
-    this.getPoints();
+  }
+
+  loadMap(): void {
+    this.map = tt
+      .map({
+        key: 'P0XIzYGDO1J29yEAreC7WrRxUBOxEhVR',
+        container: 'map',
+      })
+      .on('load', () => this.getPoints());
+
+    this.map.addControl(new tt.FullscreenControl());
+    this.map.addControl(new tt.NavigationControl());
   }
 
   getPoints(): void {
@@ -37,7 +49,8 @@ export class MapComponent implements AfterViewInit {
         filter((mapData) => mapData.length !== 0)
       )
       .subscribe((mapData) => {
-        console.log(mapData);
+        this.clearMarkers();
+
         this.map.flyTo({
           center: {
             lat: mapData[0].latitude,
@@ -45,30 +58,31 @@ export class MapComponent implements AfterViewInit {
           },
           zoom: 11,
         });
+
         mapData.forEach((dataItem) => {
           const popup = new tt.Popup({
             anchor: 'bottom',
             offset: { bottom: [0, -40] },
           }).setHTML(dataItem.label);
-          new tt.Marker()
-            .setLngLat({
-              lat: dataItem.latitude,
-              lng: dataItem.longitude,
-            })
-            .addTo(this.map)
-            .setPopup(popup)
-            .togglePopup();
+
+          this.markers.push(
+            new tt.Marker()
+              .setLngLat({
+                lat: dataItem.latitude,
+                lng: dataItem.longitude,
+              })
+              .addTo(this.map)
+              .setPopup(popup)
+              .togglePopup()
+          );
         });
       });
   }
 
-  loadMap(): void {
-    this.map = tt.map({
-      key: 'P0XIzYGDO1J29yEAreC7WrRxUBOxEhVR',
-      container: 'map',
+  clearMarkers(): void {
+    this.markers.forEach((item) => {
+      item.remove();
     });
-
-    this.map.addControl(new tt.FullscreenControl());
-    this.map.addControl(new tt.NavigationControl());
+    this.markers = [];
   }
 }
