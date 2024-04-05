@@ -37,7 +37,7 @@ export class CarsComponent implements OnInit {
       const mapData = cars.map((car) => ({
         latitude: car.latitude,
         longitude: car.longitude,
-        label: `${car.location}, ${car.price}$`,
+        label: `${car.supplier}, ${car.price}$`,
       }));
       this.mapFacade.addMapData(mapData);
     });
