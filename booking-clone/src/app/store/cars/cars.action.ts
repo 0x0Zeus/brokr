@@ -21,3 +21,8 @@ export const FetchCarsFailed = createAction(
   `${actionSource} Fetch Failed`,
   props<{ error: HttpErrorResponse }>()
 );
+
+export const SetCarsPage = createAction(
+  `${actionSource} Set Page`,
+  props<{ page: number }>()
+);

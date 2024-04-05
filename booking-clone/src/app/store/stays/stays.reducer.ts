@@ -21,14 +21,22 @@ export const initialState: StaysState = {
 
 export const staysReducer = createReducer(
   initialState,
-  on(
-    STAYS_ACTIONS.FetchStays,
-    (state, { searchParams }): StaysState => ({
-      ...state,
-      searchParams,
-      isLoading: true,
-    })
-  ),
+  on(STAYS_ACTIONS.FetchStays, (state, { searchParams }): StaysState => {
+    if (searchParams.page === 1) {
+      return {
+        ...state,
+        searchParams,
+        stays: [],
+        isLoading: true,
+      };
+    } else {
+      return {
+        ...state,
+        searchParams,
+        isLoading: true,
+      };
+    }
+  }),
   on(STAYS_ACTIONS.FetchStaysSuccess, (state, { stays }): StaysState => {
     if (state.searchParams && state.searchParams.page === 1) {
       return {

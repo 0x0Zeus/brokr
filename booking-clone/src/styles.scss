@@ -155,6 +155,10 @@ a {
   padding: 13px 10px 15px !important;
 }
 
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+  display: none;
+}
+
 //prime-ng datepicker
 
 .p-datepicker table td.p-datepicker-today > span {
@@ -194,4 +198,12 @@ a {
   outline-offset: 0;
   box-shadow: 0 0 0 0.2rem #bfdbfe;
   border-color: #3b82f6;
+}
+
+//prime-ng slider
+
+@layer {
+  .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+    background: theme('colors.base_third');
+  }
 }

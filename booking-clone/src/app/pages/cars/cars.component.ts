@@ -22,9 +22,10 @@ import { takeUntil } from 'rxjs';
   hostDirectives: [DestroyDirective],
 })
 export class CarsComponent implements OnInit {
-  cars$ = this.carsFacade.cars$;
+  cars$ = this.carsFacade.paginatedCars$;
   isLoadingCars$ = this.carsFacade.carsIsLoading$;
   private destroy$ = inject(DestroyDirective).destroy$;
+  page = 1;
 
   constructor(
     private carsFacade: CarsFacade,
@@ -40,5 +41,17 @@ export class CarsComponent implements OnInit {
       }));
       this.mapFacade.addMapData(mapData);
     });
+
+    this.carsFacade.carsPage$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((page) => {
+        this.page = page;
+      });
+  }
+
+  getCars(): void {}
+
+  setNextPage(): void {
+    this.carsFacade.setCarsPage(this.page + 1);
   }
 }
