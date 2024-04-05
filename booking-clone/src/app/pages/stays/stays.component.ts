@@ -46,7 +46,7 @@ export class StaysComponent implements OnInit {
       const mapData = stays.map((stay) => ({
         latitude: stay.latitude,
         longitude: stay.longitude,
-        label: `${stay.location}, ${stay.price}$`,
+        label: `${stay.name}, ${stay.price}$`,
       }));
       this.mapFacade.addMapData(mapData);
     });
