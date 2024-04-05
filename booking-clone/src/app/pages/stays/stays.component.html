@@ -13,23 +13,18 @@
     <app-loader />
   </div>
 } @else if ((stays$ | async)?.length) {
-  <button
-    class="btn-base w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
-    (click)="setNextPage()"
-  >
-    @if (isLoadingStays$ | async) {
-      <button
-        class="btn-base btn-disabled w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
-      >
-        <app-mini-loader color="#ffffff" />
-      </button>
-    } @else {
-      <button
-        class="btn-base w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
-        (click)="setNextPage()"
-      >
-        Show More
-      </button>
-    }
-  </button>
+  @if (isLoadingStays$ | async) {
+    <button
+      class="btn-base btn-disabled w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
+    >
+      <app-mini-loader color="#ffffff" />
+    </button>
+  } @else {
+    <button
+      class="btn-base w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
+      (click)="setNextPage()"
+    >
+      Show More
+    </button>
+  }
 }

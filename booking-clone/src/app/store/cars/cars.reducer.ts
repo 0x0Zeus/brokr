@@ -6,13 +6,17 @@ import * as CARS_ACTIONS from './cars.action';
 
 export interface CarsState {
   cars: ICar[];
+  paginatedCars: ICar[];
   isLoading: boolean;
+  page: number;
   error: HttpErrorResponse | null;
 }
 
 export const initialState: CarsState = {
   cars: [],
+  paginatedCars: [],
   isLoading: false,
+  page: 1,
   error: null,
 };
 
@@ -22,6 +26,8 @@ export const carsReducer = createReducer(
     CARS_ACTIONS.FetchCars,
     (state): CarsState => ({
       ...state,
+      cars: [],
+      paginatedCars: [],
       isLoading: true,
     })
   ),
@@ -29,6 +35,7 @@ export const carsReducer = createReducer(
     return {
       ...state,
       cars,
+      paginatedCars: [...cars.slice(0, 20)],
       isLoading: false,
     };
   }),
@@ -38,7 +45,16 @@ export const carsReducer = createReducer(
       ...state,
       error,
       cars: [],
+      paginatedCars: [],
       isLoading: false,
+    })
+  ),
+  on(
+    CARS_ACTIONS.SetCarsPage,
+    (state, { page }): CarsState => ({
+      ...state,
+      paginatedCars: [...state.cars.slice(0, 20 * page)],
+      page,
     })
   )
 );

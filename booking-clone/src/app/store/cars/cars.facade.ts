@@ -4,18 +4,20 @@ import { ICarsSearchParams } from '@shared/interfaces/cars/params';
 
 import * as CARS_ACTIONS from './cars.action';
 import {
-  selectCars,
   selectCarsError,
   selectCarsIsLoading,
+  selectCarsPage,
+  selectPaginatedCars,
 } from './cars.selector';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CarsFacade {
-  cars$ = this.store.select(selectCars);
+  paginatedCars$ = this.store.select(selectPaginatedCars);
   carsIsLoading$ = this.store.select(selectCarsIsLoading);
   carsError$ = this.store.select(selectCarsError);
+  carsPage$ = this.store.select(selectCarsPage);
 
   constructor(private store: Store) {}
 
@@ -23,6 +25,14 @@ export class CarsFacade {
     this.store.dispatch(
       CARS_ACTIONS.FetchCars({
         searchParams,
+      })
+    );
+  }
+
+  setCarsPage(page: number) {
+    this.store.dispatch(
+      CARS_ACTIONS.SetCarsPage({
+        page,
       })
     );
   }
