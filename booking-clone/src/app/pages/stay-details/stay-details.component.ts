@@ -10,6 +10,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoaderComponent } from '@components/shared/loader';
 import { RatingComponent } from '@components/shared/rating';
 import { ReviewComponent } from '@components/shared/review';
+import { SpecificationsComponent } from '@components/stays/specifications';
 import { DestroyDirective } from '@core/directives';
 import { ToasterService } from '@core/services/toaster';
 import { IStayReview } from '@shared/models/stays/review';
@@ -37,6 +38,7 @@ import { StaysService } from '../../core/services/stays/stays.service';
     ReviewComponent,
     CalendarModule,
     ReactiveFormsModule,
+    SpecificationsComponent,
   ],
   templateUrl: './stay-details.component.html',
   styleUrl: './stay-details.component.scss',
@@ -48,6 +50,7 @@ export class StayDetailsComponent implements OnInit {
   stayInfo$ = new BehaviorSubject<IStayDetails | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
   reviews$ = new BehaviorSubject<IStayReview[]>([]);
+  currentPhotoUrl = new BehaviorSubject<string | null>(null);
   dateRange = new FormGroup({
     date: new FormControl<[Date, Date]>([
       new Date(Date.now()),
@@ -94,26 +97,30 @@ export class StayDetailsComponent implements OnInit {
 
     //will optimize
 
-    this.staysFacade.stayPreviewId$
-      .pipe(
-        takeUntil(this.destroy$),
-        filter((stayId) => stayId !== undefined),
-        switchMap((stayId) => {
-          const stayIdInfo = stayId.split('_');
-          return this.staysService
-            .getStayReviews({
-              hotelId: stayIdInfo[0],
-            })
-            .pipe(
-              catchError((error: HttpErrorResponse) => {
-                this.toasterService.showHttpsError(error);
-                return of();
-              })
-            );
-        })
-      )
-      .subscribe((reviewsInfo) => {
-        this.reviews$.next(reviewsInfo);
-      });
+    // this.staysFacade.stayPreviewId$
+    //   .pipe(
+    //     takeUntil(this.destroy$),
+    //     filter((stayId) => stayId !== undefined),
+    //     switchMap((stayId) => {
+    //       const stayIdInfo = stayId.split('_');
+    //       return this.staysService
+    //         .getStayReviews({
+    //           hotelId: stayIdInfo[0],
+    //         })
+    //         .pipe(
+    //           catchError((error: HttpErrorResponse) => {
+    //             this.toasterService.showHttpsError(error);
+    //             return of();
+    //           })
+    //         );
+    //     })
+    //   )
+    //   .subscribe((reviewsInfo) => {
+    //     this.reviews$.next(reviewsInfo);
+    //   });
+  }
+
+  setCurrentPhotoUrl(url: string): void {
+    this.currentPhotoUrl.next(url);
   }
 }

@@ -49,7 +49,10 @@ export const getTransformedStayDetails = (
 ): IStayDetails => {
   const stayDetailsData = {
     id: stay.hotel_id,
-    photo: stay.rooms[stay.block[0].room_id].photos[0].url_max1280,
+    photos: stay.rooms[stay.block[0].room_id].photos.map((item) => ({
+      lg: item.url_max1280,
+      sm: item.url_square180,
+    })),
     location: stay.address,
     review: stay.review_nr,
     description: stay.rooms[stay.block[0].room_id].description,

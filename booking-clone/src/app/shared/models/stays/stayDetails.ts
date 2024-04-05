@@ -1,6 +1,6 @@
 export interface IStayDetails {
   id: number;
-  photo: string;
+  photos: IPhoto[];
   location: string;
   review: number;
   description: string;
@@ -15,9 +15,16 @@ export interface IStayDetails {
     before: string | null;
   };
   rating: number;
-  specifications: {
-    square: number;
-    bedrooms: number;
-    bathrooms: number;
-  };
+  specifications: IStayDetailsSpecifications;
+}
+
+interface IPhoto {
+  lg: string;
+  sm: string;
+}
+
+export interface IStayDetailsSpecifications {
+  square: number;
+  bedrooms: number;
+  bathrooms: number;
 }
