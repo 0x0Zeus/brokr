@@ -145,15 +145,7 @@
         {{ stayInfo.description }}
       </p>
     </div>
-    <div
-      class="reviews grid grid-cols-auto-fit-md justify-items-center gap-[2.8rem] mb-[3.5rem]"
-    >
-      @if (reviews$ | async; as reviews) {
-        @for (review of reviews; track review.reviewer) {
-          <app-review [review]="review" />
-        }
-      }
-    </div>
+    <app-stay-reviews [stayId]="stayInfo.id" />
   } @else if (isLoading$ | async) {
     <div class="mt-[35rem] h-full flex justify-center items-center w-full">
       <p-progressSpinner ariaLabel="loading"></p-progressSpinner>

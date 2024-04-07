@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IStaysDestinationsResponse } from '@shared/interfaces/stays/destinationsResponse';
 import {
   IStayDetailsSearchParams,
+  IStayReviewsParams,
   IStaysSearchParams,
 } from '@shared/interfaces/stays/params';
 import { IStayReviewsResponse } from '@shared/interfaces/stays/reviewsResponse';
@@ -111,9 +112,14 @@ export class StaysService {
       );
   }
 
-  getStayReviews({ hotelId }: { hotelId: string }): Observable<IStayReview[]> {
+  getStayReviews({
+    hotelId,
+    page,
+  }: IStayReviewsParams): Observable<IStayReview[]> {
     const options = {
-      params: new HttpParams().set('hotel_id', hotelId),
+      params: new HttpParams()
+        .set('hotel_id', hotelId)
+        .append('page_number', page),
     };
 
     return this.http

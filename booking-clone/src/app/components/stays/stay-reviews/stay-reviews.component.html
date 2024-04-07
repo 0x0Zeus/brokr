@@ -1,0 +1,32 @@
+<div
+  class="reviews grid grid-cols-auto-fit-md justify-items-center gap-[2.8rem] mb-[3.5rem]"
+>
+  @for (review of reviews$ | async; track review.reviewer) {
+    <app-review [review]="review" />
+  } @empty {
+    @if ((isReviewsLoading$ | async) === false) {
+      Reviews not found.
+    }
+  }
+</div>
+
+@if (!(reviews$ | async)?.length && (isReviewsLoading$ | async)) {
+  <div class="mt-[16rem] h-full flex justify-center items-center w-full">
+    <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+  </div>
+} @else if ((reviews$ | async)?.length) {
+  @if (isReviewsLoading$ | async) {
+    <button
+      class="btn-base btn-disabled w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
+    >
+      <app-mini-loader color="#ffffff" />
+    </button>
+  } @else {
+    <button
+      class="btn-base w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
+      (click)="getNextReviewsPage()"
+    >
+      Show More
+    </button>
+  }
+}
