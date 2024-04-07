@@ -97,27 +97,27 @@ export class StayDetailsComponent implements OnInit {
 
     //will optimize
 
-    // this.staysFacade.stayPreviewId$
-    //   .pipe(
-    //     takeUntil(this.destroy$),
-    //     filter((stayId) => stayId !== undefined),
-    //     switchMap((stayId) => {
-    //       const stayIdInfo = stayId.split('_');
-    //       return this.staysService
-    //         .getStayReviews({
-    //           hotelId: stayIdInfo[0],
-    //         })
-    //         .pipe(
-    //           catchError((error: HttpErrorResponse) => {
-    //             this.toasterService.showHttpsError(error);
-    //             return of();
-    //           })
-    //         );
-    //     })
-    //   )
-    //   .subscribe((reviewsInfo) => {
-    //     this.reviews$.next(reviewsInfo);
-    //   });
+    this.staysFacade.stayPreviewId$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((stayId) => stayId !== undefined),
+        switchMap((stayId) => {
+          const stayIdInfo = stayId.split('_');
+          return this.staysService
+            .getStayReviews({
+              hotelId: stayIdInfo[0],
+            })
+            .pipe(
+              catchError((error: HttpErrorResponse) => {
+                this.toasterService.showHttpsError(error);
+                return of();
+              })
+            );
+        })
+      )
+      .subscribe((reviewsInfo) => {
+        this.reviews$.next(reviewsInfo);
+      });
   }
 
   setCurrentPhotoUrl(url: string): void {

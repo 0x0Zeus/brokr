@@ -48,7 +48,7 @@ import {
 })
 export class CarsFilterComponent implements OnInit {
   isLocationFocus = false;
-  elasticLocationValues = new BehaviorSubject<ICarsDestination[]>([]);
+  elasticLocationValues$ = new BehaviorSubject<ICarsDestination[]>([]);
   destinationIsLoading$ = new BehaviorSubject<boolean>(false);
   chosenLocation: null | ICarsDestination = null;
   nowDate = new Date(Date.now());
@@ -107,7 +107,7 @@ export class CarsFilterComponent implements OnInit {
       )
       .subscribe((locationsValues) => {
         this.destinationIsLoading$.next(false);
-        this.elasticLocationValues.next(locationsValues);
+        this.elasticLocationValues$.next(locationsValues);
       });
   }
 
