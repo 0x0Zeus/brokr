@@ -7,7 +7,6 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { LoaderComponent } from '@components/shared/loader';
 import { RatingComponent } from '@components/shared/rating';
 import { ReviewComponent } from '@components/shared/review';
 import { SpecificationsComponent } from '@components/stays/specifications';
@@ -17,6 +16,7 @@ import { IStayReview } from '@shared/models/stays/review';
 import { IStayDetails } from '@shared/models/stays/stayDetails';
 import { StaysFacade } from '@store/stays';
 import { CalendarModule } from 'primeng/calendar';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
   BehaviorSubject,
   catchError,
@@ -34,11 +34,11 @@ import { StaysService } from '../../core/services/stays/stays.service';
   imports: [
     RatingComponent,
     AsyncPipe,
-    LoaderComponent,
     ReviewComponent,
     CalendarModule,
     ReactiveFormsModule,
     SpecificationsComponent,
+    ProgressSpinnerModule,
   ],
   templateUrl: './stay-details.component.html',
   styleUrl: './stay-details.component.scss',

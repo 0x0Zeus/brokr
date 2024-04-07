@@ -155,8 +155,8 @@
       }
     </div>
   } @else if (isLoading$ | async) {
-    <div class="mt-[35rem]">
-      <app-loader />
+    <div class="mt-[35rem] h-full flex justify-center items-center w-full">
+      <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
     </div>
   } @else {
     <p class="error-message mt-[35rem]">Something went wrong</p>

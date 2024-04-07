@@ -6,16 +6,16 @@ import {
   OnInit,
 } from '@angular/core';
 import { CarComponent } from '@components/cars/car';
-import { LoaderComponent } from '@components/shared/loader';
 import { DestroyDirective } from '@core/directives';
 import { CarsFacade } from '@store/cars';
 import { MapFacade } from '@store/map';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-cars',
   standalone: true,
-  imports: [CarComponent, AsyncPipe, LoaderComponent],
+  imports: [CarComponent, AsyncPipe, ProgressSpinnerModule],
   templateUrl: './cars.component.html',
   styleUrl: './cars.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
