@@ -56,7 +56,7 @@
     <div class="input-title font-medium text-sm mb-[0.6rem]">From</div>
     <p-calendar
       [formControl]="fromDate"
-      [iconDisplay]="'input'"
+      iconDisplay="input"
       [showIcon]="true"
       [minDate]="nowDate"
       class="h-[3.3rem] w-full block border-2 border-base_border rounded-sm text-base outline-none"
@@ -79,7 +79,7 @@
     <div class="input-title font-medium text-sm mb-[0.6rem]">Until</div>
     <p-calendar
       [formControl]="untilDate"
-      [iconDisplay]="'input'"
+      iconDisplay="input"
       [showIcon]="true"
       [minDate]="nowDate"
       class="h-[3.3rem] w-full block border-2 border-base_border rounded-sm text-base outline-none"
@@ -100,7 +100,7 @@
   </div>
   <button
     (click)="onSearch()"
-    [ngClass]="carsFilterForm.valid ? '' : 'btn-disabled'"
+    [ngClass]="carsFilterForm.valid && chosenLocation ? '' : 'btn-disabled'"
     class="btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
   >
     <img src="assets/search.svg" alt="Search" class="w-full h-full" />
