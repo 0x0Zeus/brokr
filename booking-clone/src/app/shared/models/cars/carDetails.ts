@@ -4,6 +4,7 @@ export interface ICarDetails {
   address: string;
   reviews: string;
   price: number;
+  currency: string;
   description: string;
   city: string;
   extras: string[];

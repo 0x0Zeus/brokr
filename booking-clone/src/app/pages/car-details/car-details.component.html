@@ -55,9 +55,12 @@
         >
           <p class="reservation__nights mb-[0.7rem] mr-[2rem]">
             {{ carInfo.days }}
-            <span> nights</span>
+            <span> days</span>
           </p>
-          <p class="price">{{ carInfo.price }}$</p>
+          <p class="price">
+            {{ carInfo.price }}
+            <span> {{ carInfo.currency }}</span>
+          </p>
         </div>
         <app-car-specs [specifications]="carInfo.specs" />
       </div>

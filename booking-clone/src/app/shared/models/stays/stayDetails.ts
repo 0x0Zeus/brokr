@@ -9,6 +9,7 @@ export interface IStayDetails {
   nights: number;
   city: string;
   price: number;
+  currency: string;
   facilities: string[];
   name: string;
   cancellation: {

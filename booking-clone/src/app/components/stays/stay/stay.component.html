@@ -19,15 +19,15 @@
   </p>
   <p class="title text-xl font-medium mb-[1rem]">{{ stay.name }}</p>
   <div class="splitter h-[1px] w-[4.5rem] bg-bg_secondary mb-[1.4rem]"></div>
-  <div class="labels text-base_secondary mb-[1.2rem]">
+  <div class="labels text-base_secondary pb-[1.2rem] mb-auto">
     {{ stay.label }}
   </div>
   <app-rating [rating]="stay.rating" class="mb-[1.4rem]" />
   <div class="flex justify-between items-center mb-[0.2rem]">
     <div class="price">
-      <span class="price-value text-2xl font-medium mr-[0.6rem]"
-        >${{ stay.price }}</span
-      ><span class="price-desc text-base_secondary">/night</span>
+      {{ stay.price }}
+      <span> {{ stay.currency }} </span>
+      <span class="price-desc text-base_secondary">/night</span>
     </div>
     <div class="reviews">({{ stay.reviewCount }})</div>
   </div>

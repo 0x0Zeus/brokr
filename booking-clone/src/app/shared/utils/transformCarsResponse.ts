@@ -38,6 +38,7 @@ export const getTransformedCarData = (
     model: car.vehicle_info.v_name,
     rating: Number((car.rating_info.average / 2).toFixed(1)),
     price: car.pricing_info.price,
+    currency: car.pricing_info.currency,
     supplier: car.supplier_info.name,
     seats: car.vehicle_info.seats,
     latitude: Number(car.supplier_info.latitude),
@@ -67,6 +68,7 @@ export const getTransformedCarDetails = (
         details.vehicle.rentalDurationInDays
       ).toFixed(2)
     ),
+    currency:details.vehicle.price.display.currency,
     extras: details.extras.map((item) => item.name),
     days: details.vehicle.rentalDurationInDays,
     model: details.vehicle.makeAndModel,

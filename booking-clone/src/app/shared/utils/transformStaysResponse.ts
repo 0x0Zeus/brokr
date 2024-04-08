@@ -22,6 +22,7 @@ export const getTransformedStayData = ({
     location: property.wishlistName,
     label: accessibilityLabel,
     name: property.name,
+    currency: property.priceBreakdown.grossPrice.currency,
     rating: Number((property.reviewScore / 2).toFixed(1)),
     price: Number(property.priceBreakdown.grossPrice.value.toFixed(2)),
     reviewCount: property.reviewCount,
@@ -63,8 +64,9 @@ export const getTransformedStayDetails = (
     })),
     location: stay.address,
     price: Number(
-      (stay.product_price_breakdown.net_amount.value * nightsCount).toFixed(2)
+      (stay.product_price_breakdown.gross_amount.value * nightsCount).toFixed(2)
     ),
+    currency: stay.product_price_breakdown.net_amount.currency,
     reviews: stay.review_nr,
     description: stay.rooms[stay.block[0].room_id].description,
     arrival_date: getShortDateFormat(stay.arrival_date),
