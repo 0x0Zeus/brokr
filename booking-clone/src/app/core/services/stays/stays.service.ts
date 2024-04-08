@@ -126,7 +126,7 @@ export class StaysService {
       .get<IStayReviewsResponse>(this.stayReviewsURL, options)
       .pipe(
         map((resp) => {
-          if (resp.data) {
+          if (resp.data.result) {
             const stayReviewsData = resp.data.result.map((review) => {
               const transformedReview = getTransformedStayReview(review);
 

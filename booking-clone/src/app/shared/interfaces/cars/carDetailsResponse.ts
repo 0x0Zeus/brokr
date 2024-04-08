@@ -23,7 +23,7 @@ interface Meta {
 }
 
 interface Content {
-  reviews: Reviews;
+  reviews: Reviews | null;
   carCard: CarCard;
 }
 
@@ -185,7 +185,7 @@ interface Badges {}
 
 interface Supplier3 {
   imageUrl: string;
-  rating: number;
+  rating: number | null;
   locationType: string;
 }
 

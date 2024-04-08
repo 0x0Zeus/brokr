@@ -8,13 +8,14 @@ export interface IStayDetails {
   departure_date: string;
   nights: number;
   city: string;
+  price: number;
   facilities: string[];
   name: string;
   cancellation: {
     type: string;
     before: string | null;
   };
-  rating: number;
+  rating: number | null;
   specs: IStayDetailsSpecs;
 }
 

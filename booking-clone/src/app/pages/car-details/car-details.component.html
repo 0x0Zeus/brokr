@@ -32,7 +32,9 @@
         <div
           class="statistic-info flex items-center justify-between pb-[2.7rem] border-b-1 border-base_border mb-[2.7rem]"
         >
-          <app-rating [rating]="carInfo.rating" class="mr-[1.2rem]" />
+          @if (carInfo.rating) {
+            <app-rating [rating]="carInfo.rating" class="mr-[1.2rem]" />
+          }
           <div class="reviews">{{ '(' + carInfo.reviews + ' reviews)' }}</div>
         </div>
         <div class="where mb-[2.5rem]">
@@ -48,11 +50,14 @@
             </p>
           </div>
         </div>
-        <div class="reservation mb-[2.5rem]">
-          <p class="reservation__nights font-bold text-3xl mb-[0.7rem]">
+        <div
+          class="reservation mb-[2.5rem] font-bold text-3xl flex justify-between items-center"
+        >
+          <p class="reservation__nights mb-[0.7rem] mr-[2rem]">
             {{ carInfo.days }}
             <span> nights</span>
           </p>
+          <p class="price">{{ carInfo.price }}$</p>
         </div>
         <app-car-specs [specifications]="carInfo.specs" />
       </div>
@@ -71,20 +76,22 @@
         </div>
       </div>
     </div>
-    <div class="extras mb-[5.2rem]">
-      <h3 class="extras__title font-bold text-3xl mb-[3rem]">Extras</h3>
-      <div
-        class="extras-items flex items-center justify-start gap-[2rem] flex-wrap"
-      >
-        @for (extra of carInfo.extras; track extra) {
-          <p
-            class="extras-item w-[14.7rem] min-h-[11.8rem] h-full px-[1.6rem] pt-[2.5rem] border-1 border-base_border rounded-lg font-medium text-xl"
-          >
-            {{ extra }}
-          </p>
-        }
+    @if (carInfo.extras.length) {
+      <div class="extras mb-[5.2rem]">
+        <h3 class="extras__title font-bold text-3xl mb-[3rem]">Extras</h3>
+        <div
+          class="extras-items flex items-center justify-start gap-[2rem] flex-wrap"
+        >
+          @for (extra of carInfo.extras; track extra) {
+            <p
+              class="extras-item w-[14.7rem] min-h-[11.8rem] h-full px-[1.6rem] pt-[2.5rem] border-1 border-base_border rounded-lg font-medium text-xl"
+            >
+              {{ extra }}
+            </p>
+          }
+        </div>
       </div>
-    </div>
+    }
     <div
       class="description pb-[5.5rem] border-b-1 border-base_border mb-[3.5rem]"
     >

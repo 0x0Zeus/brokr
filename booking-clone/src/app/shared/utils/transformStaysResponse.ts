@@ -47,6 +47,14 @@ export const getTransformedStaysDestination = (
 export const getTransformedStayDetails = (
   stay: IStayDetailsDataResponse
 ): IStayDetails => {
+  const nightsCount = Math.floor(
+    Number(Date.parse(stay.departure_date) - Date.parse(stay.arrival_date)) /
+      1000 /
+      60 /
+      60 /
+      24
+  );
+
   const stayDetailsData = {
     id: stay.hotel_id,
     photos: stay.rooms[stay.block[0].room_id].photos.map((item) => ({
@@ -54,25 +62,25 @@ export const getTransformedStayDetails = (
       sm: item.url_square180,
     })),
     location: stay.address,
+    price: Number(
+      (stay.product_price_breakdown.net_amount.value * nightsCount).toFixed(2)
+    ),
     reviews: stay.review_nr,
     description: stay.rooms[stay.block[0].room_id].description,
     arrival_date: getShortDateFormat(stay.arrival_date),
     departure_date: getShortDateFormat(stay.departure_date),
     city: stay.city,
     facilities: stay.facilities_block.facilities.map((fac) => fac.name),
-    nights: Math.floor(
-      Number(Date.parse(stay.departure_date) - Date.parse(stay.arrival_date)) /
-        1000 /
-        60 /
-        60 /
-        24
-    ),
+    nights: nightsCount,
     name: stay.hotel_name,
     cancellation: {
       type: stay.block[0].paymentterms.cancellation.type_translation,
       before: stay.block[0].paymentterms.cancellation.info.date_before,
     },
-    rating: Number((10 / 2).toFixed(1)),
+    rating:
+      stay.breakfast_review_score.review_count === 0
+        ? null
+        : Number((stay.breakfast_review_score.rating / 2).toFixed(1)),
     specs: {
       square: stay.block[0].room_surface_in_m2,
       bedrooms: stay.block[0].number_of_bedrooms,
@@ -87,7 +95,7 @@ export const getTransformedStayReview = (
 ): IStayReview => {
   const transformedReview = {
     photo: review.author.avatar ?? null,
-    rating: Number((review.average_score / 2).toFixed(1)),
+    rating: Number(review.average_score.toFixed(1)),
     review: review.pros,
     reviewer: review.author.name,
     date: getShortDateFormat(review.date),

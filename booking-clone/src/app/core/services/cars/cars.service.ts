@@ -118,7 +118,7 @@ export class CarsService {
 
     return this.http.get<ICarReviewsResponse>(this.carReviewsURL, options).pipe(
       map((resp) => {
-        if (resp.data) {
+        if (resp.data.customerReviews.reviews) {
           const carReviewsData = resp.data.customerReviews.reviews.map(
             (review) => {
               const transformedReview = getTransformedCarReview(review);

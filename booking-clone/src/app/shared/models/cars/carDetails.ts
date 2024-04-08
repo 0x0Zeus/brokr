@@ -3,6 +3,7 @@ export interface ICarDetails {
   photo: string;
   address: string;
   reviews: string;
+  price: number;
   description: string;
   city: string;
   extras: string[];
@@ -12,7 +13,7 @@ export interface ICarDetails {
     photo: string;
     name: string;
   };
-  rating: number;
+  rating: number | null;
   specs: ICarDetailsSpec[];
 }
 
