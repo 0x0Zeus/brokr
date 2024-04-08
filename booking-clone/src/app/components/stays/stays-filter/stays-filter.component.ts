@@ -17,7 +17,7 @@ import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
 import { StaysService } from '@core/services/stays';
 import { ToasterService } from '@core/services/toaster';
-import { IStaysDestinations } from '@shared/models/stays/destination';
+import { IStaysDestination } from '@shared/models/stays/destination';
 import { IStaysFilterForm } from '@shared/models/stays/staysFilter';
 import { parseDate } from '@shared/utils';
 import { StaysFacade } from '@store/stays';
@@ -51,8 +51,8 @@ import {
 export class StaysFilterComponent implements OnInit {
   isLocationFocus = false;
   destinationIsLoading$ = new BehaviorSubject<boolean>(false);
-  elasticLocationValues$ = new BehaviorSubject<IStaysDestinations[]>([]);
-  chosenLocation: null | IStaysDestinations = null;
+  elasticLocationValues$ = new BehaviorSubject<IStaysDestination[]>([]);
+  chosenLocation: null | IStaysDestination = null;
   nowDate = new Date(Date.now());
   private destroy$ = inject(DestroyDirective).destroy$;
 
@@ -126,7 +126,7 @@ export class StaysFilterComponent implements OnInit {
     }
   }
 
-  elasticSearch(destination: IStaysDestinations): void {
+  elasticSearch(destination: IStaysDestination): void {
     this.locationValue.setValue(destination.location);
     this.chosenLocation = destination;
   }

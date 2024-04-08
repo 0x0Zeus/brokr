@@ -3,6 +3,8 @@
     <app-cars-filter />
   } @else if ((currentRoute | async) === '/booking/stays') {
     <app-stays-filter />
+  } @else if ((currentRoute | async) === '/booking/attractions') {
+    <app-attractions-filter />
   }
   <app-navigation />
   @if (isMap$ | async) {

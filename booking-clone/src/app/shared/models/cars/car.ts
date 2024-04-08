@@ -5,6 +5,7 @@ export interface ICar {
   model: string;
   rating: number;
   price: number;
+  currency: string;
   supplier: string;
   seats: string;
   latitude: number;

@@ -82,7 +82,6 @@ export class CarDetailsComponent implements OnInit {
       .subscribe((carInfo) => {
         this.carInfo$.next(carInfo);
         this.isLoading$.next(false);
-        console.log(carInfo);
       });
   }
 }

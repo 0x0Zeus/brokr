@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FooterComponent } from '@components/core/footer';
 
-import { boatsInfo, cars, homeOptions, homes, kinds } from './constants';
+import { attractionsInfo, cars, homeOptions, homes, kinds } from './constants';
 
 @Component({
   selector: 'app-home',
@@ -17,5 +17,5 @@ export class HomeComponent {
   cars = cars;
   homes = homes;
   homeOptions = homeOptions;
-  boatsInfo = boatsInfo;
+  attractionsInfo = attractionsInfo;
 }

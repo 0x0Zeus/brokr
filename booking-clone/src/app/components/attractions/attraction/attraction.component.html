@@ -1,0 +1,33 @@
+<div
+  class="attraction flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
+  [routerLink]="['/details/attraction/', attraction.slug]"
+>
+  <img
+    [src]="isFavorite ? 'assets/fav-fill.svg' : 'assets/fav.svg'"
+    alt="Favorite"
+    class="favorite absolute top-[1.7rem] right-[1.5rem] w-[2.6rem] h-[2.6rem]"
+  />
+  <div
+    class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem] bg-center bg-cover"
+    [style.background-image]="'url(' + attraction.photo + ')'"
+  ></div>
+  <p class="description text-base_secondary mb-[0.2rem]">
+    {{ attraction.location }}
+  </p>
+  <p class="title text-xl font-medium mb-[1rem]">{{ attraction.name }}</p>
+  <div class="splitter h-[1px] w-[4.5rem] bg-bg_secondary mb-[1.4rem]"></div>
+  <div class="labels text-base_secondary pb-[1.2rem] mb-auto">
+    {{ attraction.label }}
+  </div>
+  @if (attraction.rating) {
+    <app-rating [rating]="attraction.rating" class="mb-[1.4rem]" />
+  }
+  <div class="flex justify-between items-center mb-[0.2rem]">
+    <div class="price">
+      <span class="price-value text-2xl font-medium mr-[0.6rem]"
+        >${{ attraction.price }}</span
+      ><span class="price-desc text-base_secondary">/ticket</span>
+    </div>
+    <div class="reviews">({{ attraction.reviewCount }} reviews)</div>
+  </div>
+</div>

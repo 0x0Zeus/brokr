@@ -6,6 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { AttractionsFilterComponent } from '@components/attractions/attractions-filter';
 import { CarsFilterComponent } from '@components/cars/cars-filter';
 import { NavigationComponent } from '@components/core/navigation';
 import { MapComponent } from '@components/shared/map';
@@ -22,6 +23,7 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
     NavigationComponent,
     CarsFilterComponent,
     StaysFilterComponent,
+    AttractionsFilterComponent,
     AsyncPipe,
     MapComponent,
   ],

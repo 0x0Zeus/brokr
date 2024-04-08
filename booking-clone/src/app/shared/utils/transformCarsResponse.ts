@@ -38,6 +38,7 @@ export const getTransformedCarData = (
     model: car.vehicle_info.v_name,
     rating: Number((car.rating_info.average / 2).toFixed(1)),
     price: car.pricing_info.price,
+    currency: car.pricing_info.currency,
     supplier: car.supplier_info.name,
     seats: car.vehicle_info.seats,
     latitude: Number(car.supplier_info.latitude),
@@ -56,17 +57,28 @@ export const getTransformedCarDetails = (
     id: details.vehicle.id,
     photo: details.vehicle.imageUrl,
     address: details.depots.pickup.address,
-    reviews: details.content.reviews.supplier.rating.subtitle.split(' ')[0],
+    reviews: details.content.reviews
+      ? details.content.reviews.supplier.rating.subtitle.split(' ')[0]
+      : 'unknown',
     description: details.importantInfo.subtitle,
     city: details.depots.pickup.city,
+    price: Number(
+      (
+        details.vehicle.price.display.value *
+        details.vehicle.rentalDurationInDays
+      ).toFixed(2)
+    ),
+    currency: details.vehicle.price.display.currency,
     extras: details.extras.map((item) => item.name),
     days: details.vehicle.rentalDurationInDays,
     model: details.vehicle.makeAndModel,
     supplier: {
-      photo: details.content.reviews.supplier.imageUrl,
-      name: details.content.reviews.supplier.name,
+      photo: details.content.carCard.supplier.imageUrl,
+      name: details.content.carCard.supplier.name,
     },
-    rating: Number((details.supplier.rating / 2).toFixed(1)),
+    rating: details.supplier.rating
+      ? Number((details.supplier.rating / 2).toFixed(1))
+      : null,
     specs: [
       {
         name: 'Fuel Policy',

@@ -6,6 +6,7 @@ export interface IStay {
   name: string;
   rating: number;
   price: number;
+  currency: string;
   reviewCount: number;
   longitude: number;
   latitude: number;

@@ -1,0 +1,30 @@
+<div class="attractions base-grid">
+  @for (attraction of attractions$ | async; track attraction.id) {
+    <app-attraction [attraction]="attraction" />
+  } @empty {
+    @if ((isLoadingAttractions$ | async) === false) {
+      Attractions not found.
+    }
+  }
+</div>
+
+@if (!(attractions$ | async)?.length && (isLoadingAttractions$ | async)) {
+  <div class="mt-[16rem] h-full flex justify-center items-center w-full">
+    <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+  </div>
+} @else if ((attractions$ | async)?.length) {
+  @if (isLoadingAttractions$ | async) {
+    <button
+      class="btn-base btn-disabled w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
+    >
+      <app-mini-loader color="#ffffff" />
+    </button>
+  } @else {
+    <button
+      class="btn-base w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
+      (click)="setNextPage()"
+    >
+      Show More
+    </button>
+  }
+}

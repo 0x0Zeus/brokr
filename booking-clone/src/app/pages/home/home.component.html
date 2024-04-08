@@ -164,37 +164,39 @@
       </div>
     </div>
   </section>
-  <section class="boats wrapper-base pb-[14rem]">
-    <h2 class="boats__title text-title mb-[3.3rem]">
+  <section class="attractions wrapper-base pb-[14rem]">
+    <h2 class="attractions__title text-title mb-[3.3rem]">
       The Bahamas is a country located in the Caribbean, known for its beautiful
       beaches, crystal-clear waters, and vibrant culture.
     </h2>
     <div
-      class="boats-browse w-full rounded-lg h-[52.2rem] flex flex-col justify-end items-start px-[3.8rem] py-[6.7rem] text-base_fifth mb-[2rem]"
+      class="attractions-browse w-full rounded-lg h-[52.2rem] flex flex-col justify-end items-start px-[3.8rem] py-[6.7rem] text-base_fifth mb-[2rem]"
     >
-      <p class="boats-browse__title font-bold text-2xl mb-[1rem]">
+      <p class="attractions-browse__title font-bold text-2xl mb-[1rem]">
         Put your boat to work
       </p>
-      <p class="boats-browse__description text-xl mb-[1.7rem]">
-        Offset the cost of boat ownership by listing it on Boatsetter.
+      <p class="attractions-browse__description text-xl mb-[1.7rem]">
+        Offset the cost of boat ownership by listing it on Boatssetter.
       </p>
       <button
-        class="boats-browse__btn btn-base w-[16.7rem] h-[4.7rem]"
-        [routerLink]="['/booking/boats']"
+        class="attractions-browse__btn btn-base w-[16.7rem] h-[4.7rem]"
+        [routerLink]="['/booking/attractions']"
       >
-        Browse Boats
+        Browse Attractions
       </button>
     </div>
-    <div class="boats-options flex justify-center items-center gap-[2.2rem]">
-      @for (boat of boatsInfo; track boat.title) {
+    <div
+      class="attractions-options flex justify-center items-center gap-[2.2rem]"
+    >
+      @for (boat of attractionsInfo; track boat.title) {
         <div
-          class="boats-browse h-[35rem] rounded-lg w-[61rem] flex flex-col justify-end items-start px-[2.4rem] py-[4rem] text-base_fifth"
+          class="attractions-browse h-[35rem] rounded-lg w-[61rem] flex flex-col justify-end items-start px-[2.4rem] py-[4rem] text-base_fifth"
           [style.background-image]="boat.url"
         >
-          <p class="boats-browse__title font-bold text-2xl mb-[0.9rem]">
+          <p class="attractions-browse__title font-bold text-2xl mb-[0.9rem]">
             {{ boat.title }}
           </p>
-          <p class="boats-browse__description text-xl">
+          <p class="attractions-browse__description text-xl">
             {{ boat.description }}
           </p>
         </div>

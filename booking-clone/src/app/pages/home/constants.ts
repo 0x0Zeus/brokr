@@ -1,6 +1,6 @@
 export const kinds = [
   {
-    title: 'Car',
+    title: 'Cars',
     url: 'assets/home/car.jpg',
     link: 'booking/cars',
   },
@@ -10,9 +10,9 @@ export const kinds = [
     link: 'booking/stays',
   },
   {
-    title: 'Boat',
+    title: 'Attractions',
     url: 'assets/home/boat.jpg',
-    link: 'booking/boats',
+    link: 'booking/attractions',
   },
 ];
 
@@ -79,16 +79,16 @@ export const homeOptions = [
   },
 ];
 
-export const boatsInfo = [
+export const attractionsInfo = [
   {
     title: 'Put your boat to work',
     description:
       'Offset the cost of boat ownership by listing it on Boatsetter.',
-    url: 'url(assets/home/boats/yacht.jpg)',
+    url: 'url(assets/home/attractions/yacht.jpg)',
   },
   {
     title: 'Are you an experienced captain?',
     description: 'Join our Captain Network and make money running boats.',
-    url: 'url(assets/home/boats/capitan.jpg)',
+    url: 'url(assets/home/attractions/capitan.jpg)',
   },
 ];

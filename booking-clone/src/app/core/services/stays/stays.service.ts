@@ -9,7 +9,7 @@ import {
 import { IStayReviewsResponse } from '@shared/interfaces/stays/reviewsResponse';
 import { IStayDetailsResponse } from '@shared/interfaces/stays/stayDetailsResponse';
 import { IStaysResponse } from '@shared/interfaces/stays/staysResponse';
-import { IStaysDestinations } from '@shared/models/stays/destination';
+import { IStaysDestination } from '@shared/models/stays/destination';
 import { IStayReview } from '@shared/models/stays/review';
 import { IStay } from '@shared/models/stays/stay';
 import { IStayDetails } from '@shared/models/stays/stayDetails';
@@ -40,7 +40,7 @@ export class StaysService {
     query,
   }: {
     query: string;
-  }): Observable<IStaysDestinations[]> {
+  }): Observable<IStaysDestination[]> {
     const options = {
       params: new HttpParams().set('query', query),
     };
@@ -69,7 +69,8 @@ export class StaysService {
         .append('search_type', searchType)
         .append('arrival_date', arrivalDate)
         .append('departure_date', departureDate)
-        .append('page_number', page),
+        .append('page_number', page)
+        .append('currency_code', 'USD'),
     };
     return this.http.get<IStaysResponse>(this.searchStaysURL, options).pipe(
       map((resp) => {
@@ -95,7 +96,8 @@ export class StaysService {
       params: new HttpParams()
         .set('hotel_id', hotelId)
         .append('arrival_date', arrivalDate)
-        .append('departure_date', departureDate),
+        .append('departure_date', departureDate)
+        .append('currency_code', 'USD'),
     };
 
     return this.http
@@ -126,7 +128,7 @@ export class StaysService {
       .get<IStayReviewsResponse>(this.stayReviewsURL, options)
       .pipe(
         map((resp) => {
-          if (resp.data) {
+          if (resp.data.result) {
             const stayReviewsData = resp.data.result.map((review) => {
               const transformedReview = getTransformedStayReview(review);
 
