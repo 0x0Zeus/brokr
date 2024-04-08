@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RatingComponent } from '@components/shared/rating';
-import { SpecificationsComponent } from '@components/stays/specifications';
 import { StayReviewsComponent } from '@components/stays/stay-reviews';
+import { StaySpecsComponent } from '@components/stays/stay-specs';
 import { DestroyDirective } from '@core/directives';
 import { ToasterService } from '@core/services/toaster';
 import { IStayDetails } from '@shared/models/stays/stayDetails';
@@ -35,7 +35,7 @@ import { StaysService } from '../../core/services/stays/stays.service';
     AsyncPipe,
     CalendarModule,
     ReactiveFormsModule,
-    SpecificationsComponent,
+    StaySpecsComponent,
     ProgressSpinnerModule,
     StayReviewsComponent,
   ],

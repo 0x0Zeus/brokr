@@ -2,7 +2,7 @@
   class="reviews grid grid-cols-auto-fit-md justify-items-center gap-[2.8rem] mb-[3.5rem]"
 >
   @for (review of reviews$ | async; track review.reviewer) {
-    <app-review [review]="review" />
+    <app-stay-review [review]="review" />
   } @empty {
     @if ((isReviewsLoading$ | async) === false) {
       Reviews not found.

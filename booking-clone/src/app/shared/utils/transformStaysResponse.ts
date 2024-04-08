@@ -54,7 +54,7 @@ export const getTransformedStayDetails = (
       sm: item.url_square180,
     })),
     location: stay.address,
-    review: stay.review_nr,
+    reviews: stay.review_nr,
     description: stay.rooms[stay.block[0].room_id].description,
     arrival_date: getShortDateFormat(stay.arrival_date),
     departure_date: getShortDateFormat(stay.departure_date),
@@ -73,7 +73,7 @@ export const getTransformedStayDetails = (
       before: stay.block[0].paymentterms.cancellation.info.date_before,
     },
     rating: Number((10 / 2).toFixed(1)),
-    specifications: {
+    specs: {
       square: stay.block[0].room_surface_in_m2,
       bedrooms: stay.block[0].number_of_bedrooms,
       bathrooms: stay.block[0].number_of_bathrooms,

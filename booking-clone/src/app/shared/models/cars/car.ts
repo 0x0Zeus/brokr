@@ -9,4 +9,5 @@ export interface ICar {
   seats: string;
   latitude: number;
   longitude: number;
+  searchKey: string;
 }

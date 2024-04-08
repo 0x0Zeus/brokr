@@ -24,6 +24,9 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            },
             "styles": [
               "src/styles.scss",
               "node_modules/@tomtom-international/web-sdk-maps/dist/maps.css"

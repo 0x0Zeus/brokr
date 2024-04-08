@@ -2,7 +2,7 @@ export interface IStayDetails {
   id: number;
   photos: IPhoto[];
   location: string;
-  review: number;
+  reviews: number;
   description: string;
   arrival_date: string;
   departure_date: string;
@@ -15,7 +15,7 @@ export interface IStayDetails {
     before: string | null;
   };
   rating: number;
-  specifications: IStayDetailsSpecifications;
+  specs: IStayDetailsSpecs;
 }
 
 interface IPhoto {
@@ -23,7 +23,7 @@ interface IPhoto {
   sm: string;
 }
 
-export interface IStayDetailsSpecifications {
+export interface IStayDetailsSpecs {
   square: number;
   bedrooms: number;
   bathrooms: number;

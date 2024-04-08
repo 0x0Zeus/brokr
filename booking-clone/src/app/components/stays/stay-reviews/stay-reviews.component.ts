@@ -8,7 +8,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
-import { ReviewComponent } from '@components/shared/review';
+import { StayReviewComponent } from '@components/stays/stay-review';
 import { DestroyDirective } from '@core/directives';
 import { StaysService } from '@core/services/stays';
 import { ToasterService } from '@core/services/toaster';
@@ -20,7 +20,7 @@ import { BehaviorSubject, catchError, of, takeUntil } from 'rxjs';
   selector: 'app-stay-reviews',
   standalone: true,
   imports: [
-    ReviewComponent,
+    StayReviewComponent,
     AsyncPipe,
     ProgressSpinnerModule,
     MiniLoaderComponent,

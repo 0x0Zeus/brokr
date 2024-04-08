@@ -29,9 +29,9 @@ export class StaysService {
     'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination';
   private searchStaysURL =
     'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels';
-  private searchStayDetailsURL =
+  private stayDetailsURL =
     'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails';
-  private searchStayReviewsURL =
+  private stayReviewsURL =
     'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelReviews';
 
   constructor(private http: HttpClient) {}
@@ -99,7 +99,7 @@ export class StaysService {
     };
 
     return this.http
-      .get<IStayDetailsResponse>(this.searchStayDetailsURL, options)
+      .get<IStayDetailsResponse>(this.stayDetailsURL, options)
       .pipe(
         map((resp) => {
           if (resp.data) {
@@ -123,7 +123,7 @@ export class StaysService {
     };
 
     return this.http
-      .get<IStayReviewsResponse>(this.searchStayReviewsURL, options)
+      .get<IStayReviewsResponse>(this.stayReviewsURL, options)
       .pipe(
         map((resp) => {
           if (resp.data) {

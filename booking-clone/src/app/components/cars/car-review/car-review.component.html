@@ -1,0 +1,18 @@
+<div
+  class="review w-[63rem] min-h-[23.8rem] h-full border-1 border-base_border rounded-lg text-xl py-[2.8rem] px-[3.3rem]"
+>
+  <div class="review-title flex items-center justify-start mb-[2.5rem]">
+    <p class="review-title__date font-light mr-[4.5rem]">
+      {{ review.date }}
+    </p>
+    <app-rating [rating]="review.rating" />
+  </div>
+  <div class="review-content">
+    <div class="positive">
+      <span class="text-base_third">Positive: </span>{{ review.positive }}
+    </div>
+    <div class="negative">
+      <span class="text-base_third">Negative: </span>{{ review.negative }}
+    </div>
+  </div>
+</div>
