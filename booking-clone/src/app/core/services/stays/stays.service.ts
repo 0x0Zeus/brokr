@@ -9,7 +9,7 @@ import {
 import { IStayReviewsResponse } from '@shared/interfaces/stays/reviewsResponse';
 import { IStayDetailsResponse } from '@shared/interfaces/stays/stayDetailsResponse';
 import { IStaysResponse } from '@shared/interfaces/stays/staysResponse';
-import { IStaysDestinations } from '@shared/models/stays/destination';
+import { IStaysDestination } from '@shared/models/stays/destination';
 import { IStayReview } from '@shared/models/stays/review';
 import { IStay } from '@shared/models/stays/stay';
 import { IStayDetails } from '@shared/models/stays/stayDetails';
@@ -40,7 +40,7 @@ export class StaysService {
     query,
   }: {
     query: string;
-  }): Observable<IStaysDestinations[]> {
+  }): Observable<IStaysDestination[]> {
     const options = {
       params: new HttpParams().set('query', query),
     };

@@ -1,4 +1,4 @@
-<div class="cars base-grid">
+<div class="stays base-grid">
   @for (stay of stays$ | async; track stay.id) {
     <app-stay [stay]="stay" />
   } @empty {

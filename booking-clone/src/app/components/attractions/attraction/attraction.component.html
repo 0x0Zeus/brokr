@@ -1,5 +1,6 @@
 <div
-  class="attraction flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] h-full relative"
+  class="attraction flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
+  [routerLink]="['/details/attraction/', attraction.slug]"
 >
   <img
     [src]="isFavorite ? 'assets/fav-fill.svg' : 'assets/fav.svg'"
@@ -8,22 +9,25 @@
   />
   <div
     class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem] bg-center bg-cover"
-    [style.background-image]="'url(assets/home/boat.jpg)'"
+    [style.background-image]="'url(' + attraction.photo + ')'"
   ></div>
-  <div class="mb-[1.6rem] flex justify-between items-center">
-    <p class="location mr-auto">{{ 'CHICAGO, IL' | uppercase }}</p>
-    <app-rating [rating]="3.1" />
-  </div>
-  <p class="title font-medium text-xl mb-[1rem]">
-    Luxury 40' 2010 Multi Level Yacht. Hourly rate includes Captain fee!!!
+  <p class="description text-base_secondary mb-[0.2rem]">
+    {{ attraction.location }}
   </p>
-  <div class="info flex justify-start items-center mt-auto mb-[1rem]">
-    <div class="term mr-[1.6rem]">4 - 6 hours</div>
-    <div class="capitan">Captained</div>
+  <p class="title text-xl font-medium mb-[1rem]">{{ attraction.name }}</p>
+  <div class="splitter h-[1px] w-[4.5rem] bg-bg_secondary mb-[1.4rem]"></div>
+  <div class="labels text-base_secondary pb-[1.2rem] mb-auto">
+    {{ attraction.label }}
   </div>
-  <div class="mb-[1.1rem]">
-    <span class="price-value text-2xl font-medium mr-[0.6rem]">$260 +</span
-    ><span class="price-desc text-base_secondary"> /hour</span>
+  @if (attraction.rating) {
+    <app-rating [rating]="attraction.rating" class="mb-[1.4rem]" />
+  }
+  <div class="flex justify-between items-center mb-[0.2rem]">
+    <div class="price">
+      <span class="price-value text-2xl font-medium mr-[0.6rem]"
+        >${{ attraction.price }}</span
+      ><span class="price-desc text-base_secondary">/ticket</span>
+    </div>
+    <div class="reviews">({{ attraction.reviewCount }} reviews)</div>
   </div>
-  <div class="capacity mb-[0.2rem]">Up to 12 passengers</div>
 </div>

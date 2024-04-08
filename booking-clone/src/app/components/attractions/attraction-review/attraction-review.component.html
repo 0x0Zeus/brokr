@@ -1,0 +1,26 @@
+<div
+  class="review w-[63rem] min-h-[23.8rem] h-full border-1 border-base_border rounded-lg text-xl py-[2.8rem] px-[3.3rem]"
+>
+  <div class="review-title flex items-center justify-start mb-[2.5rem]">
+    <div
+      class="review-title__photo w-[6.5rem] h-[6.5rem] rounded-full mr-[3rem] bg-center bg-cover"
+      [style.background-image]="
+        review.photo
+          ? 'url(' + review.photo + ')'
+          : 'url(assets/empty-avatar.svg)'
+      "
+    ></div>
+    <div class="review-title__info">
+      <p class="review-title__username font-bold">{{ review.reviewer }}</p>
+      <div class="flex items-center justify-start">
+        <p class="review-title__date font-light mr-[4.5rem]">
+          {{ review.date }}
+        </p>
+        <app-rating [rating]="review.rating" />
+      </div>
+    </div>
+  </div>
+  <div class="review-content">
+    {{ review.review }}
+  </div>
+</div>

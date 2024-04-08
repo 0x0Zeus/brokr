@@ -37,14 +37,28 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'details/stay/:stayId',
-        loadComponent: () =>
-          import('./pages/stay-details').then((m) => m.StayDetailsComponent),
-      },
-      {
-        path: 'details/car/:carId',
-        loadComponent: () =>
-          import('./pages/car-details').then((m) => m.CarDetailsComponent),
+        path: 'details',
+        children: [
+          {
+            path: 'stay/:stayId',
+            loadComponent: () =>
+              import('./pages/stay-details').then(
+                (m) => m.StayDetailsComponent
+              ),
+          },
+          {
+            path: 'car/:carId',
+            loadComponent: () =>
+              import('./pages/car-details').then((m) => m.CarDetailsComponent),
+          },
+          {
+            path: 'attraction/:attractionId',
+            loadComponent: () =>
+              import('./pages/attraction-details').then(
+                (m) => m.AttractionDetailsComponent
+              ),
+          },
+        ],
       },
     ],
   },

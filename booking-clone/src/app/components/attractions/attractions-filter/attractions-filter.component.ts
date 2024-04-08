@@ -8,19 +8,16 @@ import {
 } from '@angular/core';
 import {
   FormControl,
-  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
-import { StaysService } from '@core/services/stays';
+import { AttractionsService } from '@core/services/attractions';
 import { ToasterService } from '@core/services/toaster';
-import { IStaysDestination } from '@shared/models/stays/destination';
-import { IStaysFilterForm } from '@shared/models/stays/staysFilter';
-import { parseDate } from '@shared/utils';
-import { StaysFacade } from '@store/stays';
+import { IAttractionsDestination } from '@shared/models/attractions/destination';
+import { AttractionsFacade } from '@store/attractions';
 import { CalendarModule } from 'primeng/calendar';
 import {
   BehaviorSubject,
@@ -33,7 +30,7 @@ import {
 } from 'rxjs';
 
 @Component({
-  selector: 'app-stays-filter',
+  selector: 'app-attractions-filter',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -43,30 +40,30 @@ import {
     CalendarModule,
     FormsModule,
   ],
-  templateUrl: './stays-filter.component.html',
-  styleUrl: './stays-filter.component.scss',
+  templateUrl: './attractions-filter.component.html',
+  styleUrl: './attractions-filter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [DestroyDirective],
 })
-export class StaysFilterComponent implements OnInit {
+export class AttractionsFilterComponent implements OnInit {
   isLocationFocus = false;
   destinationIsLoading$ = new BehaviorSubject<boolean>(false);
-  elasticLocationValues$ = new BehaviorSubject<IStaysDestination[]>([]);
-  chosenLocation: null | IStaysDestination = null;
+  elasticLocationValues$ = new BehaviorSubject<IAttractionsDestination[]>([]);
+  chosenLocation: null | IAttractionsDestination = null;
   nowDate = new Date(Date.now());
   private destroy$ = inject(DestroyDirective).destroy$;
 
-  staysFilterForm = new FormGroup<IStaysFilterForm>({
-    arrivalDate: new FormControl<Date>(this.nowDate, {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
+  // staysFilterForm = new FormGroup<IStaysFilterForm>({
+  //   arrivalDate: new FormControl<Date>(this.nowDate, {
+  //     nonNullable: true,
+  //     validators: [Validators.required],
+  //   }),
 
-    departureDate: new FormControl<Date>(this.nowDate, {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-  });
+  //   departureDate: new FormControl<Date>(this.nowDate, {
+  //     nonNullable: true,
+  //     validators: [Validators.required],
+  //   }),
+  // });
 
   locationValue = new FormControl<string>('', {
     nonNullable: true,
@@ -74,8 +71,8 @@ export class StaysFilterComponent implements OnInit {
   });
 
   constructor(
-    private staysService: StaysService,
-    private staysFacade: StaysFacade,
+    private attractionsService: AttractionsService,
+    private attractionsFacade: AttractionsFacade,
     private toasterService: ToasterService
   ) {}
 
@@ -87,7 +84,7 @@ export class StaysFilterComponent implements OnInit {
         distinctUntilChanged(),
         switchMap(() => {
           this.destinationIsLoading$.next(true);
-          return this.staysService
+          return this.attractionsService
             .getDestinations({ query: this.locationValue.value })
             .pipe(
               catchError((error: HttpErrorResponse) => {
@@ -113,29 +110,24 @@ export class StaysFilterComponent implements OnInit {
   }
 
   onSearch(): void {
-    if (this.staysFilterForm.valid && this.chosenLocation) {
-      const staysFormData = this.staysFilterForm.getRawValue();
-
-      this.staysFacade.fetchStays({
-        arrivalDate: parseDate(staysFormData.arrivalDate),
-        departureDate: parseDate(staysFormData.departureDate),
-        destId: this.chosenLocation.destId,
-        searchType: this.chosenLocation.searchType,
+    if (this.chosenLocation) {
+      this.attractionsFacade.fetchAttractions({
+        attractionId: this.chosenLocation.attractionId,
         page: 1,
       });
     }
   }
 
-  elasticSearch(destination: IStaysDestination): void {
+  elasticSearch(destination: IAttractionsDestination): void {
     this.locationValue.setValue(destination.location);
     this.chosenLocation = destination;
   }
 
-  get arrivalDate(): FormControl<Date> {
-    return this.staysFilterForm.controls.arrivalDate;
-  }
+  // get arrivalDate(): FormControl<Date> {
+  //   return this.staysFilterForm.controls.arrivalDate;
+  // }
 
-  get departureDate(): FormControl<Date> {
-    return this.staysFilterForm.controls.departureDate;
-  }
+  // get departureDate(): FormControl<Date> {
+  //   return this.staysFilterForm.controls.departureDate;
+  // }
 }

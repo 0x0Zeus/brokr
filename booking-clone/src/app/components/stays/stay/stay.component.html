@@ -1,5 +1,5 @@
 <div
-  class="car flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
+  class="stay flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
   [routerLink]="[
     '/details/stay/',
     stay.id + '_' + stay.checkInDate + '_' + stay.checkOutDate
@@ -29,6 +29,6 @@
         >${{ stay.price }}</span
       ><span class="price-desc text-base_secondary">/night</span>
     </div>
-    <div class="reviews">({{ stay.reviewCount }})</div>
+    <div class="reviews">({{ stay.reviewCount }} reviews)</div>
   </div>
 </div>
