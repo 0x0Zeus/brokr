@@ -25,9 +25,9 @@
   <app-rating [rating]="car.rating" class="mb-[1rem]" />
   <div class="flex justify-between items-center mb-[0.2rem]">
     <div class="price">
-      {{ car.price }}
-      <span> {{ car.currency }} </span>
-      <span class="price-desc text-base_secondary">/day</span>
+      <span class="price-value text-2xl font-medium mr-[0.6rem]"
+        >${{ car.price }}</span
+      ><span class="price-desc text-base_secondary">/day</span>
     </div>
     <div class="reviews">{{ car.seats }} seats</div>
   </div>

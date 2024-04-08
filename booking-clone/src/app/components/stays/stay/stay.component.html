@@ -25,9 +25,9 @@
   <app-rating [rating]="stay.rating" class="mb-[1.4rem]" />
   <div class="flex justify-between items-center mb-[0.2rem]">
     <div class="price">
-      {{ stay.price }}
-      <span> {{ stay.currency }} </span>
-      <span class="price-desc text-base_secondary">/night</span>
+      <span class="price-value text-2xl font-medium mr-[0.6rem]"
+        >${{ stay.price }}</span
+      ><span class="price-desc text-base_secondary">/night</span>
     </div>
     <div class="reviews">({{ stay.reviewCount }})</div>
   </div>

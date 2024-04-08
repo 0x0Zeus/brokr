@@ -30,9 +30,9 @@ export const routes: Routes = [
           },
 
           {
-            path: 'boats',
+            path: 'attractions',
             loadComponent: () =>
-              import('./pages/boats').then((m) => m.BoatsComponent),
+              import('./pages/attractions').then((m) => m.AttractionsComponent),
           },
         ],
       },

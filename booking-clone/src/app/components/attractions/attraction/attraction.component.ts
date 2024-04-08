@@ -3,13 +3,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RatingComponent } from '@components/shared/rating';
 
 @Component({
-  selector: 'app-boat',
+  selector: 'app-attraction',
   standalone: true,
   imports: [UpperCasePipe, RatingComponent],
-  templateUrl: './boat.component.html',
-  styleUrl: './boat.component.scss',
+  templateUrl: './attraction.component.html',
+  styleUrl: './attraction.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BoatComponent {
+export class AttractionComponent {
   isFavorite = false;
 }

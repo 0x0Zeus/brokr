@@ -72,7 +72,8 @@ export class CarsService {
         .append('pick_up_date', fromDate)
         .append('drop_off_date', untilDate)
         .append('pick_up_time', fromTime)
-        .append('drop_off_time', untilTime),
+        .append('drop_off_time', untilTime)
+        .append('currency_code', 'USD'),
     };
     return this.http.get<ISearchCarsResponse>(this.searchCarsURL, options).pipe(
       map((resp) => {
@@ -94,7 +95,8 @@ export class CarsService {
     const options = {
       params: new HttpParams()
         .set('search_key', searchKey)
-        .append('vehicle_id', vehicleId),
+        .append('vehicle_id', vehicleId)
+        .append('currency_code', 'USD'),
     };
     return this.http.get<ICarDetailsResponse>(this.carDetailsURL, options).pipe(
       map((resp) => {

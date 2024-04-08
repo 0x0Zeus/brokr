@@ -69,7 +69,8 @@ export class StaysService {
         .append('search_type', searchType)
         .append('arrival_date', arrivalDate)
         .append('departure_date', departureDate)
-        .append('page_number', page),
+        .append('page_number', page)
+        .append('currency_code', 'USD'),
     };
     return this.http.get<IStaysResponse>(this.searchStaysURL, options).pipe(
       map((resp) => {
@@ -95,7 +96,8 @@ export class StaysService {
       params: new HttpParams()
         .set('hotel_id', hotelId)
         .append('arrival_date', arrivalDate)
-        .append('departure_date', departureDate),
+        .append('departure_date', departureDate)
+        .append('currency_code', 'USD'),
     };
 
     return this.http

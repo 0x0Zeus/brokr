@@ -57,10 +57,7 @@
             {{ carInfo.days }}
             <span> days</span>
           </p>
-          <p class="price">
-            {{ carInfo.price }}
-            <span> {{ carInfo.currency }}</span>
-          </p>
+          <p class="price">{{ carInfo.price }}$</p>
         </div>
         <app-car-specs [specifications]="carInfo.specs" />
       </div>

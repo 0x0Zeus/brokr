@@ -68,7 +68,7 @@ export const getTransformedCarDetails = (
         details.vehicle.rentalDurationInDays
       ).toFixed(2)
     ),
-    currency:details.vehicle.price.display.currency,
+    currency: details.vehicle.price.display.currency,
     extras: details.extras.map((item) => item.name),
     days: details.vehicle.rentalDurationInDays,
     model: details.vehicle.makeAndModel,
