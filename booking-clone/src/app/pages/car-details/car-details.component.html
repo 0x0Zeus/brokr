@@ -1,3 +1,108 @@
-<div class="details-container max-w-[135rem] mx-[2rem] m-auto mt-[5.7rem]">
-  car-details works!
+<div class="details-container max-w-[135rem] px-[2rem] m-auto mt-[5.7rem]">
+  @if (carInfo$ | async; as carInfo) {
+    <div class="main flex justify-between gap-[6.6rem] mb-[6.7rem]">
+      <div class="w-[53.2rem]">
+        <div
+          class="car-photo rounded-lg w-full h-[63.2rem] bg-center bg-contain bg-no-repeat mb-[1rem]"
+          [style.background-image]="'url(' + carInfo.photo + ')'"
+        ></div>
+      </div>
+      <div class="main-info basis-1/2 w-full">
+        <div class="host flex items-center justify-start mb-[1.6rem]">
+          <img
+            src="assets/details/reward.svg"
+            alt="Host"
+            class="host__img w-[1rem] h-[1.6rem] mr-[1rem]"
+          />
+          <h3 class="host__title text-base_third">Host Name</h3>
+        </div>
+        <p class="car-title font-bold text-4xl mb-[1.5rem]">
+          {{ carInfo.model }}
+        </p>
+        <div class="location flex items-center justify-start mb-[1rem]">
+          <img
+            src="assets/details/map.svg"
+            alt="Location"
+            class="location__img w-[0.9rem] h-[1rem] mr-[1rem]"
+          />
+          <p class="location__title text-base_secondary font-light">
+            {{ carInfo.city }}
+          </p>
+        </div>
+        <div
+          class="statistic-info flex items-center justify-between pb-[2.7rem] border-b-1 border-base_border mb-[2.7rem]"
+        >
+          <app-rating [rating]="carInfo.rating" class="mr-[1.2rem]" />
+          <div class="reviews">{{ '(' + carInfo.reviews + ' reviews)' }}</div>
+        </div>
+        <div class="where mb-[2.5rem]">
+          <h3 class="where__title font-bold text-3xl mb-[1.8rem]">Where</h3>
+          <div class="location flex items-center justify-start mb-[1rem]">
+            <img
+              src="assets/details/map.svg"
+              alt="Location"
+              class="location__img w-[1.7rem] h-[1.7rem] mr-[1.7rem]"
+            />
+            <p class="location__title text-lg">
+              {{ carInfo.address }}
+            </p>
+          </div>
+        </div>
+        <div class="reservation mb-[2.5rem]">
+          <p class="reservation__nights font-bold text-3xl mb-[0.7rem]">
+            {{ carInfo.days }}
+            <span> nights</span>
+          </p>
+        </div>
+        <app-car-specs [specifications]="carInfo.specs" />
+      </div>
+    </div>
+    <div class="suplier mb-[5.1rem]">
+      <h3 class="supplier__title font-bold text-3xl mb-[1.8rem]">Supplier</h3>
+      <div class="supplier__descr flex items-center justify-start">
+        <div
+          class="supplier__img rounded-full bg-center bg-cover w-[4rem] h-[4rem] mr-[2.1rem]"
+          [style.background-image]="'url(' + carInfo.supplier.photo + ')'"
+        ></div>
+        <div class="supplier__info">
+          <p class="supplier__friendly font-medium text-2xl leading-[2rem]">
+            {{ carInfo.supplier.name }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="extras mb-[5.2rem]">
+      <h3 class="extras__title font-bold text-3xl mb-[3rem]">Extras</h3>
+      <div
+        class="extras-items flex items-center justify-start gap-[2rem] flex-wrap"
+      >
+        @for (extra of carInfo.extras; track extra) {
+          <p
+            class="extras-item w-[14.7rem] min-h-[11.8rem] h-full px-[1.6rem] pt-[2.5rem] border-1 border-base_border rounded-lg font-medium text-xl"
+          >
+            {{ extra }}
+          </p>
+        }
+      </div>
+    </div>
+    <div
+      class="description pb-[5.5rem] border-b-1 border-base_border mb-[3.5rem]"
+    >
+      <h3 class="description__title font-bold text-3xl mb-[2.5rem]">
+        Description
+      </h3>
+      <p class="description__content text-xl text-base_secondary">
+        {{ carInfo.description }}
+      </p>
+    </div>
+    @if (reviewParams$ | async; as reviewParams) {
+      <app-car-reviews [params]="reviewParams" />
+    }
+  } @else if (isLoading$ | async) {
+    <div class="mt-[35rem] h-full flex justify-center items-center w-full">
+      <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+    </div>
+  } @else {
+    <p class="error-message mt-[35rem]">Something went wrong</p>
+  }
 </div>

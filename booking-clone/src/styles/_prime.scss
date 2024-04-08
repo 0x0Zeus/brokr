@@ -1,0 +1,53 @@
+//prime-ng datepicker
+
+.p-datepicker table,
+.p-datepicker-header {
+  font-size: 1.4rem;
+}
+
+.p-datepicker table td.p-datepicker-today > span {
+  background: #675dfe;
+  color: #d1d5db;
+  border-color: transparent;
+}
+
+.p-calendar {
+  height: 100%;
+}
+
+.p-calendar .p-inputtext {
+  padding: 0 1.4rem;
+}
+
+.p-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.p-input-icon-left > i,
+.p-input-icon-left > .p-icon-wrapper,
+.p-input-icon-right > i,
+.p-input-icon-right > .p-icon-wrapper {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.8rem;
+}
+
+.p-datepicker table td > span {
+  border-radius: 0.3rem;
+}
+
+.p-calendar:not(.p-calendar-disabled).p-focus > .p-inputtext {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #bfdbfe;
+  border-color: #3b82f6;
+}
+
+//prime-ng slider
+
+@layer {
+  .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+    background: theme('colors.base_third');
+  }
+}

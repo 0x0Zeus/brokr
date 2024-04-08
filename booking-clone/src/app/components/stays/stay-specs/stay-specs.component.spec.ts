@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoaderComponent } from '.';
+import { StaySpecsComponent } from './stay-specs.component';
 
-describe('LoaderComponent', () => {
-  let component: LoaderComponent;
-  let fixture: ComponentFixture<LoaderComponent>;
+describe('StaySpecsComponent', () => {
+  let component: StaySpecsComponent;
+  let fixture: ComponentFixture<StaySpecsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoaderComponent],
+      imports: [StaySpecsComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LoaderComponent);
+    fixture = TestBed.createComponent(StaySpecsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

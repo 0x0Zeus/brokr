@@ -8,6 +8,7 @@ import {
   selectCarsIsLoading,
   selectCarsPage,
   selectPaginatedCars,
+  selectPreviewCarId,
 } from './cars.selector';
 
 @Injectable({
@@ -18,6 +19,7 @@ export class CarsFacade {
   carsIsLoading$ = this.store.select(selectCarsIsLoading);
   carsError$ = this.store.select(selectCarsError);
   carsPage$ = this.store.select(selectCarsPage);
+  carPreviewId$ = this.store.select(selectPreviewCarId);
 
   constructor(private store: Store) {}
 

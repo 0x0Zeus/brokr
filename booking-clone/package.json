@@ -24,6 +24,7 @@
     "@ngrx/router-store": "^17.1.1",
     "@ngrx/store": "^17.1.1",
     "@tomtom-international/web-sdk-maps": "^6.25.0",
+    "primeicons": "^7.0.0",
     "primeng": "^17.12.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

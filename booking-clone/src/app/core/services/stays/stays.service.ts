@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IStaysDestinationsResponse } from '@shared/interfaces/stays/destinationsResponse';
 import {
   IStayDetailsSearchParams,
+  IStayReviewsParams,
   IStaysSearchParams,
 } from '@shared/interfaces/stays/params';
 import { IStayReviewsResponse } from '@shared/interfaces/stays/reviewsResponse';
@@ -28,9 +29,9 @@ export class StaysService {
     'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination';
   private searchStaysURL =
     'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels';
-  private searchStayDetailsURL =
+  private stayDetailsURL =
     'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails';
-  private searchStayReviewsURL =
+  private stayReviewsURL =
     'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelReviews';
 
   constructor(private http: HttpClient) {}
@@ -98,7 +99,7 @@ export class StaysService {
     };
 
     return this.http
-      .get<IStayDetailsResponse>(this.searchStayDetailsURL, options)
+      .get<IStayDetailsResponse>(this.stayDetailsURL, options)
       .pipe(
         map((resp) => {
           if (resp.data) {
@@ -111,13 +112,18 @@ export class StaysService {
       );
   }
 
-  getStayReviews({ hotelId }: { hotelId: string }): Observable<IStayReview[]> {
+  getStayReviews({
+    hotelId,
+    page,
+  }: IStayReviewsParams): Observable<IStayReview[]> {
     const options = {
-      params: new HttpParams().set('hotel_id', hotelId),
+      params: new HttpParams()
+        .set('hotel_id', hotelId)
+        .append('page_number', page),
     };
 
     return this.http
-      .get<IStayReviewsResponse>(this.searchStayReviewsURL, options)
+      .get<IStayReviewsResponse>(this.stayReviewsURL, options)
       .pipe(
         map((resp) => {
           if (resp.data) {

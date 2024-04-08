@@ -74,6 +74,9 @@ export class MapComponent implements AfterViewInit {
               .addTo(this.map)
               .setPopup(popup)
               .togglePopup()
+              .on('drag', () => {
+                console.log('here');
+              })
           );
         });
       });

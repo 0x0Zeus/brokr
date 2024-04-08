@@ -11,3 +11,8 @@ export interface IStayDetailsSearchParams {
   departureDate: string;
   hotelId: string;
 }
+
+export interface IStayReviewsParams {
+  hotelId: string;
+  page: number;
+}

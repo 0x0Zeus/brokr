@@ -7,15 +7,15 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { LoaderComponent } from '@components/shared/loader';
 import { RatingComponent } from '@components/shared/rating';
-import { ReviewComponent } from '@components/shared/review';
+import { StayReviewsComponent } from '@components/stays/stay-reviews';
+import { StaySpecsComponent } from '@components/stays/stay-specs';
 import { DestroyDirective } from '@core/directives';
 import { ToasterService } from '@core/services/toaster';
-import { IStayReview } from '@shared/models/stays/review';
 import { IStayDetails } from '@shared/models/stays/stayDetails';
 import { StaysFacade } from '@store/stays';
 import { CalendarModule } from 'primeng/calendar';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
   BehaviorSubject,
   catchError,
@@ -33,10 +33,11 @@ import { StaysService } from '../../core/services/stays/stays.service';
   imports: [
     RatingComponent,
     AsyncPipe,
-    LoaderComponent,
-    ReviewComponent,
     CalendarModule,
     ReactiveFormsModule,
+    StaySpecsComponent,
+    ProgressSpinnerModule,
+    StayReviewsComponent,
   ],
   templateUrl: './stay-details.component.html',
   styleUrl: './stay-details.component.scss',
@@ -47,7 +48,7 @@ export class StayDetailsComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
   stayInfo$ = new BehaviorSubject<IStayDetails | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
-  reviews$ = new BehaviorSubject<IStayReview[]>([]);
+  currentPhotoUrl = new BehaviorSubject<string | null>(null);
   dateRange = new FormGroup({
     date: new FormControl<[Date, Date]>([
       new Date(Date.now()),
@@ -91,29 +92,9 @@ export class StayDetailsComponent implements OnInit {
         this.stayInfo$.next(stayInfo);
         this.isLoading$.next(false);
       });
+  }
 
-    //will optimize
-
-    this.staysFacade.stayPreviewId$
-      .pipe(
-        takeUntil(this.destroy$),
-        filter((stayId) => stayId !== undefined),
-        switchMap((stayId) => {
-          const stayIdInfo = stayId.split('_');
-          return this.staysService
-            .getStayReviews({
-              hotelId: stayIdInfo[0],
-            })
-            .pipe(
-              catchError((error: HttpErrorResponse) => {
-                this.toasterService.showHttpsError(error);
-                return of();
-              })
-            );
-        })
-      )
-      .subscribe((reviewsInfo) => {
-        this.reviews$.next(reviewsInfo);
-      });
+  setCurrentPhotoUrl(url: string): void {
+    this.currentPhotoUrl.next(url);
   }
 }

@@ -6,3 +6,8 @@ export interface ICarsSearchParams {
   longitude: number;
   latitude: number;
 }
+
+export interface ICarDetailsParams {
+  vehicleId: string;
+  searchKey: string;
+}

@@ -5,19 +5,24 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { LoaderComponent } from '@components/shared/loader';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { StayComponent } from '@components/stays/stay';
 import { DestroyDirective } from '@core/directives';
 import { IStaysSearchParams } from '@shared/interfaces/stays/params';
 import { MapFacade } from '@store/map';
 import { StaysFacade } from '@store/stays';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-stays',
   standalone: true,
-  imports: [StayComponent, AsyncPipe, LoaderComponent, MiniLoaderComponent],
+  imports: [
+    StayComponent,
+    AsyncPipe,
+    MiniLoaderComponent,
+    ProgressSpinnerModule,
+  ],
   templateUrl: './stays.component.html',
   styleUrl: './stays.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

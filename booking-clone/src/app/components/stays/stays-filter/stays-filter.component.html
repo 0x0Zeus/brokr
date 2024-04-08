@@ -4,48 +4,44 @@
 >
   <div class="relative input-item max-w-[32rem] mr-[1.1rem]">
     <div class="input-title font-medium text-sm mb-[0.6rem]">Where</div>
-    <label>
-      <div
-        class="input-container h-[3.3rem] w-[32rem] px-[1.4rem] flex justify-start items-center border-2 border-base_border rounded-sm text-base"
-      >
-        @if (destinationIsLoading$ | async) {
-          <div class="w-[1.1rem] mr-[1.4rem]">
-            <app-mini-loader color="bg-bg_secondary" />
-          </div>
-        } @else {
-          <img
-            src="assets/map.svg"
-            alt="Map"
-            class="w-[1.1rem] h-[1.4rem] mr-[1.4rem]"
-          />
-        }
-        <input
-          [formControl]="locationValue"
-          type="text"
-          (focus)="onFocus()"
-          (blur)="onBlur()"
-          class="input_place h-full w-full outline-none"
-          placeholder="City, postcode, address, airport or hotel"
-        />
-        @if (isLocationFocus && (elasticLocationValues$ | async)!.length >= 1) {
-          <div
-            class="elastic-search absolute w-full left-0 bottom-0 translate-y-[105%] rounded-sm py-[0.8rem] z-10 border-1 border-base_border bg-bg_primary"
-          >
-            @for (
-              elasticItem of elasticLocationValues$ | async;
-              track elasticItem.location
-            ) {
-              <button
-                class="elastic-item py-[0.4rem] px-[0.5rem] overflow-hidden text-ellipsis whitespace-nowrap text-left w-full hover:bg-bg_third/10"
-                (mousedown)="elasticSearch(elasticItem)"
-                [title]="elasticItem.location"
-              >
-                {{ elasticItem.location }}
-              </button>
-            }
-          </div>
-        }
-      </div>
+    <label
+      class="input-container p-input-icon-left h-[3.3rem] w-[32rem] flex justify-start items-center border-2 border-base_border rounded-sm text-base"
+    >
+      <i
+        class="pi text-2xl text-base_primary"
+        [class]="
+          (destinationIsLoading$ | async)
+            ? 'pi-spin pi-spinner'
+            : 'pi-map-marker'
+        "
+      ></i>
+      <input
+        pInputText
+        [formControl]="locationValue"
+        type="text"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+        placeholder="City, postcode, address, airport or hotel"
+        class="h-full w-full block border-2 px-[3.2rem] border-base_border rounded-sm text-base outline-none"
+      />
+      @if (isLocationFocus && (elasticLocationValues$ | async)!.length >= 1) {
+        <div
+          class="elastic-search absolute w-full left-0 bottom-0 translate-y-[105%] rounded-sm py-[0.8rem] z-10 border-1 border-base_border bg-bg_primary"
+        >
+          @for (
+            elasticItem of elasticLocationValues$ | async;
+            track elasticItem.location
+          ) {
+            <button
+              class="elastic-item py-[0.4rem] px-[0.5rem] overflow-hidden text-ellipsis whitespace-nowrap text-left w-full hover:bg-bg_third/10"
+              (mousedown)="elasticSearch(elasticItem)"
+              [title]="elasticItem.location"
+            >
+              {{ elasticItem.location }}
+            </button>
+          }
+        </div>
+      }
       @if (
         (locationValue.hasError('required') && locationValue.touched) ||
         (chosenLocation === null && locationValue.touched)
@@ -60,7 +56,7 @@
     <div class="input-title font-medium text-sm mb-[0.6rem]">From</div>
     <p-calendar
       [formControl]="arrivalDate"
-      [iconDisplay]="'input'"
+      iconDisplay="input"
       [showIcon]="true"
       [minDate]="nowDate"
       class="h-[3.3rem] w-full block border-2 border-base_border rounded-sm text-base outline-none"
@@ -73,7 +69,7 @@
     <div class="input-title font-medium text-sm mb-[0.6rem]">Until</div>
     <p-calendar
       [formControl]="departureDate"
-      [iconDisplay]="'input'"
+      iconDisplay="input"
       [showIcon]="true"
       [minDate]="nowDate"
       class="h-[3.3rem] w-full block border-2 border-base_border rounded-sm text-base outline-none"
@@ -84,7 +80,7 @@
   </div>
   <button
     (click)="onSearch()"
-    [ngClass]="staysFilterForm.valid ? '' : 'btn-disabled'"
+    [ngClass]="staysFilterForm.valid && chosenLocation ? '' : 'btn-disabled'"
     class="btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
   >
     <img src="assets/search.svg" alt="Search" class="w-full h-full" />
