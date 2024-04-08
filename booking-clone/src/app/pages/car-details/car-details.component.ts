@@ -12,6 +12,7 @@ import { RatingComponent } from '@components/shared/rating';
 import { DestroyDirective } from '@core/directives';
 import { CarsService } from '@core/services/cars';
 import { ToasterService } from '@core/services/toaster';
+import { ICarDetailsParams } from '@shared/interfaces/cars/params';
 import { ICarDetails } from '@shared/models/cars/carDetails';
 import { CarsFacade } from '@store/cars';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -43,8 +44,7 @@ export class CarDetailsComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
   carInfo$ = new BehaviorSubject<ICarDetails | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
-  searchKey$ = new BehaviorSubject<string | null>(null);
-  vehicleId$ = new BehaviorSubject<string | null>(null);
+  reviewParams$ = new BehaviorSubject<ICarDetailsParams | null>(null);
 
   constructor(
     private carsFacade: CarsFacade,
@@ -60,8 +60,11 @@ export class CarDetailsComponent implements OnInit {
         filter((carId) => carId !== undefined),
         switchMap((carId) => {
           const carIdInfo = carId.split('_');
-          this.vehicleId$.next(carIdInfo[0]);
-          this.searchKey$.next(carIdInfo[1]);
+          this.reviewParams$.next({
+            vehicleId: carIdInfo[0],
+            searchKey: carIdInfo[1],
+          });
+
           return this.carsService
             .getCarDetails({
               vehicleId: carIdInfo[0],

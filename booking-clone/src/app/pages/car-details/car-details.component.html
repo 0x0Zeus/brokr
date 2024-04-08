@@ -95,10 +95,9 @@
         {{ carInfo.description }}
       </p>
     </div>
-    <!-- @if((vehicleId$ | async) && (searchKey$ | async)){
-    <app-car-reviews [searchKey]="vehicleId$ | async" [vehicleId]="" />
-
-    } -->
+    @if (reviewParams$ | async; as reviewParams) {
+      <app-car-reviews [params]="reviewParams" />
+    }
   } @else if (isLoading$ | async) {
     <div class="mt-[35rem] h-full flex justify-center items-center w-full">
       <p-progressSpinner ariaLabel="loading"></p-progressSpinner>

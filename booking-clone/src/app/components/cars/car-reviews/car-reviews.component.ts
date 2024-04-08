@@ -11,6 +11,7 @@ import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
 import { CarsService } from '@core/services/cars';
 import { ToasterService } from '@core/services/toaster';
+import { ICarDetailsParams } from '@shared/interfaces/cars/params';
 import { ICarReview } from '@shared/models/cars/review';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BehaviorSubject, catchError, of, takeUntil } from 'rxjs';
@@ -32,8 +33,7 @@ import { CarReviewComponent } from '../car-review';
 })
 export class CarReviewsComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
-  @Input({ required: true }) vehicleId!: string;
-  @Input({ required: true }) searchKey!: string;
+  @Input({ required: true }) params!: ICarDetailsParams;
   reviews$ = new BehaviorSubject<ICarReview[]>([]);
   isReviewsLoading$ = new BehaviorSubject<boolean>(false);
 
@@ -46,8 +46,8 @@ export class CarReviewsComponent implements OnInit {
     this.isReviewsLoading$.next(true);
     this.carsService
       .getCarReviews({
-        vehicleId: this.vehicleId,
-        searchKey: this.searchKey,
+        vehicleId: this.params.vehicleId,
+        searchKey: this.params.searchKey,
       })
       .pipe(
         takeUntil(this.destroy$),
