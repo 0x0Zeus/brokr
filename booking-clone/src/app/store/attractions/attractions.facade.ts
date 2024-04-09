@@ -8,7 +8,7 @@ import {
   selectAttractionsError,
   selectAttractionsIsLoading,
   selectAttractionsSearchParams,
-  selectPreviewAttractionId,
+  selectDetailsAttractionId,
 } from './attractions.selector';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class AttractionsFacade {
   attractionsIsLoading$ = this.store.select(selectAttractionsIsLoading);
   attractionsSearchParams$ = this.store.select(selectAttractionsSearchParams);
   attractionsError$ = this.store.select(selectAttractionsError);
-  attractionPreviewId$ = this.store.select(selectPreviewAttractionId);
+  attractionDetailsId$ = this.store.select(selectDetailsAttractionId);
 
   constructor(private store: Store) {}
 

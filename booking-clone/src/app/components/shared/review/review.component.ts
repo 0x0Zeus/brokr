@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IStayReview } from '@shared/models/stays/review';
 
-import { RatingComponent } from '../../shared/rating';
+import { RatingComponent } from '../rating';
 
 @Component({
-  selector: 'app-stay-review',
+  selector: 'app-review',
   standalone: true,
   imports: [RatingComponent],
-  templateUrl: './stay-review.component.html',
-  styleUrl: './stay-review.component.scss',
+  templateUrl: './review.component.html',
+  styleUrl: './review.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StayReviewComponent {
+export class ReviewComponent {
   @Input({ required: true }) review!: IStayReview;
 }

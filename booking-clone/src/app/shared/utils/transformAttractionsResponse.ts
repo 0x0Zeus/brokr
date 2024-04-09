@@ -5,6 +5,8 @@ import { IAttraction } from '@shared/models/attractions/attraction';
 import { IAttractionDetails } from '@shared/models/attractions/attractionDetails';
 import { IAttractionsDestination } from '@shared/models/attractions/destination';
 
+import { getShortDateFormat } from './dateParser';
+
 export const getTransformedAttrDestination = (
   destination: IAttrDestinationResponse
 ): IAttractionsDestination => {
@@ -46,6 +48,7 @@ export const getTransformedAttractionDetails = (
     location =
       attr.addresses.meeting[0].address + ', ' + attr.addresses.meeting[0].city;
   }
+
   const attrDetailsData = {
     id: attr.id,
     photos: attr.photos.map((item) => ({
@@ -60,23 +63,18 @@ export const getTransformedAttractionDetails = (
     city: attr.ufiDetails.bCityName,
     includes: attr.whatsIncluded,
     name: attr.name,
-    // cancellation: {
-    //   type: attr.cancellationPolicy.hasFreeCancellation,
-    //   before: stay.block[0].paymentterms.cancellation.info.date_before,
-    // },
+    cancellation: attr.cancellationPolicy.hasFreeCancellation
+      ? 'Free cancelation'
+      : 'Not free cancelation',
     rating: attr.reviewsStats.combinedNumericStats.average,
     reviews: attr.reviews.reviews.map((review) => ({
       photo: review.user?.avatar ?? null,
       rating: Number(review.numericRating.toFixed(1)),
-      review: review.content ?? '',
-      reviewer: review.user?.name ?? null,
-      date: review.epochMs,
+      review: review.content ?? 'no review',
+      reviewer: review.user?.name ?? 'Unknown',
+      date: getShortDateFormat(new Date(review.epochMs).toString()),
     })),
-    // specs: {
-    //   square: stay.block[0].room_surface_in_m2,
-    //   bedrooms: stay.block[0].number_of_bedrooms,
-    //   bathrooms: stay.block[0].number_of_bathrooms,
-    // },
+    accessibility: attr.accessibility,
   };
   return attrDetailsData;
 };

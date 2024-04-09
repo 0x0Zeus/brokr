@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StayReviewComponent } from './stay-review.component';
+import { ReviewComponent } from './review.component';
 
-describe('StayReviewComponent', () => {
-  let component: StayReviewComponent;
-  let fixture: ComponentFixture<StayReviewComponent>;
+describe('ReviewComponent', () => {
+  let component: ReviewComponent;
+  let fixture: ComponentFixture<ReviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StayReviewComponent],
+      imports: [ReviewComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(StayReviewComponent);
+    fixture = TestBed.createComponent(ReviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

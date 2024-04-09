@@ -54,7 +54,7 @@ export class CarDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading$.next(true);
-    this.carsFacade.carPreviewId$
+    this.carsFacade.carDetailsId$
       .pipe(
         takeUntil(this.destroy$),
         filter((carId) => carId !== undefined),

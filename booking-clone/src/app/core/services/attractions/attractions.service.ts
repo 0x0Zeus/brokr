@@ -11,7 +11,7 @@ import {
   getTransformedAttractionData,
   getTransformedAttractionDetails,
   getTransformedAttrDestination,
-} from '@shared/utils/transformAttractionsResponse';
+} from '@shared/utils';
 import { map, Observable } from 'rxjs';
 
 @Injectable({

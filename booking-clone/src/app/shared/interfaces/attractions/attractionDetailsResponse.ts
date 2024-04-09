@@ -9,6 +9,7 @@ export interface IAttractionDataDetailsResponse {
   __typename: string;
   additionalInfo: string;
   addresses: Addresses;
+  accessibility: string[];
   applicableTerms: ApplicableTerm[];
   cancellationPolicy: CancellationPolicy;
   description: string;
