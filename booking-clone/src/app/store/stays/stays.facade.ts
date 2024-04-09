@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IStaysSearchParams } from '@shared/interfaces/stays/params';
+import { IStaysSearchParams } from '@shared/interfaces/stays';
 
 import * as STAYS_ACTIONS from './stays.action';
 import {
-  selectPreviewStayId,
+  selectDetailsStayId,
   selectStays,
   selectStaysError,
   selectStaysIsLoading,
@@ -19,7 +19,7 @@ export class StaysFacade {
   staysIsLoading$ = this.store.select(selectStaysIsLoading);
   staysSearchParams$ = this.store.select(selectStaysSearchParams);
   staysError$ = this.store.select(selectStaysError);
-  stayPreviewId$ = this.store.select(selectPreviewStayId);
+  stayDetailsId$ = this.store.select(selectDetailsStayId);
 
   constructor(private store: Store) {}
 

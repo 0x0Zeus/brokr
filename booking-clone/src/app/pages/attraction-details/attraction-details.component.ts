@@ -6,12 +6,12 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { AttractionReviewComponent } from '@components/attractions/attraction-review';
 import { RatingComponent } from '@components/shared/rating';
+import { ReviewComponent } from '@components/shared/review';
 import { DestroyDirective } from '@core/directives';
 import { AttractionsService } from '@core/services/attractions';
 import { ToasterService } from '@core/services/toaster';
-import { IAttractionDetails } from '@shared/models/attractions/attractionDetails';
+import { IAttractionDetails } from '@shared/models/attractions';
 import { AttractionsFacade } from '@store/attractions';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {
@@ -26,12 +26,7 @@ import {
 @Component({
   selector: 'app-attraction-details',
   standalone: true,
-  imports: [
-    AsyncPipe,
-    ProgressSpinnerModule,
-    RatingComponent,
-    AttractionReviewComponent,
-  ],
+  imports: [AsyncPipe, ProgressSpinnerModule, RatingComponent, ReviewComponent],
   templateUrl: './attraction-details.component.html',
   styleUrl: './attraction-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -51,7 +46,7 @@ export class AttractionDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading$.next(true);
-    this.attractionsFacade.attractionPreviewId$
+    this.attractionsFacade.attractionDetailsId$
       .pipe(
         takeUntil(this.destroy$),
         filter((attractionId) => attractionId !== undefined),

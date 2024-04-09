@@ -68,59 +68,64 @@
             </p>
           </div>
         </div>
-
-        <div class="reservation mb-[2.5rem]">
-          <div
-            class="reservation mb-[2.5rem] font-bold text-3xl flex justify-between items-center"
-          >
-            <p class="reservation__nights mr-[2rem]">Ticket</p>
-            <p class="price">{{ attraction.price }}$</p>
-          </div>
+        <div
+          class="reservation mb-[2.5rem] font-bold text-3xl flex justify-between items-center"
+        >
+          <p class="reservation__nights mr-[2rem]">Ticket</p>
+          <p class="price">{{ attraction.price }}$</p>
         </div>
-        <!-- <app-stay-specs [specs]="stayInfo.specs" /> -->
+        @if (attraction.accessibility.length) {
+          <div class="accessibility">
+            <h3 class="accessibility__title font-bold text-3xl mb-[1.4rem]">
+              Accessibility
+            </h3>
+            <div
+              class="accessibility-items flex items-center justify-start gap-[2rem] flex-wrap"
+            >
+              @for (attrItem of attraction.accessibility; track attrItem) {
+                <p
+                  class="includes-item text-base_third w-[14.7rem] min-h-[11.8rem] h-full px-[1.6rem] pt-[2.5rem] border-1 border-base_border rounded-lg text-xl"
+                >
+                  {{ attrItem }}
+                </p>
+              }
+            </div>
+          </div>
+        }
       </div>
     </div>
     <div class="cancellation mb-[5.1rem]">
       <h3 class="cancellation__title font-bold text-3xl mb-[1.8rem]">
         Cancellation policy
       </h3>
-      <!-- <div class="cancellation__descr flex items-start justify-start">
+      <div class="cancellation__descr flex items-center justify-start">
         <div
           class="cancellation__img rounded-md bg-bg_secondary w-[4rem] h-[4rem] flex items-center justify-center mr-[2.1rem]"
         >
           <img
-            src="assets/stayDetails/cancellation-smile.svg"
+            src="assets/details/cancellation-smile.svg"
             alt="Cancellation"
             class="w-[2rem] h-[2rem]"
           />
         </div>
-        <div class="cancellation__info">
-          <p class="cancellation__friendly font-medium text-2xl leading-[2rem]">
-            {{ stayInfo.cancellation.type }}
-          </p>
-          @if (stayInfo.cancellation.before) {
-            <p class="cancellation__term text-xl">
-              {{ 'Full refund before ' + stayInfo.cancellation.before }}
-            </p>
-          } @else {
-            <p class="cancellation__term text-xl">
-              {{ stayInfo.cancellation.type }}
-            </p>
-          }
-        </div>
-      </div> -->
+        <p class="cancellation__info font-medium text-2xl leading-[2rem]">
+          {{ attraction.cancellation }}
+        </p>
+      </div>
     </div>
     <div class="includes mb-[5.2rem]">
       <h3 class="includes__title font-bold text-3xl mb-[3rem]">Includes</h3>
       <div
         class="includes-items flex items-center justify-start gap-[2rem] flex-wrap"
       >
-        @for (includes of attraction.includes; track includes) {
-          <p
-            class="includes-item w-[14.7rem] min-h-[11.8rem] h-full px-[1.6rem] pt-[2.5rem] border-1 border-base_border rounded-lg font-medium text-xl"
-          >
-            {{ includes }}
-          </p>
+        @if (attraction.includes) {
+          @for (includes of attraction.includes; track includes) {
+            <p
+              class="includes-item w-[14.7rem] min-h-[11.8rem] h-full px-[1.6rem] py-[2.5rem] border-1 border-base_border rounded-lg font-medium text-xl"
+            >
+              {{ includes }}
+            </p>
+          }
         }
       </div>
     </div>
@@ -138,7 +143,7 @@
       class="reviews grid grid-cols-auto-fit-md justify-items-center gap-[2.8rem] mb-[3.5rem]"
     >
       @for (review of attraction.reviews; track review.reviewer) {
-        <app-attraction-review [review]="review" />
+        <app-review [review]="review" />
       } @empty {
         Reviews not found.
       }

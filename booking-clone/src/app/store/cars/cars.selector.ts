@@ -25,7 +25,7 @@ export const selectCarsPage = createSelector(
   (state: CarsState) => state.page
 );
 
-export const selectPreviewCarId = createSelector(
+export const selectDetailsCarId = createSelector(
   selectRouteParams,
   ({ carId }) => {
     return carId as string;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IMapData } from '@shared/models/map/map';
+import { IMapData } from '@shared/models/map';
 
 import * as MAP_ACTIONS from './map.action';
 import { selectIsMap, selectMapData } from './map.selector';

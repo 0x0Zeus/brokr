@@ -1,18 +1,18 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IStaysDestinationsResponse } from '@shared/interfaces/stays/destinationsResponse';
+import { IStaysDestinationsResponse } from '@shared/interfaces/stays';
 import {
   IStayDetailsSearchParams,
   IStayReviewsParams,
   IStaysSearchParams,
-} from '@shared/interfaces/stays/params';
-import { IStayReviewsResponse } from '@shared/interfaces/stays/reviewsResponse';
-import { IStayDetailsResponse } from '@shared/interfaces/stays/stayDetailsResponse';
-import { IStaysResponse } from '@shared/interfaces/stays/staysResponse';
-import { IStaysDestination } from '@shared/models/stays/destination';
-import { IStayReview } from '@shared/models/stays/review';
-import { IStay } from '@shared/models/stays/stay';
-import { IStayDetails } from '@shared/models/stays/stayDetails';
+} from '@shared/interfaces/stays';
+import { IStayReviewsResponse } from '@shared/interfaces/stays';
+import { IStayDetailsResponse } from '@shared/interfaces/stays';
+import { IStaysResponse } from '@shared/interfaces/stays';
+import { IStaysDestination } from '@shared/models/stays';
+import { IStayReview } from '@shared/models/stays';
+import { IStay } from '@shared/models/stays';
+import { IStayDetails } from '@shared/models/stays';
 import {
   getTransformedStayData,
   getTransformedStayDetails,

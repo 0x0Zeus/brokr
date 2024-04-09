@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { IMapData } from '@shared/models/map/map';
+import { IMapData } from '@shared/models/map';
 
 import * as MAP_ACTIONS from './map.action';
 

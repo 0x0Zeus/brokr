@@ -26,7 +26,7 @@ export const selectAttractionsSearchParams = createSelector(
   (state: AttractionsState) => state.searchParams
 );
 
-export const selectPreviewAttractionId = createSelector(
+export const selectDetailsAttractionId = createSelector(
   selectRouteParams,
   ({ attractionId }) => {
     return attractionId as string;

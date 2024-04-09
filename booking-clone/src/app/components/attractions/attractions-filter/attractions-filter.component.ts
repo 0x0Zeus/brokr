@@ -16,7 +16,7 @@ import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
 import { AttractionsService } from '@core/services/attractions';
 import { ToasterService } from '@core/services/toaster';
-import { IAttractionsDestination } from '@shared/models/attractions/destination';
+import { IAttractionsDestination } from '@shared/models/attractions';
 import { AttractionsFacade } from '@store/attractions';
 import { CalendarModule } from 'primeng/calendar';
 import {

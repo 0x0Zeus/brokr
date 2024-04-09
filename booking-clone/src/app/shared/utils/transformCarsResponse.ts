@@ -1,11 +1,11 @@
-import { ICarDetailsResponse } from '@shared/interfaces/cars/carDetailsResponse';
-import { ISearchCarsResponseItem } from '@shared/interfaces/cars/carsResponse';
-import { ICarsDestinationResponse } from '@shared/interfaces/cars/destinationsResponse';
-import { ICarReviewResponse } from '@shared/interfaces/cars/reviewsResponse';
-import { ICar } from '@shared/models/cars/car';
-import { ICarDetails } from '@shared/models/cars/carDetails';
-import { ICarsDestination } from '@shared/models/cars/destination';
-import { ICarReview } from '@shared/models/cars/review';
+import { ICarDetailsResponse } from '@shared/interfaces/cars';
+import { ISearchCarsResponseItem } from '@shared/interfaces/cars';
+import { ICarsDestinationResponse } from '@shared/interfaces/cars';
+import { ICarReviewResponse } from '@shared/interfaces/cars';
+import { ICar } from '@shared/models/cars';
+import { ICarDetails } from '@shared/models/cars';
+import { ICarsDestination } from '@shared/models/cars';
+import { ICarReview } from '@shared/models/cars';
 
 export const getTransformedCarDestinations = (
   destination: ICarsDestinationResponse

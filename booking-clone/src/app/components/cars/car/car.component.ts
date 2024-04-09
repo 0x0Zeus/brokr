@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RatingComponent } from '@components/shared/rating';
-import { ICar } from '@shared/models/cars/car';
+import { ICar } from '@shared/models/cars';
 
 @Component({
   selector: 'app-car',

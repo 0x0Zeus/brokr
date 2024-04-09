@@ -8,11 +8,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
-import { StayReviewComponent } from '@components/stays/stay-review';
+import { ReviewComponent } from '@components/shared/review';
 import { DestroyDirective } from '@core/directives';
 import { StaysService } from '@core/services/stays';
 import { ToasterService } from '@core/services/toaster';
-import { IStayReview } from '@shared/models/stays/review';
+import { IStayReview } from '@shared/models/stays';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BehaviorSubject, catchError, of, takeUntil } from 'rxjs';
 
@@ -20,7 +20,7 @@ import { BehaviorSubject, catchError, of, takeUntil } from 'rxjs';
   selector: 'app-stay-reviews',
   standalone: true,
   imports: [
-    StayReviewComponent,
+    ReviewComponent,
     AsyncPipe,
     ProgressSpinnerModule,
     MiniLoaderComponent,

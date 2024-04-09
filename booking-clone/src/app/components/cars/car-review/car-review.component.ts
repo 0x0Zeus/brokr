@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RatingComponent } from '@components/shared/rating';
-import { ICarReview } from '@shared/models/cars/review';
+import { ICarReview } from '@shared/models/cars';
 
 @Component({
   selector: 'app-car-review',

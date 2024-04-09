@@ -11,8 +11,8 @@ import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
 import { CarsService } from '@core/services/cars';
 import { ToasterService } from '@core/services/toaster';
-import { ICarDetailsParams } from '@shared/interfaces/cars/params';
-import { ICarReview } from '@shared/models/cars/review';
+import { ICarDetailsParams } from '@shared/interfaces/cars';
+import { ICarReview } from '@shared/models/cars';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BehaviorSubject, catchError, of, takeUntil } from 'rxjs';
 

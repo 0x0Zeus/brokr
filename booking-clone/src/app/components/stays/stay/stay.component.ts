@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RatingComponent } from '@components/shared/rating';
-import { IStay } from '@shared/models/stays/stay';
+import { IStay } from '@shared/models/stays';
 
 @Component({
   selector: 'app-stay',

@@ -6,11 +6,13 @@ export interface IAttractionDetails {
   currency: string;
   reviewsCount: number;
   description: string;
+  cancellation: string;
   city: string;
   includes: string[];
   name: string;
   rating: number;
   reviews: IAttractionReview[];
+  accessibility: string[];
 }
 
 interface IPhotos {
@@ -22,6 +24,6 @@ export interface IAttractionReview {
   photo: string | null;
   rating: number;
   review: string;
-  reviewer: string | null;
-  date: number;
+  reviewer: string;
+  date: string;
 }

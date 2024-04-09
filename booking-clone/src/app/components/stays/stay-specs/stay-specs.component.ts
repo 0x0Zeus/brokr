@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IStayDetailsSpecs } from '@shared/models/stays/stayDetails';
+import { IStayDetailsSpecs } from '@shared/models/stays';
 
 @Component({
   selector: 'app-stay-specs',
