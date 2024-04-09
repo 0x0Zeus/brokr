@@ -1,4 +1,4 @@
-export interface ICarsDestinationResponse {
+export interface ICarsDestinationsResponse {
   status: boolean;
   message: string;
   timestamp: number;

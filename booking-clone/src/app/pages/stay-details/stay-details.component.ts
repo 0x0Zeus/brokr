@@ -12,7 +12,7 @@ import { StayReviewsComponent } from '@components/stays/stay-reviews';
 import { StaySpecsComponent } from '@components/stays/stay-specs';
 import { DestroyDirective } from '@core/directives';
 import { ToasterService } from '@core/services/toaster';
-import { IStayDetails } from '@shared/models/stays/stayDetails';
+import { IStayDetails } from '@shared/models/stays';
 import { StaysFacade } from '@store/stays';
 import { CalendarModule } from 'primeng/calendar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';

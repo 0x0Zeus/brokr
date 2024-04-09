@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
-import { IStaysSearchParams } from '@shared/interfaces/stays/params';
-import { IStay } from '@shared/models/stays/stay';
+import { IStaysSearchParams } from '@shared/interfaces/stays';
+import { IStay } from '@shared/models/stays';
 
 import * as STAYS_ACTIONS from './stays.action';
 

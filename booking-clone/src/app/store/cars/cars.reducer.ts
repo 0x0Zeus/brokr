@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
-import { ICar } from '@shared/models/cars/car';
+import { ICar } from '@shared/models/cars';
 
 import * as CARS_ACTIONS from './cars.action';
 

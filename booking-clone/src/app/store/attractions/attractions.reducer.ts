@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
-import { IAttractionsSearchParams } from '@shared/interfaces/attractions/params';
-import { IAttraction } from '@shared/models/attractions/attraction';
+import { IAttractionsSearchParams } from '@shared/interfaces/attractions';
+import { IAttraction } from '@shared/models/attractions';
 
 import * as ATTRACTIONS_ACTIONS from './attractions.action';
 

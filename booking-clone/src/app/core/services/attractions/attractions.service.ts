@@ -1,12 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAttractionDetailsResponse } from '@shared/interfaces/attractions/attractionDetailsResponse';
-import { IAttractionsResponse } from '@shared/interfaces/attractions/attractionsResponse';
-import { IAttrDestinationsResponse } from '@shared/interfaces/attractions/destinationsResponse';
-import { IAttractionsSearchParams } from '@shared/interfaces/attractions/params';
-import { IAttraction } from '@shared/models/attractions/attraction';
-import { IAttractionDetails } from '@shared/models/attractions/attractionDetails';
-import { IAttractionsDestination } from '@shared/models/attractions/destination';
+import { IAttractionDetailsResponse } from '@shared/interfaces/attractions';
+import { IAttractionsResponse } from '@shared/interfaces/attractions';
+import { IAttrDestinationsResponse } from '@shared/interfaces/attractions';
+import { IAttractionsSearchParams } from '@shared/interfaces/attractions';
+import { IAttraction } from '@shared/models/attractions';
+import { IAttractionDetails } from '@shared/models/attractions';
+import { IAttractionsDestination } from '@shared/models/attractions';
 import {
   getTransformedAttractionData,
   getTransformedAttractionDetails,

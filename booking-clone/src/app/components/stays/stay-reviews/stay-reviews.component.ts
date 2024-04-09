@@ -12,7 +12,7 @@ import { ReviewComponent } from '@components/shared/review';
 import { DestroyDirective } from '@core/directives';
 import { StaysService } from '@core/services/stays';
 import { ToasterService } from '@core/services/toaster';
-import { IStayReview } from '@shared/models/stays/review';
+import { IStayReview } from '@shared/models/stays';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BehaviorSubject, catchError, of, takeUntil } from 'rxjs';
 

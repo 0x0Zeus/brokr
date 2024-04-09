@@ -1,11 +1,11 @@
-import { IStayDestinationsResponse } from '@shared/interfaces/stays/destinationsResponse';
-import { IStayReviewResponse } from '@shared/interfaces/stays/reviewsResponse';
-import { IStayDetailsDataResponse } from '@shared/interfaces/stays/stayDetailsResponse';
-import { IStayResponse } from '@shared/interfaces/stays/staysResponse';
-import { IStaysDestination } from '@shared/models/stays/destination';
-import { IStayReview } from '@shared/models/stays/review';
-import { IStay } from '@shared/models/stays/stay';
-import { IStayDetails } from '@shared/models/stays/stayDetails';
+import { IStayDestinationsResponse } from '@shared/interfaces/stays';
+import { IStayReviewResponse } from '@shared/interfaces/stays';
+import { IStayDetailsDataResponse } from '@shared/interfaces/stays';
+import { IStayResponse } from '@shared/interfaces/stays';
+import { IStaysDestination } from '@shared/models/stays';
+import { IStayReview } from '@shared/models/stays';
+import { IStay } from '@shared/models/stays';
+import { IStayDetails } from '@shared/models/stays';
 
 import { getShortDateFormat } from './dateParser';
 

@@ -11,7 +11,7 @@ import { ReviewComponent } from '@components/shared/review';
 import { DestroyDirective } from '@core/directives';
 import { AttractionsService } from '@core/services/attractions';
 import { ToasterService } from '@core/services/toaster';
-import { IAttractionDetails } from '@shared/models/attractions/attractionDetails';
+import { IAttractionDetails } from '@shared/models/attractions';
 import { AttractionsFacade } from '@store/attractions';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {

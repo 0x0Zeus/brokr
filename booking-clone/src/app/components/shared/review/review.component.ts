@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IStayReview } from '@shared/models/stays/review';
+import { IStayReview } from '@shared/models/stays';
 
 import { RatingComponent } from '../rating';
 

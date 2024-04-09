@@ -1,17 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ICarDetailsResponse } from '@shared/interfaces/cars/carDetailsResponse';
-import { ISearchCarsResponse } from '@shared/interfaces/cars/carsResponse';
-import { ICarsDestinationResponse } from '@shared/interfaces/cars/destinationsResponse';
-import {
-  ICarDetailsParams,
-  ICarsSearchParams,
-} from '@shared/interfaces/cars/params';
-import { ICarReviewsResponse } from '@shared/interfaces/cars/reviewsResponse';
-import { ICar } from '@shared/models/cars/car';
-import { ICarDetails } from '@shared/models/cars/carDetails';
-import { ICarsDestination } from '@shared/models/cars/destination';
-import { ICarReview } from '@shared/models/cars/review';
+import { ICarDetailsResponse } from '@shared/interfaces/cars';
+import { ISearchCarsResponse } from '@shared/interfaces/cars';
+import { ICarsDestinationsResponse } from '@shared/interfaces/cars';
+import { ICarDetailsParams, ICarsSearchParams } from '@shared/interfaces/cars';
+import { ICarReviewsResponse } from '@shared/interfaces/cars';
+import { ICar } from '@shared/models/cars';
+import { ICarDetails } from '@shared/models/cars';
+import { ICarsDestination } from '@shared/models/cars';
+import { ICarReview } from '@shared/models/cars';
 import {
   getTransformedCarData,
   getTransformedCarDestinations,
@@ -44,7 +41,7 @@ export class CarsService {
       params: new HttpParams().set('query', query),
     };
     return this.http
-      .get<ICarsDestinationResponse>(this.destinationURL, options)
+      .get<ICarsDestinationsResponse>(this.destinationURL, options)
       .pipe(
         map((resp) => {
           if (resp.data) {

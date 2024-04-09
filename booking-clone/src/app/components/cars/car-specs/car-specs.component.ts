@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ICarDetailsSpec } from '@shared/models/cars/carDetails';
+import { ICarDetailsSpec } from '@shared/models/cars';
 
 @Component({
   selector: 'app-car-specs',

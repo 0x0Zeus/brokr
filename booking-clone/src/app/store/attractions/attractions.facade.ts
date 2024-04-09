@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IAttractionsSearchParams } from '@shared/interfaces/attractions/params';
+import { IAttractionsSearchParams } from '@shared/interfaces/attractions';
 
 import * as ATTRACTIONS_ACTIONS from './attractions.action';
 import {

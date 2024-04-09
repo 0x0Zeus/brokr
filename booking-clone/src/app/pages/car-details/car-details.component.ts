@@ -12,8 +12,8 @@ import { RatingComponent } from '@components/shared/rating';
 import { DestroyDirective } from '@core/directives';
 import { CarsService } from '@core/services/cars';
 import { ToasterService } from '@core/services/toaster';
-import { ICarDetailsParams } from '@shared/interfaces/cars/params';
-import { ICarDetails } from '@shared/models/cars/carDetails';
+import { ICarDetailsParams } from '@shared/interfaces/cars';
+import { ICarDetails } from '@shared/models/cars';
 import { CarsFacade } from '@store/cars';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {

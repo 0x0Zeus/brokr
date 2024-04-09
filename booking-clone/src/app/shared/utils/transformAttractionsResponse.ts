@@ -1,9 +1,9 @@
-import { IAttractionDataDetailsResponse } from '@shared/interfaces/attractions/attractionDetailsResponse';
-import { IAttractionResponse } from '@shared/interfaces/attractions/attractionsResponse';
-import { IAttrDestinationResponse } from '@shared/interfaces/attractions/destinationsResponse';
-import { IAttraction } from '@shared/models/attractions/attraction';
-import { IAttractionDetails } from '@shared/models/attractions/attractionDetails';
-import { IAttractionsDestination } from '@shared/models/attractions/destination';
+import { IAttractionDataDetailsResponse } from '@shared/interfaces/attractions';
+import { IAttractionResponse } from '@shared/interfaces/attractions';
+import { IAttrDestinationResponse } from '@shared/interfaces/attractions';
+import { IAttraction } from '@shared/models/attractions';
+import { IAttractionDetails } from '@shared/models/attractions';
+import { IAttractionsDestination } from '@shared/models/attractions';
 
 import { getShortDateFormat } from './dateParser';
 

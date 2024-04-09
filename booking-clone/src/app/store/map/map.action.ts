@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import {} from '@shared/interfaces/stays/params';
-import { IMapData } from '@shared/models/map/map';
+import { IMapData } from '@shared/models/map';
 
 const actionSource = '[Map]';
 

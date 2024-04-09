@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IStaysSearchParams } from '@shared/interfaces/stays/params';
+import { IStaysSearchParams } from '@shared/interfaces/stays';
 
 import * as STAYS_ACTIONS from './stays.action';
 import {

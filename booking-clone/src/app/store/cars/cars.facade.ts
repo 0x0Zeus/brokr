@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ICarsSearchParams } from '@shared/interfaces/cars/params';
+import { ICarsSearchParams } from '@shared/interfaces/cars';
 
 import * as CARS_ACTIONS from './cars.action';
 import {
