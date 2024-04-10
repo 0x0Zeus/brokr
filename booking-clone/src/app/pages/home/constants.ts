@@ -14,6 +14,11 @@ export const kinds = [
     url: 'assets/home/boat.jpg',
     link: 'booking/attractions',
   },
+  {
+    title: 'Flights',
+    url: 'assets/home/jet.jpg',
+    link: 'booking/flights',
+  },
 ];
 
 export const cars = [

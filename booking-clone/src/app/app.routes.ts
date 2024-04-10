@@ -28,7 +28,11 @@ export const routes: Routes = [
             loadComponent: () =>
               import('./pages/stays').then((m) => m.StaysComponent),
           },
-
+          {
+            path: 'flights',
+            loadComponent: () =>
+              import('./pages/flights').then((m) => m.FlightsComponent),
+          },
           {
             path: 'attractions',
             loadComponent: () =>
