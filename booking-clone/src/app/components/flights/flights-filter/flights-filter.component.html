@@ -1,0 +1,135 @@
+<form
+  [formGroup]="flightsFilterForm"
+  class="filters flex justify-start items-end mb-[3.2rem]"
+>
+  <div class="relative input-item max-w-[32rem] mr-[1.1rem]">
+    <div class="input-title font-medium text-sm mb-[0.6rem]">From</div>
+    <label
+      class="input-container p-input-icon-left h-[3.3rem] w-[32rem] flex justify-start items-center rounded-sm text-base"
+    >
+      <i
+        class="pi text-2xl text-base_primary"
+        [class]="
+          (destinationFromIsLoading$ | async)
+            ? 'pi-spin pi-spinner'
+            : 'pi-map-marker'
+        "
+      ></i>
+      <input
+        pInputText
+        [formControl]="locationFromValue"
+        type="text"
+        (focus)="onFromFocus()"
+        (blur)="onFromBlur()"
+        placeholder="City, postcode, address, airport or hotel"
+        class="h-full w-full block border-2 px-[3.2rem] border-base_border rounded-sm text-base outline-none"
+      />
+      @if (
+        isLocationFromFocus && (elasticLocationFromValues$ | async)!.length >= 1
+      ) {
+        <div
+          class="elastic-search absolute w-full left-0 bottom-0 translate-y-[105%] rounded-sm py-[0.8rem] z-10 border-1 border-base_border bg-bg_primary"
+        >
+          @for (
+            elasticItem of elasticLocationFromValues$ | async;
+            track elasticItem.location
+          ) {
+            <button
+              class="elastic-item py-[0.4rem] px-[0.5rem] overflow-hidden text-ellipsis whitespace-nowrap text-left w-full hover:bg-bg_third/10"
+              (mousedown)="elasticSearchFrom(elasticItem)"
+              [title]="elasticItem.location"
+            >
+              {{ elasticItem.location }}
+            </button>
+          }
+        </div>
+      }
+      @if (
+        (locationFromValue.hasError('required') && locationFromValue.touched) ||
+        (chosenLocationFrom === null && locationFromValue.touched)
+      ) {
+        <div class="invalid__message">
+          please select a location from the list below
+        </div>
+      }
+    </label>
+  </div>
+  <div class="relative input-item max-w-[32rem] mr-[1.1rem]">
+    <div class="input-title font-medium text-sm mb-[0.6rem]">To</div>
+    <label
+      class="input-container p-input-icon-left h-[3.3rem] w-[32rem] flex justify-start items-center rounded-sm text-base"
+    >
+      <i
+        class="pi text-2xl text-base_primary"
+        [class]="
+          (destinationToIsLoading$ | async)
+            ? 'pi-spin pi-spinner'
+            : 'pi-map-marker'
+        "
+      ></i>
+      <input
+        pInputText
+        [formControl]="locationToValue"
+        type="text"
+        (focus)="onToFocus()"
+        (blur)="onToBlur()"
+        placeholder="City, postcode, address, airport or hotel"
+        class="h-full w-full block border-2 px-[3.2rem] border-base_border rounded-sm text-base outline-none"
+      />
+      @if (
+        isLocationToFocus && (elasticLocationToValues$ | async)!.length >= 1
+      ) {
+        <div
+          class="elastic-search absolute w-full left-0 bottom-0 translate-y-[105%] rounded-sm py-[0.8rem] z-10 border-1 border-base_border bg-bg_primary"
+        >
+          @for (
+            elasticItem of elasticLocationToValues$ | async;
+            track elasticItem.location
+          ) {
+            <button
+              class="elastic-item py-[0.4rem] px-[0.5rem] overflow-hidden text-ellipsis whitespace-nowrap text-left w-full hover:bg-bg_third/10"
+              (mousedown)="elasticSearchTo(elasticItem)"
+              [title]="elasticItem.location"
+            >
+              {{ elasticItem.location }}
+            </button>
+          }
+        </div>
+      }
+      @if (
+        (locationToValue.hasError('required') && locationToValue.touched) ||
+        (chosenLocationTo === null && locationToValue.touched)
+      ) {
+        <div class="invalid__message">
+          please select a location from the list below
+        </div>
+      }
+    </label>
+  </div>
+  <div class="input-item max-w-[17rem] mr-[1.1rem] relative">
+    <div class="input-title font-medium text-sm mb-[0.6rem]">
+      Departure date
+    </div>
+    <p-calendar
+      [formControl]="departureDate"
+      iconDisplay="input"
+      [showIcon]="true"
+      [minDate]="nowDate"
+      class="h-[3.3rem] w-full block border-2 border-base_border rounded-sm text-base outline-none"
+    ></p-calendar>
+    @if (departureDate.hasError('required') && departureDate.touched) {
+      <div class="invalid__message">please enter a date</div>
+    }
+  </div>
+  <button
+    (click)="onSearch()"
+    [ngClass]="
+      flightsFilterForm.valid && chosenLocationFrom && chosenLocationTo
+        ? ''
+        : 'btn-disabled'
+    "
+    class="btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
+  >
+    <img src="assets/search.svg" alt="Search" class="w-full h-full" />
+  </button>
+</form>

@@ -1,0 +1,32 @@
+<div
+  class="flight flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
+  [routerLink]="['/details/flight/', flight.id]"
+>
+  <div class="from">
+    <h4 class="from__title text-base_secondary mb-[0.5rem]">From</h4>
+    <p class="from__airport mb-[0.2rem]">{{ flight.departure.airport }}</p>
+    <p class="from__date">{{ flight.departure.time }}</p>
+    <p class="from__location text-base_secondary">
+      {{ flight.departure.location }}
+    </p>
+  </div>
+  <span
+    class="pi pi-arrow-down-right text-base_third text-3xl my-[1rem] ml-[1rem]"
+  ></span>
+  <div class="to">
+    <h4 class="to__title text-base_secondary mb-[0.5rem]">To</h4>
+    <p class="to__airport mb-[0.2rem]">{{ flight.arrival.airport }}</p>
+    <p class="to__date">{{ flight.arrival.time }}</p>
+    <p class="to__location text-base_secondary">
+      {{ flight.arrival.location }}
+    </p>
+  </div>
+  <div class="flex justify-between items-center mt-[1rem] mb-[0.2rem]">
+    <p class="price">
+      <span class="price-value text-2xl font-medium mr-[0.6rem]"
+        >${{ flight.price }}</span
+      ><span class="price-desc text-base_secondary">/ticket</span>
+    </p>
+    <p class="reviews">({{ flight.seats }} seats)</p>
+  </div>
+</div>

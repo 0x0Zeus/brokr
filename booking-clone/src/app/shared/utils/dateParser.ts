@@ -9,3 +9,13 @@ export const getShortDateFormat = (date: string): string => {
     day: 'numeric',
   });
 };
+
+export const getFullDateFormat = (date: string): string => {
+  return new Date(date).toLocaleDateString('en-EN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  });
+};

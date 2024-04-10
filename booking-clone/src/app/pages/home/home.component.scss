@@ -1,9 +1,23 @@
 .intro-summary,
 .garage,
 .homes-find,
-.aircraft-browse {
+.attractions-browse {
   background-position: center;
   background-size: cover;
+  position: relative;
+  z-index: -2;
+
+  &::before {
+    content: '';
+    left: 0;
+    top: 0;
+    position: absolute;
+    background-color: #000000;
+    opacity: 0.1;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
 }
 
 .intro-summary {
@@ -32,4 +46,19 @@
   font-size: 1.6rem;
   color: #7e7e7e;
   line-height: 1.8rem;
+}
+
+.shadow-layer {
+  position: relative;
+  z-index: -2;
+
+  &::before {
+    content: '';
+    position: absolute;
+    background-color: #000000;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
 }

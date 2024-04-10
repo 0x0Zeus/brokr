@@ -5,6 +5,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { AttractionsStoreModule } from './attractions';
 import { CarsStoreModule } from './cars';
+import { FlightsStoreModule } from './flights';
 import { MapStoreModule } from './map';
 import { RouterStoreModule } from './router';
 import { StaysStoreModule } from './stays';
@@ -16,6 +17,7 @@ import { StaysStoreModule } from './stays';
     RouterStoreModule,
     MapStoreModule,
     AttractionsStoreModule,
+    FlightsStoreModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot({}),
     StoreRouterConnectingModule.forRoot(),

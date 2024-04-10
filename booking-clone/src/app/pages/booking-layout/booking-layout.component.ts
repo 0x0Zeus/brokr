@@ -9,6 +9,7 @@ import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { AttractionsFilterComponent } from '@components/attractions/attractions-filter';
 import { CarsFilterComponent } from '@components/cars/cars-filter';
 import { NavigationComponent } from '@components/core/navigation';
+import { FlightsFilterComponent } from '@components/flights/flights-filter';
 import { MapComponent } from '@components/shared/map';
 import { StaysFilterComponent } from '@components/stays/stays-filter';
 import { DestroyDirective } from '@core/directives';
@@ -24,6 +25,7 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
     CarsFilterComponent,
     StaysFilterComponent,
     AttractionsFilterComponent,
+    FlightsFilterComponent,
     AsyncPipe,
     MapComponent,
   ],
