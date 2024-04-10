@@ -1,13 +1,19 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
+  IFlightDetailsResponse,
   IFlightsDestinationsResponse,
   IFlightsResponse,
   IFlightsSearchParams,
 } from '@shared/interfaces/flights';
-import { IFlight, IFlightsDestination } from '@shared/models/flights';
+import {
+  IFlight,
+  IFlightDetails,
+  IFlightsDestination,
+} from '@shared/models/flights';
 import {
   getTransformedFlightData,
+  getTransformedFlightDetails,
   getTransformedFlightsDestination,
 } from '@shared/utils';
 import { map, Observable } from 'rxjs';
@@ -20,10 +26,8 @@ export class FlightsService {
     'https://booking-com15.p.rapidapi.com/api/v1/flights/searchDestination';
   private searchFlightsURL =
     'https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights';
-  // private stayDetailsURL =
-  //   'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails';
-  // private stayReviewsURL =
-  //   'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelReviews';
+  private flightDetailsURL =
+    'https://booking-com15.p.rapidapi.com/api/v1/flights/getFlightDetails';
 
   constructor(private http: HttpClient) {}
 
@@ -64,7 +68,7 @@ export class FlightsService {
     };
     return this.http.get<IFlightsResponse>(this.searchFlightsURL, options).pipe(
       map((resp) => {
-        if (resp.data) {
+        if (resp.data.flightOffers) {
           const transData = resp.data.flightOffers.map((flight) => {
             const flightData = getTransformedFlightData(flight);
             return flightData;
@@ -77,58 +81,28 @@ export class FlightsService {
     );
   }
 
-  // getStayDetails({
-  //   arrivalDate,
-  //   departureDate,
-  //   hotelId,
-  // }: IStayDetailsSearchParams): Observable<IStayDetails | null> {
-  //   const options = {
-  //     params: new HttpParams()
-  //       .set('hotel_id', hotelId)
-  //       .append('arrival_date', arrivalDate)
-  //       .append('departure_date', departureDate)
-  //       .append('currency_code', 'USD'),
-  //   };
+  getFlightDetails({
+    flightId,
+  }: {
+    flightId: string;
+  }): Observable<IFlightDetails | null> {
+    const options = {
+      params: new HttpParams()
+        .append('token', flightId)
+        .append('currency_code', 'USD'),
+    };
 
-  //   return this.http
-  //     .get<IStayDetailsResponse>(this.stayDetailsURL, options)
-  //     .pipe(
-  //       map((resp) => {
-  //         if (resp.data) {
-  //           const stayDetailsData = getTransformedStayDetails(resp.data);
-  //           return stayDetailsData;
-  //         } else {
-  //           return null;
-  //         }
-  //       })
-  //     );
-  // }
-
-  // getStayReviews({
-  //   hotelId,
-  //   page,
-  // }: IStayReviewsParams): Observable<IReview[]> {
-  //   const options = {
-  //     params: new HttpParams()
-  //       .set('hotel_id', hotelId)
-  //       .append('page_number', page),
-  //   };
-
-  //   return this.http
-  //     .get<IStayReviewsResponse>(this.stayReviewsURL, options)
-  //     .pipe(
-  //       map((resp) => {
-  //         if (resp.data.result) {
-  //           const stayReviewsData = resp.data.result.map((review) => {
-  //             const transformedReview = getTransformedStayReview(review);
-
-  //             return transformedReview;
-  //           });
-  //           return stayReviewsData;
-  //         } else {
-  //           return [];
-  //         }
-  //       })
-  //     );
-  // }
+    return this.http
+      .get<IFlightDetailsResponse>(this.flightDetailsURL, options)
+      .pipe(
+        map((resp) => {
+          if (resp.data) {
+            const flightDetailsData = getTransformedFlightDetails(resp.data);
+            return flightDetailsData;
+          } else {
+            return null;
+          }
+        })
+      );
+  }
 }

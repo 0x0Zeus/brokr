@@ -15,7 +15,7 @@ import {
 } from '@angular/forms';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
-import { FlightsService } from '@core/services/flights/flights.service';
+import { FlightsService } from '@core/services/flights';
 import { ToasterService } from '@core/services/toaster';
 import {
   IFlightsDestination,

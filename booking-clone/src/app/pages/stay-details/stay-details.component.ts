@@ -50,7 +50,6 @@ export class StayDetailsComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
   stayInfo$ = new BehaviorSubject<IStayDetails | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
-  currentPhotoUrl = new BehaviorSubject<string | null>(null);
   dateRange = new FormGroup({
     date: new FormControl<[Date, Date]>([
       new Date(Date.now()),
@@ -94,9 +93,5 @@ export class StayDetailsComponent implements OnInit {
         this.stayInfo$.next(stayInfo);
         this.isLoading$.next(false);
       });
-  }
-
-  setCurrentPhotoUrl(url: string): void {
-    this.currentPhotoUrl.next(url);
   }
 }

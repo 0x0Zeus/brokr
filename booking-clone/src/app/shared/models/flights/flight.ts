@@ -7,7 +7,7 @@ export interface IFlight {
   arrival: IAirportInfo;
 }
 
-interface IAirportInfo {
+export interface IAirportInfo {
   airport: string;
   location: string;
   time: string;

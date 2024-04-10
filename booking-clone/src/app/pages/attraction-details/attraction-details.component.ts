@@ -43,7 +43,6 @@ export class AttractionDetailsComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
   attractionInfo$ = new BehaviorSubject<IAttractionDetails | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
-  currentPhotoUrl = new BehaviorSubject<string | null>(null);
 
   constructor(
     private attractionsFacade: AttractionsFacade,
@@ -75,9 +74,5 @@ export class AttractionDetailsComponent implements OnInit {
         this.attractionInfo$.next(attractionInfo);
         this.isLoading$.next(false);
       });
-  }
-
-  setCurrentPhotoUrl(url: string): void {
-    this.currentPhotoUrl.next(url);
   }
 }
