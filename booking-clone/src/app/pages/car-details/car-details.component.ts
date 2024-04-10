@@ -6,6 +6,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
+import { CarExtraComponent } from '@components/cars/car-extra';
 import { CarReviewsComponent } from '@components/cars/car-reviews';
 import { CarSpecsComponent } from '@components/cars/car-specs';
 import { RatingComponent } from '@components/shared/rating';
@@ -34,6 +35,7 @@ import {
     CarSpecsComponent,
     ProgressSpinnerModule,
     CarReviewsComponent,
+    CarExtraComponent,
   ],
   templateUrl: './car-details.component.html',
   styleUrl: './car-details.component.scss',

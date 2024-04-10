@@ -1,5 +1,5 @@
 <div class="container">
-  <article class="intro">
+  <section class="intro">
     <div
       class="intro-summary h-[59.2rem] w-full flex flex-col items-center text-base_fifth"
     >
@@ -16,8 +16,8 @@
         class="fast-loading hidden"
       />
     </div>
-  </article>
-  <article class="why-we bg-bg_fifth pt-[8rem]">
+  </section>
+  <section class="why-we bg-bg_fifth pt-[8rem]">
     <div class="wrapper-base">
       <div class="why-we-summary w-full flex flex-col items-center mb-[3rem]">
         <h2 class="why-we-title text-title">Why Choose Us</h2>
@@ -48,8 +48,8 @@
         }
       </div>
     </div>
-  </article>
-  <article class="cars wrapper-base mt-[6.7rem] pb-[4.1rem]">
+  </section>
+  <section class="cars wrapper-base pt-[6.7rem] pb-[4.1rem]">
     <div
       class="garage h-[52.2rem] pl-[8rem] pt-[18.2rem] text-base_fifth mb-[5.5rem] rounded-lg"
     >
@@ -97,8 +97,8 @@
         </div>
       }
     </div>
-  </article>
-  <article class="homes bg-bg_fifth pt-[8.5rem] pb-[11.5rem] mb-[7.2rem]">
+  </section>
+  <section class="homes bg-bg_fifth pt-[8.5rem] pb-[11.5rem] mb-[7.2rem]">
     <div class="wrapper-base">
       <div class="homes-summary">
         <h2 class="homes-title text-title mb-[1rem]">
@@ -168,8 +168,8 @@
         }
       </div>
     </div>
-  </article>
-  <article class="attractions wrapper-base pb-[14rem]">
+  </section>
+  <section class="attractions wrapper-base pb-[7rem]">
     <h2 class="attractions__title text-title mb-[3.3rem]">
       The Bahamas is a country located in the Caribbean, known for its beautiful
       beaches, crystal-clear waters, and vibrant culture.
@@ -207,8 +207,29 @@
         </div>
       }
     </div>
-  </article>
-  <article
+  </section>
+  <section class="bg-bg_fifth mb-[7rem] py-[4rem]">
+    <div
+      class="wrapper-base flights h-[52.2rem] pl-[8rem] pt-[18.2rem] text-base_fifth rounded-lg"
+    >
+      <div class="flights__content max-w-[51.3rem]">
+        <h2 class="flights__title mb-[1.5rem] text-title">
+          Book tickets and go anywhere in the world
+        </h2>
+        <h2 class="flights__decscription text-xl mb-[2rem] leading-[1.8rem]">
+          Prepare to fly on a plane with all the comforts wherever your mood
+          desires
+        </h2>
+        <button
+          class="flights__btn btn-base w-[16.7rem] h-[4.7rem]"
+          [routerLink]="['/booking/flights']"
+        >
+          Browse Flight
+        </button>
+      </div>
+    </div>
+  </section>
+  <section
     class="statistic pt-[8.8rem] text-2xl pb-[14rem] text-base_fifth bg-bg_secondary"
   >
     <div class="max-w-[61rem] m-auto text-center">
@@ -237,6 +258,6 @@
         </div>
       </div>
     </div>
-  </article>
+  </section>
   <app-footer />
 </div>

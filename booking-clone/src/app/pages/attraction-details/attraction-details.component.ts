@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { RatingComponent } from '@components/shared/rating';
 import { ReviewComponent } from '@components/shared/review';
+import { SliderComponent } from '@components/shared/slider';
 import { DestroyDirective } from '@core/directives';
 import { AttractionsService } from '@core/services/attractions';
 import { ToasterService } from '@core/services/toaster';
@@ -26,7 +27,13 @@ import {
 @Component({
   selector: 'app-attraction-details',
   standalone: true,
-  imports: [AsyncPipe, ProgressSpinnerModule, RatingComponent, ReviewComponent],
+  imports: [
+    AsyncPipe,
+    ProgressSpinnerModule,
+    RatingComponent,
+    ReviewComponent,
+    SliderComponent,
+  ],
   templateUrl: './attraction-details.component.html',
   styleUrl: './attraction-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,7 +43,6 @@ export class AttractionDetailsComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
   attractionInfo$ = new BehaviorSubject<IAttractionDetails | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
-  currentPhotoUrl = new BehaviorSubject<string | null>(null);
 
   constructor(
     private attractionsFacade: AttractionsFacade,
@@ -68,9 +74,5 @@ export class AttractionDetailsComponent implements OnInit {
         this.attractionInfo$.next(attractionInfo);
         this.isLoading$.next(false);
       });
-  }
-
-  setCurrentPhotoUrl(url: string): void {
-    this.currentPhotoUrl.next(url);
   }
 }

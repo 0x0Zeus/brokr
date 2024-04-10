@@ -1,30 +1,7 @@
 <div class="details-container max-w-[135rem] px-[2rem] m-auto mt-[5.7rem]">
   @if (stayInfo$ | async; as stayInfo) {
     <div class="main flex justify-between gap-[6.6rem] mb-[6.7rem]">
-      <div class="w-[53.2rem]">
-        <div
-          class="stay-photo rounded-lg w-full h-[63.2rem] bg-center bg-cover mb-[1rem]"
-          [style.background-image]="
-            (currentPhotoUrl | async) === null
-              ? 'url(' + stayInfo.photos[0].lg + ')'
-              : 'url(' + (currentPhotoUrl | async) + ')'
-          "
-        ></div>
-        <div class="album-container w-full h-[13rem] relative overflow-x-auto">
-          <div
-            class="absolute stays-album flex justify-center items-start gap-[0.8rem]"
-          >
-            @for (photo of stayInfo.photos; track photo.lg) {
-              <button
-                class="stays-album__item rounded-sm min-w-[10.7rem] h-[12rem] bg-center bg-cover"
-                [style.background-image]="'url(' + photo.sm + ')'"
-                (click)="setCurrentPhotoUrl(photo.lg)"
-                aria-label="Set photo"
-              ></button>
-            }
-          </div>
-        </div>
-      </div>
+      <app-slider [photos]="stayInfo.photos" />
       <div class="main-info basis-1/2 w-full">
         <div class="host flex items-center justify-start mb-[1.6rem]">
           <img
@@ -61,7 +38,7 @@
             <img
               src="assets/details/map.svg"
               alt="Location"
-              class="location__img w-[1.7rem] h-[1.7rem] mr-[1.7rem]"
+              class="location__img w-[1.7rem] h-[1.8rem] mr-[1.7rem]"
             />
             <p class="location__title text-lg">
               {{ stayInfo.location }}
@@ -133,7 +110,7 @@
     <div class="amenities mb-[5.2rem]">
       <h3 class="amenities__title font-bold text-3xl mb-[3rem]">Amenities</h3>
       <div
-        class="amenities-items flex items-center justify-start gap-[2rem] flex-wrap"
+        class="amenities-items flex items-start justify-start gap-[2rem] flex-wrap"
       >
         @for (facility of stayInfo.facilities; track facility) {
           <p

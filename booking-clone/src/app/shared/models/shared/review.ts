@@ -1,4 +1,4 @@
-export interface IStayReview {
+export interface IReview {
   photo: string | null;
   rating: number;
   review: string;

@@ -7,7 +7,7 @@ export interface ICarDetails {
   currency: string;
   description: string;
   city: string;
-  extras: string[];
+  extras: ICarExtraDetails[];
   days: number;
   model: string;
   supplier: {
@@ -21,4 +21,9 @@ export interface ICarDetails {
 export interface ICarDetailsSpec {
   name: string;
   value: string;
+}
+
+export interface ICarExtraDetails {
+  name: string;
+  price: number;
 }

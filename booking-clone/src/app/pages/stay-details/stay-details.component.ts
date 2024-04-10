@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RatingComponent } from '@components/shared/rating';
+import { SliderComponent } from '@components/shared/slider';
 import { StayReviewsComponent } from '@components/stays/stay-reviews';
 import { StaySpecsComponent } from '@components/stays/stay-specs';
 import { DestroyDirective } from '@core/directives';
@@ -38,6 +39,7 @@ import { StaysService } from '../../core/services/stays/stays.service';
     StaySpecsComponent,
     ProgressSpinnerModule,
     StayReviewsComponent,
+    SliderComponent,
   ],
   templateUrl: './stay-details.component.html',
   styleUrl: './stay-details.component.scss',
@@ -48,7 +50,6 @@ export class StayDetailsComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
   stayInfo$ = new BehaviorSubject<IStayDetails | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
-  currentPhotoUrl = new BehaviorSubject<string | null>(null);
   dateRange = new FormGroup({
     date: new FormControl<[Date, Date]>([
       new Date(Date.now()),
@@ -92,9 +93,5 @@ export class StayDetailsComponent implements OnInit {
         this.stayInfo$.next(stayInfo);
         this.isLoading$.next(false);
       });
-  }
-
-  setCurrentPhotoUrl(url: string): void {
-    this.currentPhotoUrl.next(url);
   }
 }

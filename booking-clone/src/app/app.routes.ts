@@ -62,6 +62,13 @@ export const routes: Routes = [
                 (m) => m.AttractionDetailsComponent
               ),
           },
+          {
+            path: 'flight/:flightId',
+            loadComponent: () =>
+              import('./pages/flight-details').then(
+                (m) => m.FlightDetailsComponent
+              ),
+          },
         ],
       },
     ],
