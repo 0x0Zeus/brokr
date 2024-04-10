@@ -9,12 +9,8 @@ import {
   IStaysResponse,
   IStaysSearchParams,
 } from '@shared/interfaces/stays';
-import {
-  IStay,
-  IStayDetails,
-  IStayReview,
-  IStaysDestination,
-} from '@shared/models/stays';
+import { IReview } from '@shared/models/shared';
+import { IStay, IStayDetails, IStaysDestination } from '@shared/models/stays';
 import {
   getTransformedStayData,
   getTransformedStayDetails,
@@ -116,10 +112,7 @@ export class StaysService {
       );
   }
 
-  getStayReviews({
-    hotelId,
-    page,
-  }: IStayReviewsParams): Observable<IStayReview[]> {
+  getStayReviews({ hotelId, page }: IStayReviewsParams): Observable<IReview[]> {
     const options = {
       params: new HttpParams()
         .set('hotel_id', hotelId)

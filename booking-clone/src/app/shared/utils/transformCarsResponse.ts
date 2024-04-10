@@ -69,7 +69,10 @@ export const getTransformedCarDetails = (
       ).toFixed(2)
     ),
     currency: details.vehicle.price.display.currency,
-    extras: details.extras.map((item) => item.name),
+    extras: details.extras.map((item) => ({
+      name: item.name,
+      price: item.price.perRental.display.value,
+    })),
     days: details.vehicle.rentalDurationInDays,
     model: details.vehicle.makeAndModel,
     supplier: {

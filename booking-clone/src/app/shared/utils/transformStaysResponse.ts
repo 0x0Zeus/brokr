@@ -2,8 +2,8 @@ import { IStayDestinationsResponse } from '@shared/interfaces/stays';
 import { IStayReviewResponse } from '@shared/interfaces/stays';
 import { IStayDetailsDataResponse } from '@shared/interfaces/stays';
 import { IStayResponse } from '@shared/interfaces/stays';
+import { IReview } from '@shared/models/shared';
 import { IStaysDestination } from '@shared/models/stays';
-import { IStayReview } from '@shared/models/stays';
 import { IStay } from '@shared/models/stays';
 import { IStayDetails } from '@shared/models/stays';
 
@@ -94,7 +94,7 @@ export const getTransformedStayDetails = (
 
 export const getTransformedStayReview = (
   review: IStayReviewResponse
-): IStayReview => {
+): IReview => {
   const transformedReview = {
     photo: review.author.avatar ?? null,
     rating: Number(review.average_score.toFixed(1)),

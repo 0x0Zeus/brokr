@@ -107,7 +107,7 @@ export class FlightsService {
   // getStayReviews({
   //   hotelId,
   //   page,
-  // }: IStayReviewsParams): Observable<IStayReview[]> {
+  // }: IStayReviewsParams): Observable<IReview[]> {
   //   const options = {
   //     params: new HttpParams()
   //       .set('hotel_id', hotelId)

@@ -12,7 +12,7 @@ import { ReviewComponent } from '@components/shared/review';
 import { DestroyDirective } from '@core/directives';
 import { StaysService } from '@core/services/stays';
 import { ToasterService } from '@core/services/toaster';
-import { IStayReview } from '@shared/models/stays';
+import { IReview } from '@shared/models/shared';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BehaviorSubject, catchError, of, takeUntil } from 'rxjs';
 
@@ -34,8 +34,8 @@ export class StayReviewsComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
   @Input({ required: true }) stayId!: number;
   reviewsPage = 1;
-  reviews$ = new BehaviorSubject<IStayReview[]>([]);
-  reviews: IStayReview[] = [];
+  reviews$ = new BehaviorSubject<IReview[]>([]);
+  reviews: IReview[] = [];
   isReviewsLoading$ = new BehaviorSubject<boolean>(false);
 
   constructor(

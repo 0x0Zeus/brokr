@@ -10,7 +10,12 @@
   }
   <app-navigation />
   @if (isMap$ | async) {
-    <app-map />
+    @if (
+      (currentRoute | async) !== '/booking/attractions' &&
+      (currentRoute | async) !== '/booking/flights'
+    ) {
+      <app-map />
+    }
   }
   <router-outlet></router-outlet>
 </div>

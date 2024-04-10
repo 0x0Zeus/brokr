@@ -76,22 +76,20 @@
         </div>
       </div>
     </div>
-    @if (carInfo.extras.length) {
-      <div class="extras mb-[5.2rem]">
-        <h3 class="extras__title font-bold text-3xl mb-[3rem]">Extras</h3>
+    <div class="extras mb-[5.2rem]">
+      <h3 class="extras__title font-bold text-3xl mb-[3rem]">Extras</h3>
+      @if (carInfo.extras.length) {
         <div
-          class="extras-items flex items-center justify-start gap-[2rem] flex-wrap"
+          class="extras-items flex items-start justify-start gap-[2rem] flex-wrap"
         >
           @for (extra of carInfo.extras; track extra) {
-            <p
-              class="extras-item w-[14.7rem] min-h-[11.8rem] h-full px-[1.6rem] py-[2.5rem] border-1 border-base_border rounded-lg font-medium text-xl"
-            >
-              {{ extra }}
-            </p>
+            <app-car-extra [extra]="extra" />
           }
         </div>
-      </div>
-    }
+      } @else {
+        <p>No extras.</p>
+      }
+    </div>
     <div
       class="description pb-[5.5rem] border-b-1 border-base_border mb-[3.5rem]"
     >
@@ -104,6 +102,8 @@
     </div>
     @if (reviewParams$ | async; as reviewParams) {
       <app-car-reviews [params]="reviewParams" />
+    } @else {
+      <p>No reviews.</p>
     }
   } @else if (isLoading$ | async) {
     <div class="mt-[35rem] h-full flex justify-center items-center w-full">
