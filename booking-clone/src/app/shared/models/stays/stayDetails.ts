@@ -1,3 +1,5 @@
+import { IPhoto } from '../shared';
+
 export interface IStayDetails {
   id: number;
   photos: IPhoto[];
@@ -18,11 +20,6 @@ export interface IStayDetails {
   };
   rating: number | null;
   specs: IStayDetailsSpecs;
-}
-
-interface IPhoto {
-  lg: string;
-  sm: string;
 }
 
 export interface IStayDetailsSpecs {

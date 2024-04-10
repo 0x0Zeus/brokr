@@ -1,6 +1,8 @@
+import { IPhoto } from '../shared';
+
 export interface IAttractionDetails {
   id: string;
-  photos: IPhotos[];
+  photos: IPhoto[];
   location: string;
   price: number;
   currency: string;
@@ -13,11 +15,6 @@ export interface IAttractionDetails {
   rating: number;
   reviews: IAttractionReview[];
   accessibility: string[];
-}
-
-interface IPhotos {
-  lg: string;
-  sm: string;
 }
 
 export interface IAttractionReview {

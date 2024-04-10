@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RatingComponent } from '@components/shared/rating';
+import { SliderComponent } from '@components/shared/slider';
 import { StayReviewsComponent } from '@components/stays/stay-reviews';
 import { StaySpecsComponent } from '@components/stays/stay-specs';
 import { DestroyDirective } from '@core/directives';
@@ -38,6 +39,7 @@ import { StaysService } from '../../core/services/stays/stays.service';
     StaySpecsComponent,
     ProgressSpinnerModule,
     StayReviewsComponent,
+    SliderComponent,
   ],
   templateUrl: './stay-details.component.html',
   styleUrl: './stay-details.component.scss',

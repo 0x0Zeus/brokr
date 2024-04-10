@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { RatingComponent } from '@components/shared/rating';
 import { ReviewComponent } from '@components/shared/review';
+import { SliderComponent } from '@components/shared/slider';
 import { DestroyDirective } from '@core/directives';
 import { AttractionsService } from '@core/services/attractions';
 import { ToasterService } from '@core/services/toaster';
@@ -26,7 +27,13 @@ import {
 @Component({
   selector: 'app-attraction-details',
   standalone: true,
-  imports: [AsyncPipe, ProgressSpinnerModule, RatingComponent, ReviewComponent],
+  imports: [
+    AsyncPipe,
+    ProgressSpinnerModule,
+    RatingComponent,
+    ReviewComponent,
+    SliderComponent,
+  ],
   templateUrl: './attraction-details.component.html',
   styleUrl: './attraction-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
