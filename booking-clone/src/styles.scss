@@ -1,5 +1,6 @@
 @import 'prime';
 @import 'map';
+@import 'fonts';
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
@@ -8,34 +9,6 @@
 @import 'primeng/resources/themes/lara-light-blue/theme.css';
 @import 'primeng/resources/primeng.css';
 @import 'primeicons/primeicons.css';
-
-@font-face {
-  font-family: 'Roboto Bold';
-  src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto Medium';
-  src: url('./assets/fonts/Roboto-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto Regular';
-  src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto Light';
-  src: url('./assets/fonts/Roboto-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}
 
 :root {
   font-family: 'Roboto Regular', sans-serif;
