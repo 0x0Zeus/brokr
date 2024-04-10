@@ -1,31 +1,32 @@
 <div
-  class="stay flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
+  class="flight flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
   [routerLink]="['/details/flight/', flight.id]"
 >
-  <img
-    [src]="isFavorite ? 'assets/fav-fill.svg' : 'assets/fav.svg'"
-    alt="Favorite"
-    class="favorite absolute top-[1.7rem] right-[1.5rem] w-[2.6rem] h-[2.6rem]"
-  />
-  <!-- <div
-    class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem] bg-center bg-cover"
-    [style.background-image]="'url(' + flight.photo + ')'"
-  ></div> -->
-  <!-- <p class="description text-base_secondary mb-[0.2rem]">
-    {{ flight.location }}
-  </p> -->
-  <!-- <p class="title text-xl font-medium mb-[1rem]">{{ flight.name }}</p> -->
-  <div class="splitter h-[1px] w-[4.5rem] bg-bg_secondary mb-[1.4rem]"></div>
-  <!-- <div class="labels text-base_secondary pb-[1.2rem] mb-auto">
-    {{ flight.label }}
-  </div> -->
-  <!-- <app-rating [rating]="flight.rating" class="mb-[1.4rem]" /> -->
-  <div class="flex justify-between items-center mb-[0.2rem]">
-    <div class="price">
+  <div class="from">
+    <h4 class="from__title text-base_secondary mb-[0.5rem]">From</h4>
+    <p class="from__airport mb-[0.2rem]">{{ flight.departure.airport }}</p>
+    <p class="from__date">{{ flight.departure.time }}</p>
+    <p class="from__location text-base_secondary">
+      {{ flight.departure.location }}
+    </p>
+  </div>
+  <span
+    class="pi pi-arrow-down-right text-base_third text-3xl my-[1rem] ml-[1rem]"
+  ></span>
+  <div class="to">
+    <h4 class="to__title text-base_secondary mb-[0.5rem]">To</h4>
+    <p class="to__airport mb-[0.2rem]">{{ flight.arrival.airport }}</p>
+    <p class="to__date">{{ flight.arrival.time }}</p>
+    <p class="to__location text-base_secondary">
+      {{ flight.arrival.location }}
+    </p>
+  </div>
+  <div class="flex justify-between items-center mt-[1rem] mb-[0.2rem]">
+    <p class="price">
       <span class="price-value text-2xl font-medium mr-[0.6rem]"
         >${{ flight.price }}</span
-      ><span class="price-desc text-base_secondary">/flight</span>
-    </div>
-    <div class="reviews">({{ flight.seats }} seats)</div>
+      ><span class="price-desc text-base_secondary">/ticket</span>
+    </p>
+    <p class="reviews">({{ flight.seats }} seats)</p>
   </div>
 </div>

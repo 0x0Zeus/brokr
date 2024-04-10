@@ -65,11 +65,6 @@ export class FlightsFilterComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
 
   flightsFilterForm = new FormGroup<IFlightsFilterForm>({
-    arrivalDate: new FormControl<Date>(this.nowDate, {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-
     departureDate: new FormControl<Date>(this.nowDate, {
       nonNullable: true,
       validators: [Validators.required],
@@ -167,7 +162,6 @@ export class FlightsFilterComponent implements OnInit {
       this.flightsFacade.fetchFlights({
         fromId: this.chosenLocationFrom.destId,
         toId: this.chosenLocationTo.destId,
-        returnDate: parseDate(flightsFormData.arrivalDate),
         departureDate: parseDate(flightsFormData.departureDate),
         page: 1,
       });
@@ -182,10 +176,6 @@ export class FlightsFilterComponent implements OnInit {
   elasticSearchTo(destination: IFlightsDestination): void {
     this.locationToValue.setValue(destination.location);
     this.chosenLocationTo = destination;
-  }
-
-  get arrivalDate(): FormControl<Date> {
-    return this.flightsFilterForm.controls.arrivalDate;
   }
 
   get departureDate(): FormControl<Date> {

@@ -53,13 +53,12 @@ export class FlightsService {
   }
 
   getFlights(query: IFlightsSearchParams): Observable<IFlight[]> {
-    const { fromId, toId, returnDate, departureDate, page } = query;
+    const { fromId, toId, departureDate, page } = query;
     const options = {
       params: new HttpParams()
         .set('fromId', fromId)
         .append('toId', toId)
         .append('departDate', departureDate)
-        .append('returnDate', returnDate)
         .append('pageNo', page)
         .append('currency_code', 'USD'),
     };

@@ -10,6 +10,11 @@
         When you're traveling to a new place, sometimes the best way to truly
         experience it is by renting a car.
       </h2>
+      <img
+        src="assets/home/cars/helm.jpg"
+        alt="Intro"
+        class="fast-loading hidden"
+      />
     </div>
   </article>
   <article class="why-we bg-bg_fifth pt-[8rem]">
@@ -31,7 +36,7 @@
             <img
               [src]="kind.url"
               [alt]="kind.title"
-              class="kind-item-img w-full h-full rounded-lg"
+              class="kind-item-img w-full h-full rounded-lg object-cover"
               [routerLink]="[kind.link]"
             />
             <p

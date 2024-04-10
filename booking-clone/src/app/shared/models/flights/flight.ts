@@ -3,6 +3,12 @@ export interface IFlight {
   price: number;
   currency: string;
   seats: number;
-  departureAirport: string;
-  arrivalAirport: string;
+  departure: IAirportInfo;
+  arrival: IAirportInfo;
+}
+
+interface IAirportInfo {
+  airport: string;
+  location: string;
+  time: string;
 }
