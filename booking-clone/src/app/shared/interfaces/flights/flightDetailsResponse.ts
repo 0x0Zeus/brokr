@@ -136,7 +136,7 @@ export interface TravellerCabinLuggage {
 export interface LuggageAllowance2 {
   luggageType: string;
   maxPiece: number;
-  maxWeightPerPiece: number;
+  maxWeightPerPiece: number | null;
   massUnit: string;
   sizeRestrictions: SizeRestrictions;
 }

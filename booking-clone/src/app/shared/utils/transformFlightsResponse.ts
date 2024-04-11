@@ -69,7 +69,10 @@ export const getTransformedFlightDetails = (
           },
           {
             name: 'Weight',
-            value: `${flight.segments[0].travellerCabinLuggage[0].luggageAllowance.maxWeightPerPiece} ${flight.segments[0].travellerCabinLuggage[0].luggageAllowance.massUnit}`,
+            value: flight.segments[0].travellerCabinLuggage[0].luggageAllowance
+              .maxWeightPerPiece
+              ? `${flight.segments[0].travellerCabinLuggage[0].luggageAllowance.maxWeightPerPiece} ${flight.segments[0].travellerCabinLuggage[0].luggageAllowance.massUnit}`
+              : 'Unknown',
           },
           {
             name: 'Dimensions',
