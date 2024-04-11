@@ -20,7 +20,7 @@ export interface IFlightDetailsDataResponse {
   includedProducts: IncludedProducts;
   extraProducts: ExtraProduct[];
   offerExtras: OfferExtras;
-  ancillaries: Ancillaries;
+  ancillaries: Ancillaries | null;
   fareRulesStatus: FareRulesStatus;
   seatAvailability: SeatAvailability;
   baggagePolicies: BaggagePolicy[];
@@ -129,7 +129,7 @@ export interface LuggageAllowance {
 
 export interface TravellerCabinLuggage {
   travellerReference: string;
-  luggageAllowance: LuggageAllowance2;
+  luggageAllowance: LuggageAllowance2 | null;
   personalItem: boolean;
 }
 
@@ -542,7 +542,7 @@ export interface TotalWithoutDiscount5 {
 export interface Ancillaries {
   flexibleTicket: FlexibleTicket2;
   mobileTravelPlan: MobileTravelPlan2;
-  travelInsurance: TravelInsurance;
+  travelInsurance: TravelInsurance | null;
 }
 
 export interface FlexibleTicket2 {
@@ -661,7 +661,7 @@ export interface TotalWithoutDiscount7 {
 export interface TravelInsurance {
   options: Options;
   documents: Documents;
-  content: Content;
+  content: Content | null;
   forceForAllTravellers: boolean;
 }
 

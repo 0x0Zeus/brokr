@@ -6,6 +6,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
+import { FlightLuggageComponent } from '@components/flights/flight-luggage';
 import { DestroyDirective } from '@core/directives';
 import { FlightsService } from '@core/services/flights';
 import { ToasterService } from '@core/services/toaster';
@@ -24,7 +25,7 @@ import {
 @Component({
   selector: 'app-flight-details',
   standalone: true,
-  imports: [AsyncPipe, ProgressSpinnerModule],
+  imports: [AsyncPipe, ProgressSpinnerModule, FlightLuggageComponent],
   templateUrl: './flight-details.component.html',
   styleUrl: './flight-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

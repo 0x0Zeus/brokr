@@ -7,15 +7,14 @@ export interface IFlightDetails {
   carrierName: string;
   carrierLogo: string;
   currency: string;
-  luggage: IFlightLuggage;
+  luggage: IFlightLuggage[] | null;
   seats: number;
   departure: IAirportInfo;
   arrival: IAirportInfo;
+  benefits: string[] | null;
 }
 
-interface IFlightLuggage {
-  type: string;
-  amount: number;
-  weight: string;
-  dimensions: string;
+export interface IFlightLuggage {
+  name: string;
+  value: string | number;
 }
