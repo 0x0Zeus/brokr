@@ -133,20 +133,20 @@ export class FlightsFilterComponent implements OnInit {
       });
   }
 
-  onFromFocus(): void {
-    this.isLocationFromFocus = true;
+  onFocus(type: string): void {
+    if (type === 'from') {
+      this.isLocationFromFocus = true;
+    } else if (type === 'to') {
+      this.isLocationToFocus = true;
+    }
   }
 
-  onFromBlur(): void {
-    this.isLocationFromFocus = false;
-  }
-
-  onToFocus(): void {
-    this.isLocationToFocus = true;
-  }
-
-  onToBlur(): void {
-    this.isLocationToFocus = false;
+  onBlur(type: string): void {
+    if (type === 'from') {
+      this.isLocationFromFocus = false;
+    } else if (type === 'to') {
+      this.isLocationToFocus = false;
+    }
   }
 
   onSearch(): void {
@@ -166,14 +166,14 @@ export class FlightsFilterComponent implements OnInit {
     }
   }
 
-  elasticSearchFrom(destination: IFlightsDestination): void {
-    this.locationFromValue.setValue(destination.location);
-    this.chosenLocationFrom = destination;
-  }
-
-  elasticSearchTo(destination: IFlightsDestination): void {
-    this.locationToValue.setValue(destination.location);
-    this.chosenLocationTo = destination;
+  elasticSearch(destination: IFlightsDestination, type: string): void {
+    if (type === 'from') {
+      this.locationFromValue.setValue(destination.location);
+      this.chosenLocationFrom = destination;
+    } else if (type === 'to') {
+      this.locationToValue.setValue(destination.location);
+      this.chosenLocationTo = destination;
+    }
   }
 
   get departureDate(): FormControl<Date> {

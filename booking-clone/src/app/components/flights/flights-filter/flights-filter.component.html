@@ -19,8 +19,8 @@
         pInputText
         [formControl]="locationFromValue"
         type="text"
-        (focus)="onFromFocus()"
-        (blur)="onFromBlur()"
+        (focus)="onFocus('from')"
+        (blur)="onBlur('from')"
         placeholder="City, postcode, address, airport or hotel"
         class="h-full w-full block border-2 px-[3.2rem] border-base_border rounded-sm text-base outline-none"
       />
@@ -36,7 +36,7 @@
           ) {
             <button
               class="elastic-item py-[0.4rem] px-[0.5rem] overflow-hidden text-ellipsis whitespace-nowrap text-left w-full hover:bg-bg_third/10"
-              (mousedown)="elasticSearchFrom(elasticItem)"
+              (mousedown)="elasticSearch(elasticItem, 'from')"
               [title]="elasticItem.location"
             >
               {{ elasticItem.location }}
@@ -71,8 +71,8 @@
         pInputText
         [formControl]="locationToValue"
         type="text"
-        (focus)="onToFocus()"
-        (blur)="onToBlur()"
+        (focus)="onFocus('to')"
+        (blur)="onBlur('to')"
         placeholder="City, postcode, address, airport or hotel"
         class="h-full w-full block border-2 px-[3.2rem] border-base_border rounded-sm text-base outline-none"
       />
@@ -88,7 +88,7 @@
           ) {
             <button
               class="elastic-item py-[0.4rem] px-[0.5rem] overflow-hidden text-ellipsis whitespace-nowrap text-left w-full hover:bg-bg_third/10"
-              (mousedown)="elasticSearchTo(elasticItem)"
+              (mousedown)="elasticSearch(elasticItem, 'to')"
               [title]="elasticItem.location"
             >
               {{ elasticItem.location }}

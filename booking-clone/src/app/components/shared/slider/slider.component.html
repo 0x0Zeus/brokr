@@ -1,8 +1,16 @@
 <div class="w-[53.2rem]">
-  <div
-    class="attraction-photo rounded-lg w-full h-[63.2rem] bg-center bg-cover mb-[1rem]"
+  <button
+    class="attraction-photo rounded-lg w-full h-[63.2rem] bg-center bg-cover mb-[1rem] relative"
     [style.background-image]="'url(' + (currentPhotoUrl | async) + ')'"
-  ></div>
+    (click)="openModal()"
+    aria-label="Open photo"
+  >
+    <div
+      class="overlay absolute hover:bg-bg_sixth/20 w-full h-full left-0 top-0 hidden justify-center items-center transition-all"
+    >
+      <img src="assets/search.svg" alt="Scale" class="w-[5rem] h-[5rem]" />
+    </div>
+  </button>
   <div class="album-container w-full h-[13rem] relative overflow-x-auto">
     <div
       class="absolute attraction-album flex justify-center items-start gap-[0.8rem]"
@@ -18,3 +26,12 @@
     </div>
   </div>
 </div>
+@if (isFullMode) {
+  <app-modal (closeModal)="closeModal()">
+    <img
+      class="attraction-photo rounded-lg min-w-[60rem] h-[110rem] bg-center bg-cover mb-[1rem] object-cover"
+      [src]="currentPhotoUrl | async"
+      alt="Full mode photo"
+    />
+  </app-modal>
+}
