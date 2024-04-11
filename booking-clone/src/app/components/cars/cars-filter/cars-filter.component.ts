@@ -18,7 +18,7 @@ import { CarsService } from '@core/services/cars';
 import { ToasterService } from '@core/services/toaster';
 import { ICarsFilterForm } from '@shared/models/cars';
 import { ICarsDestination } from '@shared/models/cars';
-import { parseDate } from '@shared/utils';
+import { parseDate, parseTime } from '@shared/utils';
 import { CarsFacade } from '@store/cars';
 import { CalendarModule } from 'primeng/calendar';
 import {
@@ -59,7 +59,7 @@ export class CarsFilterComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    fromTime: new FormControl<string>('', {
+    fromTime: new FormControl<Date>(this.nowDate, {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -67,7 +67,7 @@ export class CarsFilterComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    untilTime: new FormControl<string>('', {
+    untilTime: new FormControl<Date>(this.nowDate, {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -123,9 +123,10 @@ export class CarsFilterComponent implements OnInit {
     if (this.carsFilterForm.valid && this.chosenLocation) {
       const carsFormData = this.carsFilterForm.getRawValue();
       this.carsFacade.fetchCars({
-        ...carsFormData,
         fromDate: parseDate(carsFormData.fromDate),
         untilDate: parseDate(carsFormData.untilDate),
+        fromTime: parseTime(carsFormData.fromTime),
+        untilTime: parseTime(carsFormData.untilTime),
         latitude: this.chosenLocation!.latitude,
         longitude: this.chosenLocation!.longitude,
       });

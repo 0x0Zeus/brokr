@@ -2,7 +2,7 @@ import { FormControl } from '@angular/forms';
 
 export interface ICarsFilterForm {
   fromDate: FormControl<Date>;
-  fromTime: FormControl<string>;
+  fromTime: FormControl<Date>;
   untilDate: FormControl<Date>;
-  untilTime: FormControl<string>;
+  untilTime: FormControl<Date>;
 }

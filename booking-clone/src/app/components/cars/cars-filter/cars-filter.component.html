@@ -65,12 +65,17 @@
       <div class="invalid__message">please enter a date</div>
     }
   </div>
-  <div class="input-item max-w-[17rem] mr-[1.1rem] relative">
-    <input
+  <div class="input-item max-w-[14rem] mr-[1.1rem] relative">
+    <p-calendar
+      [showTime]="true"
       [formControl]="fromTime"
-      type="time"
-      class="h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
-    />
+      hourFormat="12"
+      [showIcon]="true"
+      [timeOnly]="true"
+      icon="pi pi-clock text-2xl text-base_secondary"
+      class="h-[3.3rem] w-full block border-2 border-base_border rounded-sm text-base outline-none"
+    >
+    </p-calendar>
     @if (fromTime.hasError('required') && fromTime.touched) {
       <div class="invalid__message">please enter a time</div>
     }
@@ -88,12 +93,17 @@
       <div class="invalid__message">please enter a date</div>
     }
   </div>
-  <div class="input-item max-w-[17rem] mr-[1.1rem] relative">
-    <input
+  <div class="input-item max-w-[14rem] mr-[1.1rem] relative">
+    <p-calendar
+      [showTime]="true"
       [formControl]="untilTime"
-      type="time"
-      class="h-[3.3rem] w-full px-[1.4rem] border-2 border-base_border rounded-sm text-base outline-none"
-    />
+      hourFormat="12"
+      [showIcon]="true"
+      [timeOnly]="true"
+      icon="pi pi-clock text-2xl text-base_secondary"
+      class="h-[3.3rem] w-full block border-2 border-base_border rounded-sm text-base outline-none"
+    >
+    </p-calendar>
     @if (untilTime.hasError('required') && untilTime.touched) {
       <div class="invalid__message">please enter a time</div>
     }
