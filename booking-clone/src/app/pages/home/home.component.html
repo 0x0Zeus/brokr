@@ -12,6 +12,7 @@
       </h2>
       <img
         src="assets/home/cars/helm.jpg"
+        loading="eager"
         alt="Intro"
         class="fast-loading hidden"
       />
@@ -36,6 +37,7 @@
             <img
               [src]="kind.url"
               [alt]="kind.title"
+              loading="eager"
               class="kind-item-img w-full h-full rounded-lg object-cover"
               [routerLink]="[kind.link]"
             />
