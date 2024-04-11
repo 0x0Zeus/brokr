@@ -5,4 +5,5 @@ export interface ICarsFilterForm {
   fromTime: FormControl<Date>;
   untilDate: FormControl<Date>;
   untilTime: FormControl<Date>;
+  locationValue: FormControl<string>;
 }

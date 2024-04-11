@@ -69,16 +69,14 @@ export class FlightsFilterComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
-  });
-
-  locationFromValue = new FormControl<string>('', {
-    nonNullable: true,
-    validators: [Validators.required],
-  });
-
-  locationToValue = new FormControl<string>('', {
-    nonNullable: true,
-    validators: [Validators.required],
+    locationFromValue: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    locationToValue: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   });
 
   constructor(
@@ -88,7 +86,7 @@ export class FlightsFilterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.locationFromValue.valueChanges
+    this.flightsFilterForm.controls.locationFromValue.valueChanges
       .pipe(
         takeUntil(this.destroy$),
         debounceTime(500),
@@ -111,7 +109,7 @@ export class FlightsFilterComponent implements OnInit {
         this.elasticLocationFromValues$.next(locationsValues);
       });
 
-    this.locationToValue.valueChanges
+    this.flightsFilterForm.controls.locationToValue.valueChanges
       .pipe(
         takeUntil(this.destroy$),
         debounceTime(500),
@@ -180,5 +178,13 @@ export class FlightsFilterComponent implements OnInit {
 
   get departureDate(): FormControl<Date> {
     return this.flightsFilterForm.controls.departureDate;
+  }
+
+  get locationFromValue(): FormControl<string> {
+    return this.flightsFilterForm.controls.locationFromValue;
+  }
+
+  get locationToValue(): FormControl<string> {
+    return this.flightsFilterForm.controls.locationToValue;
   }
 }

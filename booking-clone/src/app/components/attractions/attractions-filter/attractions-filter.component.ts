@@ -46,25 +46,12 @@ import {
   hostDirectives: [DestroyDirective],
 })
 export class AttractionsFilterComponent implements OnInit {
+  private destroy$ = inject(DestroyDirective).destroy$;
   isLocationFocus = false;
   destinationIsLoading$ = new BehaviorSubject<boolean>(false);
   elasticLocationValues$ = new BehaviorSubject<IAttractionsDestination[]>([]);
   chosenLocation: null | IAttractionsDestination = null;
   nowDate = new Date(Date.now());
-  private destroy$ = inject(DestroyDirective).destroy$;
-
-  // staysFilterForm = new FormGroup<IStaysFilterForm>({
-  //   arrivalDate: new FormControl<Date>(this.nowDate, {
-  //     nonNullable: true,
-  //     validators: [Validators.required],
-  //   }),
-
-  //   departureDate: new FormControl<Date>(this.nowDate, {
-  //     nonNullable: true,
-  //     validators: [Validators.required],
-  //   }),
-  // });
-
   locationValue = new FormControl<string>('', {
     nonNullable: true,
     validators: [Validators.required],
@@ -122,12 +109,4 @@ export class AttractionsFilterComponent implements OnInit {
     this.locationValue.setValue(destination.location);
     this.chosenLocation = destination;
   }
-
-  // get arrivalDate(): FormControl<Date> {
-  //   return this.staysFilterForm.controls.arrivalDate;
-  // }
-
-  // get departureDate(): FormControl<Date> {
-  //   return this.staysFilterForm.controls.departureDate;
-  // }
 }
