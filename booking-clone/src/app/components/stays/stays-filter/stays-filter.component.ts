@@ -61,16 +61,14 @@ export class StaysFilterComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
-
     departureDate: new FormControl<Date>(this.nowDate, {
       nonNullable: true,
       validators: [Validators.required],
     }),
-  });
-
-  locationValue = new FormControl<string>('', {
-    nonNullable: true,
-    validators: [Validators.required],
+    locationValue: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   });
 
   constructor(
@@ -80,7 +78,7 @@ export class StaysFilterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.locationValue.valueChanges
+    this.staysFilterForm.controls.locationValue.valueChanges
       .pipe(
         takeUntil(this.destroy$),
         debounceTime(500),
@@ -133,6 +131,10 @@ export class StaysFilterComponent implements OnInit {
 
   get arrivalDate(): FormControl<Date> {
     return this.staysFilterForm.controls.arrivalDate;
+  }
+
+  get locationValue(): FormControl<string> {
+    return this.staysFilterForm.controls.locationValue;
   }
 
   get departureDate(): FormControl<Date> {

@@ -3,7 +3,9 @@
     <div
       class="intro-summary h-[59.2rem] w-full flex flex-col items-center text-base_fifth"
     >
-      <h1 class="intro-title mt-[13rem] mb-[2rem] font-bold text-[5rem]">
+      <h1
+        class="intro-title mt-[13rem] mb-[2rem] font-bold text-[5rem] sm:text-[4rem]"
+      >
         Where do you want to go?
       </h1>
       <h2 class="intro-description text-xl">
@@ -53,7 +55,7 @@
   </section>
   <section class="cars wrapper-base pt-[6.7rem] pb-[4.1rem]">
     <div
-      class="garage h-[52.2rem] pl-[8rem] pt-[18.2rem] text-base_fifth mb-[5.5rem] rounded-lg"
+      class="garage h-[52.2rem] pl-[8rem] sm:pl-[2rem] pt-[18.2rem] sm:pt-[12rem] text-base_fifth mb-[5.5rem] rounded-lg"
     >
       <div class="garage__content max-w-[51.3rem]">
         <h2 class="garage__title mb-[1.5rem] text-title">
@@ -111,10 +113,10 @@
         </h2>
       </div>
       <div
-        class="homes-kinds flex justify-center items-center gap-[1.4rem] mb-[8.2rem]"
+        class="homes-kinds flex justify-center items-center gap-[1.4rem] mb-[8.2rem] sm:flex-col"
       >
         <div
-          class="homes-kinds-set homes-find basis-1/2 w-[65.5rem] h-[51.9rem] rounded-lg flex flex-col justify-end items-start p-[4rem] text-base_fifth"
+          class="homes-kinds-set homes-find basis-1/2 max-w-[65.5rem] w-full h-[51.9rem] rounded-lg flex flex-col justify-end items-start p-[4rem] text-base_fifth"
         >
           <h2 class="homes-find__title text-title mb-[1rem]">
             Find inspiration for your family trip
@@ -151,7 +153,7 @@
         </div>
       </div>
       <div
-        class="homes-options flex justify-between items-start flex-wrap gap-[1rem]"
+        class="homes-options flex justify-between items-start flex-wrap gap-[2rem]"
       >
         @for (option of homeOptions; track option.title) {
           <div class="homes-options-item text-xl w-[22.7rem]">
@@ -193,7 +195,7 @@
       </button>
     </div>
     <div
-      class="attractions-options flex justify-center items-center gap-[2.2rem]"
+      class="attractions-options flex justify-center items-center flex-wrap gap-[2.2rem]"
     >
       @for (boat of attractionsInfo; track boat.title) {
         <div
@@ -212,7 +214,7 @@
   </section>
   <section class="bg-bg_fifth mb-[7rem] py-[4rem]">
     <div
-      class="wrapper-base flights h-[52.2rem] pl-[8rem] pt-[18.2rem] text-base_fifth rounded-lg"
+      class="wrapper-base flights h-[52.2rem] pl-[8rem] sm:pl-[2rem] pt-[18.2rem] sm:pt-[12rem] text-base_fifth rounded-lg"
     >
       <div class="flights__content max-w-[51.3rem]">
         <h2 class="flights__title mb-[1.5rem] text-title">
@@ -235,7 +237,9 @@
     class="statistic pt-[8.8rem] text-2xl pb-[14rem] text-base_fifth bg-bg_secondary"
   >
     <div class="max-w-[61rem] m-auto text-center">
-      <p class="statistic__title text-[4.8rem] font-bold mb-[4rem]">
+      <p
+        class="statistic__title text-[4.8rem] sm:text-[4rem] font-bold mb-[4rem]"
+      >
         This trip will be the best
       </p>
       <p
@@ -245,7 +249,9 @@
         you can make new acquaintances, new friends, business partners. Thanks
         to travel, you grow up, go to a new level of your personal development.
       </p>
-      <div class="statistic-info flex justify-between items-center">
+      <div
+        class="statistic-info flex justify-between items-center flex-wrap sm:justify-center sm:gap-[3rem]"
+      >
         <div class="statistic-info-item">
           <p class="statistic-info-item__title text-[7.2rem] leading-[8.3rem]">
             942

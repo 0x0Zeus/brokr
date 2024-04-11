@@ -8,10 +8,12 @@ import {
 import { IPhoto } from '@shared/models/shared';
 import { BehaviorSubject } from 'rxjs';
 
+import { ModalComponent } from '../modal';
+
 @Component({
   selector: 'app-slider',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, ModalComponent],
   templateUrl: './slider.component.html',
   styleUrl: './slider.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,6 +21,7 @@ import { BehaviorSubject } from 'rxjs';
 export class SliderComponent implements OnInit {
   @Input({ required: true }) photos!: IPhoto[];
   currentPhotoUrl = new BehaviorSubject<string | null>(null);
+  isFullMode = false;
 
   ngOnInit(): void {
     this.currentPhotoUrl.next(this.photos[0].lg);
@@ -26,5 +29,13 @@ export class SliderComponent implements OnInit {
 
   setCurrentPhotoUrl(url: string): void {
     this.currentPhotoUrl.next(url);
+  }
+
+  closeModal(): void {
+    this.isFullMode = false;
+  }
+
+  openModal(): void {
+    this.isFullMode = true;
   }
 }
