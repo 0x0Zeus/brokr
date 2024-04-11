@@ -18,6 +18,10 @@ html {
   font-size: 10px;
   color: #000000;
   background-color: #ffffff;
+
+  @media (max-width: 576px) {
+    font-size: 8px;
+  }
 }
 
 body {
