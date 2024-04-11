@@ -76,37 +76,21 @@
         <p class="ticket__nights mr-[2rem]">Ticket</p>
         <p class="price text-base_third">{{ flight.price }}$</p>
       </div>
-      <div class="luggage mb-[2.5rem] text-xl">
+      <div
+        class="luggage mb-[2.5rem] pb-[1rem] text-xl border-b-1 border-base_border"
+      >
         <h3 class="luggage__title mb-[2rem] font-bold text-3xl">
           Luggage Info
         </h3>
-
-        <div class="luggage-item flex items-center justify-start mb-[0.5rem]">
-          <h4 class="luggage-item__title mr-[2rem] text-2xl font-bold">
-            Type:
-          </h4>
-          <p class="luggage-item__info">{{ flight.luggage.type }}</p>
-        </div>
-        <div class="luggage-item flex items-center justify-start mb-[0.5rem]">
-          <h4 class="luggage-item__title mr-[2rem] text-2xl font-bold">
-            Max Amount:
-          </h4>
-          <p class="luggage-item__info">{{ flight.luggage.amount }}</p>
-        </div>
-        <div class="luggage-item flex items-center justify-start mb-[0.5rem]">
-          <h4 class="luggage-item__title mr-[2rem] text-2xl font-bold">
-            Weight:
-          </h4>
-          <p class="luggage-item__info">{{ flight.luggage.weight }}</p>
-        </div>
-        <div class="luggage-item flex items-center justify-start mb-[0.5rem]">
-          <h4 class="luggage-item__title mr-[2rem] text-2xl font-bold">
-            Dimensions:
-          </h4>
-          <p class="luggage-item__info">{{ flight.luggage.dimensions }}</p>
-        </div>
+        @if (flight.bookingMethods) {
+          @for (luggageItem of flight.luggage; track luggageItem.name) {
+            <app-flight-luggage [luggage]="luggageItem" />
+          }
+        } @else {
+          <p>No info.</p>
+        }
       </div>
-      <div class="methods">
+      <div class="methods mb-[2.5rem]">
         <h3 class="methods__title font-bold text-3xl mb-[1.4rem]">
           Booking methods
         </h3>
@@ -122,6 +106,19 @@
               </p>
             }
           </div>
+        } @else {
+          <p>No info.</p>
+        }
+      </div>
+      <div class="benefits">
+        <h3 class="benefits__title font-bold text-3xl mb-[1.4rem]">Benefits</h3>
+        @if (flight.benefits) {
+          @for (benefit of flight.benefits; track benefit) {
+            <p class="includes-item text-base_secondary rounded-lg text-xl">
+              <span class="text-base_third text-3xl mr-[0.5rem]">-</span
+              >{{ benefit }}
+            </p>
+          }
         } @else {
           <p>No info.</p>
         }
