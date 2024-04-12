@@ -1,11 +1,11 @@
 <form
   [formGroup]="staysFilterForm"
-  class="filters flex justify-start items-end mb-[3.2rem]"
+  class="filters flex justify-start items-end mb-[3.2rem] flex-wrap gap-[1.1rem]"
 >
-  <div class="relative input-item max-w-[32rem] mr-[1.1rem]">
+  <div class="relative input-item max-w-[32rem] sm:max-w-[32rem]">
     <div class="input-title font-medium text-sm mb-[0.6rem]">Where</div>
     <label
-      class="input-container p-input-icon-left h-[3.3rem] w-[32rem] flex justify-start items-center rounded-sm text-base"
+      class="input-container p-input-icon-left h-[3.3rem] w-full flex justify-start items-center rounded-sm text-base"
     >
       <i
         class="pi text-2xl text-base_primary"
@@ -52,7 +52,7 @@
       }
     </label>
   </div>
-  <div class="input-item mr-[1.1rem] relative">
+  <div class="input-item sm:max-w-[20rem] relative">
     <div class="input-title font-medium text-sm mb-[0.6rem]">From</div>
     <p-calendar
       [formControl]="arrivalDate"
@@ -65,24 +65,26 @@
       <div class="invalid__message">please enter a date</div>
     }
   </div>
-  <div class="input-item mr-[1.1rem] relative">
-    <div class="input-title font-medium text-sm mb-[0.6rem]">Until</div>
-    <p-calendar
-      [formControl]="departureDate"
-      iconDisplay="input"
-      [showIcon]="true"
-      [minDate]="nowDate"
-      class="h-[3.3rem] w-[17rem] block border-2 border-base_border rounded-sm text-base outline-none"
-    ></p-calendar>
-    @if (departureDate.hasError('required') && departureDate.touched) {
-      <div class="invalid__message">please enter a date</div>
-    }
+  <div class="flex justify-start items-end gap-[1.1rem]">
+    <div class="input-item sm:max-w-[20rem] relative">
+      <div class="input-title font-medium text-sm mb-[0.6rem]">Until</div>
+      <p-calendar
+        [formControl]="departureDate"
+        iconDisplay="input"
+        [showIcon]="true"
+        [minDate]="nowDate"
+        class="h-[3.3rem] w-[17rem] block border-2 border-base_border rounded-sm text-base outline-none"
+      ></p-calendar>
+      @if (departureDate.hasError('required') && departureDate.touched) {
+        <div class="invalid__message">please enter a date</div>
+      }
+    </div>
+    <button
+      (click)="onSearch()"
+      [ngClass]="staysFilterForm.valid && chosenLocation ? '' : 'btn-disabled'"
+      class="btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
+    >
+      <img src="assets/search.svg" alt="Search" class="w-full h-full" />
+    </button>
   </div>
-  <button
-    (click)="onSearch()"
-    [ngClass]="staysFilterForm.valid && chosenLocation ? '' : 'btn-disabled'"
-    class="btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
-  >
-    <img src="assets/search.svg" alt="Search" class="w-full h-full" />
-  </button>
 </form>
