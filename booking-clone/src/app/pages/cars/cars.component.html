@@ -9,7 +9,7 @@
 </div>
 
 @if (!(cars$ | async)?.length && (isLoadingCars$ | async)) {
-  <div class="mt-[16rem] h-full flex justify-center items-center w-full">
+  <div class="mt-[30vh] h-full flex justify-center items-center w-full">
     <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
   </div>
 } @else if ((cars$ | async)?.length) {

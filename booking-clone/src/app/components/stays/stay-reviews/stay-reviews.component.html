@@ -11,7 +11,7 @@
 </div>
 
 @if (!(reviews$ | async)?.length && (isReviewsLoading$ | async)) {
-  <div class="mt-[16rem] h-full flex justify-center items-center w-full">
+  <div class="mt-[10rem] h-full flex justify-center items-center w-full">
     <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
   </div>
 } @else if ((reviews$ | async)?.length) {
