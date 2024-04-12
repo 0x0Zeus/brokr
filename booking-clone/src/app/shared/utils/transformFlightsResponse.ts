@@ -76,7 +76,10 @@ export const getTransformedFlightDetails = (
           },
           {
             name: 'Dimensions',
-            value: `${flight.segments[0].travellerCabinLuggage[0].luggageAllowance.sizeRestrictions.maxLength} * ${flight.segments[0].travellerCabinLuggage[0].luggageAllowance.sizeRestrictions.maxWidth} * ${flight.segments[0].travellerCabinLuggage[0].luggageAllowance.sizeRestrictions.maxHeight} ${flight.segments[0].travellerCabinLuggage[0].luggageAllowance.sizeRestrictions.sizeUnit}`,
+            value: flight.segments[0].travellerCabinLuggage[0].luggageAllowance
+              .sizeRestrictions
+              ? `${flight.segments[0].travellerCabinLuggage[0].luggageAllowance.sizeRestrictions.maxLength} * ${flight.segments[0].travellerCabinLuggage[0].luggageAllowance.sizeRestrictions.maxWidth} * ${flight.segments[0].travellerCabinLuggage[0].luggageAllowance.sizeRestrictions.maxHeight} ${flight.segments[0].travellerCabinLuggage[0].luggageAllowance.sizeRestrictions.sizeUnit}`
+              : 'Unknown',
           },
         ]
       : null,
