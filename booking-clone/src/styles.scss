@@ -36,6 +36,15 @@ body {
   margin: auto;
 }
 
+.base-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(33.7rem, 1fr));
+  justify-items: center;
+  column-gap: 2.4rem;
+  margin-bottom: 1rem;
+  row-gap: 1.1rem;
+}
+
 //scrollbar
 
 ::-webkit-scrollbar {
@@ -62,17 +71,6 @@ body {
 
 ::-webkit-scrollbar-corner {
   background: rgba(0, 0, 0, 0);
-}
-
-//base grid
-
-.base-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(33.7rem, 1fr));
-  justify-items: center;
-  column-gap: 2.4rem;
-  margin-bottom: 1rem;
-  row-gap: 1.1rem;
 }
 
 //buttons
