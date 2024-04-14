@@ -29,7 +29,7 @@
 @if (isFullMode) {
   <app-modal (closeModal)="closeModal()">
     <img
-      class="attraction-photo rounded-lg min-w-[60rem] h-[90vh] bg-center bg-cover mb-[1rem] object-cover"
+      class="attraction-photo rounded-lg min-w-[80vw] max-h-[80vh] min-h-[54rem] object-cover"
       [src]="currentPhotoUrl | async"
       alt="Full mode photo"
     />
