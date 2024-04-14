@@ -53,9 +53,6 @@ module.exports = {
         '3xl': '2rem',
         '4xl': '2.2rem',
       },
-      gridTemplateColumns: {
-        'auto-fit-md': 'repeat(auto-fit, minmax(63rem, 1fr))',
-      },
     },
     plugins: [],
   },
