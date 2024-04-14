@@ -41,7 +41,6 @@ export class NavigationComponent implements OnInit {
   checkedMap = false;
   currentRoute = new BehaviorSubject<string>(this.router.url);
   private destroy$ = inject(DestroyDirective).destroy$;
-  isActiveHamburger = false;
 
   constructor(
     private mapFacade: MapFacade,
@@ -62,9 +61,5 @@ export class NavigationComponent implements OnInit {
 
   toggleMap(): void {
     this.mapFacade.toggleMap(this.checkedMap);
-  }
-
-  toggleHamburger(): void {
-    this.isActiveHamburger = !this.isActiveHamburger;
   }
 }

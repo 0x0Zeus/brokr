@@ -1,5 +1,5 @@
-<div class="nav-desktop md:hidden flex items-start justify-between">
-  <nav class="nav flex items-center justify-start gap-[4rem]">
+<div class="nav-desktop flex items-start justify-between">
+  <nav class="nav flex md:hidden items-center justify-start gap-[4rem]">
     @for (link of links; track link.title) {
       <div
         class="nav-item -mb-[0.2rem] flex items-center justify-start pb-[1rem] border-b-4 border-transparent hover:border-base_third hover:text-base_third cursor-pointer"
@@ -20,7 +20,7 @@
     (currentRoute | async) !== '/booking/flights'
   ) {
     <div
-      class="input-item max-w-[17rem] flex items-center justify-start pl-[2rem]"
+      class="input-item max-w-[17rem] md:ml-auto flex items-center justify-start pl-[2rem] pb-[0.9rem]"
     >
       <div class="input-title font-medium text-sm mr-[1.1rem]">Map</div>
       <p-inputSwitch
@@ -31,55 +31,4 @@
       ></p-inputSwitch>
     </div>
   }
-</div>
-
-<div class="hidden md:block">
-  <div class="hamburger-container fixed top-[2rem] left-[2.5rem]">
-    <button
-      class="hamburger"
-      (click)="toggleHamburger()"
-      [ngClass]="{ active: isActiveHamburger }"
-    >
-      <span class="hamburger_line"></span>
-      <span class="hamburger_line"></span>
-      <span class="hamburger_line"></span>
-    </button>
-  </div>
-  <div
-    class="nav-mobile flex invisible transition-all duration-300 items-start justify-between fixed pt-[10rem] pb-[6rem] rounded-md shadow-lg flex-col -translate-x-[100%] left-0 top-0 bg-base_fifth"
-    [ngClass]="{ open: isActiveHamburger }"
-  >
-    <nav class="nav flex flex-col items-start justify-between mb-[4rem]">
-      @for (link of links; track link.title) {
-        <div
-          class="nav-item flex items-center justify-start pl-[4rem] pr-[8rem] py-[2rem] w-full border-b-4 border-transparent hover:bg-bg_secondary/30 cursor-pointer"
-          [routerLink]="[link.link]"
-          routerLinkActive="active"
-        >
-          <img
-            [src]="link.image"
-            [alt]="link.title"
-            class="nav-item__icon mr-[1.2rem] h-[2rem]"
-          />
-          <div class="nav-item__title">{{ link.title }}</div>
-        </div>
-      }
-    </nav>
-    @if (
-      (currentRoute | async) !== '/booking/attractions' &&
-      (currentRoute | async) !== '/booking/flights'
-    ) {
-      <div
-        class="input-item max-w-[17rem] flex items-center justify-start ml-[4rem]"
-      >
-        <div class="input-title font-medium text-sm mr-[1.1rem]">Map</div>
-        <p-inputSwitch
-          [(ngModel)]="checkedMap"
-          [ngModelOptions]="{ standalone: true }"
-          class="block"
-          (ngModelChange)="toggleMap()"
-        ></p-inputSwitch>
-      </div>
-    }
-  </div>
 </div>

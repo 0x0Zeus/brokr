@@ -34,6 +34,11 @@ body {
   max-width: 124.2rem;
   width: 100%;
   margin: auto;
+
+  @media (max-width: 1336px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .base-grid {

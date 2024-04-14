@@ -52,7 +52,7 @@
       }
     </label>
   </div>
-  <div class="flex justify-start items-end gap-[1.1rem]">
+  <div class="flex justify-start items-end gap-[1.1rem] sm:flex-wrap">
     <div class="input-item relative">
       <div class="input-title font-medium text-sm mb-[0.6rem]">From</div>
       <p-calendar
@@ -83,7 +83,7 @@
       }
     </div>
   </div>
-  <div class="flex justify-start items-end gap-[1.1rem]">
+  <div class="flex justify-start items-end gap-[1.1rem] sm:flex-wrap">
     <div class="input-item relative">
       <div class="input-title font-medium text-sm mb-[0.6rem]">Until</div>
       <p-calendar
@@ -97,28 +97,30 @@
         <div class="invalid__message">please enter a date</div>
       }
     </div>
-    <div class="input-item relative">
-      <p-calendar
-        [showTime]="true"
-        [formControl]="untilTime"
-        hourFormat="12"
-        [showIcon]="true"
-        [timeOnly]="true"
-        [minDate]="nowDate"
-        icon="pi pi-clock text-2xl text-base_secondary"
-        class="h-[3.3rem] w-[17rem] block border-2 border-base_border rounded-sm text-base outline-none"
+    <div class="flex justify-start items-end gap-[1.1rem]">
+      <div class="input-item relative">
+        <p-calendar
+          [showTime]="true"
+          [formControl]="untilTime"
+          hourFormat="12"
+          [showIcon]="true"
+          [timeOnly]="true"
+          [minDate]="nowDate"
+          icon="pi pi-clock text-2xl text-base_secondary"
+          class="h-[3.3rem] w-[17rem] block border-2 border-base_border rounded-sm text-base outline-none"
+        >
+        </p-calendar>
+        @if (untilTime.hasError('required') && untilTime.touched) {
+          <div class="invalid__message">please enter a time</div>
+        }
+      </div>
+      <button
+        (click)="onSearch()"
+        [ngClass]="carsFilterForm.valid && chosenLocation ? '' : 'btn-disabled'"
+        class="btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
       >
-      </p-calendar>
-      @if (untilTime.hasError('required') && untilTime.touched) {
-        <div class="invalid__message">please enter a time</div>
-      }
+        <img src="assets/search.svg" alt="Search" class="w-full h-full" />
+      </button>
     </div>
-    <button
-      (click)="onSearch()"
-      [ngClass]="carsFilterForm.valid && chosenLocation ? '' : 'btn-disabled'"
-      class="btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
-    >
-      <img src="assets/search.svg" alt="Search" class="w-full h-full" />
-    </button>
   </div>
 </form>
