@@ -8,7 +8,10 @@ import {
 import { FlightComponent } from '@components/flights/flight';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
-import { IFlightsSearchParams } from '@shared/interfaces/flights';
+import {
+  IFlightsSearchFilters,
+  IFlightsSearchParams,
+} from '@shared/interfaces/flights';
 import { FlightsFacade } from '@store/flights';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { takeUntil } from 'rxjs';
@@ -32,6 +35,11 @@ export class FlightsComponent implements OnInit {
   flightsSearchParams$ = this.flightsFacade.flightsSearchParams$;
   flightsSearchParams: null | IFlightsSearchParams = null;
   private destroy$ = inject(DestroyDirective).destroy$;
+  filters: IFlightsSearchFilters = {
+    adults: null,
+    cabinClass: null,
+    sortBy: null,
+  };
 
   constructor(private flightsFacade: FlightsFacade) {}
 
@@ -41,14 +49,23 @@ export class FlightsComponent implements OnInit {
       .subscribe((searchParams) => {
         this.flightsSearchParams = searchParams;
       });
+
+    this.flightsFacade.flightsSearchFilters$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((filters) => {
+        this.filters = filters;
+      });
   }
 
   setNextPage(): void {
     if (this.flightsSearchParams) {
-      this.flightsFacade.fetchFlights({
-        ...this.flightsSearchParams,
-        page: this.flightsSearchParams.page + 1,
-      });
+      this.flightsFacade.fetchFlights(
+        {
+          ...this.flightsSearchParams,
+          page: this.flightsSearchParams.page + 1,
+        },
+        this.filters
+      );
     }
   }
 }

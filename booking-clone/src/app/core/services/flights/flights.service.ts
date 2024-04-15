@@ -4,6 +4,7 @@ import {
   IFlightDetailsResponse,
   IFlightsDestinationsResponse,
   IFlightsResponse,
+  IFlightsSearchFilters,
   IFlightsSearchParams,
 } from '@shared/interfaces/flights';
 import {
@@ -56,29 +57,45 @@ export class FlightsService {
       );
   }
 
-  getFlights(query: IFlightsSearchParams): Observable<IFlight[]> {
+  getFlights(
+    query: IFlightsSearchParams,
+    filters: IFlightsSearchFilters
+  ): Observable<IFlight[]> {
     const { fromId, toId, departureDate, page } = query;
-    const options = {
-      params: new HttpParams()
-        .set('fromId', fromId)
-        .append('toId', toId)
-        .append('departDate', departureDate)
-        .append('pageNo', page)
-        .append('currency_code', 'USD'),
-    };
-    return this.http.get<IFlightsResponse>(this.searchFlightsURL, options).pipe(
-      map((resp) => {
-        if (resp.data.flightOffers) {
-          const transData = resp.data.flightOffers.map((flight) => {
-            const flightData = getTransformedFlightData(flight);
-            return flightData;
-          });
-          return transData;
-        } else {
-          return [];
-        }
-      })
-    );
+    let params = new HttpParams()
+      .set('fromId', fromId)
+      .append('toId', toId)
+      .append('departDate', departureDate)
+      .append('pageNo', page)
+      .append('currency_code', 'USD');
+
+    if (filters.adults) {
+      params = params.append('adults', filters.adults);
+    }
+    if (filters.cabinClass) {
+      params = params.append('cabinClass', filters.cabinClass);
+    }
+    if (filters.sortBy) {
+      params = params.append('sort', filters.sortBy);
+    }
+
+    console.log(params);
+
+    return this.http
+      .get<IFlightsResponse>(this.searchFlightsURL, { params })
+      .pipe(
+        map((resp) => {
+          if (resp.data.flightOffers) {
+            const transData = resp.data.flightOffers.map((flight) => {
+              const flightData = getTransformedFlightData(flight);
+              return flightData;
+            });
+            return transData;
+          } else {
+            return [];
+          }
+        })
+      );
   }
 
   getFlightDetails({

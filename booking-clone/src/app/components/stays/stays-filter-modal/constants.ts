@@ -1,4 +1,4 @@
-export const sortTypes = [
+export const staysSortTypes = [
   { name: 'Entire homes', value: 'upsort_bh' },
   { name: 'Popularity', value: 'popularity' },
   { name: 'Distance from city centre', value: 'distance' },

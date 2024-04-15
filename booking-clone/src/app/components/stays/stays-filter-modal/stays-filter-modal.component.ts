@@ -6,12 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DestroyDirective } from '@core/directives';
 import { IStaysModalFilterForm } from '@shared/models/stays';
 import { StaysFacade } from '@store/stays';
@@ -19,17 +14,12 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { takeUntil } from 'rxjs';
 
-import { sortTypes } from './constants';
+import { staysSortTypes } from './constants';
 
 @Component({
   selector: 'app-stays-filter-modal',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    InputNumberModule,
-    FormsModule,
-    DropdownModule,
-  ],
+  imports: [ReactiveFormsModule, InputNumberModule, DropdownModule],
   templateUrl: './stays-filter-modal.component.html',
   styleUrl: './stays-filter-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,7 +27,7 @@ import { sortTypes } from './constants';
 })
 export class StaysFilterModalComponent implements OnInit {
   @Output() closeModal = new EventEmitter<boolean>();
-  sortTypes = sortTypes;
+  staysSortTypes = staysSortTypes;
   private destroy$ = inject(DestroyDirective).destroy$;
   staysModalFilterForm = new FormGroup<IStaysModalFilterForm>({
     adults: new FormControl<number | null>(null),
@@ -78,5 +68,16 @@ export class StaysFilterModalComponent implements OnInit {
     const filtersFormData = this.staysModalFilterForm.getRawValue();
     this.staysFacade.setStaysFilters(filtersFormData);
     this.closeModal.emit(false);
+  }
+
+  clearForm(): void {
+    this.staysModalFilterForm.reset();
+    this.staysFacade.setStaysFilters({
+      adults: null,
+      rooms: null,
+      priceMin: null,
+      priceMax: null,
+      sortBy: null,
+    });
   }
 }

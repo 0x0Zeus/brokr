@@ -14,9 +14,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
+import { ModalComponent } from '@components/shared/modal';
 import { DestroyDirective } from '@core/directives';
 import { FlightsService } from '@core/services/flights';
 import { ToasterService } from '@core/services/toaster';
+import { IFlightsSearchFilters } from '@shared/interfaces/flights';
 import {
   IFlightsDestination,
   IFlightsFilterForm,
@@ -34,6 +36,8 @@ import {
   takeUntil,
 } from 'rxjs';
 
+import { FlightsFilterModalComponent } from '../flights-filter-modal';
+
 @Component({
   selector: 'app-flights-filter',
   standalone: true,
@@ -44,6 +48,8 @@ import {
     MiniLoaderComponent,
     CalendarModule,
     FormsModule,
+    FlightsFilterModalComponent,
+    ModalComponent,
   ],
   templateUrl: './flights-filter.component.html',
   styleUrl: './flights-filter.component.scss',
@@ -55,13 +61,17 @@ export class FlightsFilterComponent implements OnInit {
   destinationFromIsLoading$ = new BehaviorSubject<boolean>(false);
   elasticLocationFromValues$ = new BehaviorSubject<IFlightsDestination[]>([]);
   chosenLocationFrom: null | IFlightsDestination = null;
-
   isLocationToFocus = false;
   destinationToIsLoading$ = new BehaviorSubject<boolean>(false);
   elasticLocationToValues$ = new BehaviorSubject<IFlightsDestination[]>([]);
   chosenLocationTo: null | IFlightsDestination = null;
-
+  isFiltersModalOpen = false;
   nowDate = new Date(Date.now());
+  filters: IFlightsSearchFilters = {
+    adults: null,
+    cabinClass: null,
+    sortBy: null,
+  };
   private destroy$ = inject(DestroyDirective).destroy$;
 
   flightsFilterForm = new FormGroup<IFlightsFilterForm>({
@@ -131,6 +141,12 @@ export class FlightsFilterComponent implements OnInit {
         this.destinationToIsLoading$.next(false);
         this.elasticLocationToValues$.next(locationsValues);
       });
+
+    this.flightsFacade.flightsSearchFilters$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((filters) => {
+        this.filters = filters;
+      });
   }
 
   onFocus(type: string): void {
@@ -157,13 +173,24 @@ export class FlightsFilterComponent implements OnInit {
     ) {
       const flightsFormData = this.flightsFilterForm.getRawValue();
 
-      this.flightsFacade.fetchFlights({
-        fromId: this.chosenLocationFrom.destId,
-        toId: this.chosenLocationTo.destId,
-        departureDate: parseDate(flightsFormData.departureDate),
-        page: 1,
-      });
+      this.flightsFacade.fetchFlights(
+        {
+          fromId: this.chosenLocationFrom.destId,
+          toId: this.chosenLocationTo.destId,
+          departureDate: parseDate(flightsFormData.departureDate),
+          page: 1,
+        },
+        this.filters
+      );
     }
+  }
+
+  closeModal(): void {
+    this.isFiltersModalOpen = false;
+  }
+
+  openModal(): void {
+    this.isFiltersModalOpen = true;
   }
 
   elasticSearch(destination: IFlightsDestination, type: string): void {
