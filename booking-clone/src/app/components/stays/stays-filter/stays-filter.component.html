@@ -82,9 +82,25 @@
     <button
       (click)="onSearch()"
       [ngClass]="staysFilterForm.valid && chosenLocation ? '' : 'btn-disabled'"
-      class="btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
+      class="search btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
     >
       <img src="assets/search.svg" alt="Search" class="w-full h-full" />
     </button>
+    <button
+      (click)="openModal()"
+      class="filter h-[3.3rem] w-[11.5rem] sm:ml-[2rem] ml-[10rem] border-2 border-base_border rounded-sm text-base flex justify-center items-center"
+    >
+      <img
+        src="assets/filter.svg"
+        alt="Search"
+        class="w-[1.3rem]] h-[1.1rem] mr-[1.7rem]"
+      />
+      <span>Filter</span>
+    </button>
   </div>
 </form>
+@if (isFiltersModalOpen) {
+  <app-modal (closeModal)="closeModal()">
+    <app-stays-filter-modal />
+  </app-modal>
+}

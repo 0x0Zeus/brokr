@@ -1,6 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
-import { IStaysSearchParams } from '@shared/interfaces/stays';
+import {
+  IStaysSearchFilters,
+  IStaysSearchParams,
+} from '@shared/interfaces/stays';
 import { IStay } from '@shared/models/stays';
 
 import * as STAYS_ACTIONS from './stays.action';
@@ -10,6 +13,7 @@ export interface StaysState {
   isLoading: boolean;
   error: HttpErrorResponse | null;
   searchParams: null | IStaysSearchParams;
+  filters: IStaysSearchFilters;
 }
 
 export const initialState: StaysState = {
@@ -17,26 +21,32 @@ export const initialState: StaysState = {
   isLoading: false,
   error: null,
   searchParams: null,
+  filters: { adults: null, rooms: null, priceMin: null, priceMax: null },
 };
 
 export const staysReducer = createReducer(
   initialState,
-  on(STAYS_ACTIONS.FetchStays, (state, { searchParams }): StaysState => {
-    if (searchParams.page === 1) {
-      return {
-        ...state,
-        searchParams,
-        stays: [],
-        isLoading: true,
-      };
-    } else {
-      return {
-        ...state,
-        searchParams,
-        isLoading: true,
-      };
+  on(
+    STAYS_ACTIONS.FetchStays,
+    (state, { searchParams, filters }): StaysState => {
+      if (searchParams.page === 1) {
+        return {
+          ...state,
+          searchParams,
+          filters,
+          stays: [],
+          isLoading: true,
+        };
+      } else {
+        return {
+          ...state,
+          searchParams,
+          filters,
+          isLoading: true,
+        };
+      }
     }
-  }),
+  ),
   on(STAYS_ACTIONS.FetchStaysSuccess, (state, { stays }): StaysState => {
     if (state.searchParams && state.searchParams.page === 1) {
       return {
@@ -59,6 +69,13 @@ export const staysReducer = createReducer(
       error,
       stays: [],
       isLoading: false,
+    })
+  ),
+  on(
+    STAYS_ACTIONS.SetStaysFilters,
+    (state, { filters }): StaysState => ({
+      ...state,
+      filters,
     })
   )
 );

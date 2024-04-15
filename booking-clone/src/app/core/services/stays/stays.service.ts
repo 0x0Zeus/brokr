@@ -7,6 +7,7 @@ import {
   IStayReviewsResponse,
   IStaysDestinationsResponse,
   IStaysResponse,
+  IStaysSearchFilters,
   IStaysSearchParams,
 } from '@shared/interfaces/stays';
 import { IReview } from '@shared/models/shared';
@@ -59,18 +60,37 @@ export class StaysService {
       );
   }
 
-  getStays(query: IStaysSearchParams): Observable<IStay[]> {
+  getStays(
+    query: IStaysSearchParams,
+    filters: IStaysSearchFilters
+  ): Observable<IStay[]> {
+    console.log(filters);
     const { destId, searchType, arrivalDate, departureDate, page } = query;
-    const options = {
-      params: new HttpParams()
-        .set('dest_id', destId)
-        .append('search_type', searchType)
-        .append('arrival_date', arrivalDate)
-        .append('departure_date', departureDate)
-        .append('page_number', page)
-        .append('currency_code', 'USD'),
-    };
-    return this.http.get<IStaysResponse>(this.searchStaysURL, options).pipe(
+    let params: HttpParams = new HttpParams()
+      .set('dest_id', destId)
+      .append('search_type', searchType)
+      .append('arrival_date', arrivalDate)
+      .append('departure_date', departureDate)
+      .append('page_number', page)
+      .append('currency_code', 'USD');
+
+    if (filters.adults) {
+      params = params.append('adults', filters.adults);
+    }
+    if (filters.rooms) {
+      console.log(filters.rooms);
+      params = params.append('room_qty', filters.rooms);
+    }
+    if (filters.priceMin) {
+      params = params.append('price_min', filters.priceMin);
+    }
+    if (filters.priceMax) {
+      params = params.append('price_max', filters.priceMax);
+    }
+
+    console.log(params);
+
+    return this.http.get<IStaysResponse>(this.searchStaysURL, { params }).pipe(
       map((resp) => {
         if (resp.data) {
           const transData = resp.data.hotels.map((stay) => {

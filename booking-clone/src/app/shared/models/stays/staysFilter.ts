@@ -5,3 +5,10 @@ export interface IStaysFilterForm {
   departureDate: FormControl<Date>;
   locationValue: FormControl<string>;
 }
+
+export interface IStaysModalFilterForm {
+  adults: FormControl<number | null>;
+  rooms: FormControl<number | null>;
+  priceMin: FormControl<number | null>;
+  priceMax: FormControl<number | null>;
+}

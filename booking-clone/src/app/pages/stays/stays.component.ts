@@ -8,7 +8,10 @@ import {
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { StayComponent } from '@components/stays/stay';
 import { DestroyDirective } from '@core/directives';
-import { IStaysSearchParams } from '@shared/interfaces/stays';
+import {
+  IStaysSearchFilters,
+  IStaysSearchParams,
+} from '@shared/interfaces/stays';
 import { MapFacade } from '@store/map';
 import { StaysFacade } from '@store/stays';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -33,6 +36,12 @@ export class StaysComponent implements OnInit {
   isLoadingStays$ = this.staysFacade.staysIsLoading$;
   staysSearchParams$ = this.staysFacade.staysSearchParams$;
   staysSearchParams: null | IStaysSearchParams = null;
+  filters: IStaysSearchFilters = {
+    adults: null,
+    rooms: null,
+    priceMin: null,
+    priceMax: null,
+  };
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
@@ -55,14 +64,23 @@ export class StaysComponent implements OnInit {
       }));
       this.mapFacade.addMapData(mapData);
     });
+
+    this.staysFacade.staysSearchFilters$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((filters) => {
+        this.filters = filters;
+      });
   }
 
   setNextPage(): void {
     if (this.staysSearchParams) {
-      this.staysFacade.fetchStays({
-        ...this.staysSearchParams,
-        page: this.staysSearchParams.page + 1,
-      });
+      this.staysFacade.fetchStays(
+        {
+          ...this.staysSearchParams,
+          page: this.staysSearchParams.page + 1,
+        },
+        this.filters
+      );
     }
   }
 }

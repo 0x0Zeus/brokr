@@ -25,6 +25,11 @@ export const selectStaysSearchParams = createSelector(
   (state: StaysState) => state.searchParams
 );
 
+export const selectStaysFilters = createSelector(
+  selectStaysStore,
+  (state: StaysState) => state.filters
+);
+
 export const selectDetailsStayId = createSelector(
   selectRouteParams,
   ({ stayId }) => {

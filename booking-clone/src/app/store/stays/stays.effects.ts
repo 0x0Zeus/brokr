@@ -18,8 +18,8 @@ export class StaysEffects {
   fetchStays$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(STAYS_ACTIONS.FetchStays),
-      switchMap(({ searchParams }) =>
-        this.staysService.getStays(searchParams).pipe(
+      switchMap(({ searchParams, filters }) =>
+        this.staysService.getStays(searchParams, filters).pipe(
           map((stays) => STAYS_ACTIONS.FetchStaysSuccess({ stays })),
           catchError((error: HttpErrorResponse) => {
             this.toasterService.showHttpsError(error);

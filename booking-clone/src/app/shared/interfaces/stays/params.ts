@@ -6,6 +6,13 @@ export interface IStaysSearchParams {
   page: number;
 }
 
+export interface IStaysSearchFilters {
+  adults: number | null;
+  rooms: number | null;
+  priceMin: number | null;
+  priceMax: number | null;
+}
+
 export interface IStayDetailsSearchParams {
   arrivalDate: string;
   departureDate: string;
