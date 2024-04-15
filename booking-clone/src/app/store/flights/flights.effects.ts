@@ -18,8 +18,8 @@ export class FlightsEffects {
   fetchFlights$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FLIGHTS_ACTIONS.FetchFlights),
-      switchMap(({ searchParams }) =>
-        this.flightsService.getFlights(searchParams).pipe(
+      switchMap(({ searchParams, filters }) =>
+        this.flightsService.getFlights(searchParams, filters).pipe(
           map((flights) => FLIGHTS_ACTIONS.FetchFlightsSuccess({ flights })),
           catchError((error: HttpErrorResponse) => {
             this.toasterService.showHttpsError(error);

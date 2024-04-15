@@ -26,6 +26,11 @@ export const selectFlightsSearchParams = createSelector(
   (state: FlightsState) => state.searchParams
 );
 
+export const selectFlightsFilters = createSelector(
+  selectFlightsStore,
+  (state: FlightsState) => state.filters
+);
+
 export const selectDetailsFlightId = createSelector(
   selectRouteParams,
   ({ flightId }) => {

@@ -4,3 +4,9 @@ export interface IFlightsSearchParams {
   toId: string;
   page: number;
 }
+
+export interface IFlightsSearchFilters {
+  adults: number | null;
+  sortBy: string | null;
+  cabinClass: string | null;
+}

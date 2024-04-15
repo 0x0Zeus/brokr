@@ -11,4 +11,5 @@ export interface IStaysModalFilterForm {
   rooms: FormControl<number | null>;
   priceMin: FormControl<number | null>;
   priceMax: FormControl<number | null>;
+  sortBy: FormControl<string | null>;
 }
