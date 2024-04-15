@@ -66,6 +66,7 @@ export class StaysFilterComponent implements OnInit {
     rooms: null,
     priceMin: null,
     priceMax: null,
+    sortBy: null,
   };
   private destroy$ = inject(DestroyDirective).destroy$;
 

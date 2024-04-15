@@ -64,8 +64,8 @@ export class StaysService {
     query: IStaysSearchParams,
     filters: IStaysSearchFilters
   ): Observable<IStay[]> {
-    console.log(filters);
     const { destId, searchType, arrivalDate, departureDate, page } = query;
+
     let params: HttpParams = new HttpParams()
       .set('dest_id', destId)
       .append('search_type', searchType)
@@ -78,7 +78,6 @@ export class StaysService {
       params = params.append('adults', filters.adults);
     }
     if (filters.rooms) {
-      console.log(filters.rooms);
       params = params.append('room_qty', filters.rooms);
     }
     if (filters.priceMin) {
@@ -86,6 +85,9 @@ export class StaysService {
     }
     if (filters.priceMax) {
       params = params.append('price_max', filters.priceMax);
+    }
+    if (filters.sortBy) {
+      params = params.append('sort_by', filters.sortBy);
     }
 
     console.log(params);

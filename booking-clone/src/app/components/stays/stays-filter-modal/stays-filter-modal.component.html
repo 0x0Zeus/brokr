@@ -21,7 +21,7 @@
             inputId="minmax-buttons"
             [min]="0"
             [max]="100"
-            styleClass="h-[3rem] text-2xl border-2 border-base_border rounded-sm outline-base_secondary"
+            styleClass="h-[3rem] text-2xl border-2 border-base_border rounded-sm"
           >
           </p-inputNumber>
         </div>
@@ -35,13 +35,15 @@
             [showButtons]="true"
             inputId="minmax-buttons"
             [min]="0"
-            styleClass="h-[3rem] text-2xl border-2 border-base_border rounded-sm outline-base_secondary"
+            styleClass="h-[3rem] text-2xl border-2 border-base_border rounded-sm"
           >
           </p-inputNumber>
         </div>
       </div>
     </div>
-    <div class="filter-group pt-[1.8rem] pb-[3.2rem]">
+    <div
+      class="filter-group pt-[1.8rem] pb-[3.2rem] border-b-2 border-base_border"
+    >
       <h4 class="filter-group__title text-2xl mb-[1rem] font-bold">Price</h4>
       <div class="flex flex-wrap justify-between items-center">
         <div class="filter-item w-[28.3rem]">
@@ -52,13 +54,13 @@
             buttonLayout="horizontal"
             inputId="horizontal"
             spinnerMode="horizontal"
-            [step]="1"
+            [step]="10"
             [min]="0"
             decrementButtonClass="p-button-danger"
             incrementButtonClass="p-button-success"
             incrementButtonIcon="pi pi-plus"
             decrementButtonIcon="pi pi-minus"
-            styleClass="h-[3rem] text-2xl border-2 border-base_border rounded-sm outline-base_secondary"
+            styleClass="h-[3rem] text-2xl border-2 border-base_border rounded-sm"
             mode="currency"
             currency="USD"
           ></p-inputNumber>
@@ -71,17 +73,31 @@
             buttonLayout="horizontal"
             inputId="horizontal"
             spinnerMode="horizontal"
-            [step]="1"
+            [step]="10"
             [min]="0"
             decrementButtonClass="p-button-danger"
             incrementButtonClass="p-button-success"
             incrementButtonIcon="pi pi-plus"
             decrementButtonIcon="pi pi-minus"
-            styleClass="h-[3rem] text-2xl border-2 border-base_border rounded-sm outline-base_secondary"
+            styleClass="h-[3rem] text-2xl border-2 border-base_border rounded-sm"
             mode="currency"
             currency="USD"
           ></p-inputNumber>
         </div>
+      </div>
+    </div>
+    <div class="filter-item pt-[1.8rem] pb-[3.2rem]">
+      <h4 class="filter-item__title text-2xl mb-[1rem] font-bold">Sort By</h4>
+      <div class="max-w-[10rem]">
+        <p-dropdown
+          [formControl]="sortBy"
+          [options]="sortTypes"
+          optionLabel="name"
+          optionValue="value"
+          placeholder="Sort by"
+          class="dropdown"
+          styleClass="h-[3rem] border-2 border-base_border rounded-sm"
+        ></p-dropdown>
       </div>
     </div>
   </div>

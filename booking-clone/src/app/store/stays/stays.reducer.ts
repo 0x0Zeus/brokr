@@ -21,7 +21,13 @@ export const initialState: StaysState = {
   isLoading: false,
   error: null,
   searchParams: null,
-  filters: { adults: null, rooms: null, priceMin: null, priceMax: null },
+  filters: {
+    adults: null,
+    rooms: null,
+    priceMin: null,
+    priceMax: null,
+    sortBy: null,
+  },
 };
 
 export const staysReducer = createReducer(

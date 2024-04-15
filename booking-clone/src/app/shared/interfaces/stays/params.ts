@@ -11,6 +11,7 @@ export interface IStaysSearchFilters {
   rooms: number | null;
   priceMin: number | null;
   priceMax: number | null;
+  sortBy: string | null;
 }
 
 export interface IStayDetailsSearchParams {
