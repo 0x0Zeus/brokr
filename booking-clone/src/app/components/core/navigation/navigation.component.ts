@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,6 +17,8 @@ import { MapFacade } from '@store/map';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 
+import { links } from './constants';
+
 @Component({
   selector: 'app-navigation',
   standalone: true,
@@ -26,6 +28,7 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
     FormsModule,
     InputSwitchModule,
     AsyncPipe,
+    NgClass,
   ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss',
@@ -33,6 +36,7 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
   hostDirectives: [DestroyDirective],
 })
 export class NavigationComponent implements OnInit {
+  links = links;
   isMap$ = this.mapFacade.isMap$;
   checkedMap = false;
   currentRoute = new BehaviorSubject<string>(this.router.url);

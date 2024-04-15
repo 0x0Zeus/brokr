@@ -1,8 +1,10 @@
 <div class="details-container max-w-[135rem] px-[2rem] m-auto mt-[5.7rem]">
   @if (stayInfo$ | async; as stayInfo) {
-    <div class="main flex justify-between gap-[6.6rem] mb-[6.7rem]">
+    <div
+      class="main flex justify-between gap-[6.6rem] mb-[6.7rem] lg:flex-wrap lg:justify-center"
+    >
       <app-slider [photos]="stayInfo.photos" />
-      <div class="main-info basis-1/2 w-full">
+      <div class="main-info basis-1/2 lg:basis-auto w-full">
         <div class="host flex items-center justify-start mb-[1.6rem]">
           <img
             src="assets/details/reward.svg"

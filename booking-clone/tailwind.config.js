@@ -3,21 +3,21 @@ module.exports = {
   content: ['./src/**/*.{html,ts}'],
   darkMode: 'class',
   theme: {
+    screens: {
+      '3xl': { max: '1576px' },
+      '2xl': { max: '1336px' },
+      xl: { max: '1200px' },
+      lg: { max: '992px' },
+      md: { max: '768px' },
+      sm: { max: '576px' },
+      xs: { max: '480px' },
+    },
     extend: {
       fontFamily: {
         light: ['ui-sans-serif', 'Roboto Light'],
         regular: ['ui-sans-serif', 'Roboto Regular'],
         medium: ['ui-sans-serif', 'Roboto Medium'],
         bold: ['ui-sans-serif', 'Roboto Bold'],
-      },
-      screens: {
-        xs: { max: '480px' },
-        sm: { max: '576px' },
-        md: { max: '768px' },
-        lg: { max: '992px' },
-        xl: { max: '1200px' },
-        '2xl': { max: '1336px' },
-        '3xl': { max: '1576px' },
       },
       colors: {
         base_primary: '#000000',
@@ -52,9 +52,6 @@ module.exports = {
         '2xl': '1.8rem',
         '3xl': '2rem',
         '4xl': '2.2rem',
-      },
-      gridTemplateColumns: {
-        'auto-fit-md': 'repeat(auto-fit, minmax(63rem, 1fr))',
       },
     },
     plugins: [],

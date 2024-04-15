@@ -2,13 +2,13 @@
 @import 'map';
 @import 'fonts';
 
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
 @import 'primeng/resources/themes/lara-light-blue/theme.css';
 @import 'primeng/resources/primeng.css';
 @import 'primeicons/primeicons.css';
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 :root {
   font-family: 'Roboto Regular', sans-serif;
@@ -34,6 +34,11 @@ body {
   max-width: 124.2rem;
   width: 100%;
   margin: auto;
+
+  @media (max-width: 1336px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .base-grid {
@@ -102,6 +107,7 @@ a {
 
 .invalid__message {
   position: absolute;
+  line-height: 1.1rem;
   color: rgb(239 68 68);
   left: 0;
   bottom: 0;

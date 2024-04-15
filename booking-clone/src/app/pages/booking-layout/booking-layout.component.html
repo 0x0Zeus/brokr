@@ -1,4 +1,4 @@
-<div class="mt-[2.3rem] mx-[9rem] sm:mx-[2rem]">
+<div class="mt-[2.3rem] mx-[9rem] md:mx-[2rem]">
   @if ((currentRoute | async) === '/booking/cars') {
     <app-cars-filter />
   } @else if ((currentRoute | async) === '/booking/stays') {
@@ -8,7 +8,9 @@
   } @else if ((currentRoute | async) === '/booking/flights') {
     <app-flights-filter />
   }
-  <app-navigation />
+  <div class="border-b-1 border-base_border mb-[2.1rem]">
+    <app-navigation />
+  </div>
   @if (isMap$ | async) {
     @if (
       (currentRoute | async) !== '/booking/attractions' &&

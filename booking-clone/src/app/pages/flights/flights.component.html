@@ -1,9 +1,9 @@
-<div class="flights base-grid">
+<div class="flights flex flex-col justify-center gap-[2rem]">
   @for (flight of flights$ | async; track flight.id) {
     <app-flight [flight]="flight" />
   } @empty {
     @if ((isLoadingFlights$ | async) === false) {
-      Flights not found.
+      <div class="m-auto">Flights not found.</div>
     }
   }
 </div>

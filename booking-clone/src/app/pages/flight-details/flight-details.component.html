@@ -1,6 +1,6 @@
 <div class="details-container max-w-[135rem] px-[2rem] m-auto mt-[5.7rem]">
   @if (flightInfo$ | async; as flight) {
-    <div class="main-info basis-1/2 w-full">
+    <div class="main-info w-full">
       <div class="host flex items-center justify-start mb-[1.6rem]">
         <img
           src="assets/details/reward.svg"
@@ -23,7 +23,9 @@
         </p>
       </div>
       <p class="seats text-xl mb-[2rem]">{{ flight.seats }} seats available</p>
-      <div class="destinations mb-[2.5rem] flex items-center justify-between">
+      <div
+        class="destinations mb-[2.5rem] flex md:flex-col md:items-start gap-[1rem] items-center justify-between"
+      >
         <div class="from">
           <h3 class="from__title font-bold text-3xl mb-[1.8rem]">From</h3>
           <div class="from flex items-center justify-start mb-[1rem]">
@@ -110,7 +112,7 @@
           <p>No info.</p>
         }
       </div>
-      <div class="benefits">
+      <div class="benefits pb-[5.5rem]">
         <h3 class="benefits__title font-bold text-3xl mb-[1.4rem]">Benefits</h3>
         @if (flight.benefits) {
           @for (benefit of flight.benefits; track benefit) {

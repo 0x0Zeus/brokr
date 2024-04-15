@@ -14,9 +14,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
+import { ModalComponent } from '@components/shared/modal';
 import { DestroyDirective } from '@core/directives';
 import { StaysService } from '@core/services/stays';
 import { ToasterService } from '@core/services/toaster';
+import { IStaysSearchFilters } from '@shared/interfaces/stays';
 import { IStaysDestination } from '@shared/models/stays';
 import { IStaysFilterForm } from '@shared/models/stays';
 import { parseDate } from '@shared/utils';
@@ -32,6 +34,8 @@ import {
   takeUntil,
 } from 'rxjs';
 
+import { StaysFilterModalComponent } from '../stays-filter-modal';
+
 @Component({
   selector: 'app-stays-filter',
   standalone: true,
@@ -42,6 +46,8 @@ import {
     MiniLoaderComponent,
     CalendarModule,
     FormsModule,
+    ModalComponent,
+    StaysFilterModalComponent,
   ],
   templateUrl: './stays-filter.component.html',
   styleUrl: './stays-filter.component.scss',
@@ -54,6 +60,13 @@ export class StaysFilterComponent implements OnInit {
   elasticLocationValues$ = new BehaviorSubject<IStaysDestination[]>([]);
   chosenLocation: null | IStaysDestination = null;
   nowDate = new Date(Date.now());
+  isFiltersModalOpen = false;
+  filters: IStaysSearchFilters = {
+    adults: null,
+    rooms: null,
+    priceMin: null,
+    priceMax: null,
+  };
   private destroy$ = inject(DestroyDirective).destroy$;
 
   staysFilterForm = new FormGroup<IStaysFilterForm>({
@@ -100,6 +113,12 @@ export class StaysFilterComponent implements OnInit {
         this.destinationIsLoading$.next(false);
         this.elasticLocationValues$.next(locationsValues);
       });
+
+    this.staysFacade.staysSearchFilters$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((filters) => {
+        this.filters = filters;
+      });
   }
 
   onFocus(): void {
@@ -114,19 +133,30 @@ export class StaysFilterComponent implements OnInit {
     if (this.staysFilterForm.valid && this.chosenLocation) {
       const staysFormData = this.staysFilterForm.getRawValue();
 
-      this.staysFacade.fetchStays({
-        arrivalDate: parseDate(staysFormData.arrivalDate),
-        departureDate: parseDate(staysFormData.departureDate),
-        destId: this.chosenLocation.destId,
-        searchType: this.chosenLocation.searchType,
-        page: 1,
-      });
+      this.staysFacade.fetchStays(
+        {
+          arrivalDate: parseDate(staysFormData.arrivalDate),
+          departureDate: parseDate(staysFormData.departureDate),
+          destId: this.chosenLocation.destId,
+          searchType: this.chosenLocation.searchType,
+          page: 1,
+        },
+        this.filters
+      );
     }
   }
 
   elasticSearch(destination: IStaysDestination): void {
     this.locationValue.setValue(destination.location);
     this.chosenLocation = destination;
+  }
+
+  closeModal(): void {
+    this.isFiltersModalOpen = false;
+  }
+
+  openModal(): void {
+    this.isFiltersModalOpen = true;
   }
 
   get arrivalDate(): FormControl<Date> {

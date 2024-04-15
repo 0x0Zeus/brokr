@@ -1,0 +1,98 @@
+<form
+  [formGroup]="staysModalFilterForm"
+  class="filters-container bg-bg_primary rounded-lg w-[82.4rem] sm:w-[35rem] lg:w-[50rem] md:w-[40rem]"
+>
+  <h3
+    class="filters__title border-b-2 border-base_border text-2xl m-auto py-[2rem] text-center font-bold"
+  >
+    Filters
+  </h3>
+  <div class="filters mx-[2.2rem]">
+    <div
+      class="filters-group pt-[1.8rem] pb-[3.2rem] flex flex-wrap justify-between items-center border-b-2 border-base_border"
+    >
+      <div class="filter-item w-[28.3rem]">
+        <h4 class="filter-item__title text-2xl mb-[1rem] font-bold">Adults</h4>
+        <div class="max-w-[10rem]">
+          <p-inputNumber
+            [formControl]="adults"
+            mode="decimal"
+            [showButtons]="true"
+            inputId="minmax-buttons"
+            [min]="0"
+            [max]="100"
+            styleClass="h-[3rem] text-2xl border-2 border-base_border rounded-sm outline-base_secondary"
+          >
+          </p-inputNumber>
+        </div>
+      </div>
+      <div class="filter-item w-[28.3rem]">
+        <h4 class="filter-item__title text-2xl mb-[1rem] font-bold">Rooms</h4>
+        <div class="max-w-[10rem]">
+          <p-inputNumber
+            [formControl]="rooms"
+            mode="decimal"
+            [showButtons]="true"
+            inputId="minmax-buttons"
+            [min]="0"
+            styleClass="h-[3rem] text-2xl border-2 border-base_border rounded-sm outline-base_secondary"
+          >
+          </p-inputNumber>
+        </div>
+      </div>
+    </div>
+    <div class="filter-group pt-[1.8rem] pb-[3.2rem]">
+      <h4 class="filter-group__title text-2xl mb-[1rem] font-bold">Price</h4>
+      <div class="flex flex-wrap justify-between items-center">
+        <div class="filter-item w-[28.3rem]">
+          <h4 class="filter-item__title text-2xl mb-[1rem]">Min</h4>
+          <p-inputNumber
+            [formControl]="priceMin"
+            [showButtons]="true"
+            buttonLayout="horizontal"
+            inputId="horizontal"
+            spinnerMode="horizontal"
+            [step]="1"
+            [min]="0"
+            decrementButtonClass="p-button-danger"
+            incrementButtonClass="p-button-success"
+            incrementButtonIcon="pi pi-plus"
+            decrementButtonIcon="pi pi-minus"
+            styleClass="h-[3rem] text-2xl border-2 border-base_border rounded-sm outline-base_secondary"
+            mode="currency"
+            currency="USD"
+          ></p-inputNumber>
+        </div>
+        <div class="filter-item w-[28.3rem]">
+          <h4 class="filter-item__title text-2xl mb-[1rem]">Max</h4>
+          <p-inputNumber
+            [formControl]="priceMax"
+            [showButtons]="true"
+            buttonLayout="horizontal"
+            inputId="horizontal"
+            spinnerMode="horizontal"
+            [step]="1"
+            [min]="0"
+            decrementButtonClass="p-button-danger"
+            incrementButtonClass="p-button-success"
+            incrementButtonIcon="pi pi-plus"
+            decrementButtonIcon="pi pi-minus"
+            styleClass="h-[3rem] text-2xl border-2 border-base_border rounded-sm outline-base_secondary"
+            mode="currency"
+            currency="USD"
+          ></p-inputNumber>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="buttons flex flex-wrap justify-between items-center py-[1.3rem] border-t-2 border-base_border px-[2.2rem]"
+  >
+    <button class="btn-clear underline font-medium leading-[2.6rem]">
+      Clear All
+    </button>
+    <button class="btn-base w-[16.3rem] py-[0.5rem]" (click)="applyFilters()">
+      Apply Filters
+    </button>
+  </div>
+</form>

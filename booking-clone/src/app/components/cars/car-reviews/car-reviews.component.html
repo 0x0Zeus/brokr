@@ -1,6 +1,4 @@
-<div
-  class="reviews grid grid-cols-auto-fit-md justify-items-center gap-[2.8rem] mb-[3.5rem]"
->
+<div class="reviews flex flex-col gap-[2.8rem] mb-[3.5rem]">
   @for (review of reviews$ | async; track review.positive) {
     <app-car-review [review]="review" />
   } @empty {
