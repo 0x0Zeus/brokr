@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DestroyDirective } from '@core/directives';
+import { ToasterService } from '@core/services/toaster';
 import { IFlightsModalFilterForm } from '@shared/models/flights';
 import { FlightsFacade } from '@store/flights';
 import { DropdownModule } from 'primeng/dropdown';
@@ -36,7 +37,10 @@ export class FlightsFilterModalComponent implements OnInit {
     cabinClass: new FormControl<string | null>(null),
   });
 
-  constructor(private flightsFacade: FlightsFacade) {}
+  constructor(
+    private flightsFacade: FlightsFacade,
+    private toasterService: ToasterService
+  ) {}
 
   ngOnInit(): void {
     this.flightsFacade.flightsSearchFilters$
@@ -61,6 +65,11 @@ export class FlightsFilterModalComponent implements OnInit {
   applyFilters(): void {
     const filtersFormData = this.flightsModalFilterForm.getRawValue();
     this.flightsFacade.setFlightsFilters(filtersFormData);
+    this.toasterService.show({
+      type: 'success',
+      title: 'Flights filters',
+      message: 'Filters applied!',
+    });
     this.closeModal.emit(false);
   }
 
