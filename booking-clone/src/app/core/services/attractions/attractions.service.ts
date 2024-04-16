@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   IAttractionDetailsResponse,
   IAttractionsResponse,
+  IAttractionsSearchFilters,
   IAttractionsSearchParams,
   IAttrDestinationsResponse,
 } from '@shared/interfaces/attractions';
@@ -56,16 +57,22 @@ export class AttractionsService {
       );
   }
 
-  getAttractions(query: IAttractionsSearchParams): Observable<IAttraction[]> {
+  getAttractions(
+    query: IAttractionsSearchParams,
+    filters: IAttractionsSearchFilters
+  ): Observable<IAttraction[]> {
     const { attractionId, page } = query;
-    const options = {
-      params: new HttpParams()
-        .set('id', attractionId)
-        .append('page', page)
-        .append('currency_code', 'USD'),
-    };
+    let params = new HttpParams()
+      .set('id', attractionId)
+      .append('page', page)
+      .append('currency_code', 'USD');
+
+    if (filters.sortBy) {
+      params = params.append('sortBy', filters.sortBy);
+    }
+
     return this.http
-      .get<IAttractionsResponse>(this.searchAttractionsURL, options)
+      .get<IAttractionsResponse>(this.searchAttractionsURL, { params })
       .pipe(
         map((resp) => {
           if (resp.data) {

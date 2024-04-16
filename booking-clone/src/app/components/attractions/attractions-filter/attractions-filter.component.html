@@ -1,59 +1,81 @@
-<div class="filters flex justify-start items-end mb-[3.2rem] gap-[1.6rem]">
-  <div class="relative input-item w-[32rem]">
-    <div class="input-title font-medium text-sm mb-[0.6rem]">Where</div>
-    <label
-      class="input-container p-input-icon-left h-[3.3rem] w-full flex justify-start items-center rounded-sm text-base"
+<div
+  class="filters flex justify-start items-end flex-wrap mb-[3.2rem] gap-[1.6rem]"
+>
+  <div
+    class="flex justify-start items-end flex-wrap gap-[1.6rem] sm:mr-[2rem] mr-[10rem]"
+  >
+    <div class="relative input-item w-[32rem]">
+      <div class="input-title font-medium text-sm mb-[0.6rem]">Where</div>
+      <label
+        class="input-container p-input-icon-left h-[3.3rem] w-full flex justify-start items-center rounded-sm text-base"
+      >
+        <i
+          class="pi text-2xl text-base_primary"
+          [class]="
+            (destinationIsLoading$ | async)
+              ? 'pi-spin pi-spinner'
+              : 'pi-map-marker'
+          "
+        ></i>
+        <input
+          pInputText
+          [formControl]="locationValue"
+          type="text"
+          (focus)="onFocus()"
+          (blur)="onBlur()"
+          placeholder="City, postcode, address, airport or hotel"
+          class="h-full w-full block border-2 px-[3.2rem] border-base_border rounded-sm text-base outline-none"
+        />
+        @if (isLocationFocus && (elasticLocationValues$ | async)!.length >= 1) {
+          <div
+            class="elastic-search absolute w-full left-0 bottom-0 translate-y-[105%] rounded-sm py-[0.8rem] z-10 border-1 border-base_border bg-bg_primary"
+          >
+            @for (
+              elasticItem of elasticLocationValues$ | async;
+              track elasticItem.location
+            ) {
+              <button
+                class="elastic-item py-[0.4rem] px-[0.5rem] overflow-hidden text-ellipsis whitespace-nowrap text-left w-full hover:bg-bg_third/10"
+                (mousedown)="elasticSearch(elasticItem)"
+                [title]="elasticItem.location"
+              >
+                {{ elasticItem.location }}
+              </button>
+            }
+          </div>
+        }
+        @if (
+          (locationValue.hasError('required') && locationValue.touched) ||
+          (chosenLocation === null && locationValue.touched)
+        ) {
+          <div class="invalid__message">
+            please select a location from the list below
+          </div>
+        }
+      </label>
+    </div>
+    <button
+      (click)="onSearch()"
+      [ngClass]="chosenLocation ? '' : 'btn-disabled'"
+      class="btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
     >
-      <i
-        class="pi text-2xl text-base_primary"
-        [class]="
-          (destinationIsLoading$ | async)
-            ? 'pi-spin pi-spinner'
-            : 'pi-map-marker'
-        "
-      ></i>
-      <input
-        pInputText
-        [formControl]="locationValue"
-        type="text"
-        (focus)="onFocus()"
-        (blur)="onBlur()"
-        placeholder="City, postcode, address, airport or hotel"
-        class="h-full w-full block border-2 px-[3.2rem] border-base_border rounded-sm text-base outline-none"
-      />
-      @if (isLocationFocus && (elasticLocationValues$ | async)!.length >= 1) {
-        <div
-          class="elastic-search absolute w-full left-0 bottom-0 translate-y-[105%] rounded-sm py-[0.8rem] z-10 border-1 border-base_border bg-bg_primary"
-        >
-          @for (
-            elasticItem of elasticLocationValues$ | async;
-            track elasticItem.location
-          ) {
-            <button
-              class="elastic-item py-[0.4rem] px-[0.5rem] overflow-hidden text-ellipsis whitespace-nowrap text-left w-full hover:bg-bg_third/10"
-              (mousedown)="elasticSearch(elasticItem)"
-              [title]="elasticItem.location"
-            >
-              {{ elasticItem.location }}
-            </button>
-          }
-        </div>
-      }
-      @if (
-        (locationValue.hasError('required') && locationValue.touched) ||
-        (chosenLocation === null && locationValue.touched)
-      ) {
-        <div class="invalid__message">
-          please select a location from the list below
-        </div>
-      }
-    </label>
+      <img src="assets/search.svg" alt="Search" class="w-full h-full" />
+    </button>
   </div>
   <button
-    (click)="onSearch()"
-    [ngClass]="chosenLocation ? '' : 'btn-disabled'"
-    class="btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
+    (click)="openModal()"
+    class="filter h-[3.3rem] w-[11.5rem] border-2 border-base_border rounded-sm text-base flex justify-center items-center"
   >
-    <img src="assets/search.svg" alt="Search" class="w-full h-full" />
+    <img
+      src="assets/filter.svg"
+      alt="Search"
+      class="w-[1.3rem]] h-[1.1rem] mr-[1.7rem]"
+    />
+    <span>Filter</span>
   </button>
 </div>
+@if (isFiltersModalOpen) {
+  <app-modal (closeModal)="closeModal()">
+    <app-attractions-filter-modal (closeModal)="closeModal()" />
+  </app-modal>
+}

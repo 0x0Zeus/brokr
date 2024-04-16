@@ -8,7 +8,10 @@ import {
 import { AttractionComponent } from '@components/attractions/attraction';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
-import { IAttractionsSearchParams } from '@shared/interfaces/attractions';
+import {
+  IAttractionsSearchFilters,
+  IAttractionsSearchParams,
+} from '@shared/interfaces/attractions';
 import { AttractionsFacade } from '@store/attractions';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { takeUntil } from 'rxjs';
@@ -32,6 +35,9 @@ export class AttractionsComponent implements OnInit {
   isLoadingAttractions$ = this.attractionsFacade.attractionsIsLoading$;
   attractionsSearchParams$ = this.attractionsFacade.attractionsSearchParams$;
   attractionsSearchParams: null | IAttractionsSearchParams = null;
+  filters: IAttractionsSearchFilters = {
+    sortBy: null,
+  };
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(private attractionsFacade: AttractionsFacade) {}
@@ -42,14 +48,23 @@ export class AttractionsComponent implements OnInit {
       .subscribe((searchParams) => {
         this.attractionsSearchParams = searchParams;
       });
+
+    this.attractionsFacade.attractionsSearchFilters$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((filters) => {
+        this.filters = filters;
+      });
   }
 
   setNextPage(): void {
     if (this.attractionsSearchParams) {
-      this.attractionsFacade.fetchAttractions({
-        ...this.attractionsSearchParams,
-        page: this.attractionsSearchParams.page + 1,
-      });
+      this.attractionsFacade.fetchAttractions(
+        {
+          ...this.attractionsSearchParams,
+          page: this.attractionsSearchParams.page + 1,
+        },
+        this.filters
+      );
     }
   }
 }

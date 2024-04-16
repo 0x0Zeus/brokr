@@ -18,8 +18,8 @@ export class AttractionsEffects {
   fetchAttractions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ATTRACTIONS_ACTIONS.FetchAttractions),
-      switchMap(({ searchParams }) =>
-        this.attractionsService.getAttractions(searchParams).pipe(
+      switchMap(({ searchParams, filters }) =>
+        this.attractionsService.getAttractions(searchParams, filters).pipe(
           map((attractions) =>
             ATTRACTIONS_ACTIONS.FetchAttractionsSuccess({ attractions })
           ),

@@ -1,6 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
-import { IAttractionsSearchParams } from '@shared/interfaces/attractions';
+import {
+  IAttractionsSearchFilters,
+  IAttractionsSearchParams,
+} from '@shared/interfaces/attractions';
 import { IAttraction } from '@shared/models/attractions';
 
 import * as ATTRACTIONS_ACTIONS from './attractions.action';
@@ -10,6 +13,7 @@ export interface AttractionsState {
   isLoading: boolean;
   error: HttpErrorResponse | null;
   searchParams: null | IAttractionsSearchParams;
+  filters: IAttractionsSearchFilters;
 }
 
 export const initialState: AttractionsState = {
@@ -17,17 +21,21 @@ export const initialState: AttractionsState = {
   isLoading: false,
   error: null,
   searchParams: null,
+  filters: {
+    sortBy: null,
+  },
 };
 
 export const attractionsReducer = createReducer(
   initialState,
   on(
     ATTRACTIONS_ACTIONS.FetchAttractions,
-    (state, { searchParams }): AttractionsState => {
+    (state, { searchParams, filters }): AttractionsState => {
       if (searchParams.page === 1) {
         return {
           ...state,
           searchParams,
+          filters,
           attractions: [],
           isLoading: true,
         };
@@ -35,6 +43,7 @@ export const attractionsReducer = createReducer(
         return {
           ...state,
           searchParams,
+          filters,
           isLoading: true,
         };
       }
@@ -65,6 +74,13 @@ export const attractionsReducer = createReducer(
       error,
       attractions: [],
       isLoading: false,
+    })
+  ),
+  on(
+    ATTRACTIONS_ACTIONS.SetAttractionsFilters,
+    (state, { filters }): AttractionsState => ({
+      ...state,
+      filters,
     })
   )
 );

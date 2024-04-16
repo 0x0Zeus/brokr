@@ -1,0 +1,38 @@
+<div
+  class="filters-container bg-bg_primary rounded-lg w-[82.4rem] sm:w-[35rem] lg:w-[50rem] md:w-[40rem]"
+>
+  <h3
+    class="filters__title border-b-2 border-base_border text-2xl m-auto py-[2rem] text-center font-bold"
+  >
+    Filters
+  </h3>
+  <div class="filters mx-[2.2rem]">
+    <div class="filter-item pt-[1.8rem] pb-[3.2rem]">
+      <h4 class="filter-item__title text-2xl mb-[1rem] font-bold">Sort By</h4>
+      <div class="max-w-[10rem]">
+        <p-dropdown
+          [formControl]="sortBy"
+          [options]="attractionsSortTypes"
+          optionLabel="name"
+          optionValue="value"
+          placeholder="Sort by"
+          class="dropdown"
+          styleClass="h-[3rem] border-2 border-base_border rounded-sm"
+        ></p-dropdown>
+      </div>
+    </div>
+  </div>
+  <div
+    class="buttons flex flex-wrap justify-between items-center py-[1.3rem] border-t-2 border-base_border px-[2.2rem]"
+  >
+    <button
+      class="btn-clear underline font-medium leading-[2.6rem]"
+      (click)="clearForm()"
+    >
+      Clear All
+    </button>
+    <button class="btn-base w-[16.3rem] py-[0.5rem]" (click)="applyFilters()">
+      Apply Filters
+    </button>
+  </div>
+</div>
