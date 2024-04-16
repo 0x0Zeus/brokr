@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DestroyDirective } from '@core/directives';
+import { ToasterService } from '@core/services/toaster';
 import { IStaysModalFilterForm } from '@shared/models/stays';
 import { StaysFacade } from '@store/stays';
 import { DropdownModule } from 'primeng/dropdown';
@@ -37,7 +38,10 @@ export class StaysFilterModalComponent implements OnInit {
     sortBy: new FormControl<string | null>(null),
   });
 
-  constructor(private staysFacade: StaysFacade) {}
+  constructor(
+    private staysFacade: StaysFacade,
+    private toasterService: ToasterService
+  ) {}
 
   ngOnInit(): void {
     this.staysFacade.staysSearchFilters$
@@ -67,6 +71,11 @@ export class StaysFilterModalComponent implements OnInit {
   applyFilters(): void {
     const filtersFormData = this.staysModalFilterForm.getRawValue();
     this.staysFacade.setStaysFilters(filtersFormData);
+    this.toasterService.show({
+      type: 'success',
+      title: 'Stays filters',
+      message: 'Filters applied!',
+    });
     this.closeModal.emit(false);
   }
 
