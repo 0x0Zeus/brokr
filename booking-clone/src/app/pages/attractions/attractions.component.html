@@ -8,23 +8,21 @@
   }
 </div>
 
-@if (!(attractions$ | async)?.length && (isLoadingAttractions$ | async)) {
+@if (isLoadingAttractions$ | async) {
   <div class="mt-[25vh] h-full flex justify-center items-center w-full">
     <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
   </div>
 } @else if ((attractions$ | async)?.length) {
-  @if (isLoadingAttractions$ | async) {
-    <button
-      class="btn-base btn-disabled w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
-    >
-      <app-mini-loader color="#ffffff" />
-    </button>
-  } @else {
-    <button
-      class="btn-base w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
-      (click)="setNextPage()"
-    >
-      Show More
-    </button>
+  @if (totalCount | async; as totalCount) {
+    <p-paginator
+      (onPageChange)="setNextPage($event)"
+      [first]="
+        attractionsSearchParams ? (attractionsSearchParams.page - 1) * 20 : 0
+      "
+      [rows]="20"
+      [totalRecords]="totalCount"
+      [showJumpToPageDropdown]="true"
+      styleClass="text-sm"
+    ></p-paginator>
   }
 }

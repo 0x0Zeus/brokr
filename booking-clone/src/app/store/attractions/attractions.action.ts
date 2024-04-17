@@ -18,7 +18,7 @@ export const FetchAttractions = createAction(
 
 export const FetchAttractionsSuccess = createAction(
   `${actionSource} Fetch Success`,
-  props<{ attractions: IAttraction[] }>()
+  props<{ attractions: IAttraction[]; totalCount: number }>()
 );
 
 export const FetchAttractionsFailed = createAction(

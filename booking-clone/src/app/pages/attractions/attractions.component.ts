@@ -13,8 +13,9 @@ import {
   IAttractionsSearchParams,
 } from '@shared/interfaces/attractions';
 import { AttractionsFacade } from '@store/attractions';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { takeUntil } from 'rxjs';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-attractions',
@@ -24,6 +25,7 @@ import { takeUntil } from 'rxjs';
     ProgressSpinnerModule,
     AsyncPipe,
     MiniLoaderComponent,
+    PaginatorModule,
   ],
   templateUrl: './attractions.component.html',
   styleUrl: './attractions.component.scss',
@@ -34,6 +36,7 @@ export class AttractionsComponent implements OnInit {
   attractions$ = this.attractionsFacade.attractions$;
   isLoadingAttractions$ = this.attractionsFacade.attractionsIsLoading$;
   attractionsSearchParams$ = this.attractionsFacade.attractionsSearchParams$;
+  totalCount = new BehaviorSubject<number>(0);
   attractionsSearchParams: null | IAttractionsSearchParams = null;
   filters: IAttractionsSearchFilters = {
     sortBy: null,
@@ -54,14 +57,21 @@ export class AttractionsComponent implements OnInit {
       .subscribe((filters) => {
         this.filters = filters;
       });
+
+    this.attractionsFacade.attractionsTotalCount$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((totalCount) => {
+        this.totalCount.next(totalCount);
+      });
   }
 
-  setNextPage(): void {
-    if (this.attractionsSearchParams) {
+  setNextPage(pageState: PaginatorState): void {
+    console.log([].length);
+    if (this.attractionsSearchParams && pageState.page !== undefined) {
       this.attractionsFacade.fetchAttractions(
         {
           ...this.attractionsSearchParams,
-          page: this.attractionsSearchParams.page + 1,
+          page: pageState.page + 1,
         },
         this.filters
       );

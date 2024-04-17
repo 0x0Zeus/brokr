@@ -12,6 +12,7 @@ export interface AttractionsState {
   attractions: IAttraction[];
   isLoading: boolean;
   error: HttpErrorResponse | null;
+  totalCount: number;
   searchParams: null | IAttractionsSearchParams;
   filters: IAttractionsSearchFilters;
 }
@@ -20,6 +21,7 @@ export const initialState: AttractionsState = {
   attractions: [],
   isLoading: false,
   error: null,
+  totalCount: 0,
   searchParams: null,
   filters: {
     sortBy: null,
@@ -31,40 +33,24 @@ export const attractionsReducer = createReducer(
   on(
     ATTRACTIONS_ACTIONS.FetchAttractions,
     (state, { searchParams, filters }): AttractionsState => {
-      if (searchParams.page === 1) {
-        return {
-          ...state,
-          searchParams,
-          filters,
-          attractions: [],
-          isLoading: true,
-        };
-      } else {
-        return {
-          ...state,
-          searchParams,
-          filters,
-          isLoading: true,
-        };
-      }
+      return {
+        ...state,
+        searchParams,
+        filters,
+        attractions: [],
+        isLoading: true,
+      };
     }
   ),
   on(
     ATTRACTIONS_ACTIONS.FetchAttractionsSuccess,
-    (state, { attractions }): AttractionsState => {
-      if (state.searchParams && state.searchParams.page === 1) {
-        return {
-          ...state,
-          attractions,
-          isLoading: false,
-        };
-      } else {
-        return {
-          ...state,
-          attractions: [...state.attractions].concat(attractions),
-          isLoading: false,
-        };
-      }
+    (state, { attractions, totalCount }): AttractionsState => {
+      return {
+        ...state,
+        attractions,
+        totalCount,
+        isLoading: false,
+      };
     }
   ),
   on(

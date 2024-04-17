@@ -12,6 +12,7 @@ import {
   selectAttractionsFilters,
   selectAttractionsIsLoading,
   selectAttractionsSearchParams,
+  selectAttractionsTotalCount,
   selectDetailsAttractionId,
 } from './attractions.selector';
 
@@ -23,6 +24,7 @@ export class AttractionsFacade {
   attractionsIsLoading$ = this.store.select(selectAttractionsIsLoading);
   attractionsSearchParams$ = this.store.select(selectAttractionsSearchParams);
   attractionsSearchFilters$ = this.store.select(selectAttractionsFilters);
+  attractionsTotalCount$ = this.store.select(selectAttractionsTotalCount);
   attractionsError$ = this.store.select(selectAttractionsError);
   attractionDetailsId$ = this.store.select(selectDetailsAttractionId);
 

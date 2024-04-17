@@ -31,6 +31,11 @@ export const selectAttractionsFilters = createSelector(
   (state: AttractionsState) => state.filters
 );
 
+export const selectAttractionsTotalCount = createSelector(
+  selectAttractionsStore,
+  (state: AttractionsState) => state.totalCount
+);
+
 export const selectDetailsAttractionId = createSelector(
   selectRouteParams,
   ({ attractionId }) => {

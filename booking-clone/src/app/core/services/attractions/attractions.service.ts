@@ -2,13 +2,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   IAttractionDetailsResponse,
+  IAttractionsInfoData,
   IAttractionsResponse,
   IAttractionsSearchFilters,
   IAttractionsSearchParams,
   IAttrDestinationsResponse,
 } from '@shared/interfaces/attractions';
 import {
-  IAttraction,
   IAttractionDetails,
   IAttractionsDestination,
 } from '@shared/models/attractions';
@@ -60,7 +60,7 @@ export class AttractionsService {
   getAttractions(
     query: IAttractionsSearchParams,
     filters: IAttractionsSearchFilters
-  ): Observable<IAttraction[]> {
+  ): Observable<IAttractionsInfoData> {
     const { attractionId, page } = query;
     let params = new HttpParams()
       .set('id', attractionId)
@@ -80,9 +80,15 @@ export class AttractionsService {
               const attractionData = getTransformedAttractionData(attraction);
               return attractionData;
             });
-            return transData;
+            return {
+              attractions: transData,
+              totalCount: resp.data.filterStats.filteredProductCount,
+            };
           } else {
-            return [];
+            return {
+              attractions: [],
+              totalCount: 0,
+            };
           }
         })
       );
