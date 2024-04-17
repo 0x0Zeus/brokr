@@ -18,7 +18,7 @@ export const FetchFlights = createAction(
 
 export const FetchFlightsSuccess = createAction(
   `${actionSource} Fetch Success`,
-  props<{ flights: IFlight[] }>()
+  props<{ flights: IFlight[]; totalCount: number }>()
 );
 
 export const FetchFlightsFailed = createAction(

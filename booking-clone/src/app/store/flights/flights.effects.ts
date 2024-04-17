@@ -20,7 +20,9 @@ export class FlightsEffects {
       ofType(FLIGHTS_ACTIONS.FetchFlights),
       switchMap(({ searchParams, filters }) =>
         this.flightsService.getFlights(searchParams, filters).pipe(
-          map((flights) => FLIGHTS_ACTIONS.FetchFlightsSuccess({ flights })),
+          map((flightsInfo) =>
+            FLIGHTS_ACTIONS.FetchFlightsSuccess(flightsInfo)
+          ),
           catchError((error: HttpErrorResponse) => {
             this.toasterService.showHttpsError(error);
             return of(

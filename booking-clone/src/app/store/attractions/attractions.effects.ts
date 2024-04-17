@@ -20,8 +20,8 @@ export class AttractionsEffects {
       ofType(ATTRACTIONS_ACTIONS.FetchAttractions),
       switchMap(({ searchParams, filters }) =>
         this.attractionsService.getAttractions(searchParams, filters).pipe(
-          map((attractions) =>
-            ATTRACTIONS_ACTIONS.FetchAttractionsSuccess(attractions)
+          map((attractionsInfo) =>
+            ATTRACTIONS_ACTIONS.FetchAttractionsSuccess(attractionsInfo)
           ),
           catchError((error: HttpErrorResponse) => {
             this.toasterService.showHttpsError(error);

@@ -3,15 +3,12 @@ import { Injectable } from '@angular/core';
 import {
   IFlightDetailsResponse,
   IFlightsDestinationsResponse,
+  IFlightsInfoData,
   IFlightsResponse,
   IFlightsSearchFilters,
   IFlightsSearchParams,
 } from '@shared/interfaces/flights';
-import {
-  IFlight,
-  IFlightDetails,
-  IFlightsDestination,
-} from '@shared/models/flights';
+import { IFlightDetails, IFlightsDestination } from '@shared/models/flights';
 import {
   getTransformedFlightData,
   getTransformedFlightDetails,
@@ -60,7 +57,7 @@ export class FlightsService {
   getFlights(
     query: IFlightsSearchParams,
     filters: IFlightsSearchFilters
-  ): Observable<IFlight[]> {
+  ): Observable<IFlightsInfoData> {
     const { fromId, toId, departureDate, page } = query;
     let params = new HttpParams()
       .set('fromId', fromId)
@@ -90,9 +87,16 @@ export class FlightsService {
               const flightData = getTransformedFlightData(flight);
               return flightData;
             });
-            return transData;
+
+            return {
+              flights: transData,
+              totalCount: resp.data.aggregation.filteredTotalCount,
+            };
           } else {
-            return [];
+            return {
+              flights: [],
+              totalCount: 0,
+            };
           }
         })
       );

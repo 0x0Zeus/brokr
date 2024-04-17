@@ -66,7 +66,6 @@ export class AttractionsComponent implements OnInit {
   }
 
   setNextPage(pageState: PaginatorState): void {
-    console.log([].length);
     if (this.attractionsSearchParams && pageState.page !== undefined) {
       this.attractionsFacade.fetchAttractions(
         {
