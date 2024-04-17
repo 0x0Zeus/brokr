@@ -13,5 +13,4 @@ import { ICar } from '@shared/models/cars';
 })
 export class CarComponent {
   @Input({ required: true }) car!: ICar;
-  isFavorite = false;
 }

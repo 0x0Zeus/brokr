@@ -13,5 +13,4 @@ import { IFlight } from '@shared/models/flights';
 })
 export class FlightComponent {
   @Input({ required: true }) flight!: IFlight;
-  isFavorite = true;
 }

@@ -13,5 +13,4 @@ import { IStay } from '@shared/models/stays';
 })
 export class StayComponent {
   @Input({ required: true }) stay!: IStay;
-  isFavorite = true;
 }

@@ -78,7 +78,6 @@ export class StaysComponent implements OnInit {
     this.staysFacade.staysTotalCount$
       .pipe(takeUntil(this.destroy$))
       .subscribe((totalCount) => {
-        console.log(totalCount);
         this.totalCount.next(totalCount);
       });
   }
