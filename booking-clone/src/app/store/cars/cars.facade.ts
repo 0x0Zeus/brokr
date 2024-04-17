@@ -7,6 +7,7 @@ import {
   selectCarsError,
   selectCarsIsLoading,
   selectCarsPage,
+  selectCarsTotalCount,
   selectDetailsCarId,
   selectPaginatedCars,
 } from './cars.selector';
@@ -19,6 +20,7 @@ export class CarsFacade {
   carsIsLoading$ = this.store.select(selectCarsIsLoading);
   carsError$ = this.store.select(selectCarsError);
   carsPage$ = this.store.select(selectCarsPage);
+  carsTotalCount$ = this.store.select(selectCarsTotalCount);
   carDetailsId$ = this.store.select(selectDetailsCarId);
 
   constructor(private store: Store) {}

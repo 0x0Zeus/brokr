@@ -35,7 +35,6 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
 export class AttractionsComponent implements OnInit {
   attractions$ = this.attractionsFacade.attractions$;
   isLoadingAttractions$ = this.attractionsFacade.attractionsIsLoading$;
-  attractionsSearchParams$ = this.attractionsFacade.attractionsSearchParams$;
   totalCount = new BehaviorSubject<number>(0);
   attractionsSearchParams: null | IAttractionsSearchParams = null;
   filters: IAttractionsSearchFilters = {
@@ -46,7 +45,7 @@ export class AttractionsComponent implements OnInit {
   constructor(private attractionsFacade: AttractionsFacade) {}
 
   ngOnInit(): void {
-    this.attractionsSearchParams$
+    this.attractionsFacade.attractionsSearchParams$
       .pipe(takeUntil(this.destroy$))
       .subscribe((searchParams) => {
         this.attractionsSearchParams = searchParams;

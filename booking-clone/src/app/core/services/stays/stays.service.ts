@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { baseUrl } from '@shared/enviroments';
 import {
   IStayDetailsResponse,
   IStayDetailsSearchParams,
@@ -25,14 +26,10 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class StaysService {
-  private destinationURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination';
-  private searchStaysURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels';
-  private stayDetailsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails';
-  private stayReviewsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelReviews';
+  private destinationURL = `${baseUrl}/hotels/searchDestination`;
+  private searchStaysURL = `${baseUrl}/hotels/searchHotels`;
+  private stayDetailsURL = `${baseUrl}/hotels/getHotelDetails`;
+  private stayReviewsURL = `${baseUrl}/hotels/getHotelReviews`;
 
   constructor(private http: HttpClient) {}
 
@@ -102,7 +99,9 @@ export class StaysService {
           return {
             stays: transData,
             totalCount:
-              page === 1 ? Number(resp.data.meta[0].title.split(' ')[0]) : 0,
+              page === 1 && resp.data.hotels[0]
+                ? Number(resp.data.meta[0].title.split(' ')[0])
+                : 0,
           };
         } else {
           return {

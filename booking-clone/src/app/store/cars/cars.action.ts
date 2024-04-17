@@ -14,7 +14,7 @@ export const FetchCars = createAction(
 
 export const FetchCarsSuccess = createAction(
   `${actionSource} Fetch Success`,
-  props<{ cars: ICar[] }>()
+  props<{ cars: ICar[]; totalCount: number }>()
 );
 
 export const FetchCarsFailed = createAction(

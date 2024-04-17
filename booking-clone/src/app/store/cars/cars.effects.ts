@@ -20,7 +20,7 @@ export class CarsEffects {
       ofType(CARS_ACTIONS.FetchCars),
       switchMap(({ searchParams }) =>
         this.carsService.getCars(searchParams).pipe(
-          map((cars) => CARS_ACTIONS.FetchCarsSuccess({ cars })),
+          map((carsInfo) => CARS_ACTIONS.FetchCarsSuccess(carsInfo)),
           catchError((error: HttpErrorResponse) => {
             this.toasterService.showHttpsError(error);
             return of(

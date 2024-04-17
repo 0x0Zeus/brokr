@@ -25,6 +25,11 @@ export const selectCarsPage = createSelector(
   (state: CarsState) => state.page
 );
 
+export const selectCarsTotalCount = createSelector(
+  selectCarsStore,
+  (state: CarsState) => state.totalCount
+);
+
 export const selectDetailsCarId = createSelector(
   selectRouteParams,
   ({ carId }) => {

@@ -36,7 +36,6 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
 export class StaysComponent implements OnInit {
   stays$ = this.staysFacade.stays$;
   isLoadingStays$ = this.staysFacade.staysIsLoading$;
-  staysSearchParams$ = this.staysFacade.staysSearchParams$;
   staysSearchParams: null | IStaysSearchParams = null;
   filters: IStaysSearchFilters = {
     adults: null,
@@ -54,7 +53,7 @@ export class StaysComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.staysSearchParams$
+    this.staysFacade.staysSearchParams$
       .pipe(takeUntil(this.destroy$))
       .subscribe((searchParams) => {
         this.staysSearchParams = searchParams;

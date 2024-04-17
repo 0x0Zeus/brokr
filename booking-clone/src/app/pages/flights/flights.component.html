@@ -16,8 +16,8 @@
   @if (totalCount | async; as totalCount) {
     <p-paginator
       (onPageChange)="setNextPage($event)"
-      [first]="flightsSearchParams ? (flightsSearchParams.page - 1) * 20 : 0"
-      [rows]="20"
+      [first]="flightsSearchParams ? (flightsSearchParams.page - 1) * 15 : 0"
+      [rows]="15"
       [totalRecords]="totalCount"
       [showJumpToPageDropdown]="true"
       styleClass="text-sm mt-[2rem]"

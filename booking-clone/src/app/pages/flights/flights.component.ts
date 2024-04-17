@@ -34,7 +34,6 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
 export class FlightsComponent implements OnInit {
   flights$ = this.flightsFacade.flights$;
   isLoadingFlights$ = this.flightsFacade.flightsIsLoading$;
-  flightsSearchParams$ = this.flightsFacade.flightsSearchParams$;
   flightsSearchParams: null | IFlightsSearchParams = null;
   totalCount = new BehaviorSubject<number>(0);
   private destroy$ = inject(DestroyDirective).destroy$;
@@ -47,7 +46,7 @@ export class FlightsComponent implements OnInit {
   constructor(private flightsFacade: FlightsFacade) {}
 
   ngOnInit(): void {
-    this.flightsSearchParams$
+    this.flightsFacade.flightsSearchParams$
       .pipe(takeUntil(this.destroy$))
       .subscribe((searchParams) => {
         this.flightsSearchParams = searchParams;

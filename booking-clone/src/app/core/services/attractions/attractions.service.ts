@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { baseUrl } from '@shared/enviroments';
 import {
   IAttractionDetailsResponse,
   IAttractionsInfoData,
@@ -23,12 +24,9 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AttractionsService {
-  private destinationURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/attraction/searchLocation';
-  private searchAttractionsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/attraction/searchAttractions';
-  private attractionDetailsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/attraction/getAttractionDetails';
+  private destinationURL = `${baseUrl}/attraction/searchLocation`;
+  private searchAttractionsURL = `${baseUrl}/attraction/searchAttractions`;
+  private attractionDetailsURL = `${baseUrl}/attraction/getAttractionDetails`;
 
   constructor(private http: HttpClient) {}
 
