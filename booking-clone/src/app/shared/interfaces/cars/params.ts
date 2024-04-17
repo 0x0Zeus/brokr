@@ -1,3 +1,5 @@
+import { ICar } from '@shared/models/cars';
+
 export interface ICarsSearchParams {
   fromDate: string;
   fromTime: string;
@@ -10,4 +12,9 @@ export interface ICarsSearchParams {
 export interface ICarDetailsParams {
   vehicleId: string;
   searchKey: string;
+}
+
+export interface ICarsInfoData {
+  cars: ICar[];
+  totalCount: number;
 }

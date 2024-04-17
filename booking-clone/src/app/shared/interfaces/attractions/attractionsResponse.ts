@@ -51,12 +51,12 @@ interface ReviewsStats {
   __typename: string;
   allReviewsCount: number;
   percentage: string;
-  combinedNumericStats: CombinedNumericStats;
+  combinedNumericStats: CombinedNumericStats | null;
 }
 
 interface CombinedNumericStats {
   __typename: string;
-  average: number;
+  average: number | null;
   total: number;
 }
 

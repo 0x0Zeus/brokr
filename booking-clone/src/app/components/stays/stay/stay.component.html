@@ -5,11 +5,6 @@
     stay.id + '_' + stay.checkInDate + '_' + stay.checkOutDate
   ]"
 >
-  <img
-    [src]="isFavorite ? 'assets/fav-fill.svg' : 'assets/fav.svg'"
-    alt="Favorite"
-    class="favorite absolute top-[1.7rem] right-[1.5rem] w-[2.6rem] h-[2.6rem]"
-  />
   <div
     class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem] bg-center bg-cover"
     [style.background-image]="'url(' + stay.photo + ')'"

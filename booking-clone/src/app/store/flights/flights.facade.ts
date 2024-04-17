@@ -13,6 +13,7 @@ import {
   selectFlightsFilters,
   selectFlightsIsLoading,
   selectFlightsSearchParams,
+  selectFlightsTotalCount,
 } from './flights.selector';
 
 @Injectable({
@@ -23,6 +24,7 @@ export class FlightsFacade {
   flightsIsLoading$ = this.store.select(selectFlightsIsLoading);
   flightsSearchParams$ = this.store.select(selectFlightsSearchParams);
   flightsSearchFilters$ = this.store.select(selectFlightsFilters);
+  flightsTotalCount$ = this.store.select(selectFlightsTotalCount);
   flightsError$ = this.store.select(selectFlightsError);
   flightDetailsId$ = this.store.select(selectDetailsFlightId);
 

@@ -1,17 +1,19 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { baseUrl } from '@shared/enviroments';
 import {
   IStayDetailsResponse,
   IStayDetailsSearchParams,
   IStayReviewsParams,
   IStayReviewsResponse,
   IStaysDestinationsResponse,
+  IStaysInfoData,
   IStaysResponse,
   IStaysSearchFilters,
   IStaysSearchParams,
 } from '@shared/interfaces/stays';
 import { IReview } from '@shared/models/shared';
-import { IStay, IStayDetails, IStaysDestination } from '@shared/models/stays';
+import { IStayDetails, IStaysDestination } from '@shared/models/stays';
 import {
   getTransformedStayData,
   getTransformedStayDetails,
@@ -24,14 +26,10 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class StaysService {
-  private destinationURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination';
-  private searchStaysURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels';
-  private stayDetailsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails';
-  private stayReviewsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelReviews';
+  private destinationURL = `${baseUrl}/hotels/searchDestination`;
+  private searchStaysURL = `${baseUrl}/hotels/searchHotels`;
+  private stayDetailsURL = `${baseUrl}/hotels/getHotelDetails`;
+  private stayReviewsURL = `${baseUrl}/hotels/getHotelReviews`;
 
   constructor(private http: HttpClient) {}
 
@@ -63,7 +61,7 @@ export class StaysService {
   getStays(
     query: IStaysSearchParams,
     filters: IStaysSearchFilters
-  ): Observable<IStay[]> {
+  ): Observable<IStaysInfoData> {
     const { destId, searchType, arrivalDate, departureDate, page } = query;
 
     let params: HttpParams = new HttpParams()
@@ -90,8 +88,6 @@ export class StaysService {
       params = params.append('sort_by', filters.sortBy);
     }
 
-    console.log(params);
-
     return this.http.get<IStaysResponse>(this.searchStaysURL, { params }).pipe(
       map((resp) => {
         if (resp.data) {
@@ -99,9 +95,19 @@ export class StaysService {
             const stayData = getTransformedStayData(stay);
             return stayData;
           });
-          return transData;
+
+          return {
+            stays: transData,
+            totalCount:
+              page === 1 && resp.data.hotels[0]
+                ? Number(resp.data.meta[0].title.split(' ')[0])
+                : 0,
+          };
         } else {
-          return [];
+          return {
+            stays: [],
+            totalCount: 0,
+          };
         }
       })
     );

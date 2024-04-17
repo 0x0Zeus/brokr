@@ -13,8 +13,9 @@ import {
   IFlightsSearchParams,
 } from '@shared/interfaces/flights';
 import { FlightsFacade } from '@store/flights';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { takeUntil } from 'rxjs';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-flights',
@@ -24,6 +25,7 @@ import { takeUntil } from 'rxjs';
     FlightComponent,
     ProgressSpinnerModule,
     MiniLoaderComponent,
+    PaginatorModule,
   ],
   templateUrl: './flights.component.html',
   styleUrl: './flights.component.scss',
@@ -32,8 +34,8 @@ import { takeUntil } from 'rxjs';
 export class FlightsComponent implements OnInit {
   flights$ = this.flightsFacade.flights$;
   isLoadingFlights$ = this.flightsFacade.flightsIsLoading$;
-  flightsSearchParams$ = this.flightsFacade.flightsSearchParams$;
   flightsSearchParams: null | IFlightsSearchParams = null;
+  totalCount = new BehaviorSubject<number>(0);
   private destroy$ = inject(DestroyDirective).destroy$;
   filters: IFlightsSearchFilters = {
     adults: null,
@@ -44,7 +46,7 @@ export class FlightsComponent implements OnInit {
   constructor(private flightsFacade: FlightsFacade) {}
 
   ngOnInit(): void {
-    this.flightsSearchParams$
+    this.flightsFacade.flightsSearchParams$
       .pipe(takeUntil(this.destroy$))
       .subscribe((searchParams) => {
         this.flightsSearchParams = searchParams;
@@ -55,14 +57,20 @@ export class FlightsComponent implements OnInit {
       .subscribe((filters) => {
         this.filters = filters;
       });
+
+    this.flightsFacade.flightsTotalCount$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((totalCount) => {
+        this.totalCount.next(totalCount);
+      });
   }
 
-  setNextPage(): void {
-    if (this.flightsSearchParams) {
+  setNextPage(pageState: PaginatorState): void {
+    if (this.flightsSearchParams && pageState.page !== undefined) {
       this.flightsFacade.fetchFlights(
         {
           ...this.flightsSearchParams,
-          page: this.flightsSearchParams.page + 1,
+          page: pageState.page + 1,
         },
         this.filters
       );

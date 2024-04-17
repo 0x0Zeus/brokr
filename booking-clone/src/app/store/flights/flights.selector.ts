@@ -31,6 +31,11 @@ export const selectFlightsFilters = createSelector(
   (state: FlightsState) => state.filters
 );
 
+export const selectFlightsTotalCount = createSelector(
+  selectFlightsStore,
+  (state: FlightsState) => state.totalCount
+);
+
 export const selectDetailsFlightId = createSelector(
   selectRouteParams,
   ({ flightId }) => {

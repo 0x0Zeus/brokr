@@ -14,5 +14,4 @@ import { IAttraction } from '@shared/models/attractions';
 })
 export class AttractionComponent {
   @Input({ required: true }) attraction!: IAttraction;
-  isFavorite = false;
 }

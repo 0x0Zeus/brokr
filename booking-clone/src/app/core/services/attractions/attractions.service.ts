@@ -1,13 +1,15 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { baseUrl } from '@shared/enviroments';
 import {
   IAttractionDetailsResponse,
+  IAttractionsInfoData,
   IAttractionsResponse,
+  IAttractionsSearchFilters,
   IAttractionsSearchParams,
   IAttrDestinationsResponse,
 } from '@shared/interfaces/attractions';
 import {
-  IAttraction,
   IAttractionDetails,
   IAttractionsDestination,
 } from '@shared/models/attractions';
@@ -22,12 +24,9 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AttractionsService {
-  private destinationURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/attraction/searchLocation';
-  private searchAttractionsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/attraction/searchAttractions';
-  private attractionDetailsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/attraction/getAttractionDetails';
+  private destinationURL = `${baseUrl}/attraction/searchLocation`;
+  private searchAttractionsURL = `${baseUrl}/attraction/searchAttractions`;
+  private attractionDetailsURL = `${baseUrl}/attraction/getAttractionDetails`;
 
   constructor(private http: HttpClient) {}
 
@@ -56,16 +55,22 @@ export class AttractionsService {
       );
   }
 
-  getAttractions(query: IAttractionsSearchParams): Observable<IAttraction[]> {
+  getAttractions(
+    query: IAttractionsSearchParams,
+    filters: IAttractionsSearchFilters
+  ): Observable<IAttractionsInfoData> {
     const { attractionId, page } = query;
-    const options = {
-      params: new HttpParams()
-        .set('id', attractionId)
-        .append('page', page)
-        .append('currency_code', 'USD'),
-    };
+    let params = new HttpParams()
+      .set('id', attractionId)
+      .append('page', page)
+      .append('currency_code', 'USD');
+
+    if (filters.sortBy) {
+      params = params.append('sortBy', filters.sortBy);
+    }
+
     return this.http
-      .get<IAttractionsResponse>(this.searchAttractionsURL, options)
+      .get<IAttractionsResponse>(this.searchAttractionsURL, { params })
       .pipe(
         map((resp) => {
           if (resp.data) {
@@ -73,9 +78,15 @@ export class AttractionsService {
               const attractionData = getTransformedAttractionData(attraction);
               return attractionData;
             });
-            return transData;
+            return {
+              attractions: transData,
+              totalCount: resp.data.filterStats.filteredProductCount,
+            };
           } else {
-            return [];
+            return {
+              attractions: [],
+              totalCount: 0,
+            };
           }
         })
       );

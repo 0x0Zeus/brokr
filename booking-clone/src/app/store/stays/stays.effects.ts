@@ -20,7 +20,7 @@ export class StaysEffects {
       ofType(STAYS_ACTIONS.FetchStays),
       switchMap(({ searchParams, filters }) =>
         this.staysService.getStays(searchParams, filters).pipe(
-          map((stays) => STAYS_ACTIONS.FetchStaysSuccess({ stays })),
+          map((staysInfo) => STAYS_ACTIONS.FetchStaysSuccess(staysInfo)),
           catchError((error: HttpErrorResponse) => {
             this.toasterService.showHttpsError(error);
             return of(

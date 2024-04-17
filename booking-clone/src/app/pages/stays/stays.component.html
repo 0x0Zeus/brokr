@@ -8,23 +8,19 @@
   }
 </div>
 
-@if (!(stays$ | async)?.length && (isLoadingStays$ | async)) {
+@if (isLoadingStays$ | async) {
   <div class="mt-[25vh] h-full flex justify-center items-center w-full">
     <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
   </div>
 } @else if ((stays$ | async)?.length) {
-  @if (isLoadingStays$ | async) {
-    <button
-      class="btn-base btn-disabled w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
-    >
-      <app-mini-loader color="#ffffff" />
-    </button>
-  } @else {
-    <button
-      class="btn-base w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
-      (click)="setNextPage()"
-    >
-      Show More
-    </button>
+  @if (totalCount | async; as totalCount) {
+    <p-paginator
+      (onPageChange)="setNextPage($event)"
+      [first]="staysSearchParams ? (staysSearchParams.page - 1) * 19 : 0"
+      [rows]="19"
+      [totalRecords]="totalCount"
+      [showJumpToPageDropdown]="true"
+      styleClass="text-sm mt-[2rem]"
+    ></p-paginator>
   }
 }

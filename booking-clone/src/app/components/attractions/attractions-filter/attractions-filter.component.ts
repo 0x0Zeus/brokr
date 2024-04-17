@@ -13,9 +13,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
+import { ModalComponent } from '@components/shared/modal';
 import { DestroyDirective } from '@core/directives';
 import { AttractionsService } from '@core/services/attractions';
 import { ToasterService } from '@core/services/toaster';
+import { IAttractionsSearchFilters } from '@shared/interfaces/attractions';
 import { IAttractionsDestination } from '@shared/models/attractions';
 import { AttractionsFacade } from '@store/attractions';
 import { CalendarModule } from 'primeng/calendar';
@@ -24,10 +26,13 @@ import {
   catchError,
   debounceTime,
   distinctUntilChanged,
+  filter,
   of,
   switchMap,
   takeUntil,
 } from 'rxjs';
+
+import { AttractionsFilterModalComponent } from '../attractions-filter-modal';
 
 @Component({
   selector: 'app-attractions-filter',
@@ -39,6 +44,8 @@ import {
     MiniLoaderComponent,
     CalendarModule,
     FormsModule,
+    ModalComponent,
+    AttractionsFilterModalComponent,
   ],
   templateUrl: './attractions-filter.component.html',
   styleUrl: './attractions-filter.component.scss',
@@ -51,7 +58,11 @@ export class AttractionsFilterComponent implements OnInit {
   destinationIsLoading$ = new BehaviorSubject<boolean>(false);
   elasticLocationValues$ = new BehaviorSubject<IAttractionsDestination[]>([]);
   chosenLocation: null | IAttractionsDestination = null;
+  isFiltersModalOpen = false;
   nowDate = new Date(Date.now());
+  filters: IAttractionsSearchFilters = {
+    sortBy: null,
+  };
   locationValue = new FormControl<string>('', {
     nonNullable: true,
     validators: [Validators.required],
@@ -69,6 +80,7 @@ export class AttractionsFilterComponent implements OnInit {
         takeUntil(this.destroy$),
         debounceTime(500),
         distinctUntilChanged(),
+        filter((query) => query !== ''),
         switchMap(() => {
           this.destinationIsLoading$.next(true);
           return this.attractionsService
@@ -86,6 +98,12 @@ export class AttractionsFilterComponent implements OnInit {
         this.destinationIsLoading$.next(false);
         this.elasticLocationValues$.next(locationsValues);
       });
+
+    this.attractionsFacade.attractionsSearchFilters$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((filters) => {
+        this.filters = filters;
+      });
   }
 
   onFocus(): void {
@@ -98,11 +116,22 @@ export class AttractionsFilterComponent implements OnInit {
 
   onSearch(): void {
     if (this.chosenLocation) {
-      this.attractionsFacade.fetchAttractions({
-        attractionId: this.chosenLocation.attractionId,
-        page: 1,
-      });
+      this.attractionsFacade.fetchAttractions(
+        {
+          attractionId: this.chosenLocation.attractionId,
+          page: 1,
+        },
+        this.filters
+      );
     }
+  }
+
+  closeModal(): void {
+    this.isFiltersModalOpen = false;
+  }
+
+  openModal(): void {
+    this.isFiltersModalOpen = true;
   }
 
   elasticSearch(destination: IAttractionsDestination): void {

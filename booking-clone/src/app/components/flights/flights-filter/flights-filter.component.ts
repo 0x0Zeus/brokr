@@ -31,6 +31,7 @@ import {
   catchError,
   debounceTime,
   distinctUntilChanged,
+  filter,
   of,
   switchMap,
   takeUntil,
@@ -101,6 +102,7 @@ export class FlightsFilterComponent implements OnInit {
         takeUntil(this.destroy$),
         debounceTime(500),
         distinctUntilChanged(),
+        filter((query) => query !== ''),
         switchMap(() => {
           this.destinationFromIsLoading$.next(true);
           return this.flightsService
@@ -124,6 +126,7 @@ export class FlightsFilterComponent implements OnInit {
         takeUntil(this.destroy$),
         debounceTime(500),
         distinctUntilChanged(),
+        filter((query) => query !== ''),
         switchMap(() => {
           this.destinationToIsLoading$.next(true);
           return this.flightsService

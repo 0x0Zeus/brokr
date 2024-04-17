@@ -9,13 +9,14 @@ import { CarComponent } from '@components/cars/car';
 import { DestroyDirective } from '@core/directives';
 import { CarsFacade } from '@store/cars';
 import { MapFacade } from '@store/map';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { takeUntil } from 'rxjs';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-cars',
   standalone: true,
-  imports: [CarComponent, AsyncPipe, ProgressSpinnerModule],
+  imports: [CarComponent, AsyncPipe, ProgressSpinnerModule, PaginatorModule],
   templateUrl: './cars.component.html',
   styleUrl: './cars.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,8 +25,9 @@ import { takeUntil } from 'rxjs';
 export class CarsComponent implements OnInit {
   cars$ = this.carsFacade.paginatedCars$;
   isLoadingCars$ = this.carsFacade.carsIsLoading$;
+  totalCount = new BehaviorSubject<number>(0);
+  page = 0;
   private destroy$ = inject(DestroyDirective).destroy$;
-  page = 1;
 
   constructor(
     private carsFacade: CarsFacade,
@@ -47,11 +49,17 @@ export class CarsComponent implements OnInit {
       .subscribe((page) => {
         this.page = page;
       });
+
+    this.carsFacade.carsTotalCount$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((totalCount) => {
+        this.totalCount.next(totalCount);
+      });
   }
 
-  getCars(): void {}
-
-  setNextPage(): void {
-    this.carsFacade.setCarsPage(this.page + 1);
+  setNextPage(pageState: PaginatorState): void {
+    if (pageState.page !== undefined) {
+      this.carsFacade.setCarsPage(pageState.page);
+    }
   }
 }

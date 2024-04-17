@@ -8,23 +8,19 @@
   }
 </div>
 
-@if (!(flights$ | async)?.length && (isLoadingFlights$ | async)) {
+@if (isLoadingFlights$ | async) {
   <div class="mt-[25vh] h-full flex justify-center items-center w-full">
     <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
   </div>
 } @else if ((flights$ | async)?.length) {
-  @if (isLoadingFlights$ | async) {
-    <button
-      class="btn-base btn-disabled w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
-    >
-      <app-mini-loader color="#ffffff" />
-    </button>
-  } @else {
-    <button
-      class="btn-base w-[15.5rem] h-[4rem] m-auto my-[3.5rem]"
-      (click)="setNextPage()"
-    >
-      Show More
-    </button>
+  @if (totalCount | async; as totalCount) {
+    <p-paginator
+      (onPageChange)="setNextPage($event)"
+      [first]="flightsSearchParams ? (flightsSearchParams.page - 1) * 15 : 0"
+      [rows]="15"
+      [totalRecords]="totalCount"
+      [showJumpToPageDropdown]="true"
+      styleClass="text-sm mt-[2rem]"
+    ></p-paginator>
   }
 }

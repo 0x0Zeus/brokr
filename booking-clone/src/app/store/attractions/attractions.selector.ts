@@ -26,6 +26,16 @@ export const selectAttractionsSearchParams = createSelector(
   (state: AttractionsState) => state.searchParams
 );
 
+export const selectAttractionsFilters = createSelector(
+  selectAttractionsStore,
+  (state: AttractionsState) => state.filters
+);
+
+export const selectAttractionsTotalCount = createSelector(
+  selectAttractionsStore,
+  (state: AttractionsState) => state.totalCount
+);
+
 export const selectDetailsAttractionId = createSelector(
   selectRouteParams,
   ({ attractionId }) => {

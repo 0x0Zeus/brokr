@@ -30,6 +30,11 @@ export const selectStaysFilters = createSelector(
   (state: StaysState) => state.filters
 );
 
+export const selectStaysTotalCount = createSelector(
+  selectStaysStore,
+  (state: StaysState) => state.totalCount
+);
+
 export const selectDetailsStayId = createSelector(
   selectRouteParams,
   ({ stayId }) => {

@@ -2,7 +2,7 @@
 @import 'map';
 @import 'fonts';
 
-@import 'primeng/resources/themes/lara-light-blue/theme.css';
+@import 'primeng/resources/themes/lara-light-indigo/theme.css';
 @import 'primeng/resources/primeng.css';
 @import 'primeicons/primeicons.css';
 
@@ -12,6 +12,7 @@
 
 :root {
   font-family: 'Roboto Regular', sans-serif;
+  --font-family: 'Roboto Regular', sans-serif;
 }
 
 html {
@@ -127,4 +128,16 @@ a {
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
+}
+
+//paginator
+
+.p-paginator-page.p-highlight,
+.p-ripple.p-dropdown-item.p-highlight {
+  background-color: rgba(103, 93, 254, 0.2);
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  color: #4b5563;
+  background-color: rgba(103, 93, 254, 0.2);
 }

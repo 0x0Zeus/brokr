@@ -29,6 +29,7 @@ import {
   catchError,
   debounceTime,
   distinctUntilChanged,
+  filter,
   of,
   switchMap,
   takeUntil,
@@ -97,6 +98,7 @@ export class StaysFilterComponent implements OnInit {
         takeUntil(this.destroy$),
         debounceTime(500),
         distinctUntilChanged(),
+        filter((query) => query !== ''),
         switchMap(() => {
           this.destinationIsLoading$.next(true);
           return this.staysService

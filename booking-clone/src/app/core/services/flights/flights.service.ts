@@ -1,17 +1,15 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { baseUrl } from '@shared/enviroments';
 import {
   IFlightDetailsResponse,
   IFlightsDestinationsResponse,
+  IFlightsInfoData,
   IFlightsResponse,
   IFlightsSearchFilters,
   IFlightsSearchParams,
 } from '@shared/interfaces/flights';
-import {
-  IFlight,
-  IFlightDetails,
-  IFlightsDestination,
-} from '@shared/models/flights';
+import { IFlightDetails, IFlightsDestination } from '@shared/models/flights';
 import {
   getTransformedFlightData,
   getTransformedFlightDetails,
@@ -23,12 +21,9 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class FlightsService {
-  private destinationURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/flights/searchDestination';
-  private searchFlightsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights';
-  private flightDetailsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/flights/getFlightDetails';
+  private destinationURL = `${baseUrl}/flights/searchDestination`;
+  private searchFlightsURL = `${baseUrl}/flights/searchFlights`;
+  private flightDetailsURL = `${baseUrl}/flights/getFlightDetails`;
 
   constructor(private http: HttpClient) {}
 
@@ -60,7 +55,7 @@ export class FlightsService {
   getFlights(
     query: IFlightsSearchParams,
     filters: IFlightsSearchFilters
-  ): Observable<IFlight[]> {
+  ): Observable<IFlightsInfoData> {
     const { fromId, toId, departureDate, page } = query;
     let params = new HttpParams()
       .set('fromId', fromId)
@@ -79,8 +74,6 @@ export class FlightsService {
       params = params.append('sort', filters.sortBy);
     }
 
-    console.log(params);
-
     return this.http
       .get<IFlightsResponse>(this.searchFlightsURL, { params })
       .pipe(
@@ -90,9 +83,16 @@ export class FlightsService {
               const flightData = getTransformedFlightData(flight);
               return flightData;
             });
-            return transData;
+
+            return {
+              flights: transData,
+              totalCount: resp.data.aggregation.filteredTotalCount,
+            };
           } else {
-            return [];
+            return {
+              flights: [],
+              totalCount: 0,
+            };
           }
         })
       );

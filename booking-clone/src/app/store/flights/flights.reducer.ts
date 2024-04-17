@@ -12,6 +12,7 @@ export interface FlightsState {
   flights: IFlight[];
   isLoading: boolean;
   error: HttpErrorResponse | null;
+  totalCount: number;
   searchParams: null | IFlightsSearchParams;
   filters: IFlightsSearchFilters;
 }
@@ -20,6 +21,7 @@ export const initialState: FlightsState = {
   flights: [],
   isLoading: false,
   error: null,
+  totalCount: 0,
   searchParams: null,
   filters: {
     adults: null,
@@ -33,40 +35,24 @@ export const flightsReducer = createReducer(
   on(
     FLIGHTS_ACTIONS.FetchFlights,
     (state, { searchParams, filters }): FlightsState => {
-      if (searchParams.page === 1) {
-        return {
-          ...state,
-          searchParams,
-          filters,
-          flights: [],
-          isLoading: true,
-        };
-      } else {
-        return {
-          ...state,
-          searchParams,
-          filters,
-          isLoading: true,
-        };
-      }
+      return {
+        ...state,
+        searchParams,
+        filters,
+        flights: [],
+        isLoading: true,
+      };
     }
   ),
   on(
     FLIGHTS_ACTIONS.FetchFlightsSuccess,
-    (state, { flights }): FlightsState => {
-      if (state.searchParams && state.searchParams.page === 1) {
-        return {
-          ...state,
-          flights,
-          isLoading: false,
-        };
-      } else {
-        return {
-          ...state,
-          flights: [...state.flights].concat(flights),
-          isLoading: false,
-        };
-      }
+    (state, { flights, totalCount }): FlightsState => {
+      return {
+        ...state,
+        flights,
+        totalCount,
+        isLoading: false,
+      };
     }
   ),
   on(

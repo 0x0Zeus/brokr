@@ -1,19 +1,16 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { baseUrl } from '@shared/enviroments';
 import {
   ICarDetailsParams,
   ICarDetailsResponse,
   ICarReviewsResponse,
   ICarsDestinationsResponse,
+  ICarsInfoData,
   ICarsSearchParams,
   ISearchCarsResponse,
 } from '@shared/interfaces/cars';
-import {
-  ICar,
-  ICarDetails,
-  ICarReview,
-  ICarsDestination,
-} from '@shared/models/cars';
+import { ICarDetails, ICarReview, ICarsDestination } from '@shared/models/cars';
 import {
   getTransformedCarData,
   getTransformedCarDestinations,
@@ -26,14 +23,10 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CarsService {
-  private destinationURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/cars/searchDestination';
-  private searchCarsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/cars/searchCarRentals';
-  private carDetailsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/cars/vehicleDetails';
-  private carReviewsURL =
-    'https://booking-com15.p.rapidapi.com/api/v1/cars/vehicleSupplierReview';
+  private destinationURL = `${baseUrl}/cars/searchDestination`;
+  private searchCarsURL = `${baseUrl}/cars/searchCarRentals`;
+  private carDetailsURL = `${baseUrl}/cars/vehicleDetails`;
+  private carReviewsURL = `${baseUrl}/cars/vehicleSupplierReview`;
 
   constructor(private http: HttpClient) {}
 
@@ -62,7 +55,7 @@ export class CarsService {
       );
   }
 
-  getCars(query: ICarsSearchParams): Observable<ICar[]> {
+  getCars(query: ICarsSearchParams): Observable<ICarsInfoData> {
     const { fromDate, fromTime, latitude, longitude, untilDate, untilTime } =
       query;
     const options = {
@@ -84,9 +77,15 @@ export class CarsService {
             const carData = getTransformedCarData(car, resp.data.search_key);
             return carData;
           });
-          return transData;
+          return {
+            cars: transData,
+            totalCount: resp.data.count,
+          };
         } else {
-          return [];
+          return {
+            cars: [],
+            totalCount: 0,
+          };
         }
       })
     );

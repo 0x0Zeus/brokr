@@ -8,10 +8,14 @@ import {
 import { AttractionComponent } from '@components/attractions/attraction';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
-import { IAttractionsSearchParams } from '@shared/interfaces/attractions';
+import {
+  IAttractionsSearchFilters,
+  IAttractionsSearchParams,
+} from '@shared/interfaces/attractions';
 import { AttractionsFacade } from '@store/attractions';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { takeUntil } from 'rxjs';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-attractions',
@@ -21,6 +25,7 @@ import { takeUntil } from 'rxjs';
     ProgressSpinnerModule,
     AsyncPipe,
     MiniLoaderComponent,
+    PaginatorModule,
   ],
   templateUrl: './attractions.component.html',
   styleUrl: './attractions.component.scss',
@@ -30,26 +35,44 @@ import { takeUntil } from 'rxjs';
 export class AttractionsComponent implements OnInit {
   attractions$ = this.attractionsFacade.attractions$;
   isLoadingAttractions$ = this.attractionsFacade.attractionsIsLoading$;
-  attractionsSearchParams$ = this.attractionsFacade.attractionsSearchParams$;
+  totalCount = new BehaviorSubject<number>(0);
   attractionsSearchParams: null | IAttractionsSearchParams = null;
+  filters: IAttractionsSearchFilters = {
+    sortBy: null,
+  };
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(private attractionsFacade: AttractionsFacade) {}
 
   ngOnInit(): void {
-    this.attractionsSearchParams$
+    this.attractionsFacade.attractionsSearchParams$
       .pipe(takeUntil(this.destroy$))
       .subscribe((searchParams) => {
         this.attractionsSearchParams = searchParams;
       });
+
+    this.attractionsFacade.attractionsSearchFilters$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((filters) => {
+        this.filters = filters;
+      });
+
+    this.attractionsFacade.attractionsTotalCount$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((totalCount) => {
+        this.totalCount.next(totalCount);
+      });
   }
 
-  setNextPage(): void {
-    if (this.attractionsSearchParams) {
-      this.attractionsFacade.fetchAttractions({
-        ...this.attractionsSearchParams,
-        page: this.attractionsSearchParams.page + 1,
-      });
+  setNextPage(pageState: PaginatorState): void {
+    if (this.attractionsSearchParams && pageState.page !== undefined) {
+      this.attractionsFacade.fetchAttractions(
+        {
+          ...this.attractionsSearchParams,
+          page: pageState.page + 1,
+        },
+        this.filters
+      );
     }
   }
 }

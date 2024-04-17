@@ -27,13 +27,14 @@ export const getTransformedAttractionData = (
     label: attr.shortDescription,
     name: attr.name,
     currency: attr.representativePrice.currency,
-    rating: attr.reviewsStats
+    rating: attr.reviewsStats?.combinedNumericStats?.average
       ? Number((attr.reviewsStats.combinedNumericStats.average / 2).toFixed(1))
       : null,
     price: Number(attr.representativePrice.chargeAmount.toFixed(2)),
     reviewCount: attr.reviewsStats ? attr.reviewsStats.allReviewsCount : 0,
     slug: attr.slug,
   };
+
   return attractionData;
 };
 

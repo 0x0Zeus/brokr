@@ -1,4 +1,4 @@
-//prime-ng datepicker
+//datepicker
 
 .p-datepicker table,
 .p-datepicker-header {
@@ -24,15 +24,6 @@
   height: 1.6rem;
 }
 
-.p-input-icon-left > i,
-.p-input-icon-left > .p-icon-wrapper,
-.p-input-icon-right > i,
-.p-input-icon-right > .p-icon-wrapper {
-  position: absolute;
-  top: 50%;
-  margin-top: -0.8rem;
-}
-
 .p-datepicker table td > span {
   border-radius: 0.3rem;
 }
@@ -44,7 +35,7 @@
   border-color: #3b82f6;
 }
 
-//prime-ng slider
+//slider
 
 @layer {
   .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
@@ -52,10 +43,21 @@
   }
 }
 
-//prime-ng input number
+//input number
 
 .p-inputnumber-buttons-horizontal .p-inputnumber-input {
   width: 22rem;
+}
+
+//input text
+
+.p-input-icon-left > i,
+.p-input-icon-left > .p-icon-wrapper,
+.p-input-icon-right > i,
+.p-input-icon-right > .p-icon-wrapper {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.9rem;
 }
 
 //input select
@@ -63,7 +65,7 @@
 .dropdown .p-inputtext {
   font-size: 1.4rem;
   width: 25rem;
-  padding: 0.5rem 0.5rem;
+  padding: 0.4rem 0.5rem;
 }
 
 .p-overlay .p-component {

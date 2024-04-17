@@ -4,6 +4,7 @@ export interface IStaysResponse {
   timestamp: number;
   data: {
     hotels: IStayResponse[];
+    meta: Meta[];
   };
 }
 
@@ -51,4 +52,8 @@ export interface IStayResponse {
     name: string;
     longitude: number;
   };
+}
+
+interface Meta {
+  title: string;
 }

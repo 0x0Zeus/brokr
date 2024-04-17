@@ -12,6 +12,7 @@ export interface StaysState {
   stays: IStay[];
   isLoading: boolean;
   error: HttpErrorResponse | null;
+  totalCount: number;
   searchParams: null | IStaysSearchParams;
   filters: IStaysSearchFilters;
 }
@@ -20,6 +21,7 @@ export const initialState: StaysState = {
   stays: [],
   isLoading: false,
   error: null,
+  totalCount: 0,
   searchParams: null,
   filters: {
     adults: null,
@@ -35,39 +37,34 @@ export const staysReducer = createReducer(
   on(
     STAYS_ACTIONS.FetchStays,
     (state, { searchParams, filters }): StaysState => {
-      if (searchParams.page === 1) {
+      return {
+        ...state,
+        searchParams,
+        filters,
+        stays: [],
+        isLoading: true,
+      };
+    }
+  ),
+  on(
+    STAYS_ACTIONS.FetchStaysSuccess,
+    (state, { stays, totalCount }): StaysState => {
+      if (state.searchParams?.page === 1) {
         return {
           ...state,
-          searchParams,
-          filters,
-          stays: [],
-          isLoading: true,
+          stays,
+          totalCount,
+          isLoading: false,
         };
       } else {
         return {
           ...state,
-          searchParams,
-          filters,
-          isLoading: true,
+          stays,
+          isLoading: false,
         };
       }
     }
   ),
-  on(STAYS_ACTIONS.FetchStaysSuccess, (state, { stays }): StaysState => {
-    if (state.searchParams && state.searchParams.page === 1) {
-      return {
-        ...state,
-        stays,
-        isLoading: false,
-      };
-    } else {
-      return {
-        ...state,
-        stays: [...state.stays].concat(stays),
-        isLoading: false,
-      };
-    }
-  }),
   on(
     STAYS_ACTIONS.FetchStaysFailed,
     (state, { error }): StaysState => ({
