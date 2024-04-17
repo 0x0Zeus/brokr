@@ -14,8 +14,9 @@ import {
 } from '@shared/interfaces/stays';
 import { MapFacade } from '@store/map';
 import { StaysFacade } from '@store/stays';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { takeUntil } from 'rxjs';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-stays',
@@ -25,6 +26,7 @@ import { takeUntil } from 'rxjs';
     AsyncPipe,
     MiniLoaderComponent,
     ProgressSpinnerModule,
+    PaginatorModule,
   ],
   templateUrl: './stays.component.html',
   styleUrl: './stays.component.scss',
@@ -43,6 +45,7 @@ export class StaysComponent implements OnInit {
     priceMax: null,
     sortBy: null,
   };
+  totalCount = new BehaviorSubject<number>(0);
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
@@ -71,14 +74,21 @@ export class StaysComponent implements OnInit {
       .subscribe((filters) => {
         this.filters = filters;
       });
+
+    this.staysFacade.staysTotalCount$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((totalCount) => {
+        console.log(totalCount);
+        this.totalCount.next(totalCount);
+      });
   }
 
-  setNextPage(): void {
-    if (this.staysSearchParams) {
+  setNextPage(pageState: PaginatorState): void {
+    if (this.staysSearchParams && pageState.page !== undefined) {
       this.staysFacade.fetchStays(
         {
           ...this.staysSearchParams,
-          page: this.staysSearchParams.page + 1,
+          page: pageState.page + 1,
         },
         this.filters
       );

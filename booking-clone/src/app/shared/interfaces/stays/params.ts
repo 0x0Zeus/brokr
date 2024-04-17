@@ -1,3 +1,5 @@
+import { IStay } from '@shared/models/stays';
+
 export interface IStaysSearchParams {
   arrivalDate: string;
   departureDate: string;
@@ -23,4 +25,9 @@ export interface IStayDetailsSearchParams {
 export interface IStayReviewsParams {
   hotelId: string;
   page: number;
+}
+
+export interface IStaysInfoData {
+  stays: IStay[];
+  totalCount: number;
 }

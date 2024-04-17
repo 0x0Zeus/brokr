@@ -76,8 +76,6 @@ export class FlightsService {
       params = params.append('sort', filters.sortBy);
     }
 
-    console.log(params);
-
     return this.http
       .get<IFlightsResponse>(this.searchFlightsURL, { params })
       .pipe(

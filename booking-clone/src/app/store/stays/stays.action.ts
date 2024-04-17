@@ -18,7 +18,7 @@ export const FetchStays = createAction(
 
 export const FetchStaysSuccess = createAction(
   `${actionSource} Fetch Success`,
-  props<{ stays: IStay[] }>()
+  props<{ stays: IStay[]; totalCount: number }>()
 );
 
 export const FetchStaysFailed = createAction(

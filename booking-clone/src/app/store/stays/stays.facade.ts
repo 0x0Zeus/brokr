@@ -13,6 +13,7 @@ import {
   selectStaysFilters,
   selectStaysIsLoading,
   selectStaysSearchParams,
+  selectStaysTotalCount,
 } from './stays.selector';
 
 @Injectable({
@@ -23,6 +24,7 @@ export class StaysFacade {
   staysIsLoading$ = this.store.select(selectStaysIsLoading);
   staysSearchParams$ = this.store.select(selectStaysSearchParams);
   staysSearchFilters$ = this.store.select(selectStaysFilters);
+  staysTotalCount$ = this.store.select(selectStaysTotalCount);
   staysError$ = this.store.select(selectStaysError);
   stayDetailsId$ = this.store.select(selectDetailsStayId);
 

@@ -6,12 +6,13 @@ import {
   IStayReviewsParams,
   IStayReviewsResponse,
   IStaysDestinationsResponse,
+  IStaysInfoData,
   IStaysResponse,
   IStaysSearchFilters,
   IStaysSearchParams,
 } from '@shared/interfaces/stays';
 import { IReview } from '@shared/models/shared';
-import { IStay, IStayDetails, IStaysDestination } from '@shared/models/stays';
+import { IStayDetails, IStaysDestination } from '@shared/models/stays';
 import {
   getTransformedStayData,
   getTransformedStayDetails,
@@ -63,7 +64,7 @@ export class StaysService {
   getStays(
     query: IStaysSearchParams,
     filters: IStaysSearchFilters
-  ): Observable<IStay[]> {
+  ): Observable<IStaysInfoData> {
     const { destId, searchType, arrivalDate, departureDate, page } = query;
 
     let params: HttpParams = new HttpParams()
@@ -90,8 +91,6 @@ export class StaysService {
       params = params.append('sort_by', filters.sortBy);
     }
 
-    console.log(params);
-
     return this.http.get<IStaysResponse>(this.searchStaysURL, { params }).pipe(
       map((resp) => {
         if (resp.data) {
@@ -99,9 +98,17 @@ export class StaysService {
             const stayData = getTransformedStayData(stay);
             return stayData;
           });
-          return transData;
+
+          return {
+            stays: transData,
+            totalCount:
+              page === 1 ? Number(resp.data.meta[0].title.split(' ')[0]) : 0,
+          };
         } else {
-          return [];
+          return {
+            stays: [],
+            totalCount: 0,
+          };
         }
       })
     );
