@@ -9,7 +9,9 @@
 </div>
 
 @if (isLoadingFlights$ | async) {
-  <div class="mt-[25vh] h-full flex justify-center items-center w-full">
+  <div
+    class="mt-[25vh] h-full flex justify-center items-center w-full overflow-hidden"
+  >
     <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
   </div>
 } @else if ((flights$ | async)?.length) {
