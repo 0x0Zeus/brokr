@@ -1,45 +1,47 @@
-<div class="specification">
-  <h3 class="specification__title font-bold text-3xl mb-[1.4rem]">
-    Specifications
-  </h3>
-  <div
-    class="specification-items flex items-center justify-start gap-[2rem] flex-wrap"
-  >
+@if (specs(); as specs) {
+  <div class="specification">
+    <h3 class="specification__title font-bold text-3xl mb-[1.4rem]">
+      Specifications
+    </h3>
     <div
-      class="specification-item w-[20rem] h-[11rem] px-[1.6rem] pt-[2.1rem] border-1 border-base_border rounded-lg"
+      class="specification-items flex items-center justify-start gap-[2rem] flex-wrap"
     >
-      <img
-        src="assets/stayDetails/square.svg"
-        alt="Specification"
-        class="specification-item__icon w-[2rem] h-[1.8rem] mb-[2.8rem]"
-      />
-      <p class="specification-item__description font-medium text-xl">
-        {{ specs.square }}<span> Sqmr</span>
-      </p>
-    </div>
-    <div
-      class="specification-item w-[20rem] h-[11rem] px-[1.6rem] pt-[2.1rem] border-1 border-base_border rounded-lg"
-    >
-      <img
-        src="assets/stayDetails/bedroom.svg"
-        alt="Specification"
-        class="specification-item__icon w-[2rem] h-[1.8rem] mb-[2.8rem]"
-      />
-      <p class="specification-item__description font-medium text-xl">
-        {{ specs.bedrooms }}<span> Bedrooms</span>
-      </p>
-    </div>
-    <div
-      class="specification-item w-[20rem] h-[11rem] px-[1.6rem] pt-[2.1rem] border-1 border-base_border rounded-lg"
-    >
-      <img
-        src="assets/stayDetails/bathroom.svg"
-        alt="Specification"
-        class="specification-item__icon w-[2rem] h-[1.8rem] mb-[2.8rem]"
-      />
-      <p class="specification-item__descr font-medium text-xl">
-        {{ specs.bathrooms }}<span> Bathrooms</span>
-      </p>
+      <div
+        class="specification-item w-[20rem] h-[11rem] px-[1.6rem] pt-[2.1rem] border-1 border-base_border rounded-lg"
+      >
+        <img
+          src="assets/stayDetails/square.svg"
+          alt="Specification"
+          class="specification-item__icon w-[2rem] h-[1.8rem] mb-[2.8rem]"
+        />
+        <p class="specification-item__description font-medium text-xl">
+          {{ specs.square }}<span> Sqmr</span>
+        </p>
+      </div>
+      <div
+        class="specification-item w-[20rem] h-[11rem] px-[1.6rem] pt-[2.1rem] border-1 border-base_border rounded-lg"
+      >
+        <img
+          src="assets/stayDetails/bedroom.svg"
+          alt="Specification"
+          class="specification-item__icon w-[2rem] h-[1.8rem] mb-[2.8rem]"
+        />
+        <p class="specification-item__description font-medium text-xl">
+          {{ specs.bedrooms }}<span> Bedrooms</span>
+        </p>
+      </div>
+      <div
+        class="specification-item w-[20rem] h-[11rem] px-[1.6rem] pt-[2.1rem] border-1 border-base_border rounded-lg"
+      >
+        <img
+          src="assets/stayDetails/bathroom.svg"
+          alt="Specification"
+          class="specification-item__icon w-[2rem] h-[1.8rem] mb-[2.8rem]"
+        />
+        <p class="specification-item__descr font-medium text-xl">
+          {{ specs.bathrooms }}<span> Bathrooms</span>
+        </p>
+      </div>
     </div>
   </div>
-</div>
+}

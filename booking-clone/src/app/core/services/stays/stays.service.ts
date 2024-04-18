@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { baseUrl } from '@shared/enviroments';
+import { baseUrl } from '@shared/environments';
 import {
   IStayDetailsResponse,
   IStayDetailsSearchParams,

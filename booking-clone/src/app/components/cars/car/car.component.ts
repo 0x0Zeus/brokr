@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RatingComponent } from '@components/shared/rating';
 import { ICar } from '@shared/models/cars';
@@ -12,5 +12,5 @@ import { ICar } from '@shared/models/cars';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarComponent {
-  @Input({ required: true }) car!: ICar;
+  car = input.required<ICar>();
 }

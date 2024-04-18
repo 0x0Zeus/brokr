@@ -1,5 +1,5 @@
 import { UpperCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RatingComponent } from '@components/shared/rating';
 import { IAttraction } from '@shared/models/attractions';
@@ -13,5 +13,5 @@ import { IAttraction } from '@shared/models/attractions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AttractionComponent {
-  @Input({ required: true }) attraction!: IAttraction;
+  attraction = input.required<IAttraction>();
 }

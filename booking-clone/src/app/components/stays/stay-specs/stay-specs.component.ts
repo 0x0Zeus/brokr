@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { IStayDetailsSpecs } from '@shared/models/stays';
 
 @Component({
@@ -10,5 +10,5 @@ import { IStayDetailsSpecs } from '@shared/models/stays';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StaySpecsComponent {
-  @Input({ required: true }) specs!: IStayDetailsSpecs;
+  specs = input.required<IStayDetailsSpecs>();
 }

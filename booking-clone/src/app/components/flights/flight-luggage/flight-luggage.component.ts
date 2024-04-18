@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { IFlightLuggage } from '@shared/models/flights';
 
 @Component({
@@ -10,5 +10,5 @@ import { IFlightLuggage } from '@shared/models/flights';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FlightLuggageComponent {
-  @Input({ required: true }) luggage!: IFlightLuggage;
+  luggage = input.required<IFlightLuggage>();
 }

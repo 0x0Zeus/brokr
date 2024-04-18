@@ -1,29 +1,31 @@
-<div
-  class="stay flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
-  [routerLink]="[
-    '/details/stay/',
-    stay.id + '_' + stay.checkInDate + '_' + stay.checkOutDate
-  ]"
->
+@if (stay(); as stay) {
   <div
-    class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem] bg-center bg-cover"
-    [style.background-image]="'url(' + stay.photo + ')'"
-  ></div>
-  <p class="description text-base_secondary mb-[0.2rem]">
-    {{ stay.location }}
-  </p>
-  <p class="title text-xl font-medium mb-[1rem]">{{ stay.name }}</p>
-  <div class="splitter h-[1px] w-[4.5rem] bg-bg_secondary mb-[1.4rem]"></div>
-  <div class="labels text-base_secondary pb-[1.2rem] mb-auto">
-    {{ stay.label }}
-  </div>
-  <app-rating [rating]="stay.rating" class="mb-[1.4rem]" />
-  <div class="flex justify-between items-center mb-[0.2rem]">
-    <div class="price">
-      <span class="price-value text-2xl font-medium mr-[0.6rem]"
-        >${{ stay.price }}</span
-      ><span class="price-desc text-base_secondary">/night</span>
+    class="stay flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
+    [routerLink]="[
+      '/details/stay/',
+      stay.id + '_' + stay.checkInDate + '_' + stay.checkOutDate
+    ]"
+  >
+    <div
+      class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem] bg-center bg-cover"
+      [style.background-image]="'url(' + stay.photo + ')'"
+    ></div>
+    <p class="description text-base_secondary mb-[0.2rem]">
+      {{ stay.location }}
+    </p>
+    <p class="title text-xl font-medium mb-[1rem]">{{ stay.name }}</p>
+    <div class="splitter h-[1px] w-[4.5rem] bg-bg_secondary mb-[1.4rem]"></div>
+    <div class="labels text-base_secondary pb-[1.2rem] mb-auto">
+      {{ stay.label }}
     </div>
-    <div class="reviews">({{ stay.reviewCount }} reviews)</div>
+    <app-rating [rating]="stay.rating" class="mb-[1.4rem]" />
+    <div class="flex justify-between items-center mb-[0.2rem]">
+      <div class="price">
+        <span class="price-value text-2xl font-medium mr-[0.6rem]"
+          >${{ stay.price }}</span
+        ><span class="price-desc text-base_secondary">/night</span>
+      </div>
+      <div class="reviews">({{ stay.reviewCount }} reviews)</div>
+    </div>
   </div>
-</div>
+}

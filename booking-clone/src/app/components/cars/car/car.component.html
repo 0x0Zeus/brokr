@@ -1,29 +1,33 @@
-<div
-  class="car flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
-  [routerLink]="['/details/car/', car.id + '_' + car.searchKey]"
->
+@if (car(); as car) {
   <div
-    class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem] bg-center bg-cover"
-    [style.background-image]="'url(' + car.photo + ')'"
-  ></div>
-  <p class="description text-base_secondary mb-[0.2rem]">{{ car.supplier }}</p>
-  <p class="title text-xl font-medium mb-[1rem]">{{ car.model }}</p>
-  <div class="splitter h-[1px] w-[4.5rem] bg-bg_secondary mb-[1rem]"></div>
-  <div class="location mb-[1rem] flex justify-start items-start">
-    <img
-      src="assets/car-location.svg"
-      alt="Location"
-      class="location-img mr-[0.6rem] mt-[0.3rem]"
-    />
-    <p class="location text-base_secondary">{{ car.location }}</p>
-  </div>
-  <app-rating [rating]="car.rating" class="mb-[1rem]" />
-  <div class="flex justify-between items-center mb-[0.2rem]">
-    <div class="price">
-      <span class="price-value text-2xl font-medium mr-[0.6rem]"
-        >${{ car.price }}</span
-      ><span class="price-desc text-base_secondary">/day</span>
+    class="car flex flex-col justify-start p-[0.7rem] text-lg border-base_border border-1 rounded-2xl w-[33.7rem] relative h-full cursor-pointer hover:shadow-xl transition-all duration-100"
+    [routerLink]="['/details/car/', car.id + '_' + car.searchKey]"
+  >
+    <div
+      class="photo w-[32.3rem] h-[23rem] rounded-lg mb-[0.8rem] bg-center bg-cover"
+      [style.background-image]="'url(' + car.photo + ')'"
+    ></div>
+    <p class="description text-base_secondary mb-[0.2rem]">
+      {{ car.supplier }}
+    </p>
+    <p class="title text-xl font-medium mb-[1rem]">{{ car.model }}</p>
+    <div class="splitter h-[1px] w-[4.5rem] bg-bg_secondary mb-[1rem]"></div>
+    <div class="location mb-[1rem] flex justify-start items-start">
+      <img
+        src="assets/car-location.svg"
+        alt="Location"
+        class="location-img mr-[0.6rem] mt-[0.3rem]"
+      />
+      <p class="location text-base_secondary">{{ car.location }}</p>
     </div>
-    <div class="reviews">{{ car.seats }} seats</div>
+    <app-rating [rating]="car.rating" class="mb-[1rem]" />
+    <div class="flex justify-between items-center mb-[0.2rem]">
+      <div class="price">
+        <span class="price-value text-2xl font-medium mr-[0.6rem]"
+          >${{ car.price }}</span
+        ><span class="price-desc text-base_secondary">/day</span>
+      </div>
+      <div class="reviews">{{ car.seats }} seats</div>
+    </div>
   </div>
-</div>
+}

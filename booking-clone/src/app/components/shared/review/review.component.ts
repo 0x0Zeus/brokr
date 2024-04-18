@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { IReview } from '@shared/models/shared';
 
 import { RatingComponent } from '../rating';
@@ -12,5 +12,5 @@ import { RatingComponent } from '../rating';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewComponent {
-  @Input({ required: true }) review!: IReview;
+  review = input.required<IReview>();
 }
