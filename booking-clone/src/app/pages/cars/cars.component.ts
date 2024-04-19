@@ -11,7 +11,7 @@ import { CarsFacade } from '@store/cars';
 import { MapFacade } from '@store/map';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import { BehaviorSubject, map, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-cars',
@@ -35,15 +35,21 @@ export class CarsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cars$.pipe(takeUntil(this.destroy$)).subscribe((cars) => {
-      const mapData = cars.map((car) => ({
-        latitude: car.latitude,
-        longitude: car.longitude,
-        label: `${car.supplier}, ${car.price}$`,
-        detailsLink: `/details/car/${car.id}_${car.searchKey}`,
-      }));
-      this.mapFacade.addMapData(mapData);
-    });
+    this.cars$
+      .pipe(
+        takeUntil(this.destroy$),
+        map((cars) =>
+          cars.map((car) => ({
+            latitude: car.latitude,
+            longitude: car.longitude,
+            label: `${car.supplier}, ${car.price}$`,
+            detailsLink: `/details/car/${car.id}_${car.searchKey}`,
+          }))
+        )
+      )
+      .subscribe((mapData) => {
+        this.mapFacade.addMapData(mapData);
+      });
 
     this.carsFacade.carsPage$
       .pipe(takeUntil(this.destroy$))

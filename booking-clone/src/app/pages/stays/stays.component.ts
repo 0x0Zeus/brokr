@@ -16,7 +16,7 @@ import { MapFacade } from '@store/map';
 import { StaysFacade } from '@store/stays';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import { BehaviorSubject, map, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-stays',
@@ -59,15 +59,21 @@ export class StaysComponent implements OnInit {
         this.staysSearchParams = searchParams;
       });
 
-    this.stays$.pipe(takeUntil(this.destroy$)).subscribe((stays) => {
-      const mapData = stays.map((stay) => ({
-        latitude: stay.latitude,
-        longitude: stay.longitude,
-        label: `${stay.name}, ${stay.price}$`,
-        detailsLink: `/details/stay/${stay.id}_${stay.checkInDate}_${stay.checkOutDate}`,
-      }));
-      this.mapFacade.addMapData(mapData);
-    });
+    this.stays$
+      .pipe(
+        takeUntil(this.destroy$),
+        map((stays) =>
+          stays.map((stay) => ({
+            latitude: stay.latitude,
+            longitude: stay.longitude,
+            label: `${stay.name}, ${stay.price}$`,
+            detailsLink: `/details/stay/${stay.id}_${stay.checkInDate}_${stay.checkOutDate}`,
+          }))
+        )
+      )
+      .subscribe((mapData) => {
+        this.mapFacade.addMapData(mapData);
+      });
 
     this.staysFacade.staysSearchFilters$
       .pipe(takeUntil(this.destroy$))

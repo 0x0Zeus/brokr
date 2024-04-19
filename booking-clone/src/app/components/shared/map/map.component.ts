@@ -70,7 +70,7 @@ export class MapComponent implements AfterViewInit {
         mapData.forEach((dataItem) => {
           const containerEl = document.createElement('div');
           const labelEl = document.createElement('h4');
-          labelEl.className = 'mb-[0.4rem] font-medium';
+          labelEl.className = 'my-[0.4rem] font-medium';
           labelEl.textContent = dataItem.label;
 
           const buttonEl = document.createElement('div');
