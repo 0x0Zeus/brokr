@@ -64,6 +64,7 @@ export class StaysComponent implements OnInit {
         latitude: stay.latitude,
         longitude: stay.longitude,
         label: `${stay.name}, ${stay.price}$`,
+        detailsLink: `/details/stay/${stay.id}_${stay.checkInDate}_${stay.checkOutDate}`,
       }));
       this.mapFacade.addMapData(mapData);
     });
