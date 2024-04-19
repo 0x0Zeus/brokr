@@ -41,11 +41,7 @@
 }
 
 .hamburger.active .hamburger_line:nth-child(1) {
-  transform: translateY(0.35rem) rotate(45deg);
-
-  @media (max-width: 576px) {
-    transform: translateY(0.3rem) rotate(45deg);
-  }
+  transform: translateY(0.4rem) rotate(45deg);
 }
 
 .hamburger.active .hamburger_line:nth-child(3) {

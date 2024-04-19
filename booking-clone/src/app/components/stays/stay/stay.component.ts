@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RatingComponent } from '@components/shared/rating';
 import { IStay } from '@shared/models/stays';
@@ -12,5 +12,5 @@ import { IStay } from '@shared/models/stays';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StayComponent {
-  @Input({ required: true }) stay!: IStay;
+  stay = input.required<IStay>();
 }

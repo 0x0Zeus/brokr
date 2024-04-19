@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  Input,
+  input,
   OnInit,
 } from '@angular/core';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
@@ -33,7 +33,8 @@ import { CarReviewComponent } from '../car-review';
 })
 export class CarReviewsComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
-  @Input({ required: true }) params!: ICarDetailsParams;
+  params = input.required<ICarDetailsParams>();
+
   reviews$ = new BehaviorSubject<ICarReview[]>([]);
   isReviewsLoading$ = new BehaviorSubject<boolean>(false);
 
@@ -44,10 +45,11 @@ export class CarReviewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isReviewsLoading$.next(true);
+    const params = this.params();
     this.carsService
       .getCarReviews({
-        vehicleId: this.params.vehicleId,
-        searchKey: this.params.searchKey,
+        vehicleId: params.vehicleId,
+        searchKey: params.searchKey,
       })
       .pipe(
         takeUntil(this.destroy$),

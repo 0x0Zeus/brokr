@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ICarDetailsSpec } from '@shared/models/cars';
 
 @Component({
@@ -10,5 +10,5 @@ import { ICarDetailsSpec } from '@shared/models/cars';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarSpecsComponent {
-  @Input({ required: true }) specifications!: ICarDetailsSpec[];
+  specifications = input.required<ICarDetailsSpec[]>();
 }

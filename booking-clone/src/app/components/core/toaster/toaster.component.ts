@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
+  input,
   Output,
 } from '@angular/core';
 import { IToaster } from '@shared/models/toaster/toaster';
@@ -16,11 +16,12 @@ import { IToaster } from '@shared/models/toaster/toaster';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToasterComponent {
-  @Input() toast!: IToaster;
-  @Input() index!: number;
+  toast = input.required<IToaster>();
+  index = input.required<number>();
+
   @Output() remove = new EventEmitter<number>();
 
   onClose(): void {
-    this.remove.emit(this.index);
+    this.remove.emit(this.index());
   }
 }

@@ -4,6 +4,7 @@ import {
   Component,
   inject,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { DestroyDirective } from '@core/directives';
 import { MapFacade } from '@store/map';
 import * as tt from '@tomtom-international/web-sdk-maps';
@@ -24,7 +25,10 @@ export class MapComponent implements AfterViewInit {
   markers: tt.Marker[] = [];
   private destroy$ = inject(DestroyDirective).destroy$;
 
-  constructor(private mapFacade: MapFacade) {}
+  constructor(
+    private mapFacade: MapFacade,
+    private router: Router
+  ) {}
 
   ngAfterViewInit(): void {
     this.loadMap();
@@ -40,6 +44,10 @@ export class MapComponent implements AfterViewInit {
 
     this.map.addControl(new tt.FullscreenControl());
     this.map.addControl(new tt.NavigationControl());
+  }
+
+  onButtonClick(detailsLink: string): void {
+    this.router.navigateByUrl(detailsLink);
   }
 
   getPoints(): void {
@@ -60,10 +68,25 @@ export class MapComponent implements AfterViewInit {
         });
 
         mapData.forEach((dataItem) => {
+          const containerEl = document.createElement('div');
+          const labelEl = document.createElement('h4');
+          labelEl.className = 'mb-[0.4rem] font-medium';
+          labelEl.textContent = dataItem.label;
+
+          const buttonEl = document.createElement('div');
+          buttonEl.className =
+            'border-2 border-base_border text-base_third rounded-sm p-[0.2rem] w-fit cursor-pointer';
+          buttonEl.textContent = 'Get Details';
+          buttonEl.addEventListener('click', () =>
+            this.onButtonClick(dataItem.detailsLink)
+          );
+
+          containerEl.append(labelEl, buttonEl);
+
           const popup = new tt.Popup({
             anchor: 'bottom',
             offset: { bottom: [0, -40] },
-          }).setHTML(dataItem.label);
+          }).setDOMContent(containerEl);
 
           this.markers.push(
             new tt.Marker()

@@ -40,6 +40,7 @@ export class CarsComponent implements OnInit {
         latitude: car.latitude,
         longitude: car.longitude,
         label: `${car.supplier}, ${car.price}$`,
+        detailsLink: `/details/car/${car.id}_${car.searchKey}`,
       }));
       this.mapFacade.addMapData(mapData);
     });

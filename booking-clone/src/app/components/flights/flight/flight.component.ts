@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RatingComponent } from '@components/shared/rating';
 import { IFlight } from '@shared/models/flights';
@@ -12,5 +12,5 @@ import { IFlight } from '@shared/models/flights';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FlightComponent {
-  @Input({ required: true }) flight!: IFlight;
+  flight = input.required<IFlight>();
 }

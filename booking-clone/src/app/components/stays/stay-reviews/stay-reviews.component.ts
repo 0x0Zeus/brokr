@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  Input,
+  input,
   OnInit,
 } from '@angular/core';
 import { MiniLoaderComponent } from '@components/shared/mini-loader';
@@ -32,7 +32,7 @@ import { BehaviorSubject, catchError, of, takeUntil } from 'rxjs';
 })
 export class StayReviewsComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
-  @Input({ required: true }) stayId!: number;
+  stayId = input.required<number>();
   reviewsPage = 1;
   reviews$ = new BehaviorSubject<IReview[]>([]);
   reviews: IReview[] = [];
@@ -47,7 +47,7 @@ export class StayReviewsComponent implements OnInit {
     this.isReviewsLoading$.next(true);
     this.staysService
       .getStayReviews({
-        hotelId: String(this.stayId),
+        hotelId: String(this.stayId()),
         page: 1,
       })
       .pipe(
@@ -69,7 +69,7 @@ export class StayReviewsComponent implements OnInit {
     this.isReviewsLoading$.next(true);
     this.staysService
       .getStayReviews({
-        hotelId: String(this.stayId),
+        hotelId: String(this.stayId()),
         page: this.reviewsPage + 1,
       })
       .pipe(

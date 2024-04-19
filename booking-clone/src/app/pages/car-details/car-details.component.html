@@ -5,7 +5,7 @@
     >
       <div class="min-w-[53.2rem] sm:min-w-[35rem]">
         <div
-          class="car-photo rounded-lg w-full h-[63.2rem] bg-center bg-contain bg-no-repeat mb-[1rem]"
+          class="car-photo rounded-lg w-full h-[63.2rem] sm:h-[45rem] bg-center bg-contain bg-no-repeat mb-[1rem]"
           [style.background-image]="'url(' + carInfo.photo + ')'"
         ></div>
       </div>
@@ -108,7 +108,9 @@
       <p>No reviews.</p>
     }
   } @else if (isLoading$ | async) {
-    <div class="mt-[35vh] h-full flex justify-center items-center w-full">
+    <div
+      class="mt-[35vh] h-full flex justify-center items-center w-full overflow-hidden"
+    >
       <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
     </div>
   } @else {
