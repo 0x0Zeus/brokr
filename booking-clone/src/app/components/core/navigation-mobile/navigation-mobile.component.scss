@@ -9,17 +9,12 @@
   visibility: visible;
 }
 
-.hamburger-container {
+.hamburger {
   position: relative;
   width: 3.6rem;
-  height: 4.7rem;
   z-index: 20;
   margin-right: 2rem;
   display: block;
-}
-
-.hamburger {
-  position: absolute;
 }
 
 .hamburger_line {

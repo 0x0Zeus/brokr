@@ -1,17 +1,15 @@
 <div class="hidden md:block">
-  <div class="hamburger-container">
-    <button
-      class="hamburger"
-      (click)="toggleHamburger()"
-      [ngClass]="{ active: isActiveHamburger }"
-    >
-      <span class="hamburger_line"></span>
-      <span class="hamburger_line"></span>
-      <span class="hamburger_line"></span>
-    </button>
-  </div>
+  <button
+    class="hamburger"
+    (click)="toggleHamburger()"
+    [ngClass]="{ active: isActiveHamburger }"
+  >
+    <span class="hamburger_line"></span>
+    <span class="hamburger_line"></span>
+    <span class="hamburger_line"></span>
+  </button>
   <div
-    class="nav-mobile z-10 flex invisible transition-all duration-300 items-start justify-between fixed pt-[10rem] pb-[6rem] rounded-md shadow-lg flex-col -translate-x-[100%] left-0 top-0 bg-base_fifth"
+    class="nav-mobile z-10 flex invisible transition-all duration-300 items-start justify-between absolute pt-[10rem] pb-[6rem] rounded-md shadow-lg flex-col -translate-x-[100%] left-0 top-0 bg-base_fifth"
     [ngClass]="{ open: isActiveHamburger }"
   >
     <nav class="nav flex flex-col items-start justify-between mb-[4rem]">
@@ -22,11 +20,14 @@
           (click)="toggleHamburger()"
           routerLinkActive="active"
         >
-          <img
-            [src]="link.image"
-            [alt]="link.title"
-            class="nav-item__icon mr-[1.2rem] h-[2rem]"
-          />
+          <div class="mr-[1.2rem] w-[4.4rem]">
+            <img
+              [src]="link.image"
+              [alt]="link.title"
+              class="nav-item__icon h-[2rem]"
+            />
+          </div>
+
           <div class="nav-item__title">{{ link.title }}</div>
         </button>
       }
