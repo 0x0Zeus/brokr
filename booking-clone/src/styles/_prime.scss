@@ -37,10 +37,8 @@
 
 //slider
 
-@layer {
-  .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
-    background: theme('colors.base_third');
-  }
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  background: #675dfe;
 }
 
 //input number
