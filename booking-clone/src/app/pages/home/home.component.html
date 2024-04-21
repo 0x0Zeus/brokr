@@ -1,8 +1,13 @@
 <div class="container">
   <section class="intro">
     <div
-      class="intro-summary h-[59.2rem] w-full flex flex-col items-center text-base_fifth px-[2rem]"
+      class="intro-summary relative h-[59.2rem] w-full flex flex-col items-center text-base_fifth px-[2rem]"
     >
+      <img
+        src="assets/home/cars/helm.jpg"
+        alt="Helm cover"
+        class="w-full h-full absolute top-0 left-0 -z-10 object-cover object-center"
+      />
       <h1
         class="intro-title mt-[13rem] mb-[2rem] font-bold text-[5rem] sm:text-[4rem]"
       >
@@ -12,12 +17,6 @@
         When you're traveling to a new place, sometimes the best way to truly
         experience it is by renting a car.
       </h2>
-      <img
-        src="assets/home/cars/helm.jpg"
-        loading="eager"
-        alt="Intro"
-        class="fast-loading hidden"
-      />
     </div>
   </section>
   <section class="why-we bg-bg_fifth pt-[8rem]">
@@ -39,7 +38,6 @@
             <img
               [src]="kind.url"
               [alt]="kind.title"
-              loading="eager"
               class="kind-item-img w-full h-full rounded-lg object-cover"
               [routerLink]="[kind.link]"
             />
@@ -55,8 +53,13 @@
   </section>
   <section class="cars wrapper-base pt-[6.7rem] pb-[4.1rem]">
     <div
-      class="garage h-[52.2rem] pl-[8rem] sm:pl-[2rem] pt-[18.2rem] sm:pt-[12rem] text-base_fifth mb-[5.5rem] rounded-lg"
+      class="garage relative h-[52.2rem] pl-[8rem] sm:pl-[2rem] pt-[18.2rem] sm:pt-[12rem] text-base_fifth mb-[5.5rem] rounded-lg"
     >
+      <img
+        src="assets/home/cars/garage.jpg"
+        alt="Garage cover"
+        class="w-full h-full absolute top-0 left-0 -z-10 object-cover object-center rounded-lg"
+      />
       <div class="garage__content max-w-[51.3rem]">
         <h2 class="garage__title mb-[1.5rem] text-title">
           Find the perfect car to conquer the great outdoors
@@ -116,8 +119,13 @@
         class="homes-kinds flex justify-center items-center gap-[1.4rem] mb-[8.2rem] sm:flex-col"
       >
         <div
-          class="homes-kinds-set homes-find basis-1/2 max-w-[65.5rem] w-full h-[51.9rem] rounded-lg flex flex-col justify-end items-start p-[4rem] text-base_fifth"
+          class="homes-find homes-kinds-set relative basis-1/2 max-w-[65.5rem] w-full h-[51.9rem] rounded-lg flex flex-col justify-end items-start p-[4rem] text-base_fifth"
         >
+          <img
+            src="assets/home/homes/beach.jpg"
+            alt="Beach cover"
+            class="w-full h-full absolute top-0 left-0 -z-10 object-cover object-center rounded-lg"
+          />
           <h2 class="homes-find__title text-title mb-[1rem]">
             Find inspiration for your family trip
           </h2>
@@ -179,8 +187,13 @@
       beaches, crystal-clear waters, and vibrant culture.
     </h2>
     <div
-      class="attractions-browse w-full rounded-lg h-[52.2rem] flex flex-col justify-end items-start px-[3.8rem] py-[6.7rem] text-base_fifth mb-[2rem]"
+      class="attractions-browse relative w-full rounded-lg h-[52.2rem] flex flex-col justify-end items-start px-[3.8rem] py-[6.7rem] text-base_fifth mb-[2rem]"
     >
+      <img
+        src="assets/home/attractions/view.jpg"
+        alt="Attractions cover"
+        class="w-full h-full absolute top-0 left-0 -z-10 object-cover object-center rounded-lg"
+      />
       <p class="attractions-browse__title font-bold text-2xl mb-[1rem]">
         Put your boat to work
       </p>
@@ -212,10 +225,15 @@
       }
     </div>
   </section>
-  <section class="bg-bg_fifth mb-[7rem] py-[4rem]">
+  <section class="bg-bg_fifth wrapper-base mb-[7rem] py-[4rem]">
     <div
-      class="wrapper-base flights h-[52.2rem] pl-[8rem] sm:pl-[2rem] pt-[18.2rem] sm:pt-[12rem] text-base_fifth rounded-lg"
+      class="wrapper-base flights relative h-[52.2rem] pl-[8rem] sm:pl-[2rem] pt-[18.2rem] sm:pt-[12rem] text-base_fifth rounded-lg"
     >
+      <img
+        src="assets/home/flights/jet.jpg"
+        alt="Flights cover"
+        class="w-full h-full absolute top-0 left-0 -z-10 object-cover object-center rounded-lg"
+      />
       <div class="flights__content max-w-[51.3rem]">
         <h2 class="flights__title mb-[1.5rem] text-title">
           Book tickets and go anywhere in the world
