@@ -18,7 +18,13 @@ import { CarsService } from '@core/services/cars';
 import { ToasterService } from '@core/services/toaster';
 import { ICarsFilterForm } from '@shared/models/cars';
 import { ICarsDestination } from '@shared/models/cars';
-import { parseDate, parseTime } from '@shared/utils';
+import {
+  getNowDate,
+  getTomorrowDate,
+  parseDate,
+  parseTime,
+} from '@shared/utils';
+import { ValidateCarsDateRange } from '@shared/validators';
 import { CarsFacade } from '@store/cars';
 import { CalendarModule } from 'primeng/calendar';
 import {
@@ -52,31 +58,35 @@ export class CarsFilterComponent implements OnInit {
   elasticLocationValues$ = new BehaviorSubject<ICarsDestination[]>([]);
   destinationIsLoading$ = new BehaviorSubject<boolean>(false);
   chosenLocation: null | ICarsDestination = null;
-  nowDate = new Date(Date.now());
+  nowDate = getNowDate();
+  tomorrowDate = getTomorrowDate();
   private destroy$ = inject(DestroyDirective).destroy$;
 
-  carsFilterForm = new FormGroup<ICarsFilterForm>({
-    fromDate: new FormControl<Date>(this.nowDate, {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    fromTime: new FormControl<Date>(this.nowDate, {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    untilDate: new FormControl<Date>(this.nowDate, {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    untilTime: new FormControl<Date>(this.nowDate, {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    locationValue: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-  });
+  carsFilterForm = new FormGroup<ICarsFilterForm>(
+    {
+      fromDate: new FormControl<Date>(this.nowDate, {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+      fromTime: new FormControl<Date>(this.nowDate, {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+      untilDate: new FormControl<Date>(this.tomorrowDate, {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+      untilTime: new FormControl<Date>(this.nowDate, {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+      locationValue: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+    },
+    { validators: [ValidateCarsDateRange] }
+  );
 
   constructor(
     private carsService: CarsService,
