@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { DestroyDirective } from '@core/directives';
+import { mapKey } from '@shared/environments';
 import { MapFacade } from '@store/map';
 import * as tt from '@tomtom-international/web-sdk-maps';
 import { filter, takeUntil } from 'rxjs';
@@ -37,7 +38,7 @@ export class MapComponent implements AfterViewInit {
   loadMap(): void {
     this.map = tt
       .map({
-        key: 'P0XIzYGDO1J29yEAreC7WrRxUBOxEhVR',
+        key: mapKey,
         container: 'map',
       })
       .on('load', () => this.getPoints());
