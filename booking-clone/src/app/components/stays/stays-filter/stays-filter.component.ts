@@ -21,7 +21,8 @@ import { ToasterService } from '@core/services/toaster';
 import { IStaysSearchFilters } from '@shared/interfaces/stays';
 import { IStaysDestination } from '@shared/models/stays';
 import { IStaysFilterForm } from '@shared/models/stays';
-import { parseDate } from '@shared/utils';
+import { getNowDate, getTomorrowDate, parseDate } from '@shared/utils';
+import { ValidateStaysDateRange } from '@shared/validators';
 import { StaysFacade } from '@store/stays';
 import { CalendarModule } from 'primeng/calendar';
 import {
@@ -60,7 +61,8 @@ export class StaysFilterComponent implements OnInit {
   destinationIsLoading$ = new BehaviorSubject<boolean>(false);
   elasticLocationValues$ = new BehaviorSubject<IStaysDestination[]>([]);
   chosenLocation: null | IStaysDestination = null;
-  nowDate = new Date(Date.now());
+  nowDate = getNowDate();
+  tomorrowDate = getTomorrowDate();
   isFiltersModalOpen = false;
   filters: IStaysSearchFilters = {
     adults: null,
@@ -71,20 +73,23 @@ export class StaysFilterComponent implements OnInit {
   };
   private destroy$ = inject(DestroyDirective).destroy$;
 
-  staysFilterForm = new FormGroup<IStaysFilterForm>({
-    arrivalDate: new FormControl<Date>(this.nowDate, {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    departureDate: new FormControl<Date>(this.nowDate, {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    locationValue: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-  });
+  staysFilterForm = new FormGroup<IStaysFilterForm>(
+    {
+      arrivalDate: new FormControl<Date>(this.nowDate, {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+      departureDate: new FormControl<Date>(this.tomorrowDate, {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+      locationValue: new FormControl<string>('', {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+    },
+    { validators: [ValidateStaysDateRange] }
+  );
 
   constructor(
     private staysService: StaysService,

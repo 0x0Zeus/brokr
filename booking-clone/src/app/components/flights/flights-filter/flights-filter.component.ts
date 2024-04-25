@@ -23,7 +23,7 @@ import {
   IFlightsDestination,
   IFlightsFilterForm,
 } from '@shared/models/flights';
-import { parseDate } from '@shared/utils';
+import { getNowDate, parseDate } from '@shared/utils';
 import { FlightsFacade } from '@store/flights';
 import { CalendarModule } from 'primeng/calendar';
 import {
@@ -67,7 +67,7 @@ export class FlightsFilterComponent implements OnInit {
   elasticLocationToValues$ = new BehaviorSubject<IFlightsDestination[]>([]);
   chosenLocationTo: null | IFlightsDestination = null;
   isFiltersModalOpen = false;
-  nowDate = new Date(Date.now());
+  nowDate = getNowDate();
   filters: IFlightsSearchFilters = {
     adults: null,
     cabinClass: null,

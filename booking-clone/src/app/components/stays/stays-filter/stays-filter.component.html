@@ -55,42 +55,51 @@
         }
       </label>
     </div>
-    <div class="input-item sm:max-w-[20rem] relative">
-      <div class="input-title font-medium text-sm mb-[0.6rem]">From</div>
-      <p-calendar
-        [formControl]="arrivalDate"
-        iconDisplay="input"
-        [showIcon]="true"
-        [minDate]="nowDate"
-        class="h-[3.3rem] w-[17rem] block border-2 border-base_border rounded-sm text-base outline-none"
-      ></p-calendar>
-      @if (arrivalDate.hasError('required') && arrivalDate.touched) {
-        <div class="invalid__message">please enter a date</div>
-      }
-    </div>
-    <div class="flex justify-start items-end gap-[1.1rem]">
+    <div class="flex justify-start items-end flex-wrap gap-[1.6rem] relative">
       <div class="input-item sm:max-w-[20rem] relative">
-        <div class="input-title font-medium text-sm mb-[0.6rem]">Until</div>
+        <div class="input-title font-medium text-sm mb-[0.6rem]">From</div>
         <p-calendar
-          [formControl]="departureDate"
+          [formControl]="arrivalDate"
           iconDisplay="input"
           [showIcon]="true"
           [minDate]="nowDate"
           class="h-[3.3rem] w-[17rem] block border-2 border-base_border rounded-sm text-base outline-none"
         ></p-calendar>
-        @if (departureDate.hasError('required') && departureDate.touched) {
+        @if (arrivalDate.hasError('required') && arrivalDate.touched) {
           <div class="invalid__message">please enter a date</div>
         }
       </div>
-      <button
-        (click)="onSearch()"
-        [ngClass]="
-          staysFilterForm.valid && chosenLocation ? '' : 'btn-disabled'
-        "
-        class="search btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
-      >
-        <img src="assets/search.svg" alt="Search" class="w-full h-full" />
-      </button>
+      <div class="flex justify-start items-end gap-[1.1rem]">
+        <div class="input-item sm:max-w-[20rem] relative">
+          <div class="input-title font-medium text-sm mb-[0.6rem]">Until</div>
+          <p-calendar
+            [formControl]="departureDate"
+            iconDisplay="input"
+            [showIcon]="true"
+            [minDate]="nowDate"
+            class="h-[3.3rem] w-[17rem] block border-2 border-base_border rounded-sm text-base outline-none"
+          ></p-calendar>
+          @if (departureDate.hasError('required') && departureDate.touched) {
+            <div class="invalid__message">please enter a date</div>
+          }
+        </div>
+        <button
+          (click)="onSearch()"
+          [ngClass]="
+            staysFilterForm.valid && chosenLocation ? '' : 'btn-disabled'
+          "
+          class="search btn-base p-[0.5rem] min-w-[3.2rem] min-h-[3.2rem]"
+        >
+          <img src="assets/search.svg" alt="Search" class="w-full h-full" />
+        </button>
+      </div>
+      @if (
+        staysFilterForm.hasError('dateRangeError') && departureDate.touched
+      ) {
+        <div class="invalid__message">
+          the date from must be greater than the date until
+        </div>
+      }
     </div>
   </div>
   <button

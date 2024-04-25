@@ -19,6 +19,7 @@ import { AttractionsService } from '@core/services/attractions';
 import { ToasterService } from '@core/services/toaster';
 import { IAttractionsSearchFilters } from '@shared/interfaces/attractions';
 import { IAttractionsDestination } from '@shared/models/attractions';
+import { getNowDate } from '@shared/utils';
 import { AttractionsFacade } from '@store/attractions';
 import { CalendarModule } from 'primeng/calendar';
 import {
@@ -59,7 +60,7 @@ export class AttractionsFilterComponent implements OnInit {
   elasticLocationValues$ = new BehaviorSubject<IAttractionsDestination[]>([]);
   chosenLocation: null | IAttractionsDestination = null;
   isFiltersModalOpen = false;
-  nowDate = new Date(Date.now());
+  nowDate = getNowDate();
   filters: IAttractionsSearchFilters = {
     sortBy: null,
   };
