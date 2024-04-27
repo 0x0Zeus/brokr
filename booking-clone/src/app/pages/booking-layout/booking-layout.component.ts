@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgComponentOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,10 +13,10 @@ import { FlightsFilterComponent } from '@components/flights/flights-filter';
 import { MapComponent } from '@components/shared/map';
 import { StaysFilterComponent } from '@components/stays/stays-filter';
 import { DestroyDirective } from '@core/directives';
+import { FiltersService } from '@core/services/filters';
+import { IFilterItem, PagesEnum } from '@shared/interfaces/filters';
 import { MapFacade } from '@store/map';
 import { BehaviorSubject, takeUntil } from 'rxjs';
-
-import { PagesEnum } from './constants';
 
 @Component({
   selector: 'app-booking-layout',
@@ -30,6 +30,7 @@ import { PagesEnum } from './constants';
     FlightsFilterComponent,
     AsyncPipe,
     MapComponent,
+    NgComponentOutlet,
   ],
   templateUrl: './booking-layout.component.html',
   styleUrl: './booking-layout.component.scss',
@@ -41,6 +42,7 @@ export class BookingLayoutComponent implements OnInit {
   currentRoute = new BehaviorSubject<string>(this.router.url);
   isMap$ = this.mapFacade.isMap$;
   Pages = PagesEnum;
+  private filtersList = inject(FiltersService).getFilter();
 
   constructor(
     private router: Router,
@@ -53,5 +55,12 @@ export class BookingLayoutComponent implements OnInit {
         this.currentRoute.next(event.url);
       }
     });
+  }
+
+  get currentFilter(): IFilterItem | null {
+    const filter = this.filtersList.find(
+      (comp) => comp.route === this.currentRoute.getValue()
+    );
+    return filter ?? null;
   }
 }
