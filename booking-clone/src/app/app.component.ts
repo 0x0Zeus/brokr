@@ -10,6 +10,4 @@ import { ToasterContainerComponent } from '@components/core/toaster-container';
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  title = 'booking-clone';
-}
+export class AppComponent {}

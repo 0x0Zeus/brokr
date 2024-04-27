@@ -16,6 +16,8 @@ import { DestroyDirective } from '@core/directives';
 import { MapFacade } from '@store/map';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 
+import { PagesEnum } from './constants';
+
 @Component({
   selector: 'app-booking-layout',
   standalone: true,
@@ -38,6 +40,8 @@ export class BookingLayoutComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
   currentRoute = new BehaviorSubject<string>(this.router.url);
   isMap$ = this.mapFacade.isMap$;
+  Pages = PagesEnum;
+
   constructor(
     private router: Router,
     private mapFacade: MapFacade
