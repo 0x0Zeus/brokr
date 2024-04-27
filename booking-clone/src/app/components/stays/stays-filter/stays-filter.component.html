@@ -94,7 +94,8 @@
         </button>
       </div>
       @if (
-        staysFilterForm.hasError('dateRangeError') && departureDate.touched
+        staysFilterForm.hasError('dateRangeError') &&
+        (departureDate.touched || arrivalDate.touched)
       ) {
         <div class="invalid__message">
           the date from must be greater than the date until
