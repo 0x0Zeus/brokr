@@ -124,7 +124,10 @@
         </button>
       </div>
     </div>
-    @if (carsFilterForm.hasError('dateRangeError') && untilDate.touched) {
+    @if (
+      carsFilterForm.hasError('dateRangeError') &&
+      (untilDate.touched || fromDate.touched)
+    ) {
       <div class="invalid__message">
         the date from must be greater than the date until
       </div>
