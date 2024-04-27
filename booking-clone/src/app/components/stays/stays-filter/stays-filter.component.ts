@@ -13,7 +13,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { ModalComponent } from '@components/shared/modal';
 import { DestroyDirective } from '@core/directives';
 import { StaysService } from '@core/services/stays';
@@ -45,7 +44,6 @@ import { StaysFilterModalComponent } from '../stays-filter-modal';
     ReactiveFormsModule,
     AsyncPipe,
     NgClass,
-    MiniLoaderComponent,
     CalendarModule,
     FormsModule,
     ModalComponent,

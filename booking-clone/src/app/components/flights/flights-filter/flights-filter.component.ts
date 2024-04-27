@@ -13,7 +13,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { ModalComponent } from '@components/shared/modal';
 import { DestroyDirective } from '@core/directives';
 import { FlightsService } from '@core/services/flights';
@@ -46,7 +45,6 @@ import { FlightsFilterModalComponent } from '../flights-filter-modal';
     ReactiveFormsModule,
     AsyncPipe,
     NgClass,
-    MiniLoaderComponent,
     CalendarModule,
     FormsModule,
     FlightsFilterModalComponent,

@@ -6,7 +6,6 @@ import {
   OnInit,
 } from '@angular/core';
 import { FlightComponent } from '@components/flights/flight';
-import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
 import {
   IFlightsSearchFilters,
@@ -20,13 +19,7 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-flights',
   standalone: true,
-  imports: [
-    AsyncPipe,
-    FlightComponent,
-    ProgressSpinnerModule,
-    MiniLoaderComponent,
-    PaginatorModule,
-  ],
+  imports: [AsyncPipe, FlightComponent, ProgressSpinnerModule, PaginatorModule],
   templateUrl: './flights.component.html',
   styleUrl: './flights.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

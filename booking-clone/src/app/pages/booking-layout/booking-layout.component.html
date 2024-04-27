@@ -1,11 +1,11 @@
 <div class="mt-[2.3rem] mx-[9rem] md:mx-[2rem]">
-  @if ((currentRoute | async) === '/booking/cars') {
+  @if ((currentRoute | async) === Pages.CARS) {
     <app-cars-filter />
-  } @else if ((currentRoute | async) === '/booking/stays') {
+  } @else if ((currentRoute | async) === Pages.STAYS) {
     <app-stays-filter />
-  } @else if ((currentRoute | async) === '/booking/attractions') {
+  } @else if ((currentRoute | async) === Pages.ATTRACTIONS) {
     <app-attractions-filter />
-  } @else if ((currentRoute | async) === '/booking/flights') {
+  } @else if ((currentRoute | async) === Pages.FLIGHTS) {
     <app-flights-filter />
   }
   <div class="border-b-1 border-base_border mb-[2.1rem]">
@@ -13,8 +13,8 @@
   </div>
   @if (isMap$ | async) {
     @if (
-      (currentRoute | async) !== '/booking/attractions' &&
-      (currentRoute | async) !== '/booking/flights'
+      (currentRoute | async) !== Pages.ATTRACTIONS &&
+      (currentRoute | async) !== Pages.FLIGHTS
     ) {
       <app-map />
     }

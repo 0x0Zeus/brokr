@@ -5,7 +5,6 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { StayComponent } from '@components/stays/stay';
 import { DestroyDirective } from '@core/directives';
 import {
@@ -21,13 +20,7 @@ import { BehaviorSubject, map, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-stays',
   standalone: true,
-  imports: [
-    StayComponent,
-    AsyncPipe,
-    MiniLoaderComponent,
-    ProgressSpinnerModule,
-    PaginatorModule,
-  ],
+  imports: [StayComponent, AsyncPipe, ProgressSpinnerModule, PaginatorModule],
   templateUrl: './stays.component.html',
   styleUrl: './stays.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
