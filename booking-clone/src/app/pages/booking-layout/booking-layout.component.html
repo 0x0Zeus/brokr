@@ -1,12 +1,6 @@
 <div class="mt-[2.3rem] mx-[9rem] md:mx-[2rem]">
-  @if ((currentRoute | async) === Pages.CARS) {
-    <app-cars-filter />
-  } @else if ((currentRoute | async) === Pages.STAYS) {
-    <app-stays-filter />
-  } @else if ((currentRoute | async) === Pages.ATTRACTIONS) {
-    <app-attractions-filter />
-  } @else if ((currentRoute | async) === Pages.FLIGHTS) {
-    <app-flights-filter />
+  @if (currentFilter) {
+    <ng-container *ngComponentOutlet="currentFilter.component" />
   }
   <div class="border-b-1 border-base_border mb-[2.1rem]">
     <app-navigation />
