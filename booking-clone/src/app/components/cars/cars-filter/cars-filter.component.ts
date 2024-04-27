@@ -12,7 +12,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
 import { CarsService } from '@core/services/cars';
 import { ToasterService } from '@core/services/toaster';
@@ -41,13 +40,7 @@ import {
 @Component({
   selector: 'app-cars-filter',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    AsyncPipe,
-    NgClass,
-    MiniLoaderComponent,
-    CalendarModule,
-  ],
+  imports: [ReactiveFormsModule, AsyncPipe, NgClass, CalendarModule],
   templateUrl: './cars-filter.component.html',
   styleUrl: './cars-filter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

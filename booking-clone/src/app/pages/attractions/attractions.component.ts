@@ -6,7 +6,6 @@ import {
   OnInit,
 } from '@angular/core';
 import { AttractionComponent } from '@components/attractions/attraction';
-import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
 import {
   IAttractionsSearchFilters,
@@ -24,7 +23,6 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
     AttractionComponent,
     ProgressSpinnerModule,
     AsyncPipe,
-    MiniLoaderComponent,
     PaginatorModule,
   ],
   templateUrl: './attractions.component.html',

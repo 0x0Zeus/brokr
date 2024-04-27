@@ -7,7 +7,6 @@ import {
   input,
   OnInit,
 } from '@angular/core';
-import { MiniLoaderComponent } from '@components/shared/mini-loader';
 import { DestroyDirective } from '@core/directives';
 import { CarsService } from '@core/services/cars';
 import { ToasterService } from '@core/services/toaster';
@@ -21,12 +20,7 @@ import { CarReviewComponent } from '../car-review';
 @Component({
   selector: 'app-car-reviews',
   standalone: true,
-  imports: [
-    CarReviewComponent,
-    AsyncPipe,
-    ProgressSpinnerModule,
-    MiniLoaderComponent,
-  ],
+  imports: [CarReviewComponent, AsyncPipe, ProgressSpinnerModule],
   templateUrl: './car-reviews.component.html',
   styleUrl: './car-reviews.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
