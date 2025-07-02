@@ -1,127 +1,105 @@
-# Сервис по поиску информации по бронированию отелей, автомобилей, билетов на самолеты и развлечения "Booking clone"
+# Brokr: Unified Travel Booking Platform
 
-- Deploy: https://booking-clone-vladtarnovskiy.vercel.app/
+<p align="center">
+  <img src="src/assets/home.png" alt="Brokr Home Screenshot" width="700" />
+</p>
 
-## Используемые технологии
+<p align="center">
+  <a href="https://www.figma.com/design/uabGhhYkGYZgqU3tb1Bwco/Brokr-Traveling?node-id=0-1&p=f&t=nFeIZCClJmHOlE4v-0" target="_blank"><strong>View Figma UI/UX Design</strong></a>
+</p>
 
-- **_npm/yarn_** - Менеджер пакетов.
-- **_Angular_** - Framework для создания пользовательских интерфейсов.
-- **_RxJs_** - Управление асинхронными операциями и событиями в приложении.
-- **_NgRx_** - Для управления внутренним состоянием приложения.
-- **_NgPrime_** - UI библиотека
-- **_tailwind_** - CSS-фреймворк
-- **TomTom** - карты
+---
 
-- **_Booking COM API_** - реальное api предоставляющее глобальный поиск информации по бронированию отелей, автомобилей, билетов на самолеты и развлечения.
+## Overview
 
-## Дополнительный функционал
+**Brokr** is a comprehensive web application for searching and booking hotels, cars, flights, and attractions—drawing inspiration from leading travel platforms. The project features a modern, responsive UI, real-time search, advanced filtering, and interactive maps, providing a seamless travel booking experience.
 
-- Приложение развернуто на хостинге vercel
-- Настроено CI/CD, используя [GitHub Actions](https://github.com/features/actions).
-- Проект разрабатывался с помощью eslint, prettier, husky.
+---
 
-## Описание страниц
+## Features
+- Unified search and booking for hotels, cars, flights, and attractions
+- Real-time search with elastic search and debounce
+- Advanced filtering and sorting options
+- Interactive maps (TomTom integration)
+- User reviews and ratings
+- Responsive, modern UI (Angular, NgPrime, Tailwind CSS)
+- CI/CD with GitHub Actions
+- Deployed on Vercel
 
-1. #### Landing
+---
 
-Страница описывает приложение и его возможности.
+## Demo
+- **Figma Design:** [Brokr Traveling UI/UX](https://www.figma.com/design/uabGhhYkGYZgqU3tb1Bwco/Brokr-Traveling?node-id=0-1&p=f&t=nFeIZCClJmHOlE4v-0)
 
-2. #### Cars
 
-Страница по поиску информации по бронированию авто.
+---
 
-Поиск осуществляется по городу (elastic search, debounce), началу и концу даты и времени бронирования.
+## Tech Stack
+- **Angular** – Frontend framework
+- **RxJS** – Reactive programming for async operations
+- **NgRx** – State management
+- **NgPrime** – UI component library
+- **Tailwind CSS** – Utility-first CSS framework
+- **TomTom Maps** – Map integration
+- **Booking.com API** – Real-world data for hotels, cars, flights, and attractions
+- **ESLint, Prettier, Husky** – Code quality and formatting
 
-Результат содержит краткую информацию по бронированию авто.
+---
 
-При клике на авто осуществляется навигация на Сar Details.
+## Project Structure
+- `src/app/components/` – Reusable UI components (cars, stays, flights, attractions, etc.)
+- `src/app/pages/` – Main application pages
+- `src/app/core/` – Core modules, services, interceptors
+- `src/app/shared/` – Shared utilities, models, interfaces
+- `src/app/store/` – State management (NgRx)
+- `src/assets/` – Static assets (images, icons, fonts)
 
-Есть возможность просмотра найденных авто на карте, а так же возможность перехода страницу Сar Details.
+---
 
-На странице присутствует пагинация.
+## Pages Overview
 
-3. #### Car Details
+- **Landing:** Introduction to the application and its capabilities.
+- **Cars:** Search and book rental cars by city, date, and time. View results with pagination and map integration. Navigate to detailed car information.
+- **Car Details:** Detailed information about a selected car and dealer, including photos and user reviews.
+- **Stays:** Search and book hotels and homes by city and date. Filter by guests, rooms, price, and sort by popularity, distance, rating, or price. Pagination and map integration included.
+- **Stay Details:** Detailed information about a selected hotel or home, with room photos and paginated user reviews.
+- **Attractions:** Search and book tickets for attractions and activities by city. Sort by trend, rating, or price. Pagination and detailed attraction information.
+- **Attraction Details:** Detailed information about a selected attraction, with photos and user reviews.
+- **Flights:** Search and book flights by departure/arrival city and date. Filter by seat count and class. Sort by duration or price. Pagination and detailed flight information.
+- **Flight Details:** Detailed information about a selected flight and carrier.
+- **Not Found:** Custom 404 page for undefined routes.
 
-Страница подробной информации по конкретному авто.
+---
 
-Присутствует подробная информация о дилере и авто.
+## Getting Started
 
-Есть фото авто.
+### Prerequisites
+- Node.js (v14 or higher recommended)
+- npm
 
-Есть отзывы пользователей.
+### Installation
+```bash
+npm install
+```
 
-4. #### Stays
+### Running Locally
+```bash
+npm start
+```
 
-Страница по поиску информации по бронированию отелей и домов.
+### Lint & Format
+```bash
+npm run lint
+npm run format
+```
 
-Поиск осуществляется по городу (elastic search, debounce), началу и концу даты бронирования.
+### Build
+```bash
+npm run build
+```
 
-Результат содержит краткую информацию по бронированию отеля.
+---
 
-При клике на отель осуществляется навигация на Hotel Details.
+## License
 
-Есть возможность просмотра найденных отелей на карте, а так же возможность перехода страницу Stay Details.
-
-Есть возможность фильтрации отелей по количеству человек, количеству комнат, минимальной и максимальной цене.
-
-Есть возможность сортировки отелей по популярности, расстоянию от центра города, рейтингу и цене.
-
-На странице присутствует пагинация.
-
-5. #### Stay Details
-
-Страница подробной информации об отеле.
-
-Присутствует подробная информация об отеле.
-
-Есть фото номеров (слайдер).
-
-Есть отзывы посетителей, а также их пагинация.
-
-6. #### Attractions
-
-Страница по поиску информации по бронированию билетов на посещение достопримечательностей и различных развлечений.
-
-Поиск осуществляется по городу (elastic search, debounce).
-
-Результат содержит краткую информацию по бронированию билета.
-
-При клике на развлечение осуществляется навигация на Attraction Details.
-
-Есть возможность сортировки развлечений по тренду, рейтингу и цене.
-
-На странице присутствует пагинация.
-
-7. #### Attraction Details
-
-Страница подробной информации о развлечении.
-
-Присутствует подробная информация о развлечении.
-
-Есть развлечения (слайдер).
-
-Есть отзывы посетителей.
-
-8. #### Flights
-
-Страница по поиску информации по бронированию билетов на самолеты.
-
-Поиск осуществляется по городу отправления и прибытия (elastic search, debounce), а также дате отправления.
-
-Результат содержит краткую информацию по бронированию билета на самолет.
-
-При клике на билет осуществляется навигация на Flight Details.
-
-Есть возможность фильтрации билетов по количеству мест и классу.
-
-Есть возможность сортировки билетов быстроте полета и цене.
-
-На странице присутствует пагинация.
-
-9. #### Flight Details
-
-Страница подробной информации о полете.
-
-Присутствует подробная информация о полете и перевозчике.
-
-10. #### Not Found page
+This project is for educational and demonstration purposes only. Not for commercial use.

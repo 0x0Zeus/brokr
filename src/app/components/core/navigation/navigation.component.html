@@ -1,0 +1,34 @@
+<div class="nav-desktop flex items-start justify-between">
+  <nav class="nav flex md:hidden items-center justify-start gap-[4rem]">
+    @for (link of links; track link.title) {
+      <div
+        class="nav-item -mb-[0.2rem] flex items-center justify-start pb-[1rem] border-b-4 border-transparent hover:border-base_third hover:text-base_third cursor-pointer"
+        [routerLink]="[link.link]"
+        routerLinkActive="active"
+      >
+        <img
+          [src]="link.image"
+          [alt]="link.title"
+          class="nav-item__icon mr-[1.2rem] h-[2rem]"
+        />
+        <div class="nav-item__title">{{ link.title }}</div>
+      </div>
+    }
+  </nav>
+  @if (
+    (currentRoute | async) !== '/booking/attractions' &&
+    (currentRoute | async) !== '/booking/flights'
+  ) {
+    <div
+      class="input-item max-w-[17rem] md:ml-auto flex items-center justify-start pl-[2rem] pb-[0.9rem]"
+    >
+      <div class="input-title font-medium text-sm mr-[1.1rem]">Map</div>
+      <p-inputSwitch
+        [(ngModel)]="checkedMap"
+        [ngModelOptions]="{ standalone: true }"
+        class="block"
+        (ngModelChange)="toggleMap()"
+      ></p-inputSwitch>
+    </div>
+  }
+</div>

@@ -1,0 +1,9 @@
+<div class="toaster-container fixed right-[2rem] bottom-[2rem]">
+  @for (toast of toasts | async; track toast; let i = $index) {
+    <app-toaster
+      [toast]="toast"
+      [index]="i"
+      (remove)="remove($event)"
+    ></app-toaster>
+  }
+</div>

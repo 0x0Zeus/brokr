@@ -1,0 +1,7 @@
+.attraction-photo {
+  &:hover {
+    .overlay {
+      display: flex;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<div class="mt-[2.3rem] mx-[9rem] md:mx-[2rem]">
+  @if (currentFilter) {
+    <ng-container *ngComponentOutlet="currentFilter.component" />
+  }
+  <div class="border-b-1 border-base_border mb-[2.1rem]">
+    <app-navigation />
+  </div>
+  @if (isMap$ | async) {
+    @if (
+      (currentRoute | async) !== Pages.ATTRACTIONS &&
+      (currentRoute | async) !== Pages.FLIGHTS
+    ) {
+      <app-map />
+    }
+  }
+  <router-outlet></router-outlet>
+</div>

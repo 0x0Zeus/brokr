@@ -1,0 +1,138 @@
+<div class="details-container max-w-[135rem] px-[2rem] m-auto mt-[5.7rem]">
+  @if (flightInfo$ | async; as flight) {
+    <div class="main-info w-full">
+      <div class="host flex items-center justify-start mb-[1.6rem]">
+        <img
+          src="assets/details/reward.svg"
+          alt="Host"
+          class="host__img w-[1rem] h-[1.6rem] mr-[1rem]"
+        />
+        <h3 class="host__title text-base_third">Carrier Name</h3>
+      </div>
+      <div class="carrier flex items-center mb-[3rem]">
+        <div
+          class="carrier__photo w-[6.5rem] h-[6.5rem] rounded-full mr-[3rem] bg-center bg-cover"
+          [style.background-image]="
+            flight.carrierLogo
+              ? 'url(' + flight.carrierLogo + ')'
+              : 'url(assets/empty-avatar.svg)'
+          "
+        ></div>
+        <p class="carrier-name font-bold text-4xl mr-[2rem]">
+          {{ flight.carrierName }}
+        </p>
+      </div>
+      <p class="seats text-xl mb-[2rem]">{{ flight.seats }} seats available</p>
+      <div
+        class="destinations mb-[2.5rem] flex md:flex-col md:items-start gap-[1rem] items-center justify-between"
+      >
+        <div class="from">
+          <h3 class="from__title font-bold text-3xl mb-[1.8rem]">From</h3>
+          <div class="from flex items-center justify-start mb-[1rem]">
+            <img
+              src="assets/details/map.svg"
+              alt="from"
+              class="from__img w-[1.7rem] h-[1.8rem] mr-[1.7rem]"
+            />
+            <div class="from__content text-xl">
+              <p class="from__airport mb-[1.5rem] font-medium text-2xl">
+                {{ flight.departure.airport }}
+              </p>
+              <p class="from__location">
+                {{ flight.departure.location }}
+              </p>
+              <p class="from__time">
+                {{ flight.departure.time }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <span
+          class="pi pi-arrow-right text-base_third text-5xl my-[1rem] ml-[1rem]"
+        ></span>
+        <div class="to">
+          <h3 class="to__title font-bold text-3xl mb-[1.8rem]">To</h3>
+          <div class="to flex items-center justify-start mb-[1rem]">
+            <img
+              src="assets/details/map.svg"
+              alt="to"
+              class="to__img w-[1.7rem] h-[1.8rem] mr-[1.7rem]"
+            />
+            <div class="to__content text-xl">
+              <p class="to__airport mb-[1.5rem] font-medium text-2xl">
+                {{ flight.arrival.airport }}
+              </p>
+              <p class="to__location">
+                {{ flight.arrival.location }}
+              </p>
+              <p class="to__time">
+                {{ flight.arrival.time }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ticket mb-[2.5rem] pb-[1rem] font-bold text-3xl flex justify-between items-center border-b-1 border-base_border"
+      >
+        <p class="ticket__nights mr-[2rem]">Ticket</p>
+        <p class="price text-base_third">{{ flight.price }}$</p>
+      </div>
+      <div
+        class="luggage mb-[2.5rem] pb-[1rem] text-xl border-b-1 border-base_border"
+      >
+        <h3 class="luggage__title mb-[2rem] font-bold text-3xl">
+          Luggage Info
+        </h3>
+        @if (flight.bookingMethods) {
+          @for (luggageItem of flight.luggage; track luggageItem.name) {
+            <app-flight-luggage [luggage]="luggageItem" />
+          }
+        } @else {
+          <p>No info.</p>
+        }
+      </div>
+      <div class="methods mb-[2.5rem]">
+        <h3 class="methods__title font-bold text-3xl mb-[1.4rem]">
+          Booking methods
+        </h3>
+        @if (flight.bookingMethods) {
+          <div
+            class="methods-items flex items-center justify-start gap-[2rem] flex-wrap"
+          >
+            @for (method of flight.bookingMethods; track method) {
+              <p
+                class="includes-item text-base_third w-[14.7rem] min-h-[11.8rem] h-full px-[1.6rem] pt-[2.5rem] border-1 border-base_border rounded-lg text-xl"
+              >
+                {{ method }}
+              </p>
+            }
+          </div>
+        } @else {
+          <p>No info.</p>
+        }
+      </div>
+      <div class="benefits pb-[5.5rem]">
+        <h3 class="benefits__title font-bold text-3xl mb-[1.4rem]">Benefits</h3>
+        @if (flight.benefits) {
+          @for (benefit of flight.benefits; track benefit) {
+            <p class="includes-item text-base_secondary rounded-lg text-xl">
+              <span class="text-base_third text-3xl mr-[0.5rem]">-</span
+              >{{ benefit }}
+            </p>
+          }
+        } @else {
+          <p>No info.</p>
+        }
+      </div>
+    </div>
+  } @else if (isLoading$ | async) {
+    <div
+      class="mt-[35vh] h-full flex justify-center items-center w-full overflow-hidden"
+    >
+      <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+    </div>
+  } @else {
+    <p class="error-message mt-[35rem]">Something went wrong</p>
+  }
+</div>
